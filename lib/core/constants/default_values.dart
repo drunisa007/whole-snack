@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 /// api url for app
- const String API = "";
+ const String API = "https://seinwholesale.com/api/";
 
 /// font size for all app
 const double KAppBarTitleFontSize = 18.0;
