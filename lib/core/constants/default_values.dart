@@ -15,11 +15,11 @@ const double kTinyFontSize7 = 7.0;
 
 
 ///color for all app
-const Color colorBlack =  Color(0xff171717);
-const Color colorWhite =  Color(0xffFFFFFF);
-const Color primaryColor =  Color(0xffff5c4d);
-const Color scaffoldBackgroundColor =  Color(0xffE9E9E9);
-const Color secondaryColor =  Color(0xffff5c4d);
+const Color primaryColor =  Color(0xffFF2323);
+const Color scaffoldBackgroundColor =  Color(0xffF9F9F9);
+const Color secondary =  Color(0xff00A96C);
+const Color secondaryVariant = Color(0xff0400B7);
+const Color onSecondary = Color(0xffFB9600);
 
 
 
