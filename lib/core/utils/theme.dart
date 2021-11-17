@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 
 class StyleTheme {
@@ -11,6 +12,7 @@ class StyleTheme {
         secondaryVariant: secondaryVariant,
         onSecondary: onSecondary,
       ),
+      textTheme: GoogleFonts.openSansTextTheme()
     );
   }
 }

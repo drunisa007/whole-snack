@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
 class BuildButtonNavBarFeature extends StatelessWidget {
 
@@ -14,16 +15,19 @@ class BuildButtonNavBarFeature extends StatelessWidget {
         getNavigationBarItem(
             "assets/images/home.svg", 'Home', context, 0, featureMainController),
         getNavigationBarItem(
-            "assets/images/cart.svg", 'Category', context, 1, featureMainController),
+            "assets/images/category.svg", 'Category', context, 1, featureMainController),
         getNavigationBarItem(
             "assets/images/cart.svg", 'Cart', context, 2, featureMainController),
         getNavigationBarItem(
             "assets/images/order.svg", 'Order', context, 3, featureMainController),
-        getNavigationBarItem("assets/images/profile.svg", 'Account', context, 4,
+        getNavigationBarItem("assets/images/account.svg", 'Account', context, 4,
             featureMainController),
       ],
-      elevation: 0,
+      elevation: 1,
       selectedItemColor: Theme.of(context).primaryColor,
+      unselectedItemColor: textColorGrey,
+      showUnselectedLabels: true,
+      type: BottomNavigationBarType.fixed,
       currentIndex: featureMainController.getIndex(),
       selectedFontSize: 14,
       unselectedFontSize: 14,
