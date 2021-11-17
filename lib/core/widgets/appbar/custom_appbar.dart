@@ -35,7 +35,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: double.infinity,
            decoration: BoxDecoration(
              color: Theme.of(context).colorScheme.primaryVariant,
-             borderRadius: BorderRadius.circular(4.sp)
+             borderRadius: BorderRadius.circular(5.sp)
            ),
             margin: EdgeInsets.symmetric(
               vertical: verticalMargin,
