@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 /// api url for app
- const String API = "";
+ const String API = "https://seinwholesale.com/api/";
 
 /// font size for all app
 const double KAppBarTitleFontSize = 18.0;
@@ -15,11 +15,12 @@ const double kTinyFontSize7 = 7.0;
 
 
 ///color for all app
-const Color colorBlack =  Color(0xff171717);
-const Color colorWhite =  Color(0xffFFFFFF);
-const Color primaryColor =  Color(0xffff5c4d);
-const Color scaffoldBackgroundColor =  Color(0xffE9E9E9);
-const Color secondaryColor =  Color(0xffff5c4d);
+const Color primaryColor =  Color(0xffFF2323);
+const Color scaffoldBackgroundColor =  Color(0xfff7f7f7);
+const Color secondary =  Color(0xff00A96C);
+const Color secondaryVariant = Color(0xff0400B7);
+const Color onSecondary = Color(0xffFB9600);
+const Color textColorGrey= Color(0xff6A6D77);
 
 
 

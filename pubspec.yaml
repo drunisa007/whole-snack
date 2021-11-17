@@ -24,6 +24,7 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   path_provider: ^2.0.5
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -33,8 +34,8 @@ flutter:
 
   uses-material-design: true
 
-#  assets:
-##   - assets/images
+  assets:
+    - assets/images/
 
   # fonts:
   #   - family: Schyler

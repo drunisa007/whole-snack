@@ -1,6 +1,6 @@
 
 import 'package:get/get.dart';
-import 'package:whole_snack/core/model/register_model.dart';
+import 'package:whole_snack/core/model/data_model/register_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
 import 'package:whole_snack/core/model/service_model/http_register_result.dart';
 import 'package:whole_snack/services/http_service.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:whole_snack/core/model/item_model.dart';
+import 'package:whole_snack/core/model/data_model/item_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
 import 'package:whole_snack/core/model/service_model/http_get_result.dart';
 import 'package:whole_snack/services/http_service.dart';
