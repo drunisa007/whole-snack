@@ -16,11 +16,12 @@ const double kTinyFontSize7 = 7.0;
 
 ///color for all app
 const Color primaryColor =  Color(0xffFF2323);
-const Color scaffoldBackgroundColor =  Color(0xfff7f7f7);
-const Color secondary =  Color(0xff00A96C);
-const Color secondaryVariant = Color(0xff0400B7);
-const Color onSecondary = Color(0xffFB9600);
-const Color textColorGrey= Color(0xff6A6D77);
+const Color primaryVariant = Color(0xffF1F2F3); //cart bg grey
+const Color onPrimary = Color(0xff6A6D77);/// text Color
+const Color scaffoldBackgroundColor =  Color(0xfff5f5f5);
+const Color secondary =  Color(0xff00A96C);  //status color
+const Color secondaryVariant = Color(0xff0400B7); // status color
+const Color onSecondary = Color(0xffFB9600); //statusColor
 
 
 

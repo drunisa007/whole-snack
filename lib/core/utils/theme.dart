@@ -11,6 +11,8 @@ class StyleTheme {
         secondary: secondary,
         secondaryVariant: secondaryVariant,
         onSecondary: onSecondary,
+        primaryVariant: primaryVariant, ///card bg color
+        onPrimary: onPrimary  ///text  color
       ),
       textTheme: GoogleFonts.openSansTextTheme()
     );
