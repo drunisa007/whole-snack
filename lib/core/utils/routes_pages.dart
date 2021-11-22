@@ -53,10 +53,14 @@ class RoutePage {
       name: '/edit-profile-page',
       page: ()=>EditProfilePage(),
       binding: EditProfilePageBinding()
+    ),
+    GetPage(
+      name: '/item-page',
+      page: () =>  ItemPage(),
+      binding: ItemBinding()
     )
 
-        name: '/item-page',
-        page: () => const ItemPage(),
+
 
   ];
 }

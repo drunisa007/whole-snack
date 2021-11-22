@@ -17,7 +17,7 @@ class OrderPage extends StatelessWidget {
     sizeConfig.init(context);
     return ScreenUtilInit(
       builder : ()=> Scaffold(
-        appBar: getSimpleAppbar("Order History", sizeConfig),
+        appBar: SimpleAppBar(title: "Order History",haveBackArrow: false,action: ()=> print("good"),),
         body: Center(
           child: orderPageAllWidget(context, sizeConfig, controller)
         ),

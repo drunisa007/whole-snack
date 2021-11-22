@@ -17,7 +17,7 @@ class OrderDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     sizeConfig.init(context);
     return ScreenUtilInit(builder: () => Scaffold(
-      appBar: getSimpleAppbar("Order Detail", sizeConfig),
+      appBar: SimpleAppBar(title:"Order Detail",haveBackArrow: false,action: ()=> print("hell world"),),
       body: orderDetailPageAllWidget(context, sizeConfig, controller)
     ));
   }

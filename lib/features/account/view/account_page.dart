@@ -16,7 +16,7 @@ class AccountPage extends StatelessWidget {
     sizeConfig.init(context);
     return ScreenUtilInit(builder: ()=> Scaffold(
 
-      appBar: getSimpleAppbar("Account", sizeConfig),
+      appBar: SimpleAppBar(title:"Account", haveBackArrow: false,action:() => print("something")),
 
       body: accountPageAllWidget(context, controller, sizeConfig)
     )
