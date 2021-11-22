@@ -5,7 +5,7 @@ import 'package:whole_snack/features/account/view/account_page.dart';
 import 'package:whole_snack/features/cart/view/cart_page.dart';
 import 'package:whole_snack/features/category/view/category_page.dart';
 import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
-import 'package:whole_snack/features/feature_main/view/butild_bottom_navbar_feature.dart';
+import 'package:whole_snack/features/feature_main/view/build_bottom_navbar_feature.dart';
 import 'package:whole_snack/features/home/view/home_page.dart';
 import 'package:whole_snack/features/order/view/order_page.dart';
 
