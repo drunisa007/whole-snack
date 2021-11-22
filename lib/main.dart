@@ -25,7 +25,6 @@ Future<void> main() async {
   await Hive.openBox('customerBox');
 
   runApp(const MyApp());
-
 /*  runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => MyApp(), // Wrap your app
