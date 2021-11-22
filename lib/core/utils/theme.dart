@@ -12,7 +12,7 @@ class StyleTheme {
         secondaryVariant: secondaryVariant,
         onSecondary: onSecondary,
         primaryVariant: primaryVariant, ///card bg color
-        onPrimary: onPrimary  ///text  color
+        onPrimary: onPrimary ///text  color
       ),
       textTheme: GoogleFonts.openSansTextTheme()
     );
