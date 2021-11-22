@@ -8,52 +8,49 @@ import 'package:whole_snack/features/account/controller/account_controller.dart'
 Widget accountPageAllWidget(
     BuildContext context, AccountController controller, SizeConfig sizeConfig) {
   bool isArrow = true;
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Column(
-      children: [
-        _buildProfileWidget(context, controller, sizeConfig),
-        SizedBox(
-          height: 8,
-        ),
-        _buildSetting(context, controller, sizeConfig),
-        SizedBox(
-          height: 16,
-        ),
-        Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: _buildSubSettinList(context, controller, sizeConfig,
-                Icons.logout, "Log Out", () => Get.toNamed("/order-success-page"), !isArrow)),
-        SizedBox(
-          height: 16,
-        ),
-        Center(
-          child: Text("Daily v.1.0.1(10)",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: kLargeFontSize14.sp,
-                  fontWeight: FontWeight.w500)),
-        ),
+  return Column(
+    children: [
+      _buildProfileWidget(context, controller, sizeConfig),
+      SizedBox(
+        height: 8,
+      ),
+      _buildSetting(context, controller, sizeConfig),
+      SizedBox(
+        height: 16,
+      ),
+      Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: kDefaultMargin, vertical: 16),
+          child: _buildSubSettinList(context, controller, sizeConfig,
+              Icons.logout, "Log Out", () => Get.toNamed("/order-success-page"), !isArrow)),
+      SizedBox(
+        height: 16,
+      ),
+      Center(
+        child: Text("Daily v.1.0.1(10)",
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: kMediumFontSize12.sp,
+                fontWeight: FontWeight.w500)),
+      ),
 
-        Spacer(),
-        Center(
-          child: Text("Reach out to Us",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: kExtraLargeFontSize16.sp,
-                  fontWeight: FontWeight.w500)),
-        ),
-        SizedBox(
-          height: 12,
-        ),
-        _buildSocialButtonList(
-          context,
-          controller,
-          sizeConfig,
-        )
-      ],
-    ),
+      Spacer(),
+      Center(
+        child: Text("Reach out to Us",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: kLargeFontSize14.sp,
+                fontWeight: FontWeight.w500)),
+      ),
+      SizedBox(
+        height: 12,
+      ),
+      _buildSocialButtonList(
+        context,
+        controller,
+        sizeConfig,
+      )
+    ],
   );
 }
 
@@ -62,7 +59,7 @@ Widget _buildProfileWidget(
     BuildContext context, AccountController controller, SizeConfig sizeConfig) {
   return Container(
       color: Colors.white,
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(kDefaultMargin),
       child: Row(
         children: [
           ClipRRect(
@@ -81,13 +78,13 @@ Widget _buildProfileWidget(
                   text: "Kyaw Zin Latt\n",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kExtraLargeFontSize16.sp,
+                    fontSize: kLargeFontSize14.sp,
                     fontWeight: FontWeight.bold)),
             TextSpan(
                 text: "09972000283",
                 style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: kLargeFontSize14.sp,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontSize: kMediumFontSize12.sp,
                     fontWeight: FontWeight.w500)),
           ])),
           Spacer(),
@@ -97,7 +94,7 @@ Widget _buildProfileWidget(
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: kLargeFontSize14.sp,
-                    fontWeight: FontWeight.w500)),
+                    fontWeight: FontWeight.w600)),
           ),
         ],
       ));
@@ -120,7 +117,7 @@ Widget _buildSetting(
 
   return Container(
     color: Colors.white,
-    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+    padding: EdgeInsets.symmetric(horizontal: kDefaultMargin, vertical: 16),
     child: Column(
       children: settingList.map((e) => e).toList(),
     ),
@@ -135,25 +132,25 @@ Widget _buildSubSettinList(
     String title,
     Function onClick,
     bool isArrow) {
-  return GestureDetector(
-    onTap: () =>onClick(),
-
+  return InkWell(
+    onTap: ()=>onClick(),
     child: Row(
       children: [
         Icon(
           icon,
           size: 24.sp,
+            color: Theme.of(context).colorScheme.onPrimary
         ),
         SizedBox(
           width: 8,
         ),
         Text(title,
             style: TextStyle(
-                color: Colors.black.withOpacity(0.6),
-                fontSize: kLargeFontSize14.sp,
+                color: Colors.black,
+                fontSize: kMediumFontSize12.sp,
                 fontWeight: FontWeight.w500)),
         Spacer(),
-        isArrow ? Icon(Icons.navigate_next,size: 24.sp,color: Colors.black.withOpacity(0.5),) : Text("")
+        isArrow ? Icon(Icons.navigate_next,size: 24.sp,color: Theme.of(context).colorScheme.onPrimary,) : Text("")
       ],
     ),
   );

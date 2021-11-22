@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/widgets/build_custom_button.dart';
 import 'package:whole_snack/features/edit_profile/controller/edit_profile_page_controller.dart';
 
 Widget editProfilePageAllWidget(BuildContext context,
@@ -27,7 +28,7 @@ Widget _buildEditProfileBody(BuildContext context,
           right: 0,
           child: Container(
               color: Colors.white,
-              padding: EdgeInsets.all(12),
+              padding: EdgeInsets.all(kDefaultMargin),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -35,19 +36,19 @@ Widget _buildEditProfileBody(BuildContext context,
                   Text(
                     "Fullname",
                     style: TextStyle(
-                        color: Colors.grey, fontSize: kLargeFontSize14.sp),
+                        color: Colors.grey, fontSize: kMediumFontSize12.sp),
                   ),
                   TextField(
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: kExtraLargeFontSize16.sp,
+                        fontSize: kLargeFontSize14.sp,
                         fontWeight: FontWeight.bold),
                     controller: nameController,
                     decoration: InputDecoration(
                         filled: true,
                         hintStyle: TextStyle(
                             color: Colors.black,
-                            fontSize: kExtraLargeFontSize16.sp,
+                            fontSize: kLargeFontSize14.sp,
                             fontWeight: FontWeight.bold),
                         hintText: "Kyaw Zin",
                         fillColor: Colors.grey.withOpacity(0.1),
@@ -60,22 +61,7 @@ Widget _buildEditProfileBody(BuildContext context,
                   SizedBox(
                     height: 16,
                   ),
-                  SizedBox (
-                    width: double.infinity,
-                    height: sizeConfig.blockSizeHorizontal * 10,
-                    child: RaisedButton(
-                        shape:
-                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                        child: Text(
-                          "Update Profile",
-                          style: TextStyle(
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                              fontSize: kExtraLargeFontSize16.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        color: Theme.of(context).primaryColor,
-                        onPressed: () => Get.back()),
-                  ),
+     BuildCustomButton(haveCorner: false, action: ()=>Get.back(), title: "Update Profile"),
                   SizedBox(
                     height: 16,
                   ),
