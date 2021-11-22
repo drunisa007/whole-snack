@@ -15,6 +15,9 @@ import 'package:whole_snack/features/order_detail/binding/order_detail_page_bind
 import 'package:whole_snack/features/order_detail/view/order_detail_page.dart';
 import 'package:whole_snack/features/order_success/binding/order_success_binding.dart';
 import 'package:whole_snack/features/order_success/view/order_success_page.dart';
+import 'package:whole_snack/features/item/binding/item_binding.dart';
+import 'package:whole_snack/features/item/view/item_page.dart';
+
 
 class RoutePage {
   var routePage = [
@@ -51,5 +54,9 @@ class RoutePage {
       page: ()=>EditProfilePage(),
       binding: EditProfilePageBinding()
     )
+
+        name: '/item-page',
+        page: () => const ItemPage(),
+
   ];
 }
