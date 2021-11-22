@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 import 'package:whole_snack/features/cart/view/build_linear_progress_bar.dart';
 
 class BuildDeliveryFee extends StatelessWidget {
@@ -12,6 +13,9 @@ class BuildDeliveryFee extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig mSizeConfig = Get.find<SizeConfig>();
     mSizeConfig.init(context);
+
+    CartController mCartController = Get.find<CartController>();
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(
@@ -45,11 +49,6 @@ class BuildDeliveryFee extends StatelessWidget {
             height: 2.sp,
           ),
           BuildLinearProgressBar(
-            realWidth: 100,
-
-            ///40,67,100
-            realSizeBoxWidth: 73,
-            ///10,43,73
           )
         ],
       ),

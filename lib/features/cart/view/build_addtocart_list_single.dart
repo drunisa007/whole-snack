@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,27 +5,32 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/temp_model/temp_addtocart_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 
 class BuildAddToCartListSingle extends StatelessWidget {
+  final int index;
 
-  final TempAddToCartModel mModel;
-
-  const BuildAddToCartListSingle({Key? key, required this.mModel}) : super(key: key);
+  const BuildAddToCartListSingle(
+      {Key? key,required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     SizeConfig mSizeConfig = Get.find<SizeConfig>();
     mSizeConfig.init(context);
 
+    CartController mCartController = Get.find<CartController>();
+
+    TempAddToCartModel mModel = mCartController.mAddToCartList[index];
+
     return Container(
       width: double.infinity,
-      height: mSizeConfig.blockSizeVertical * 11,
+      height: mSizeConfig.blockSizeVertical * 10.7,
       padding: EdgeInsets.only(
         left: kDefaultMargin.sp,
         right: kDefaultMargin.sp,
-        top: kDefaultMargin.sp-4.sp,
-        bottom: kDefaultMargin.sp-4.sp,
+        top: kDefaultMargin.sp - 4.sp,
+        bottom: kDefaultMargin.sp - 4.sp,
       ),
       child: Row(
         children: [
@@ -99,49 +103,68 @@ class BuildAddToCartListSingle extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(
-                      Icons.clear_outlined,
-                      size: 18.sp,
+                    GestureDetector(
+                      onTap: (){
+                        mCartController.removeOldCart(index);
+                      },
+                      child: Icon(
+                        Icons.clear_outlined,
+                        size: 18.sp,
+                      ),
                     ),
                     Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Container(
-                          width: 18.sp,
-                          height: 18.sp,
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(6.sp),
-                              border:
-                              Border.all(color: Colors.black, width: 1.5)),
-                          child: Center(
-                            child: Icon(Icons.remove_outlined,size: 15.sp,),
+                        GestureDetector(
+                          onTap: () {
+                            mCartController.removeNewCount(index);
+                          },
+                          child: Container(
+                            width: 18.sp,
+                            height: 18.sp,
+                            decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(6.sp),
+                                border: Border.all(
+                                    color: mModel.count>1?Colors.black:Colors.grey, width: 1.5)),
+                            child: Center(
+                              child: Icon(
+                                Icons.remove_outlined,
+                                size: 15.sp,
+                              ),
+                            ),
                           ),
                         ),
                         Container(
-                          width: mSizeConfig.blockSizeVertical*4,
+                          width: mSizeConfig.blockSizeVertical * 4,
                           child: Center(
-                            child: Text(mModel.count.toString(),style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: kLargeFontSize14
-                            ),),
+                            child: Text(
+                              mModel.count.toString(),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: kLargeFontSize14),
+                            ),
                           ),
                         ),
-                        Container(
-                          width: 18.sp,
-                          height: 18.sp,
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(6.sp),
-                              border:
-                              Border.all(color: Colors.black, width: 1.5)),
-                          child: Center(
-                            child: Icon(Icons.add_outlined,size:15.sp),
+                        GestureDetector(
+                          onTap: () {
+                            mCartController.addNewCount(index);
+                          },
+                          child: Container(
+                            width: 18.sp,
+                            height: 18.sp,
+                            decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(6.sp),
+                                border: Border.all(
+                                    color: Colors.black, width: 1.5)),
+                            child: Center(
+                              child: Icon(Icons.add_outlined, size: 15.sp),
+                            ),
                           ),
                         ),
-
                       ],
                     )
                   ],

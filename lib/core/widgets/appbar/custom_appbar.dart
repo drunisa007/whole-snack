@@ -9,9 +9,10 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 
   final double height;
+  final action;
 
   const MyCustomAppBar(
-      {required Key key, required this.height})
+      {required Key key, required this.height, this.action})
       : super(key: key);
 
   @override
@@ -23,45 +24,48 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     double horizontalMargin = mSizeConfig.blockSizeHorizontal * 5;
     double verticalMargin = mSizeConfig.blockSizeVertical * 1.45;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(top: topPadding),
-        child: Center(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryVariant,
-                borderRadius: BorderRadius.circular(5.sp)),
-            margin: EdgeInsets.symmetric(
-              vertical: verticalMargin,
-              horizontal: horizontalMargin,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: mSizeConfig.blockSizeHorizontal * 5,
-                ),
-                SvgPicture.asset(
-                  "assets/images/search.svg",
-                  width: 16,
-                  height: 16,
-                  color: Colors.grey,
-                ),
-                SizedBox(
-                  width: mSizeConfig.blockSizeHorizontal * 5,
-                ),
-                Text(
-                  "Find Products Or Category Here",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kMediumFontSize12.sp),
-                ),
-              ],
+    return GestureDetector(
+      onTap: action,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: topPadding),
+          child: Center(
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryVariant,
+                  borderRadius: BorderRadius.circular(5.sp)),
+              margin: EdgeInsets.symmetric(
+                vertical: verticalMargin,
+                horizontal: horizontalMargin,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: mSizeConfig.blockSizeHorizontal * 5,
+                  ),
+                  SvgPicture.asset(
+                    "assets/images/search.svg",
+                    width: 16,
+                    height: 16,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(
+                    width: mSizeConfig.blockSizeHorizontal * 5,
+                  ),
+                  Text(
+                    "Find Products Or Category Here",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: kMediumFontSize12.sp),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

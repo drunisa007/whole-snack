@@ -17,6 +17,8 @@ import 'package:whole_snack/features/order_success/binding/order_success_binding
 import 'package:whole_snack/features/order_success/view/order_success_page.dart';
 import 'package:whole_snack/features/item/binding/item_binding.dart';
 import 'package:whole_snack/features/item/view/item_page.dart';
+import 'package:whole_snack/features/search/binding/search_binding.dart';
+import 'package:whole_snack/features/search/view/search_page.dart';
 
 
 class RoutePage {
@@ -58,6 +60,11 @@ class RoutePage {
       name: '/item-page',
       page: () =>  ItemPage(),
       binding: ItemBinding()
+    ),
+    GetPage(
+        name: '/search-page',
+        page: () => SearchPage(),
+        binding: SearchBinding()
     )
 
 
