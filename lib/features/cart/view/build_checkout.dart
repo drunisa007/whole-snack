@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/widgets/build_custom_checkout_button.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 
 class BuildCheckOut extends StatelessWidget {
   const BuildCheckOut({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+
+    CartController mCartController = Get.find<CartController>();
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -38,13 +43,15 @@ class BuildCheckOut extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Spacer(),
-                Text(
-                  "Ks. 3,000",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kLargeFontSize14,
-                      fontWeight: FontWeight.w700),
-                )
+               Obx((){
+                 return Text(
+                     "Ks. ${mCartController.totalPrice.value.round()}",
+                     style: TextStyle(
+                     color: Theme.of(context).colorScheme.onPrimary,
+                 fontSize: kLargeFontSize14,
+                 fontWeight: FontWeight.w700),
+                 );
+               })
               ],
             ),
             SizedBox(
@@ -60,13 +67,22 @@ class BuildCheckOut extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Spacer(),
+              Obx((){
+                return mCartController.deliveryFee.value==-1?
                 Text(
-                  "Ks. 1,000",
+                  "Free",
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
                       fontSize: kLargeFontSize14,
                       fontWeight: FontWeight.w700),
-                )
+                ):Text(
+                  "Ks. ${mCartController.deliveryFee.value}",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: kLargeFontSize14,
+                      fontWeight: FontWeight.w700),
+                );
+              })
               ],
             ),
             SizedBox(
@@ -81,7 +97,7 @@ class BuildCheckOut extends StatelessWidget {
             BuildCustomCheckoutButton(
                 action: () => print("hell"),
                 title: "Continue To Check Out",
-                total: "4,000")
+                )
           ],
         ),
       ),

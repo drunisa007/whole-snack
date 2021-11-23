@@ -25,6 +25,9 @@ import 'package:whole_snack/features/otp_page/binding/otp_page_binding.dart';
 import 'package:whole_snack/features/otp_page/view/otp_page.dart';
 import 'package:whole_snack/features/sign_up_page/binding/sign_up_page_binding.dart';
 import 'package:whole_snack/features/sign_up_page/view/sign_up_page.dart';
+import 'package:whole_snack/features/search/binding/search_binding.dart';
+import 'package:whole_snack/features/search/view/search_page.dart';
+
 
 
 class RoutePage {
@@ -83,6 +86,12 @@ class RoutePage {
 
         binding: OtpPageBinding()
     ),
+     GetPage(
+        name: '/search-page',
+        page: () => SearchPage(),
+        binding: SearchBinding()
+    )
+
 
 
 

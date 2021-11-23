@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
       title: 'Whole Snack',
       builder: DevicePreview.appBuilder,
       theme: StyleTheme().getTheme(),
+      debugShowCheckedModeBanner: false,
       getPages: RoutePage().routePage,
       initialRoute: '/',
     );

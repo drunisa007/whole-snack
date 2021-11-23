@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/temp_model/temp_addtocart_model.dart';
+import 'package:whole_snack/core/model/temp_model/temp_item_package_model.dart';
 import 'package:whole_snack/core/widgets/appbar/build_horizontal_items.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
 
 import 'build_item_banner_design.dart';
 import 'build_item_packages_detail.dart';
@@ -14,6 +18,11 @@ class ItemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    CartController mCartController = Get.find<CartController>();
+    FeatureMainController mFeatureController = Get.find<FeatureMainController>();
+
+
     return Scaffold(
       body: Stack(
         children: [
@@ -65,7 +74,17 @@ class ItemPage extends StatelessWidget {
                               height: kDefaultMargin.sp + 10.sp,
                             ),
                             BuildCustomButton(
-                              action: () => print("hello world"),
+                              action: () {
+
+                                mCartController.addNewCart(TempAddToCartModel(
+                                  "https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
+                                  "Dan Vanilla Layer Cake",
+                                  "1 pc - Ks.100",
+                                  TempItemPackageModel("3pcs", "250"),
+                                  1,
+                                ));
+
+                              },
                               haveCorner: false,
                               title: "Add to Cart",
                             ),
@@ -96,61 +115,71 @@ class ItemPage extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 0.sp),
-            child: Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  width: double.infinity,
-                  color: Theme.of(context).primaryColor,
-                  height: GetPlatform.isIOS
-                      ? kBottomNavigationBarHeight +
-                          kDefaultMargin +
-                          kDefaultMargin
-                      : kBottomNavigationBarHeight,
-                  padding: EdgeInsets.only(
-                      left: kDefaultMargin + kDefaultMargin,
-                      right: kDefaultMargin + kDefaultMargin),
-                  child: Center(
-                    child: Row(
-                      children: [
-                        Text(
-                          "Total in cart",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: kExtraLargeFontSize16),
-                        ),
-                        SizedBox(
-                          width: kDefaultMargin,
-                        ),
-                        Container(
-                          width: 20.sp,
-                          height: 20.sp,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
+          GestureDetector(
+            onTap: (){
+              mFeatureController.changeIndex(2);
+              Get.offAndToNamed("/");
+            },
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 0.sp),
+              child: Positioned.fill(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: double.infinity,
+                    color: Theme.of(context).primaryColor,
+                    height: GetPlatform.isIOS
+                        ? kBottomNavigationBarHeight +
+                            kDefaultMargin +
+                            kDefaultMargin
+                        : kBottomNavigationBarHeight,
+                    padding: EdgeInsets.only(
+                        left: kDefaultMargin + kDefaultMargin,
+                        right: kDefaultMargin + kDefaultMargin),
+                    child: Center(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Total in cart",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: kExtraLargeFontSize16),
                           ),
-                          child: Center(
-                            child: Text(
-                              "1",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: kMediumFontSize12),
+                          SizedBox(
+                            width: kDefaultMargin,
+                          ),
+                          Container(
+                            width: 20.sp,
+                            height: 20.sp,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                              child: Obx((){
+                                return Text(
+                                  "${mCartController.mAddToCartList.length}",
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: kMediumFontSize12),
+                                );
+                              })
                             ),
                           ),
-                        ),
-                        Spacer(),
-                        Text(
-                          "Ks 4,000",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: kExtraLargeFontSize16),
-                        ),
-                      ],
+                          Spacer(),
+                          Obx((){
+                            return Text(
+                              "Ks ${mCartController.totalPrice}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: kExtraLargeFontSize16),
+                            );
+                          })
+                        ],
+                      ),
                     ),
                   ),
                 ),

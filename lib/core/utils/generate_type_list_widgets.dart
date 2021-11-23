@@ -10,8 +10,10 @@ class GenerateTypeList{
 
     List<Widget> mTypeWidgetList = [];
 
+    int index=0;
     for(TempCategoryModel mModel in mTypeList){
-      mTypeWidgetList.add(BuildTypeDesign(mModel: mModel,));
+      mTypeWidgetList.add(BuildTypeDesign(mModel: mModel,index:index));
+      index++;
     }
 
 

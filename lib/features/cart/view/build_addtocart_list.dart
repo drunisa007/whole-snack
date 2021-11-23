@@ -17,8 +17,7 @@ class BuildAddToCartList extends StatelessWidget {
     return Obx(() {
       return ListView.separated(
         itemBuilder: (context, index) {
-          TempAddToCartModel mModel = mCartController.mAddToCartList[index];
-          return BuildAddToCartListSingle(mModel: mModel);
+          return BuildAddToCartListSingle(index:index);
         },
         shrinkWrap: true,
         itemCount: mCartController.mAddToCartList.length,
