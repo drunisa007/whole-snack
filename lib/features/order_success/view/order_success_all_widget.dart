@@ -1,14 +1,19 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/widgets/build_custom_button.dart';
 import 'package:whole_snack/features/order_success/controller/order_success_controller.dart';
 
 Widget orderSuccessAllWidget(
     BuildContext context,SizeConfig sizeConfig) {
   return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(kDefaultMargin),
       child: _buildOrderSuccessBody(context,sizeConfig));
 }
 
@@ -27,17 +32,30 @@ Widget _buildOrderSuccessBody(
           SizedBox(
             height: 16,
           ),
-          Text("Your Order is submmited!!!!",style: TextStyle(color: Colors.black,fontSize: kExtraLargeFontSize16.sp,fontWeight: FontWeight.bold)),
+          Text("Your Order is submmited!!!!",style: TextStyle(color: Colors.black,fontSize: kMediumFontSize12.sp,fontWeight: FontWeight.bold)),
           SizedBox(
             height: 8,
           ),
-          Text("Order Id : 4740303 !!!!",style: TextStyle(color: Colors.grey,fontSize: kLargeFontSize14.sp)),
+          Text("Order Id : 4740303 !!!!",style: TextStyle(color: Colors.grey,fontSize: kSmallFontSize10.sp)),
 
 
 
         ],
       ),
-      _buildButton(context,sizeConfig)
+      Column(
+        children: [
+          BuildCustomButton(haveCorner: false, action: ()=> Get.back(), title: "Track your order"),
+          SizedBox(
+            height: 16,
+          ),
+          Text("Continue to Shop other Products",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: kMediumFontSize12.sp)),
+
+          SizedBox(
+            height: 24,
+          )
+        ],
+      ),
+
 
 
     ],

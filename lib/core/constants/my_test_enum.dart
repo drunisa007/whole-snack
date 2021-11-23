@@ -1,0 +1,6 @@
+
+enum DeliveryEnum{
+  start,
+  free
+}
+

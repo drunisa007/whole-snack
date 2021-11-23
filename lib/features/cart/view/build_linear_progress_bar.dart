@@ -5,59 +5,81 @@ import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'dart:math' as math;
 
-class BuildLinearProgressBar extends StatelessWidget {
-  final double realWidth;
-  final double realSizeBoxWidth;
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 
-  const BuildLinearProgressBar({Key? key, required this.realWidth, required this.realSizeBoxWidth})
-      : super(key: key);
+class BuildLinearProgressBar extends StatelessWidget {
+  const BuildLinearProgressBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SizeConfig mSizeConfig = Get.find<SizeConfig>();
     mSizeConfig.init(context);
 
+    CartController mCartController = Get.find<CartController>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Row(
-          children:[
-            SizedBox(width:mSizeConfig.safeBlockHorizontal*realSizeBoxWidth,),
-          Container(
-            width: mSizeConfig.safeBlockHorizontal*15,
-            height: mSizeConfig.safeBlockVertical*2.8,
-            child: Stack(
-              children: [
-                Positioned.fill(child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Transform.rotate(
-                    angle: - math.pi / 4,
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 3.sp),
+        Row(children: [
+          Obx(() {
+            return SizedBox(
+              width: mSizeConfig.safeBlockHorizontal *
+                  mCartController.progressBarRealWidth.value,
+            );
+          }),
+          Obx(() {
+            return Visibility(
+              visible: mCartController.deliveryStatus.value == -1 ||
+                      mCartController.deliveryStatus.value == 0
+                  ? false
+                  : true,
+              child: Container(
+                width: mSizeConfig.safeBlockHorizontal * 15,
+                height: mSizeConfig.safeBlockVertical * 2.8,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                        child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Transform.rotate(
+                        angle: -math.pi / 4,
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 3.sp),
+                          color: Theme.of(context).primaryColor,
+                          width: 15.sp,
+                          height: 15.sp,
+                        ),
+                      ),
+                    )),
+                    Container(
+                      width: mSizeConfig.safeBlockHorizontal * 15,
+                      height: mSizeConfig.safeBlockVertical * 2.2,
                       color: Theme.of(context).primaryColor,
-                      width: 15.sp,
-                      height: 15.sp,
+                      child: Center(
+                        child: mCartController.deliveryStatus.value == 3
+                            ? Text(
+                                "FREE",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: kSmallFontSize10,
+                                ),
+                              )
+                            : Text(
+                                "Ks. ${mCartController.deliveryFee.value}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: kSmallFontSize10,
+                                ),
+                              ),
+                      ),
                     ),
-                  ),
-                )),
-                Container(
-                  width: mSizeConfig.safeBlockHorizontal*15,
-                  height: mSizeConfig.safeBlockVertical*2.2,
-                  color: Theme.of(context).primaryColor,
-                  child: Center(
-                    child: Text("Ks. 1,000",style: TextStyle(
-                      color: Colors.white,
-                      fontSize: kSmallFontSize10,
-                    ),),
-                  ),
+                  ],
                 ),
-
-              ],
-            ),
-          )
-          ]
-        ),
+              ),
+            );
+          })
+        ]),
         SizedBox(
           height: 4.sp,
         ),
@@ -69,13 +91,18 @@ class BuildLinearProgressBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.sp)),
           child: Stack(
             children: [
-              Container(
-                width: mSizeConfig.safeBlockHorizontal * realWidth,
-                height: mSizeConfig.blockSizeVertical * 1.8,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(10.sp)),
-              ),
+              Obx(() {
+                return mCartController.progressBarSizeBoxWidth.value == 0
+                    ? Container()
+                    : Container(
+                        width: mSizeConfig.safeBlockHorizontal *
+                            mCartController.progressBarSizeBoxWidth.value,
+                        height: mSizeConfig.blockSizeVertical * 1.8,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(10.sp)),
+                      );
+              })
             ],
           ),
         ),

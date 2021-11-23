@@ -6,6 +6,7 @@ import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/constants/default_values.dart';import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/widgets/build_custom_button.dart';
 
 import 'package:whole_snack/features/order/controller/order_controller.dart';
 
@@ -21,7 +22,7 @@ Widget orderPageAllWidget(
     _buildOrderHistoryCard(context, sizeConfig, controller,orderStatus),
   ];
   return Container(
-    margin: EdgeInsets.all(12),
+    margin: EdgeInsets.all(kDefaultMargin),
     child: Column(
       children: [
         Row(
@@ -70,7 +71,7 @@ Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
           title,
           style: TextStyle(
             color: Colors.black,
-            fontSize: kLargeFontSize14.sp,
+            fontSize: kMediumFontSize12.sp,
           ),
         ),
         SizedBox(
@@ -81,51 +82,8 @@ Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
         /*  width: sizeConfig.safeBlockVertical * 13,*/
           height: sizeConfig.blockSizeHorizontal * 10,
           child: isDate
-              ? GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: sizeConfig.blockSizeHorizontal * 10,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).primaryColor,
-                  style: BorderStyle.solid,
-                  width: 1.0,
-                ),
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Center(
-                    child: Text(
-                      "1/11/21",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: kExtraLargeFontSize16.sp,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ):
-          SizedBox(
-       /*     width: sizeConfig.safeBlockVertical * 13,*/
-                  height: sizeConfig.blockSizeHorizontal * 10,
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Text(
-                        "Apply",
-                        style: TextStyle(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            fontSize: kExtraLargeFontSize16.sp,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      color: Theme.of(context).primaryColor,
-                      onPressed: () => Get.toNamed("/order-detail-page")),
-                )
+              ? BuildCustomButton(haveCorner: true, action: ()=>Get.toNamed("/order-detail-page"), title: "11/12/21"):
+         BuildCustomButton(haveCorner: false, action: ()=>Get.toNamed("/order-detail-page"), title: "Apply")
 
         ),
       ],
@@ -142,7 +100,7 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
 
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     child: Container(
-      margin: EdgeInsets.all(12),
+      margin: EdgeInsets.all(kDefaultMargin),
 
       width: double.infinity,
       child: Column(
@@ -161,14 +119,14 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
                 "Apply",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kExtraLargeFontSize16.sp,
+                    fontSize: kMediumFontSize12.sp,
                     fontWeight: FontWeight.w600),
               ),
               Text(
                 "Ks. 50000",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kExtraLargeFontSize16.sp,
+                    fontSize: kSmallFontSize10.sp,
                     fontWeight: FontWeight.w600),
               ),
             ],
@@ -176,9 +134,9 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
           Text(
             "Order Code #8488394",
             style: TextStyle(
-                color: Colors.grey,
+                color: Theme.of(context).colorScheme.onPrimary,
 
-                fontSize: kExtraLargeFontSize16.sp,
+                fontSize: kSmallFontSize10.sp,
                 fontWeight: FontWeight.w500),
           ),
           SizedBox(
@@ -187,15 +145,15 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
           Row(
 
             children: [
-              Icon(Icons.shopping_bag,color: Colors.grey,size: 26.sp,),
+              Icon(Icons.shopping_bag,color: Theme.of(context).colorScheme.onPrimary,size: 26.sp,),
               SizedBox(width: 8,),
               Flexible(
                 child: Text(
                   "80 Street, Corner Of 16 Street, AMP Tsp, Mandalay",
                   
                   style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: kExtraLargeFontSize16.sp,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: kMediumFontSize12.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ),
@@ -223,7 +181,7 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
 
                   style: TextStyle(
                       color: Colors.blueAccent,
-                      fontSize: kLargeFontSize14.sp,
+                      fontSize: kMediumFontSize12.sp,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -249,14 +207,14 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
                 "Cancel Order",
                 style: TextStyle(
                     color: Colors.grey,
-                    fontSize: kExtraLargeFontSize16.sp,
+                    fontSize: kMediumFontSize12.sp,
                     fontWeight: FontWeight.w600),
               ),
               Text(
                 "Track Order",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: kExtraLargeFontSize16.sp,
+                    fontSize: kMediumFontSize12.sp,
                     fontWeight: FontWeight.w600),
               ),
             ],

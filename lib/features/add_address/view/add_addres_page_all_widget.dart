@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/township_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/widgets/build_custom_button.dart';
 import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
 
 Widget addAddressPageAllWidget(BuildContext context, SizeConfig sizeConfig,
     AddAddressPageController controller) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(kDefaultMargin),
     child: _buildAddAddressForm(context, sizeConfig, controller),
   );
 }
@@ -26,7 +27,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
         "Phone Number",
         style: TextStyle(
           color: Colors.black,
-          fontSize: kLargeFontSize14.sp,
+          fontSize: kMediumFontSize12.sp,
         ),
       ),
       TextField(
@@ -44,8 +45,8 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
           ),
           hintText: "Enter you address",
           hintStyle: TextStyle(
-              color: Colors.grey.withOpacity(0.8),
-              fontSize: kMediumFontSize12.sp),
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: kSmallFontSize10.sp),
         ),
       ),
       SizedBox(
@@ -61,7 +62,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
       GetBuilder<AddAddressPageController>(
         builder: (controller) => Container(
 
-          padding: EdgeInsets.only(left: 8,right: 8),
+          padding: EdgeInsets.only(left: kDefaultMargin,right: kDefaultMargin),
 
           decoration: BoxDecoration(
            
@@ -91,7 +92,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
               }).toList(),
               hint: Text(
                 "Please Choose Your Region\t \t \t\t",
-                style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                style: TextStyle(color: Colors.grey, fontSize: kMediumFontSize12.sp),
               ),
               underline: Container(
                 decoration: const BoxDecoration(
@@ -112,7 +113,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
         "Delivery Addresss",
         style: TextStyle(
           color: Colors.black,
-          fontSize: kLargeFontSize14.sp,
+          fontSize: kMediumFontSize12.sp,
         ),
       ),
       TextField(
@@ -132,7 +133,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
           hintText: "Enter your address",
           hintStyle: TextStyle(
               color: Colors.grey,
-              fontSize: kMediumFontSize12.sp),
+              fontSize: kSmallFontSize10.sp),
         ),
       ),
       SizedBox(
@@ -142,7 +143,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
         "Save As",
         style: TextStyle(
           color: Colors.black,
-          fontSize: kLargeFontSize14.sp,
+          fontSize: kMediumFontSize12.sp,
         ),
       ),
       TextField(
@@ -161,28 +162,13 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
           hintText: "Home",
           hintStyle: TextStyle(
               color: Colors.grey.withOpacity(0.8),
-              fontSize: kMediumFontSize12.sp),
+              fontSize: kSmallFontSize10.sp),
         ),
       ),
       SizedBox(
         height: 16,
       ),
-      SizedBox(
-        width: double.infinity,
-        height: sizeConfig.blockSizeHorizontal * 10,
-        child: RaisedButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            child: Text(
-              "Save Address",
-              style: TextStyle(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  fontSize: kExtraLargeFontSize16.sp,
-                  fontWeight: FontWeight.w600),
-            ),
-            color: Theme.of(context).primaryColor,
-            onPressed: () => print("hahahah")),
-      ),
+    BuildCustomButton(haveCorner: false, action: ()=>Get.back(), title: "Save Address")
     ],
   );
 }

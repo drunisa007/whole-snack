@@ -12,11 +12,11 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
     children: [
 
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 16,horizontal: kDefaultMargin),
         child: Text("For Customer Support",
             style: TextStyle(
                 color: Colors.black,
-                fontSize: kLargeFontSize14.sp,
+                fontSize: kMediumFontSize12.sp,
                 )),
       ),
       Container(
@@ -38,11 +38,11 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
       ),
 
       Padding(
-        padding: const EdgeInsets.only(left: 8,top: 20,bottom: 16),
+        padding: const EdgeInsets.only(left: kDefaultMargin,top: 20,bottom: 16),
         child: Text("For Technical Support",
             style: TextStyle(
                 color: Colors.black,
-                fontSize: kLargeFontSize14.sp,
+                fontSize: kMediumFontSize12.sp,
                )),
       ),
       Container(
@@ -64,15 +64,15 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
       ),
 
       Padding(
-        padding: const EdgeInsets.only(left: 8,top: 20,bottom: 16),
+        padding: const EdgeInsets.only(left: kDefaultMargin,top: 20,bottom: 16),
         child: Text("For Email Support",
             style: TextStyle(
                 color: Colors.black,
-                fontSize: kLargeFontSize14.sp,
+                fontSize: kMediumFontSize12.sp,
                 )),
       ),
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 8,vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: kDefaultMargin,vertical: 16),
 
         decoration: BoxDecoration(
 
@@ -86,6 +86,7 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
             Icon(
               Icons.email,
               size: 24.sp,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
             SizedBox(
               width: 16,
@@ -93,8 +94,8 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
             Text("dailymdy@gmail.com",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kLargeFontSize14.sp,
-                    fontWeight: FontWeight.w500)),
+                    fontSize: kMediumFontSize12.sp,
+                    )),
             Spacer(),
             GestureDetector(
               onTap:()=> print("hello wolrd"),
@@ -158,8 +159,9 @@ Widget _buildCustomerSigleItem(BuildContext context, SizeConfig sizeConfig,
         Row(
           children: [
             Icon(
-              Icons.help,
+              Icons.support_agent,
               size: 24.sp,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
             SizedBox(
               width: 16,
@@ -167,8 +169,8 @@ Widget _buildCustomerSigleItem(BuildContext context, SizeConfig sizeConfig,
             Text(number1,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kLargeFontSize14.sp,
-                    fontWeight: FontWeight.w500)),
+                    fontSize: kMediumFontSize12.sp,
+                   )),
             Spacer(),
             GestureDetector(
               onTap:()=> onClick,

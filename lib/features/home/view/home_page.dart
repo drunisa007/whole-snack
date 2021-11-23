@@ -25,11 +25,11 @@ class HomePage extends StatelessWidget {
 
     HomeController mHomeController = Get.find<HomeController>();
 
-
     return Scaffold(
         appBar: MyCustomAppBar(
             key: _scaffoldKey,
-          height:height
+          height:height,
+          action: ()=> Get.toNamed("search-page"),
            ),
         body: ListView(
           padding: EdgeInsets.zero,

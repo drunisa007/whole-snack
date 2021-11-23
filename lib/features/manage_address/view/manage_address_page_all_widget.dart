@@ -40,7 +40,7 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
                     "Add New Address",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        fontSize: kExtraLargeFontSize16.sp,
+                        fontSize: kLargeFontSize14.sp,
                         fontWeight: FontWeight.w600),
 
                   )
@@ -58,7 +58,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
 
   return Container(
 
-    padding: EdgeInsets.all(8),
+    padding: EdgeInsets.all(kDefaultMargin),
     decoration: BoxDecoration(
       color: Colors.white,
 
@@ -78,20 +78,20 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                     text: "Home\n",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: kExtraLargeFontSize16.sp,
+                        fontSize: kMediumFontSize12.sp,
                         fontWeight: FontWeight.bold)),
                 TextSpan(
-                    text: "45 E 45 St Mdy City Myamandalar ,Mandalay",
+                    text: "45 E 45 St Mdy City Mya kyaw minglar a a a a a Myamandalar ,Mandalay",
                     style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: kLargeFontSize14.sp,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: kSmallFontSize10.sp,
                       )),
               ])),
         ),
 
-        SizedBox(
-          width: 8,
-        ),
+
+
+
 
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -102,7 +102,8 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                   "Update",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: kLargeFontSize14.sp,
+                    fontSize: kMediumFontSize12.sp,
+                    fontWeight: FontWeight.bold
                   )),
             ),
             SizedBox(width: 8,),
@@ -112,7 +113,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                   "Delete",
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: kLargeFontSize14.sp,
+                    fontSize: kMediumFontSize12.sp,
                   )),
             ),
           ],
