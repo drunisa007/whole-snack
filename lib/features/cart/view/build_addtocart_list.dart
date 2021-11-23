@@ -14,7 +14,7 @@ class BuildAddToCartList extends StatelessWidget {
     CartController mCartController = Get.find<CartController>();
 
 
-    return Obx(() {
+  return   Obx((){
       return ListView.separated(
         itemBuilder: (context, index) {
           return BuildAddToCartListSingle(index:index);
