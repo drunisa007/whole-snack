@@ -86,7 +86,7 @@ class BuildLoginPhoneNumberPageBody extends StatelessWidget {
                         SizedBox(
                           height: 24,
                         ),
-                        BuildCustomButton(haveCorner: false, action: ()=>print("hahahah"), title: "Verify Phone Number"),
+                        BuildCustomButton(haveCorner: false, action: ()=>Get.toNamed('/otp-page'), title: "Verify Phone Number"),
                         SizedBox(
                           height: 16,
                         ),
