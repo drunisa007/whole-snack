@@ -14,7 +14,6 @@ class BuildDeliveryFee extends StatelessWidget {
     SizeConfig mSizeConfig = Get.find<SizeConfig>();
     mSizeConfig.init(context);
 
-    CartController mCartController = Get.find<CartController>();
 
     return Container(
       width: double.infinity,
