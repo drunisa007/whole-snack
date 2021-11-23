@@ -82,8 +82,8 @@ Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
         /*  width: sizeConfig.safeBlockVertical * 13,*/
           height: sizeConfig.blockSizeHorizontal * 10,
           child: isDate
-              ? BuildCustomButton(haveCorner: true, action: ()=>print("ahhaha"), title: "11/12/21"):
-         BuildCustomButton(haveCorner: false, action: ()=>Get.to("/order-detail-page"), title: "Apply")
+              ? BuildCustomButton(haveCorner: true, action: ()=>Get.toNamed("/order-detail-page"), title: "11/12/21"):
+         BuildCustomButton(haveCorner: false, action: ()=>Get.toNamed("/order-detail-page"), title: "Apply")
 
         ),
       ],

@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: StyleTheme().getTheme(),
       debugShowCheckedModeBanner: false,
       getPages: RoutePage().routePage,
-      initialRoute: '/',
+      initialRoute: '/login-sign-up-main-page',
     );
   }
 }
