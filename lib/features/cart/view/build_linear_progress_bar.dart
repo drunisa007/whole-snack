@@ -24,57 +24,61 @@ class BuildLinearProgressBar extends StatelessWidget {
         Row(children: [
           Obx(() {
             return SizedBox(
-              width: mSizeConfig.safeBlockHorizontal * mCartController.progressBarRealWidth.value,
+              width: mSizeConfig.safeBlockHorizontal *
+                  mCartController.progressBarRealWidth.value,
             );
           }),
-         Obx((){
-           return   Visibility(
-             visible: mCartController.deliveryFee.value<=0?false:true,
-             child: Container(
-               width: mSizeConfig.safeBlockHorizontal * 15,
-               height: mSizeConfig.safeBlockVertical * 2.8,
-               child: Stack(
-                 children: [
-                   Positioned.fill(
-                       child: Align(
-                         alignment: Alignment.bottomCenter,
-                         child: Transform.rotate(
-                           angle: -math.pi / 4,
-                           child: Container(
-                             margin: EdgeInsets.only(bottom: 3.sp),
-                             color: Theme.of(context).primaryColor,
-                             width: 15.sp,
-                             height: 15.sp,
-                           ),
-                         ),
-                       )),
-                   Container(
-                     width: mSizeConfig.safeBlockHorizontal * 15,
-                     height: mSizeConfig.safeBlockVertical * 2.2,
-                     color: Theme.of(context).primaryColor,
-                     child: Center(
-                       child: Obx((){
-                         return mCartController.deliveryFee.value==-1?Text(
-                           "Free",
-                           style: TextStyle(
-                             color: Colors.white,
-                             fontSize: kSmallFontSize10,
-                           ),
-                         ):Text(
-                           "Ks. ${mCartController.deliveryFee.value}",
-                           style: TextStyle(
-                             color: Colors.white,
-                             fontSize: kSmallFontSize10,
-                           ),
-                         );
-                       }),
-                     ),
-                   ),
-                 ],
-               ),
-             ),
-           );
-         })
+          Obx(() {
+            return Visibility(
+              visible: mCartController.deliveryStatus.value == -1 ||
+                      mCartController.deliveryStatus.value == 0
+                  ? false
+                  : true,
+              child: Container(
+                width: mSizeConfig.safeBlockHorizontal * 15,
+                height: mSizeConfig.safeBlockVertical * 2.8,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                        child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Transform.rotate(
+                        angle: -math.pi / 4,
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 3.sp),
+                          color: Theme.of(context).primaryColor,
+                          width: 15.sp,
+                          height: 15.sp,
+                        ),
+                      ),
+                    )),
+                    Container(
+                      width: mSizeConfig.safeBlockHorizontal * 15,
+                      height: mSizeConfig.safeBlockVertical * 2.2,
+                      color: Theme.of(context).primaryColor,
+                      child: Center(
+                        child: mCartController.deliveryStatus.value == 3
+                            ? Text(
+                                "FREE",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: kSmallFontSize10,
+                                ),
+                              )
+                            : Text(
+                                "Ks. ${mCartController.deliveryFee.value}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: kSmallFontSize10,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          })
         ]),
         SizedBox(
           height: 4.sp,

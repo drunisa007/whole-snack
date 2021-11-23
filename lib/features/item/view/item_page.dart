@@ -24,107 +24,106 @@ class ItemPage extends StatelessWidget {
 
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              BuildItemBannerDesign(),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    children: [
-                      SizedBox(
-                        height: kDefaultMargin.sp,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.white,
-                        padding: EdgeInsets.only(
-                            left: kDefaultMargin.sp,
-                            right: kDefaultMargin.sp,
-                            top: kDefaultMargin.sp),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: kDefaultMargin.sp,
-                            ),
-                            Text(
-                              "Dan Vanilla Layer Cake",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: kLargeFontSize14.sp,
-                                  fontWeight: FontWeight.w900),
-                            ),
-                            SizedBox(
-                              height: 4.sp,
-                            ),
-                            Text(
-                              "Snack Cake&Pie",
-                              style: TextStyle(fontSize: kMediumFontSize12.sp),
-                            ),
-                            SizedBox(
-                              height: kDefaultMargin.sp + 10.sp,
-                            ),
-                            BuildItemPackagesDetail(),
-                            SizedBox(
-                              height: kDefaultMargin.sp + 10.sp,
-                            ),
-                            BuildCustomButton(
-                              action: () {
-
-                                mCartController.addNewCart(TempAddToCartModel(
-                                  "https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
-                                  "Dan Vanilla Layer Cake",
-                                  "1 pc - Ks.100",
-                                  TempItemPackageModel("3pcs", "250"),
-                                  1,
-                                ));
-
-                              },
-                              haveCorner: false,
-                              title: "Add to Cart",
-                            ),
-                            SizedBox(
-                              height: kDefaultMargin.sp + 10.sp,
-                            ),
-                          ],
+      body: Container(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                BuildItemBannerDesign(),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      children: [
+                        SizedBox(
+                          height: kDefaultMargin.sp,
                         ),
-                      ),
-                      SizedBox(
-                        height: kDefaultMargin.sp,
-                      ),
-                      BuildHorizontalItems(
-                        title: "Similar Items",
-                        haveSeeMore: false,
-                      ),
-                      SizedBox(
-                        height: GetPlatform.isIOS
-                            ? kBottomNavigationBarHeight +
-                                kDefaultMargin +
-                                kDefaultMargin +
-                                kDefaultMargin
-                            : kBottomNavigationBarHeight + kDefaultMargin,
-                      ),
-                    ],
+                        Container(
+                          width: double.infinity,
+                          color: Colors.white,
+                          padding: EdgeInsets.only(
+                              left: kDefaultMargin.sp,
+                              right: kDefaultMargin.sp,
+                              top: kDefaultMargin.sp),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: kDefaultMargin.sp,
+                              ),
+                              Text(
+                                "Dan Vanilla Layer Cake",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: kLargeFontSize14.sp,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                              SizedBox(
+                                height: 4.sp,
+                              ),
+                              Text(
+                                "Snack Cake&Pie",
+                                style: TextStyle(fontSize: kMediumFontSize12.sp),
+                              ),
+                              SizedBox(
+                                height: kDefaultMargin.sp + 10.sp,
+                              ),
+                              BuildItemPackagesDetail(),
+                              SizedBox(
+                                height: kDefaultMargin.sp + 10.sp,
+                              ),
+                              BuildCustomButton(
+                                action: () {
+
+                                  mCartController.addNewCart(TempAddToCartModel(
+                                    "https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
+                                    "Dan Vanilla Layer Cake",
+                                    "1 pc - Ks.100",
+                                    TempItemPackageModel("3pcs", "250"),
+                                    1,
+                                  ));
+
+                                },
+                                haveCorner: false,
+                                title: "Add to Cart",
+                              ),
+                              SizedBox(
+                                height: kDefaultMargin.sp + 10.sp,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: kDefaultMargin.sp,
+                        ),
+                        BuildHorizontalItems(
+                          title: "Similar Items",
+                          haveSeeMore: false,
+                        ),
+                        SizedBox(
+                          height: GetPlatform.isIOS
+                              ? kBottomNavigationBarHeight +
+                                  kDefaultMargin +
+                                  kDefaultMargin +
+                                  kDefaultMargin
+                              : kBottomNavigationBarHeight + kDefaultMargin,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          GestureDetector(
-            onTap: (){
-              mFeatureController.changeIndex(2);
-              Get.offAndToNamed("/");
-            },
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 0.sp),
-              child: Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
+              ],
+            ),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: InkWell(
+                  onTap: (){
+                    mFeatureController.changeIndex(2);
+                    Get.offAndToNamed("/");
+                  },
                   child: Container(
                     width: double.infinity,
                     color: Theme.of(context).primaryColor,
@@ -184,9 +183,9 @@ class ItemPage extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
