@@ -25,7 +25,7 @@ Widget aboutPageAllWidget(BuildContext context,SizeConfig sizeConfig,AboutPageCo
 
 Widget _buildTextStyle(BuildContext context, String text) {
 
-  return Text(text,style: TextStyle(color: Colors.black.withOpacity(0.7),
+  return Text(text,style: TextStyle(color: Theme.of(context).colorScheme.onPrimary,
   fontSize: kLargeFontSize14.sp),
   );
 

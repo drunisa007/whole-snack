@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/widgets/appbar/appbar_with_back_arrow.dart';
 import 'package:whole_snack/core/widgets/appbar/simple_app_bar.dart';
 import 'package:whole_snack/features/order/view/order_page_all_widget.dart';
 import 'package:whole_snack/features/order_detail/controller/order_detail_page_controller.dart';
@@ -17,7 +18,7 @@ class OrderDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     sizeConfig.init(context);
     return ScreenUtilInit(builder: () => Scaffold(
-      appBar: SimpleAppBar(title:"Order Detail",haveBackArrow: false,action: ()=> print("hell world"),),
+      appBar: getAppBarWithBackArrow("Order Detail", sizeConfig, ()=>Get.back()),
       body: orderDetailPageAllWidget(context, sizeConfig, controller)
     ));
   }

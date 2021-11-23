@@ -36,7 +36,7 @@ class BuildCustomButton extends StatelessWidget {
           ),
           child: Center(
             child: Text(title,style: TextStyle(
-              color: Colors.white,
+                color: haveCorner?Theme.of(context).primaryColor:Colors.white,
               fontWeight: FontWeight.w700,
               fontSize: kLargeFontSize14
             ),),

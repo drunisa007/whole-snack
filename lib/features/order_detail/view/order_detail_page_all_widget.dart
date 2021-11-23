@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/widgets/build_custom_button.dart';
 import 'package:whole_snack/features/order_detail/controller/order_detail_page_controller.dart';
 
 Widget orderDetailPageAllWidget(BuildContext context, SizeConfig sizeConfig,
@@ -14,14 +16,21 @@ Widget orderDetailPageAllWidget(BuildContext context, SizeConfig sizeConfig,
     _buildProductScroll(context, sizeConfig, controller)
   ];
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(kDefaultMargin),
     child: ListView(
       children: [
-        SizedBox(
+       /* SizedBox(
           height: 16,
         ),
         _buildStepperWidget(context, sizeConfig, controller),
-
+*/
+        SizedBox(
+          height: 16,
+        ),
+        _buildDeliveryRiderProfile(context, sizeConfig, controller),
+        SizedBox(
+          height: 16,
+        ),
         _buildProductScroll(context, sizeConfig, controller),
         SizedBox(
           height: 16,
@@ -31,43 +40,18 @@ Widget orderDetailPageAllWidget(BuildContext context, SizeConfig sizeConfig,
           height: 16,
         ),
         Center(
-          child:GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: sizeConfig.blockSizeHorizontal * 10,
-              width: sizeConfig.blockSizeVertical*30,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).primaryColor,
-                  style: BorderStyle.solid,
-                  width: 1.0,
-                ),
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Center(
-                    child: Text(
-                      "Cancel This Order",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: kExtraLargeFontSize16.sp,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
+          child:Container(
+
+            width: sizeConfig.blockSizeHorizontal*50,
+
+              child: BuildCustomButton(haveCorner: true, action: ()=>Get.back(), title: "Cancel this order")),
         ),
       ],
     ),
   );
 }
 ///build stepper widget for order tracking
-Widget _buildStepperWidget(BuildContext context, SizeConfig sizeConfig,
+/*Widget _buildStepperWidget(BuildContext context, SizeConfig sizeConfig,
     OrderDetailPageController controller) {
   return Stepper(
     controlsBuilder: (BuildContext context,
@@ -102,30 +86,21 @@ Widget _buildStepperWidget(BuildContext context, SizeConfig sizeConfig,
       ),
     ],
   );
-}
+}*/
 
 ///bui
 Widget _buildDeliveryRiderProfile(BuildContext context, SizeConfig sizeConfig,
     OrderDetailPageController controller) {
   return Container(
-    padding: EdgeInsets.all(8),
+    padding: EdgeInsets.all(kDefaultMargin),
     color: Colors.white,
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
-        Container(
-          //borderRadius: BorderRadius.circular(100),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-
-
-          ),
-
-
-       child: Image.asset("assets/images/snack.png",width: sizeConfig.safeBlockVertical*8,height: sizeConfig.safeBlockHorizontal*12,fit: BoxFit.fitHeight,)
-    ),
+        ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.asset("assets/images/profile.jpg",width: sizeConfig.safeBlockVertical*8,height: sizeConfig.safeBlockHorizontal*12,fit: BoxFit.cover,)),
 
         SizedBox(
           width: 16,
@@ -133,15 +108,15 @@ Widget _buildDeliveryRiderProfile(BuildContext context, SizeConfig sizeConfig,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Apolo layer Cake x1",style:TextStyle(color:Colors.black,fontSize: kExtraLargeFontSize16.sp,fontWeight: FontWeight.w500)),
-            Text("1pc 250Kyats",style:TextStyle(color:Colors.grey,fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.w500)),
+            Text("Apolo layer Cake x1",style:TextStyle(color:Colors.black,fontSize: kMediumFontSize12.sp)),
+            Text("1pc 250Kyats",style:TextStyle(color:Theme.of(context).colorScheme.onPrimary,fontSize: kSmallFontSize10.sp)),
 
           ],
 
 
         ),
         Spacer(),
-        Text("1pc|Ks.250",style:TextStyle(color:Theme.of(context).primaryColor,fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.w500)),
+        Text("1pc|Ks.250",style:TextStyle(color:Theme.of(context).primaryColor,fontSize: kMediumFontSize12.sp)),
       ],
     )
   );
@@ -200,21 +175,21 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
                   Text("Apolo layer Cake x1",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: kExtraLargeFontSize16.sp,
-                          fontWeight: FontWeight.w500)),
+                          fontSize: kMediumFontSize12.sp,
+                          )),
                   Text("1pc 250Kyats",
                       style: TextStyle(
                           color: Colors.grey,
-                          fontSize: kLargeFontSize14.sp,
-                          fontWeight: FontWeight.w500)),
+                          fontSize: kSmallFontSize10.sp,
+                          )),
                 ],
               ),
               Spacer(),
               Text("1pc|Ks.250",
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
-                      fontSize: kLargeFontSize14.sp,
-                      fontWeight: FontWeight.w500)),
+                      fontSize: kSmallFontSize10.sp,
+                      )),
             ],
           ),
           Divider(),
@@ -234,12 +209,12 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
                   Text("Apolo layer Cake x1",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: kExtraLargeFontSize16.sp,
-                          fontWeight: FontWeight.w500)),
+                          fontSize: kMediumFontSize12.sp,
+                          )),
                   Text("1pc 250Kyats",
                       style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: kLargeFontSize14.sp,
+                          color:Theme.of(context).colorScheme.onPrimary,
+                          fontSize: kSmallFontSize10.sp,
                           fontWeight: FontWeight.w500)),
                 ],
               ),
@@ -247,7 +222,7 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
               Text("1pc|Ks.250",
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
-                      fontSize: kLargeFontSize14.sp,
+                      fontSize: kSmallFontSize10.sp,
                       fontWeight: FontWeight.w500)),
             ],
           ),
@@ -258,12 +233,12 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
               Text("Item Total",
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: kLargeFontSize14.sp,
+                    fontSize: kSmallFontSize10.sp,
                   )),
               Text("Ks.3000",
                   style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: kLargeFontSize14.sp,
+                    color:Theme.of(context).colorScheme.onPrimary,
+                    fontSize: kSmallFontSize10.sp,
                   )),
             ],
           ),
@@ -275,13 +250,13 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
             children: [
               Text("Delivery Fees",
                   style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: kLargeFontSize14.sp,
+                    color:Theme.of(context).colorScheme.onPrimary,
+                    fontSize: kSmallFontSize10.sp,
                   )),
               Text("1000 Kyats",
                   style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: kLargeFontSize14.sp,
+                    color:Theme.of(context).colorScheme.onPrimary,
+                    fontSize: kSmallFontSize10.sp,
                   )),
             ],
           ),
@@ -297,13 +272,13 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
             children: [
               Text("Grand Total",
                   style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: kExtraLargeFontSize16.sp,
+                      color:Theme.of(context).colorScheme.onPrimary,
+                      fontSize: kSmallFontSize10.sp,
                       fontWeight: FontWeight.bold)),
               Text("Ks.4000",
                   style: TextStyle(
                       color: Colors.grey,
-                      fontSize: kExtraLargeFontSize16.sp,
+                      fontSize: kSmallFontSize10.sp,
                       fontWeight: FontWeight.bold)),
             ],
           ),
@@ -332,14 +307,14 @@ Widget _buildDeliveryAddress(BuildContext context, SizeConfig sizeConfig,
                 text: "Home\n",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kExtraLargeFontSize16.sp,
+                    fontSize: kMediumFontSize12.sp,
                     fontWeight: FontWeight.bold)),
             TextSpan(
                 text: "45 E 45 St Myamandalar ,Mandalay",
                 style: TextStyle(
                     color: Colors.grey,
-                    fontSize: kLargeFontSize14.sp,
-                    fontWeight: FontWeight.w500)),
+                    fontSize: kMediumFontSize12.sp,
+                   )),
           ]))
           //  Text("Home",style: TextStyle(color: Colors.black,fontSize: kExtraLargeFontSize16.sp,fontWeight: FontWeight.bold)),
           // Text("45 E 45 St Myamandalar ,Mandalay",style: TextStyle(color: Colors.grey,fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.w500)),
