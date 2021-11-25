@@ -22,9 +22,10 @@ const double kDefaultMargin = 12.0;
 
 ///color for all app
 const Color primaryColor =  Color(0xffFF2323);
-const Color primaryVariant = Color(0xffE5E5E5); ///cart bg grey
+const Color primaryVariant = Color(0xffF1F2F3); ///cart bg grey
 const Color onPrimary = Color(0xff6A6D77);/// text Color
-const Color scaffoldBackgroundColor =  Color(0xfff5f5f5);
+
+const Color scaffoldBackgroundColor =  Color(0xfff9f9f9);
 const Color secondary =  Color(0xff252837);  //account color
 const Color secondaryVariant = Color(0xff50555C); // category color
 const Color onSecondary = Color(0xff6A6D77); //item 1pcs color

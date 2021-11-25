@@ -33,7 +33,6 @@ class BuildItemSingleGrid extends StatelessWidget {
       color: Colors.white,
       elevation: 1,
       child: Container(
-        height: mSizeConfig.blockSizeVertical * 22,
         width: double.infinity,
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
@@ -41,7 +40,7 @@ class BuildItemSingleGrid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height:mSizeConfig.blockSizeVertical * 8,
+              height:mSizeConfig.blockSizeVertical * 10,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -77,7 +76,9 @@ class BuildItemSingleGrid extends StatelessWidget {
                   ),
                   Text(
                     originalPrice,
-                    style: TextStyle(fontSize: kSmallFontSize10.sp),
+                    style: TextStyle(fontSize: kSmallFontSize10.sp,
+                    color: Theme.of(context).colorScheme.onSecondary
+                    ),
                   ),
                 ],
               ),
@@ -99,13 +100,15 @@ class BuildItemSingleGrid extends StatelessWidget {
                     firstPackages.quantity,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: kLargeFontSize14.sp),
+                        fontWeight: FontWeight.w600,
+                        fontSize: kLargeFontSize13.sp),
                   ),
                   Spacer(),
                   Text("Ks ${firstPackages.price}",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: kLargeFontSize14.sp),
+                        fontWeight: FontWeight.w600,
+                        fontSize: kLargeFontSize13.sp),
                   ),
                 ],
               )

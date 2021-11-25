@@ -44,7 +44,7 @@ class BuildSingleCategoryDesign extends StatelessWidget {
                 width: mSizeConfig.blockSizeVertical * 3,
                 height: mSizeConfig.blockSizeVertical * 3,
                 fit: BoxFit.fill,
-                color: mCategoryController.selectedCategoryIndex.value==index?Colors.white:Theme.of(context).colorScheme.onPrimary,
+                color: mCategoryController.selectedCategoryIndex.value==index?Colors.white:Theme.of(context).colorScheme.secondaryVariant,
               ),
               SizedBox(
                 height: 4.sp,
@@ -56,7 +56,7 @@ class BuildSingleCategoryDesign extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: kMediumFontSize12.sp,
-                      color: mCategoryController.selectedCategoryIndex.value==index?Colors.white:Theme.of(context).colorScheme.onPrimary),
+                      color: mCategoryController.selectedCategoryIndex.value==index?Colors.white:Theme.of(context).colorScheme.secondaryVariant),
                 ),
               )
             ],
