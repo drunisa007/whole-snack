@@ -24,176 +24,179 @@ class BuildAddToCartListSingle extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: mSizeConfig.blockSizeVertical * 10.7,
+      height: mSizeConfig.blockSizeVertical * 10.9,
       padding: EdgeInsets.only(
         left: kDefaultMargin.sp,
         right: kDefaultMargin.sp,
         top: kDefaultMargin.sp ,
         bottom: kDefaultMargin.sp,
       ),
-      child: Row(
-        children: [
-          Expanded(
-              flex: 2,
-              child: Container(
-                child: CachedNetworkImage(
-                  imageUrl: "${mModel.image}",
-                  fit: BoxFit.contain,
-                  placeholder: (context, url) => Image.asset(
-                    "assets/images/place_holder.png",
-                    fit: BoxFit.cover,
-                  ),
-                  errorWidget: (context, url, error) => Image.asset(
-                    "assets/images/place_holder.png",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              )),
-          Expanded(
-              flex: 4,
-              child: Container(
-                padding: EdgeInsets.only(left: kDefaultMargin.sp),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      mModel.title,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: kLargeFontSize13,
-                          letterSpacing: 0.3,
-                          fontWeight: FontWeight.w600),
+      child: Center(
+        child: Row(
+          children: [
+            Expanded(
+                flex: 2,
+                child: Container(
+                  child: CachedNetworkImage(
+                    imageUrl: "${mModel.image}",
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
                     ),
-                    Text(
-                      mModel.originalPrice,
-                      style: TextStyle(
-                          fontSize: kSmallFontSize10,
-                          color: Theme.of(context).colorScheme.onSecondary
-                          ),
+                    errorWidget: (context, url, error) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
                     ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        Text(
-                          mModel.itemPackage.quantity,
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                  ),
+                )),
+            Expanded(
+                flex: 4,
+                child: Container(
+                  padding: EdgeInsets.only(left: kDefaultMargin.sp),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        mModel.title,
+                        maxLines: 2,
+                        style: TextStyle(
+                            color: Colors.black,
                             fontSize: kLargeFontSize13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.sp,
-                        ),
-                        Text(
-                          mModel.itemPackage.price,
-                          style: TextStyle(
+                            letterSpacing: 0.3,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        mModel.originalPrice,
+                        style: TextStyle(
+                            fontSize: kSmallFontSize10,
+                            color: Theme.of(context).colorScheme.onSecondary
+                            ),
+                      ),
+                      Spacer(),
+                      Row(
+                        children: [
+                          Text(
+                            mModel.itemPackage.quantity,
+                            style: TextStyle(
                               color: Theme.of(context).primaryColor,
-                            fontSize: kLargeFontSize13,
-                            fontWeight: FontWeight.w600,),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              )),
-          Expanded(
-              flex: 3,
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        mCartController.removeOldCart(index);
-                      },
-                      child: Container(
-                        width: 30.sp,
-                        height: 25.sp,
-                        child: Center(
-                          child: Icon(
-                            Icons.clear_outlined,
-                            size: 18.sp,
+                              fontSize: kLargeFontSize13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.sp,
+                          ),
+                          Text(
+                            mModel.itemPackage.price,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                              fontSize: kLargeFontSize13,
+                              fontWeight: FontWeight.w600,),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )),
+            Expanded(
+                flex: 3,
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          mCartController.removeOldCart(index);
+                        },
+                        child: Container(
+                          width: 30.sp,
+                          height: 25.sp,
+                          child: Center(
+                            child: Icon(
+                              Icons.clear_outlined,
+                              size: 18.sp,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: (){
-                            mCartController.removeNewCount(index);
-                          },
-                          child: Container(
-                            width: 30.sp,
-                            height: 30.sp,
-                            child: Center(
-                              child: Container(
-                                width: 18.sp,
-                                height: 18.sp,
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(5.sp),
-                                    border: Border.all(
-                                        color: mModel.count > 1
-                                            ? Colors.black
-                                            : Colors.grey,
-                                        width: 1.5.sp)),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.remove_outlined,
-                                    size: 15.sp,
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              mCartController.removeNewCount(index);
+                            },
+                            child: Container(
+                              width: 30.sp,
+                              height: 30.sp,
+                              child: Center(
+                                child: Container(
+                                  width: 18.sp,
+                                  height: 18.sp,
+                                  decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(5.sp),
+                                      border: Border.all(
+                                          color: mModel.count > 1
+                                              ? Colors.black
+                                              : Colors.grey,
+                                          width: 1.5.sp)),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.remove_outlined,
+                                      size: 15.sp,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: mSizeConfig.blockSizeVertical * 3,
-                          child: Center(
-                            child: Text(
-                              mCartController.mAddToCartList[index].count.toString(),
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: kLargeFontSize14),
+                          Container(
+                            width: mSizeConfig.blockSizeVertical * 3,
+                            child: Center(
+                              child: Text(
+                                mCartController.mAddToCartList[index].count.toString(),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: kLargeFontSize14),
+                              ),
                             ),
                           ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            mCartController.addNewCount(index);
-                          },
-                          child: Container(
-                            width: 30.sp,
-                            height: 30.sp,
-                            child: Center(
-                              child: Container(
-                                width: 18.sp,
-                                height: 18.sp,
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(5.sp),
-                                    border: Border.all(
-                                        color: Colors.black, width: 1.5.sp)),
-                                child: Center(
-                                  child: Icon(Icons.add_outlined, size: 15.sp),
+                          InkWell(
+                            onTap: () {
+                              mCartController.addNewCount(index);
+                            },
+                            child: Container(
+                              width: 30.sp,
+                              height: 30.sp,
+                              child: Center(
+                                child: Container(
+                                  width: 18.sp,
+                                  height: 18.sp,
+                                  decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(5.sp),
+                                      border: Border.all(
+                                          color: Colors.black, width: 1.5.sp)),
+                                  child: Center(
+                                    child: Icon(Icons.add_outlined, size: 15.sp),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    )
+                        ],
+                      )
 
-                  ],
-                ),
-              )),
-        ],
+                    ],
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }

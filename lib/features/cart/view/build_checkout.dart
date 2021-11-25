@@ -6,7 +6,11 @@ import 'package:whole_snack/core/widgets/build_custom_checkout_button.dart';
 import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 
 class BuildCheckOut extends StatelessWidget {
-  const BuildCheckOut({Key? key}) : super(key: key);
+
+  final String title;
+  final action;
+
+  const BuildCheckOut({Key? key, required this.title, this.action}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +19,11 @@ class BuildCheckOut extends StatelessWidget {
     CartController mCartController = Get.find<CartController>();
 
     return Card(
+      elevation: 10,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10.sp),
-              topRight: Radius.circular(10.sp))),
+              topLeft: Radius.circular(15.sp),
+              topRight: Radius.circular(15.sp))),
       margin: EdgeInsets.zero,
       child: Container(
         width: double.infinity,
@@ -91,8 +96,8 @@ class BuildCheckOut extends StatelessWidget {
               height: kDefaultMargin.sp,
             ),
             BuildCustomCheckoutButton(
-                action: () => print("hell"),
-                title: "Continue To Check Out",
+                action:action,
+                title: "$title",
                 )
           ],
         ),

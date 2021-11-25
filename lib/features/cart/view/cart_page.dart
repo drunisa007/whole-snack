@@ -44,7 +44,7 @@ class CartPage extends StatelessWidget {
             ),
           ),
           Spacer(),
-         BuildCheckOut()
+         BuildCheckOut(action: ()=> Get.toNamed("checkout-page",), title: 'Continue to checkout',)
         ],
       ),
     );

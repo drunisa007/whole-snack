@@ -43,7 +43,7 @@ class BuildHorizontalItems extends StatelessWidget {
                   style: TextButton.styleFrom(
                       primary: Theme.of(context).primaryColor),
                   child: Text(
-                    "See More",
+                    "see more",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: kSmallFontSize10.sp),

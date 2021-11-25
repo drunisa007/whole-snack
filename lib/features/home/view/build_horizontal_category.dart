@@ -34,7 +34,7 @@ class BuildHorizontalCategory extends StatelessWidget {
                   "Categories",
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       fontSize: kLargeFontSize13.sp),
                 ),
                 Spacer(),
@@ -45,7 +45,7 @@ class BuildHorizontalCategory extends StatelessWidget {
                   style: TextButton.styleFrom(
                       primary: Theme.of(context).primaryColor),
                   child: Text(
-                    "See More",
+                    "see more",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: kSmallFontSize10.sp),

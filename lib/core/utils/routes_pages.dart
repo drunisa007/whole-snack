@@ -3,6 +3,8 @@ import 'package:whole_snack/features/about_page/binding/about_page_binding.dart'
 import 'package:whole_snack/features/about_page/view/about_page.dart';
 import 'package:whole_snack/features/add_address/bindings/add_address_bindings.dart';
 import 'package:whole_snack/features/add_address/view/add_address_page.dart';
+import 'package:whole_snack/features/checkout/binding/checkout_binding.dart';
+import 'package:whole_snack/features/checkout/view/checkout_page.dart';
 import 'package:whole_snack/features/customer_support/binding/customer_support_page_binding.dart';
 import 'package:whole_snack/features/customer_support/view/customer_support_page.dart';
 import 'package:whole_snack/features/edit_profile/binding/edit_profile_binding.dart';
@@ -90,7 +92,13 @@ class RoutePage {
         name: '/search-page',
         page: () => SearchPage(),
         binding: SearchBinding()
+    ),
+    GetPage(
+        name: '/checkout-page',
+        page: () => CheckOutPage(),
+        binding: CheckOutBinding()
     )
+
 
 
 
