@@ -13,6 +13,7 @@ class CartController extends GetxController{
   RxInt grandTotal = RxInt(0);
   RxInt progressBarRealWidth = RxInt(0);
   RxInt progressBarSizeBoxWidth = RxInt(0);
+  RxBool cartAppBarBackArrow = false.obs;
 
   @override
   void onInit() {

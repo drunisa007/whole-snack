@@ -26,44 +26,41 @@ class BuildTypeDesign extends StatelessWidget {
           mCategoryController.changeTypeIndex(index);
         },
         child: Container(
-          margin: EdgeInsets.only(right: 6.sp,bottom: 4.sp),
+          width: mSizeConfig.blockSizeVertical * 7.5,
+          margin: EdgeInsets.only(bottom: 4.sp),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Card(
-                elevation: 1,
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.sp)),
-                child: Container(
-                  height: mSizeConfig.blockSizeVertical * 5.sp,
-                  width: mSizeConfig.blockSizeVertical * 5.sp,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.sp),
-                    color: Colors.white,
-                    border: Border.all(color: mCategoryController.selectedTypeIndex.value==index?Theme.of(context).primaryColor:Colors.transparent, width: mCategoryController.selectedTypeIndex.value==index?0.4:0.0),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5.sp),
-                    child: CachedNetworkImage(
-                      imageUrl: "${mModel.image}",
-                      fit: BoxFit.contain,
-                      placeholder: (context, url) => Image.asset(
-                        "assets/images/place_holder.png",
-                        fit: BoxFit.fill,
-                      ),
-                      errorWidget: (context, url, error) => Image.asset(
-                        "assets/images/place_holder.png",
-                        fit: BoxFit.fill,
-                      ),
+              Container(
+                height: mSizeConfig.blockSizeVertical * 5,
+                width: mSizeConfig.blockSizeVertical * 5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.sp),
+                  color: Colors.white,
+                  border: Border.all(color: mCategoryController.selectedTypeIndex.value==index?Theme.of(context).primaryColor:Colors.transparent, width: mCategoryController.selectedTypeIndex.value==index?0.4:0.0),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.sp),
+                  child: CachedNetworkImage(
+                    imageUrl: "${mModel.image}",
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.fill,
+                    ),
+                    errorWidget: (context, url, error) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 4.sp,),
+              SizedBox(height: 3.sp,),
               Text(mModel.title,style: TextStyle(
-                  color: Colors.black,
-                  fontSize: kMediumFontSize12
+                  color:Theme.of(context).colorScheme.secondaryVariant,
+                  fontSize: kSmallFontSize10
               ),),
-              SizedBox(height: 4.sp,),
             ],
           ),
         ),

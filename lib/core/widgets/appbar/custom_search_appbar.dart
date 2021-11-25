@@ -9,9 +9,10 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
 
 
   final double height;
+   final bool haveBackButton ;
 
-  const CustomSearchAppBar(
-      {required Key key, required this.height})
+   const CustomSearchAppBar(
+      {required Key key, required this.height, required this.haveBackButton})
       : super(key: key);
 
   @override
@@ -30,39 +31,49 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
       child: Padding(
         padding: EdgeInsets.only(top: topPadding),
         child: Center(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryVariant,
-                borderRadius: BorderRadius.circular(5.sp)),
-            margin: EdgeInsets.symmetric(
-              vertical: verticalMargin,
-              horizontal: horizontalMargin,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: mSizeConfig.blockSizeHorizontal * 5,
+          child: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back_ios_new,color: Colors.grey,), onPressed: () {
+                  Get.back();
+              },
+              ),
+              Expanded(
+                child: Container(
+                  height: mSizeConfig.safeBlockVertical*20,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primaryVariant,
+                      borderRadius: BorderRadius.circular(5.sp)),
+                  margin: EdgeInsets.symmetric(
+                    vertical: verticalMargin,
+                    horizontal: horizontalMargin,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: mSizeConfig.blockSizeHorizontal * 5,
+                      ),
+                      SvgPicture.asset(
+                        "assets/images/search.svg",
+                        width: 16,
+                        height: 16,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(
+                        width: mSizeConfig.blockSizeHorizontal * 5,
+                      ),
+                      Text(
+                        "Find Products Or Category Here",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontSize: kMediumFontSize12.sp),
+                      ),
+                    ],
+                  ),
                 ),
-                SvgPicture.asset(
-                  "assets/images/search.svg",
-                  width: 16,
-                  height: 16,
-                  color: Colors.grey,
-                ),
-                SizedBox(
-                  width: mSizeConfig.blockSizeHorizontal * 5,
-                ),
-                Text(
-                  "Find Products Or Category Here",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kMediumFontSize12.sp),
-                ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),

@@ -34,8 +34,8 @@ class BuildHorizontalItems extends StatelessWidget {
                   "$title",
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      fontSize: kLargeFontSize14.sp),
+                      fontWeight: FontWeight.w600,
+                      fontSize: kExtraLargeFontSize15.sp),
                 ),
                 Spacer(),
                 haveSeeMore? TextButton(
@@ -43,10 +43,9 @@ class BuildHorizontalItems extends StatelessWidget {
                   style: TextButton.styleFrom(
                       primary: Theme.of(context).primaryColor),
                   child: Text(
-                    "See More",
+                    "see more",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w600,
                         fontSize: kSmallFontSize10.sp),
                   ),
                 ): Container()
@@ -57,7 +56,7 @@ class BuildHorizontalItems extends StatelessWidget {
             height: 6.sp,
           ),
           Container(
-            height: mSizeConfig.blockSizeVertical * 21.5,
+            height: mSizeConfig.blockSizeVertical * 19.8,
             child: ListView.builder(itemBuilder: (context, index) {
               return BuildItemSingle(
                 mSizeConfig: mSizeConfig,
