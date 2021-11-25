@@ -21,9 +21,9 @@ Widget orderDetailPageAllWidget(BuildContext context, SizeConfig sizeConfig,
         height: 16,
       ),
 
-     /* _buildStepperWidget(context, sizeConfig, controller),
-*/
-      _buildStepper(context, sizeConfig, controller),
+
+    //  _buildStepper(context, sizeConfig, controller),
+      _buildNewStepper(context, sizeConfig, controller),
       SizedBox(
         height: 16,
       ),
@@ -51,44 +51,9 @@ Widget orderDetailPageAllWidget(BuildContext context, SizeConfig sizeConfig,
   );
 }
 
-///build stepper widget for order tracking
-/*Widget _buildStepperWidget(BuildContext context, SizeConfig sizeConfig,
-    OrderDetailPageController controller) {
-  return Stepper(
-    controlsBuilder: (BuildContext context,
-        {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
-      return Container();
-    },
-    steps: const <Step>[
-      Step(
-        title: Text('Order Processing'),
-        content: SizedBox(
-            //   height: 8,
-            ),
-      ),
-      Step(
-        isActive: true,
-        title: Text('Order Receive'),
-        content: SizedBox(
-          height: 8,
-        ),
-      ),
-      Step(
-        title: Text('Order Delivery'),
-        content: SizedBox(
-            //  height: 8,
-            ),
-      ),
-      Step(
-        title: Text('Order Complete'),
-        content: SizedBox(
-            //   height: 8,
-            ),
-      ),
-    ],
-  );
-}*/
 
+
+/*
 Widget _buildStepper(BuildContext context, SizeConfig sizeConfig,
     OrderDetailPageController controller) {
 
@@ -110,11 +75,11 @@ Widget _buildStepper(BuildContext context, SizeConfig sizeConfig,
 
                 TextSpan(text: "Nov 7 2021\n",
                     style: TextStyle(
-                        color: Colors.black, fontSize: kMediumFontSize12.sp,fontWeight: FontWeight.bold)),
+                        color: Colors.black, fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.bold)),
 
                 TextSpan(text: "Order  #DN-A00122",
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary, fontSize: kSmallFontSize10.sp,fontWeight: FontWeight.bold)),
+                        color: Theme.of(context).colorScheme.secondaryVariant, fontSize: kMediumFontSize11.sp,fontWeight: FontWeight.bold)),
               ]
             )),
             Spacer(),
@@ -148,21 +113,50 @@ Widget _buildStepper(BuildContext context, SizeConfig sizeConfig,
             SizedBox(width: kDefaultMargin,),
             Text( "Order processing",
                 style: TextStyle(
-                    color: Color(0xff00A96C), fontSize: kMediumFontSize12.sp,)),
+                    color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
             Spacer(
 
             ),
             Text( "9:30 PM",
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize12.sp,)),
+                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize11.sp,)),
 
           ],
         ),
 
         Container(
-          height: 30.0,
+          height: sizeConfig.blockSizeHorizontal*5,
           width: 1.0,
-          color: Colors.black38,
+          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
+          margin: const EdgeInsets.only(left: 5.0),
+        ),
+        Row(
+
+          children: [
+            CircleAvatar(
+              radius: sizeConfig.blockSizeVertical*1,
+
+              backgroundColor: Color(0xff00A96C),
+              child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
+            ),
+            SizedBox(width: kDefaultMargin,),
+            Text( "Order Receive",
+                style: TextStyle(
+                  color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+            Spacer(
+
+            ),
+            Text( "9:34 PM",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize11.sp,)),
+
+          ],
+        ),
+
+        Container(
+          height: sizeConfig.blockSizeHorizontal*5,
+          width: 1.0,
+          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
           margin: const EdgeInsets.only(left: 7.0),
         ),
         Row(
@@ -175,22 +169,23 @@ Widget _buildStepper(BuildContext context, SizeConfig sizeConfig,
               child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
             ),
             SizedBox(width: kDefaultMargin,),
-            Text( "Order processing",
+            Text( "Order Delivery",
                 style: TextStyle(
-                  color: Color(0xff00A96C), fontSize: kMediumFontSize12.sp,)),
+                  color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
             Spacer(
 
             ),
-            Text( "9:30 PM",
+            Text( "9:45 PM",
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize12.sp,)),
+                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize11.sp,)),
 
           ],
         ),
+
         Container(
-          height: 30.0,
+          height: sizeConfig.blockSizeHorizontal*5,
           width: 1.0,
-          color: Colors.black38,
+          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.4),
           margin: const EdgeInsets.only(left: 7.0),
         ),
         Row(
@@ -199,50 +194,20 @@ Widget _buildStepper(BuildContext context, SizeConfig sizeConfig,
             CircleAvatar(
               radius: sizeConfig.blockSizeVertical*1,
 
-              backgroundColor: Color(0xff00A96C),
-              child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
-            ),
-            SizedBox(width: kDefaultMargin,),
-            Text( "Order processing",
-                style: TextStyle(
-                  color: Color(0xff00A96C), fontSize: kMediumFontSize12.sp,)),
-            Spacer(
-
-            ),
-            Text( "9:30 PM",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize12.sp,)),
-
-          ],
-        ),
-        Container(
-          height: 30.0,
-          width: 1.0,
-          color: Colors.black38,
-          margin: const EdgeInsets.only(left: 7.0),
-        ),
-        Row(
-
-          children: [
-            CircleAvatar(
-              radius: sizeConfig.blockSizeVertical*1,
-
-              backgroundColor: Colors.black38,
+              backgroundColor:  Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
 
             ),
             SizedBox(width: kDefaultMargin,),
-            Text( "Order processing",
+            Text( "Order Complete",
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize12.sp,)),
-            Spacer(
+                  color:Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize11.sp,)),
 
-            ),
-            Text( "9:30 PM",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize12.sp,)),
 
           ],
         ),
+
+
+
 
 
 
@@ -251,19 +216,221 @@ Widget _buildStepper(BuildContext context, SizeConfig sizeConfig,
     ),
 
   );
-}
+}*/
 
-///bui
+///build new stepper
+///
+Widget _buildNewStepper(BuildContext context,SizeConfig sizeConfig,
+OrderDetailPageController controller) {
+
+
+  return Container(
+    padding: const EdgeInsets.all(kDefaultMargin),
+    color: Colors.white,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+
+            RichText(text: TextSpan(
+                children: [
+
+                  TextSpan(text: "Nov 7 2021\n",
+                      style: TextStyle(
+                          color: Colors.black, fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.bold)),
+
+                  TextSpan(text: "Order  #DN-A00122",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondaryVariant, fontSize: kMediumFontSize11.sp,fontWeight: FontWeight.bold)),
+                ]
+            )),
+            Spacer(),
+
+            CircleAvatar(
+              radius: sizeConfig.blockSizeVertical*1,
+
+              backgroundColor: Color(0xffFB9600),
+            ),
+            SizedBox(width: kDefaultMargin,),
+            Text( "Order processing",
+                style: TextStyle(
+                    color: Color(0xffFB9600), fontSize: kMediumFontSize12.sp,fontWeight: FontWeight.bold)),
+
+
+          ],
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Row(
+crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            Column(
+              children: [
+
+
+
+                Row(
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: sizeConfig.blockSizeVertical*1,
+
+                          backgroundColor: Color(0xff00A96C),
+                          child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
+                        ),
+                        Container(
+                          height: sizeConfig.blockSizeHorizontal*5,
+                          width: 1.0,
+                          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
+
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: kDefaultMargin,),
+                    Text( "Order processing",
+                        style: TextStyle(
+                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+
+
+                  ],
+                ),
+                Row(
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: sizeConfig.blockSizeVertical*1,
+
+                          backgroundColor: Color(0xff00A96C),
+                          child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
+                        ),
+                        Container(
+                          height: sizeConfig.blockSizeHorizontal*5,
+                          width: 1.0,
+                          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
+
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: kDefaultMargin,),
+                    Text( "Order processing",
+                        style: TextStyle(
+                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+
+
+                  ],
+                ),
+                Row(
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: sizeConfig.blockSizeVertical*1,
+
+                          backgroundColor: Color(0xff00A96C),
+                          child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
+                        ),
+                        Container(
+                          height: sizeConfig.blockSizeHorizontal*5,
+                          width: 1.0,
+                          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
+
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: kDefaultMargin,),
+                    Text( "Order processing",
+                        style: TextStyle(
+                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+
+
+                  ],
+                ),
+                Row(
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: sizeConfig.blockSizeVertical*1,
+
+                          backgroundColor: Color(0xff00A96C),
+                          child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
+                        ),
+                        Container(
+                          height: sizeConfig.blockSizeHorizontal*5,
+                          width: 1.0,
+                          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
+
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: kDefaultMargin,),
+                    Text( "Order processing",
+                        style: TextStyle(
+                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+
+
+                  ],
+                ),
+
+
+              ],
+            ),
+
+            Spacer(
+
+            ),
+            Column(
+
+              children: [
+
+                Text( "9:30 PM",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize11.sp,)),
+                SizedBox(  height: sizeConfig.blockSizeHorizontal*5,),
+                Text( "9:30 PM",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize11.sp,)),
+                SizedBox(  height: sizeConfig.blockSizeHorizontal*5,),
+                Text( "9:30 PM",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize11.sp,)),
+                SizedBox(  height: sizeConfig.blockSizeHorizontal*5,),
+
+
+
+
+              ],
+            )
+          ],
+        ),
+      ],
+    ),
+  );
+}
 Widget _buildDeliveryRiderProfile(BuildContext context, SizeConfig sizeConfig,
     OrderDetailPageController controller) {
   return Container(
-      padding: EdgeInsets.all(kDefaultMargin),
+      padding: EdgeInsets.symmetric(horizontal: kDefaultMargin,vertical: kDefaultMargin),
       color: Colors.white,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ClipRRect(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(100),
               child: Image.asset(
                 "assets/images/profile.jpg",
                 width: sizeConfig.safeBlockVertical * 8,
@@ -275,10 +442,11 @@ Widget _buildDeliveryRiderProfile(BuildContext context, SizeConfig sizeConfig,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Aung Pyae",
                   style: TextStyle(
-                      color: Colors.black, fontSize: kMediumFontSize12.sp,fontWeight: FontWeight.bold)),
+                      color: Theme.of(context).colorScheme.secondary, fontSize: kLargeFontSize14,fontWeight: FontWeight.bold)),
               Text("Delivery Rider",
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
@@ -286,10 +454,13 @@ Widget _buildDeliveryRiderProfile(BuildContext context, SizeConfig sizeConfig,
             ],
           ),
           Spacer(),
-          Text("1pc|Ks.250",
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: kMediumFontSize12.sp)),
+          GestureDetector(
+            onTap:()=> print("hhahhhah"),
+            child: CircleAvatar(
+                maxRadius: sizeConfig.blockSizeVertical*2,
+                backgroundColor: Theme.of(context).primaryColor,
+                child: Icon(Icons.phone,size: 18.sp,color: Colors.white,)),
+          )
         ],
       ));
 }
@@ -299,38 +470,9 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
   return Container(
       padding: EdgeInsets.all(8),
       color: Colors.white,
-      child: /*Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-
-        Image.asset("assets/images/snack.png",width: sizeConfig.safeBlockVertical*12,height: sizeConfig.safeBlockHorizontal*18,),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Apolo layer Cake x1",style:TextStyle(color:Colors.black,fontSize: kExtraLargeFontSize16.sp,fontWeight: FontWeight.w500)),
-            Text("1pc 250Kyats",style:TextStyle(color:Colors.grey,fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.w500)),
-
-          ],
-
-
-        ),
-        Spacer(),
-        Text("1pc|Ks.250",style:TextStyle(color:Theme.of(context).primaryColor,fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.w500)),
-      ],
-    )*/
-
-          Column(
+      child:  Column(
         children: [
-          /*     ListTile(
 
-
-          leading:   Image.asset("assets/images/snack.png",width: sizeConfig.safeBlockVertical*12,height: sizeConfig.safeBlockHorizontal*18,),
-          title: Text("Apolo layer Cake x1",style:TextStyle(color:Colors.black,fontSize: kExtraLargeFontSize16.sp,fontWeight: FontWeight.w500)),
-          subtitle: Text("1pc 250Kyats",style:TextStyle(color:Colors.grey,fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.w500)),
-          trailing: Text("1pc|Ks.250",style:TextStyle(color:Theme.of(context).primaryColor,fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.w500)),
-
-
-        ),*/
           Row(
             children: [
               Image.asset(
@@ -347,13 +489,14 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
                   Text("Apolo layer Cake x1",
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: kMediumFontSize12.sp,
+                        fontSize: kLargeFontSize13.sp,
                           fontWeight: FontWeight.bold
                       )),
                   Text("1pc 250Kyats",
                       style: TextStyle(
-                        color: Colors.grey,
+                        color :  Theme.of(context).colorScheme.onPrimary,
                         fontSize: kSmallFontSize10.sp,
+
                       )),
                 ],
               ),
@@ -361,7 +504,8 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
               Text("1pc|Ks.250",
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: kSmallFontSize10.sp,
+                   fontWeight: FontWeight.bold,
+                    fontSize: kLargeFontSize13.sp,
                   )),
             ],
           ),
@@ -381,23 +525,25 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
                 children: [
                   Text("Apolo layer Cake x1",
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: kMediumFontSize12.sp,
+                          color: Colors.black,
+                          fontSize: kLargeFontSize13.sp,
                           fontWeight: FontWeight.bold
                       )),
                   Text("1pc 250Kyats",
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: kSmallFontSize10.sp,
-                          fontWeight: FontWeight.w500)),
+                        color :  Theme.of(context).colorScheme.onPrimary,
+                        fontSize: kSmallFontSize10.sp,
+
+                      )),
                 ],
               ),
               Spacer(),
               Text("1pc|Ks.250",
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: kSmallFontSize10.sp,
-                      fontWeight: FontWeight.w500)),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: kLargeFontSize13.sp,
+                  )),
             ],
           ),
           Divider(),
@@ -406,13 +552,13 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
             children: [
               Text("Item Total",
                   style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: kSmallFontSize10.sp,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontSize: kLargeFontSize13.sp,
                   )),
               Text("Ks.3000",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: kSmallFontSize10.sp,
+                    fontSize: kLargeFontSize13.sp,
                   )),
             ],
           ),
@@ -425,12 +571,12 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
               Text("Delivery Fees",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: kSmallFontSize10.sp,
+                    fontSize: kLargeFontSize13.sp,
                   )),
               Text("1000 Kyats",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: kSmallFontSize10.sp,
+                    fontSize: kLargeFontSize13.sp,
                   )),
             ],
           ),
@@ -447,12 +593,12 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
               Text("Grand Total",
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kSmallFontSize10.sp,
+                      fontSize: kLargeFontSize13.sp,
                       fontWeight: FontWeight.bold)),
               Text("Ks.4000",
                   style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: kSmallFontSize10.sp,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: kLargeFontSize13.sp,
                       fontWeight: FontWeight.bold)),
             ],
           ),
@@ -480,13 +626,13 @@ Widget _buildDeliveryAddress(BuildContext context, SizeConfig sizeConfig,
             TextSpan(
                 text: "Home\n",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kMediumFontSize12.sp,
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: kLargeFontSize13.sp,
                     fontWeight: FontWeight.bold)),
             TextSpan(
                 text: "45 E 45 St Myamandalar ,Mandalay",
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontSize: kMediumFontSize12.sp,
                 )),
           ]))

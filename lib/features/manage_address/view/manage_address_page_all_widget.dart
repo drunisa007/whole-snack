@@ -40,7 +40,7 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
                     "Add New Address",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        fontSize: kLargeFontSize14.sp,
+                        fontSize: kExtraLargeFontSize15.sp,
                         fontWeight: FontWeight.w600),
 
                   )
@@ -78,13 +78,13 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                     text: "Home\n",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: kMediumFontSize12.sp,
+                        fontSize: kLargeFontSize13.sp,
                         fontWeight: FontWeight.bold)),
                 TextSpan(
                     text: "45 E 45 St Mdy City Mya kyaw minglar a a a a a Myamandalar ,Mandalay",
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.onPrimary,
-                        fontSize: kSmallFontSize10.sp,
+                        fontSize: kMediumFontSize12.sp,
                       )),
               ])),
         ),
@@ -101,8 +101,8 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
               child: Text(
                   "Update",
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kMediumFontSize12.sp,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    fontSize: kSmallFontSize10.sp,
                     fontWeight: FontWeight.bold
                   )),
             ),
@@ -113,7 +113,8 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                   "Delete",
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: kMediumFontSize12.sp,
+                    fontSize: kSmallFontSize10.sp,
+                    fontWeight: FontWeight.bold
                   )),
             ),
           ],

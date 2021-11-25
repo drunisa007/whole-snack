@@ -53,26 +53,26 @@ class BuildSignUpPageBody extends StatelessWidget {
                       children: [
 
 
-                        Text("Login Account",style: TextStyle(
+                        Text("Create Account",style: TextStyle(
 
                             color: Colors.black,fontSize: kExtraLargeFontSize16.sp,
                             fontWeight: FontWeight.bold
                         ),),
 
-                        Text("Enter your logged in account number.",style: TextStyle(
+                        Text("Enter your info and verifty number to signup.",style: TextStyle(
 
-                            color:  Theme.of(context).colorScheme.onPrimary,fontSize: kMediumFontSize12.sp
+                            color:  Theme.of(context).colorScheme.onPrimary,fontSize: kSmallFontSize10.sp
                         ),),
                         SizedBox(
                           height: 16,
                         ),
                         Text("Fullname",style: TextStyle(
 
-                            color:  Theme.of(context).colorScheme.onPrimary,fontSize: kMediumFontSize12.sp
+                            color:  Theme.of(context).colorScheme.secondaryVariant,fontSize: kMediumFontSize12.sp
                         ),),
                         TextField(
                           style: TextStyle(
-                              color: Colors.black,
+                              color:  Theme.of(context).colorScheme.secondaryVariant,
                               fontSize: kExtraLargeFontSize16.sp,
                               fontWeight: FontWeight.bold),
                           controller: nameController,
@@ -95,12 +95,12 @@ class BuildSignUpPageBody extends StatelessWidget {
                         ),
                         Text("Phone Number",style: TextStyle(
 
-                            color:  Theme.of(context).colorScheme.onPrimary,fontSize: kMediumFontSize12.sp
+                            color:  Theme.of(context).colorScheme.secondaryVariant,fontSize: kMediumFontSize12.sp
                         ),),
                         TextField(
                           keyboardType: TextInputType.number,
                           style: TextStyle(
-                              color: Colors.black,
+                              color:  Theme.of(context).colorScheme.secondaryVariant,
                               fontSize: kExtraLargeFontSize16.sp,
                               fontWeight: FontWeight.bold),
                           controller: phoneController,

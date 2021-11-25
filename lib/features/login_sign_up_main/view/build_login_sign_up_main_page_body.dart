@@ -56,9 +56,9 @@ class BuildLoginSignUpMainPageBody extends StatelessWidget {
                         fontWeight: FontWeight.bold
                       ),),
 
-                      Text("Welcome From Daily Neccessary!",style: TextStyle(
+                      Text("Get your groceries with same day delivery",style: TextStyle(
 
-                          color:  Theme.of(context).colorScheme.onPrimary,fontSize: kMediumFontSize12.sp
+                          color:  Theme.of(context).colorScheme.onPrimary,fontSize: kSmallFontSize10.sp
                       ),),
                       SizedBox(
                         height: 24,

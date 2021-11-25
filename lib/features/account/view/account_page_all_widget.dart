@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
@@ -22,7 +23,7 @@ Widget accountPageAllWidget(
           color: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: kDefaultMargin, vertical: 16),
           child: _buildSubSettinList(context, controller, sizeConfig,
-              Icons.logout, "Log Out", () => Get.toNamed("/order-success-page"), !isArrow)),
+              "assets/images/logout.svg", "Log Out", () => Get.toNamed("/order-success-page"), !isArrow)),
       SizedBox(
         height: 16,
       ),
@@ -30,7 +31,7 @@ Widget accountPageAllWidget(
         child: Text("Daily v.1.0.1(10)",
             style: TextStyle(
                 color: Theme.of(context).colorScheme.onPrimary,
-                fontSize: kMediumFontSize12.sp,
+                fontSize: kSmallFontSize10.sp,
                 fontWeight: FontWeight.w500)),
       ),
 
@@ -40,7 +41,7 @@ Widget accountPageAllWidget(
             style: TextStyle(
                 color: Colors.black,
                 fontSize: kLargeFontSize14.sp,
-                fontWeight: FontWeight.w500)),
+                fontWeight: FontWeight.bold)),
       ),
       SizedBox(
         height: 12,
@@ -63,30 +64,30 @@ Widget _buildProfileWidget(
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(100),
 
-            child: Image.asset("assets/images/profile.jpg",height: sizeConfig.blockSizeHorizontal*10,
-            width: sizeConfig.blockSizeHorizontal*10,
-            fit: BoxFit.cover,)
+              child: Image.asset("assets/images/profile.jpg",height: sizeConfig.blockSizeHorizontal*12,
+                width: sizeConfig.blockSizeHorizontal*12,
+                fit: BoxFit.cover,)
           ),
           SizedBox(
             width: 16,
           ),
           RichText(
               text: TextSpan(children: [
-            TextSpan(
-                  text: "Kyaw Zin Latt\n",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kLargeFontSize14.sp,
-                    fontWeight: FontWeight.bold)),
-            TextSpan(
-                text: "09972000283",
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: kMediumFontSize12.sp,
-                    fontWeight: FontWeight.w500)),
-          ])),
+                TextSpan(
+                    text: "Kyaw Zin Latt\n",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: kExtraLargeFontSize16.sp,
+                        fontWeight: FontWeight.bold)),
+                TextSpan(
+                    text: "09972000283",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: kMediumFontSize12.sp,
+                        )),
+              ])),
           Spacer(),
           GestureDetector(
             onTap: () => Get.toNamed("/edit-profile-page"),
@@ -105,13 +106,13 @@ Widget _buildSetting(
   bool isArrow = true;
 
   List<Widget> settingList = [
-    _buildSubSettinList(context, controller, sizeConfig, Icons.room,
+    _buildSubSettinList(context, controller, sizeConfig, "assets/images/location_icon.svg",
         "Manage Address", () =>Get.toNamed("/manage-address-page"), isArrow),
     Divider(),
-    _buildSubSettinList(context, controller, sizeConfig, Icons.headset_mic,
+    _buildSubSettinList(context, controller, sizeConfig, "assets/images/head_phone.svg",
         "Customer Support", () => Get.toNamed("/customer-support-page"), isArrow),
     Divider(),
-    _buildSubSettinList(context, controller, sizeConfig, Icons.info,
+    _buildSubSettinList(context, controller, sizeConfig,"assets/images/about.svg",
         "About Daily", () => Get.toNamed("/about-page"), isArrow),
   ];
 
@@ -128,7 +129,7 @@ Widget _buildSubSettinList(
     BuildContext context,
     AccountController controller,
     SizeConfig sizeConfig,
-    IconData icon,
+    String icon,
     String title,
     Function onClick,
     bool isArrow) {
@@ -136,31 +137,32 @@ Widget _buildSubSettinList(
     onTap: ()=>onClick(),
     child: Row(
       children: [
-        Icon(
-          icon,
-          size: 24.sp,
-            color: Theme.of(context).colorScheme.onPrimary
+       SvgPicture.asset(
+            icon,
+            width: 20.sp,
+            height: 20.sp,
+            color: Theme.of(context).colorScheme.secondary
         ),
         SizedBox(
           width: 8,
         ),
         Text(title,
             style: TextStyle(
-                color: Colors.black,
-                fontSize: kMediumFontSize12.sp,
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: kLargeFontSize13.sp,
                 fontWeight: FontWeight.w500)),
         Spacer(),
-        isArrow ? Icon(Icons.navigate_next,size: 24.sp,color: Theme.of(context).colorScheme.onPrimary,) : Text("")
+        isArrow ? Icon(Icons.navigate_next,size: 24.sp,color: Theme.of(context).colorScheme.secondary,) : Text("")
       ],
     ),
   );
 }
 
 Widget _buildSocialButtonList(
-  BuildContext context,
-  AccountController controller,
-  SizeConfig sizeConfig,
-) {
+    BuildContext context,
+    AccountController controller,
+    SizeConfig sizeConfig,
+    ) {
   List<Widget> socialButtons = [
     _buildSocialButton(context, controller, sizeConfig,
         "assets/images/viber.png", () => print("hahhaha")),
