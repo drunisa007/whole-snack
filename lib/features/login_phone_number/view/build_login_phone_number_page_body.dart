@@ -51,13 +51,13 @@ class BuildLoginPhoneNumberPageBody extends StatelessWidget {
 
                         Text("Login Account",style: TextStyle(
 
-                            color: Colors.black,fontSize: kExtraLargeFontSize16.sp,
+                            color: Theme.of(context).colorScheme.secondary,fontSize: kExtraLargeFontSize16.sp,
                             fontWeight: FontWeight.bold
                         ),),
 
                         Text("Enter your logged in account number.",style: TextStyle(
 
-                            color:  Theme.of(context).colorScheme.onPrimary,fontSize: kMediumFontSize12.sp
+                            color:  Theme.of(context).colorScheme.onPrimary,fontSize: kSmallFontSize10.sp
                         ),),
                         SizedBox(
                           height: 16,

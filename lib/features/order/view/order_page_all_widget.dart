@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 
-import 'package:whole_snack/core/constants/default_values.dart';
-import 'package:whole_snack/core/constants/default_values.dart';
-import 'package:whole_snack/core/constants/default_values.dart';import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
 
 import 'package:whole_snack/features/order/controller/order_controller.dart';
@@ -70,8 +69,8 @@ Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
         Text(
           title,
           style: TextStyle(
-            color: Colors.black,
-            fontSize: kMediumFontSize12.sp,
+            color: Theme.of(context).colorScheme.onPrimary,
+            fontSize: kLargeFontSize13.sp,
           ),
         ),
         SizedBox(
@@ -112,31 +111,37 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
 
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
 
               Text(
-                "Apply",
+                "Nov 7, 2021",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kMediumFontSize12.sp,
+                    fontSize: kLargeFontSize14.sp,
                     fontWeight: FontWeight.w600),
               ),
+              Spacer(),
               Text(
                 "Ks. 50000",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kSmallFontSize10.sp,
+                    fontSize: kExtraLargeFontSize15.sp,
                     fontWeight: FontWeight.w600),
               ),
+              SizedBox(
+                width: 8,
+              ),
+              Icon(Icons.arrow_forward_ios,size: 15.sp, color: Colors.black,)
+
             ],
           ),
           Text(
             "Order Code #8488394",
             style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.secondaryVariant,
 
-                fontSize: kSmallFontSize10.sp,
+                fontSize: kMediumFontSize11.sp,
                 fontWeight: FontWeight.w500),
           ),
           SizedBox(
@@ -145,7 +150,7 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
           Row(
 
             children: [
-              Icon(Icons.shopping_bag,color: Theme.of(context).colorScheme.onPrimary,size: 26.sp,),
+             SvgPicture.asset("assets/images/bag.svg",color: Theme.of(context).colorScheme.onPrimary,width: 12.sp,height: 12.sp,),
               SizedBox(width: 8,),
               Flexible(
                 child: Text(
@@ -153,7 +158,7 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
                   
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kMediumFontSize12.sp,
+                      fontSize: kMediumFontSize11.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ),
@@ -171,7 +176,7 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
                width: sizeConfig.blockSizeVertical*3,
                decoration: BoxDecoration(
                  shape: BoxShape.circle,
-                  color: Colors.blueAccent
+                  color: Color(0xff0400B7)
                ),
              ),
               SizedBox(width: 8,),
@@ -180,7 +185,7 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
                   "Order Processing",
 
                   style: TextStyle(
-                      color: Colors.blueAccent,
+                      color: Color(0xff0400B7),
                       fontSize: kMediumFontSize12.sp,
                       fontWeight: FontWeight.w600),
                 ),
@@ -206,15 +211,15 @@ Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderCo
               Text(
                 "Cancel Order",
                 style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: kMediumFontSize12.sp,
+                    color: Theme.of(context).colorScheme.secondaryVariant,
+                    fontSize: kLargeFontSize13.sp,
                     fontWeight: FontWeight.w600),
               ),
               Text(
                 "Track Order",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: kMediumFontSize12.sp,
+                    fontSize: kLargeFontSize13.sp,
                     fontWeight: FontWeight.w600),
               ),
             ],

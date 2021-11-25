@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/customer_support/controller/customer_support_page_controller.dart';
@@ -15,8 +16,9 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
         padding: const EdgeInsets.symmetric(vertical: 16,horizontal: kDefaultMargin),
         child: Text("For Customer Support",
             style: TextStyle(
-                color: Colors.black,
-                fontSize: kMediumFontSize12.sp,
+              color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: kLargeFontSize14.sp,
+              fontWeight: FontWeight.w500
                 )),
       ),
       Container(
@@ -41,8 +43,8 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
         padding: const EdgeInsets.only(left: kDefaultMargin,top: 20,bottom: 16),
         child: Text("For Technical Support",
             style: TextStyle(
-                color: Colors.black,
-                fontSize: kMediumFontSize12.sp,
+              color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: kLargeFontSize14.sp,
                )),
       ),
       Container(
@@ -67,8 +69,8 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
         padding: const EdgeInsets.only(left: kDefaultMargin,top: 20,bottom: 16),
         child: Text("For Email Support",
             style: TextStyle(
-                color: Colors.black,
-                fontSize: kMediumFontSize12.sp,
+              color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: kLargeFontSize14.sp,
                 )),
       ),
       Container(
@@ -83,18 +85,19 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
         ),
         child: Row(
           children: [
-            Icon(
-              Icons.email,
-              size: 24.sp,
-              color: Theme.of(context).colorScheme.onPrimary,
+           SvgPicture.asset(
+             "assets/images/email.svg",
+              width: 18.sp,
+              height: 18,
+              color: Theme.of(context).colorScheme.secondary,
             ),
             SizedBox(
               width: 16,
             ),
             Text("dailymdy@gmail.com",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kMediumFontSize12.sp,
+                  color: Theme.of(context).colorScheme.secondary,
+                    fontSize: kLargeFontSize13.sp,
                     )),
             Spacer(),
             GestureDetector(
@@ -102,7 +105,12 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
               child: CircleAvatar(
                   maxRadius: sizeConfig.blockSizeVertical*2,
                   backgroundColor: Theme.of(context).primaryColor,
-                  child: Icon(Icons.send,size: 18.sp,color: Colors.white,)),
+                  child: SvgPicture.asset("assets/images/send.svg",width: 15.sp,
+                    height: 15.sp,
+
+                    color: Colors.white,
+
+                  )),
             )
           ],
         ),
@@ -112,8 +120,9 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
         padding: const EdgeInsets.only(left: 8,top: 20,bottom: 8),
         child: Text("Social Media Contact",
             style: TextStyle(
-                color: Colors.black,
+              color: Theme.of(context).colorScheme.onPrimary,
                 fontSize: kLargeFontSize14.sp,
+              fontWeight: FontWeight.w500,
                 )),
       ),
       Padding(
@@ -158,18 +167,19 @@ Widget _buildCustomerSigleItem(BuildContext context, SizeConfig sizeConfig,
       children: [
         Row(
           children: [
-            Icon(
-              Icons.support_agent,
-              size: 24.sp,
-              color: Theme.of(context).colorScheme.onPrimary,
+            SvgPicture.asset(
+             "assets/images/head_phone.svg",
+              height: 18.sp,
+              width: 18.sp,
+              color: Theme.of(context).colorScheme.secondary,
             ),
             SizedBox(
               width: 16,
             ),
             Text(number1,
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kMediumFontSize12.sp,
+                  color: Theme.of(context).colorScheme.secondary,
+                    fontSize: kLargeFontSize13.sp,
                    )),
             Spacer(),
             GestureDetector(

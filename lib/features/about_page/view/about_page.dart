@@ -18,7 +18,7 @@ class AboutPage extends StatelessWidget {
     return ScreenUtilInit(builder: () => Scaffold(
       appBar: getAppBarWithBackArrow("About Page", sizeConfig, ()=>Get.back()),
 
-      body: aboutPageAllWidget(context, sizeConfig, controller)
+      body: AboutPageAllWidget(sizeConfig : sizeConfig,controller :  controller)
     ));
   }
 }

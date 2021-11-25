@@ -26,38 +26,47 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
       Text(
         "Phone Number",
         style: TextStyle(
-          color: Colors.black,
-          fontSize: kMediumFontSize12.sp,
+          color: Theme.of(context).colorScheme.secondary,
+          fontSize: kLargeFontSize13.sp,
+
+            fontWeight: FontWeight.w500
         ),
+      ),
+      SizedBox(
+        height: 8,
       ),
       TextField(
         controller: phoneController,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.grey, width: 1),
+            borderSide: BorderSide( color: Theme.of(context).colorScheme.onPrimary, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide(
-              color: Colors.black,
+                color: Theme.of(context).colorScheme.onPrimary
             ),
           ),
           hintText: "Enter you address",
           hintStyle: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: kSmallFontSize10.sp),
+              fontSize: kLargeFontSize13.sp),
+        ),
+      ),
+      SizedBox(
+        height: 12,
+      ),
+      Text(
+        "Township",
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
+          fontSize: kLargeFontSize13.sp,
+          fontWeight: FontWeight.w500
         ),
       ),
       SizedBox(
         height: 8,
-      ),
-      Text(
-        "Delivery Addresss",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: kLargeFontSize14.sp,
-        ),
       ),
       GetBuilder<AddAddressPageController>(
         builder: (controller) => Container(
@@ -69,7 +78,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
 
             borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             border: Border.all(
-              color: Colors.grey,
+              color: Theme.of(context).colorScheme.onPrimary,
 
               width: 1,
             ),),
@@ -86,13 +95,13 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
                   value: value,
                   child: Text(
                     value.townshipName,
-                    style: TextStyle(color: Colors.black, fontSize: 12.sp),
+                    style: TextStyle( color: Theme.of(context).colorScheme.secondary, fontSize: kLargeFontSize13.sp),
                   ),
                 );
               }).toList(),
               hint: Text(
                 "Please Choose Your Region\t \t \t\t",
-                style: TextStyle(color: Colors.grey, fontSize: kMediumFontSize12.sp),
+                style: TextStyle( color: Theme.of(context).colorScheme.onPrimary, fontSize: kLargeFontSize13.sp),
               ),
               underline: Container(
                 decoration: const BoxDecoration(
@@ -107,14 +116,18 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
         ),
       ),
       SizedBox(
-        height: 8,
+        height: 12,
       ),
       Text(
         "Delivery Addresss",
         style: TextStyle(
-          color: Colors.black,
-          fontSize: kMediumFontSize12.sp,
+          color: Theme.of(context).colorScheme.secondary,
+          fontSize: kLargeFontSize13.sp,
+          fontWeight: FontWeight.w500
         ),
+      ),
+      SizedBox(
+        height: 8,
       ),
       TextField(
         controller: addressController,
@@ -122,47 +135,50 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.grey, width: 1),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide(
-              color: Colors.black,
+                color: Theme.of(context).colorScheme.onPrimary
             ),
           ),
           hintText: "Enter your address",
           hintStyle: TextStyle(
-              color: Colors.grey,
-              fontSize: kSmallFontSize10.sp),
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: kLargeFontSize13.sp),
         ),
       ),
       SizedBox(
-        height: 8,
+        height: 12,
       ),
       Text(
         "Save As",
         style: TextStyle(
-          color: Colors.black,
-          fontSize: kMediumFontSize12.sp,
+          color: Theme.of(context).colorScheme.secondary,
+          fontSize: kLargeFontSize13.sp,
         ),
+      ),
+      SizedBox(
+        height: 8,
       ),
       TextField(
         controller: saveTittleController,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.grey, width: 1),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide(
-              color: Colors.black,
+                color: Theme.of(context).colorScheme.onPrimary
             ),
           ),
           hintText: "Home",
           hintStyle: TextStyle(
-              color: Colors.grey.withOpacity(0.8),
-              fontSize: kSmallFontSize10.sp),
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: kLargeFontSize13.sp),
         ),
       ),
       SizedBox(

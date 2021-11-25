@@ -36,7 +36,7 @@ Widget _buildEditProfileBody(BuildContext context,
                   Text(
                     "Fullname",
                     style: TextStyle(
-                        color: Colors.grey, fontSize: kMediumFontSize12.sp),
+                        color: Theme.of(context).colorScheme.onPrimary, fontSize: kMediumFontSize12.sp),
                   ),
                   TextField(
                     style: TextStyle(
@@ -47,7 +47,7 @@ Widget _buildEditProfileBody(BuildContext context,
                     decoration: InputDecoration(
                         filled: true,
                         hintStyle: TextStyle(
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.onPrimary,
                             fontSize: kLargeFontSize14.sp,
                             fontWeight: FontWeight.bold),
                         hintText: "Kyaw Zin",

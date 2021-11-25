@@ -161,8 +161,10 @@ class BuildOtpPageBody extends StatelessWidget {
        width: size,
        child: Center(
          child: TextField(
+
            style: TextStyle(
-                fontSize: kLargeFontSize14.sp, color: Colors.black,fontWeight: FontWeight.bold),
+
+                fontSize: kExtraLargeFontSize15.sp, color: Colors.black,fontWeight: FontWeight.bold),
            keyboardType: TextInputType.number,
            maxLength: 1,
            decoration: InputDecoration(border: InputBorder.none, counterText: ''),
