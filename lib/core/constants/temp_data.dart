@@ -38,7 +38,7 @@ List<TempCategoryModel> zCategoryData = [
 ];
 List<TempItemModel> zItemData = [
   TempItemModel("https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
-      "Apollo Layer Cake", "1 pc - Ks.200", [
+      "Apollo Layer  Cake Layer Cake", "1 pc - Ks.200", [
     TempItemPackageModel("3pcs", "500"),
     TempItemPackageModel("6pcs", "1200"),
     TempItemPackageModel("12pcs/1box", "2500")

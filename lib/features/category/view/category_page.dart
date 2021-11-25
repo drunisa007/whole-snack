@@ -33,8 +33,6 @@ class CategoryPage extends StatelessWidget {
 
     List<TempItemModel> mItemList = zItemData;
 
-    CategoryController mCategoryController = Get.find<CategoryController>();
-
     return Scaffold(
       appBar: MyCustomAppBar(height: appBarHeight, key: _scaffoldKey),
       body: Container(
@@ -55,7 +53,7 @@ class CategoryPage extends StatelessWidget {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return Divider(
-                      height: 0.6,
+                      height: 0.6.sp,
                     );
                   },
                   itemCount: mCategoryList.length,

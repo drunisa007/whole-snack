@@ -34,8 +34,8 @@ class BuildHorizontalCategory extends StatelessWidget {
                   "Categories",
                   style: TextStyle(
                       color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      fontSize: kLargeFontSize14.sp),
+                      fontWeight: FontWeight.w500,
+                      fontSize: kLargeFontSize13.sp),
                 ),
                 Spacer(),
                 TextButton(
@@ -48,7 +48,6 @@ class BuildHorizontalCategory extends StatelessWidget {
                     "See More",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w600,
                         fontSize: kSmallFontSize10.sp),
                   ),
                 ),
@@ -59,7 +58,7 @@ class BuildHorizontalCategory extends StatelessWidget {
             height: 6.sp,
           ),
           Container(
-            height: mSizeConfig.blockSizeVertical *10.5,
+            height: mSizeConfig.blockSizeVertical *9.2,
             child: ListView.builder(itemBuilder: (context, index) {
               return BuildCategoryHorizontalSingle(
                 mSizeConfig: mSizeConfig,

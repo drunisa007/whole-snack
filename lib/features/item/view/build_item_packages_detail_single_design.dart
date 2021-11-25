@@ -52,8 +52,8 @@ class BuildItemPackagesDetailSingleDesign extends StatelessWidget {
                       color:  mItemController.itemSelectedIndex.value==index
                           ? Theme.of(context).primaryColor
                           : Colors.black,
-                      fontSize: kLargeFontSize14,
-                      fontWeight: FontWeight.bold,
+                      fontSize: kLargeFontSize13,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -76,7 +76,7 @@ class BuildItemPackagesDetailSingleDesign extends StatelessWidget {
                             "Save - K 100",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: (kExtraSmallFontSize8 + 1).sp),
+                                fontSize: (kSmallFontSize9).sp),
                           ),
                         ),
                         Text("Ks $price",
@@ -84,7 +84,7 @@ class BuildItemPackagesDetailSingleDesign extends StatelessWidget {
                                 color:  mItemController.itemSelectedIndex.value==index
                                     ? Theme.of(context).primaryColor
                                     : Colors.black,
-                                fontSize: (kSmallFontSize10 + 1).sp))
+                                fontSize: kLargeFontSize13.sp))
                       ],
                     ),
                   ))

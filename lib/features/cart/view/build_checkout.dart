@@ -38,18 +38,17 @@ class BuildCheckOut extends StatelessWidget {
                 Text(
                   "Item Total",
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kLargeFontSize14,
-                      fontWeight: FontWeight.w700),
+                      color: Theme.of(context).colorScheme.secondaryVariant,
+                      fontSize: kLargeFontSize13,
+                      ),
                 ),
                 Spacer(),
                Obx((){
                  return Text(
                      "Ks. ${mCartController.totalPrice.value.round()}",
                      style: TextStyle(
-                     color: Theme.of(context).colorScheme.onPrimary,
-                 fontSize: kLargeFontSize14,
-                 fontWeight: FontWeight.w700),
+                         color: Theme.of(context).colorScheme.secondaryVariant,
+                         fontSize: kLargeFontSize13),
                  );
                })
               ],
@@ -62,9 +61,8 @@ class BuildCheckOut extends StatelessWidget {
                 Text(
                   "Delivery Fees",
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kLargeFontSize14,
-                      fontWeight: FontWeight.w700),
+                      color: Theme.of(context).colorScheme.secondaryVariant,
+                      fontSize: kLargeFontSize13),
                 ),
                 Spacer(),
               Obx((){
@@ -72,15 +70,13 @@ class BuildCheckOut extends StatelessWidget {
                 Text(
                   "Free",
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kLargeFontSize14,
-                      fontWeight: FontWeight.w700),
+                      color: Theme.of(context).colorScheme.secondaryVariant,
+                      fontSize: kLargeFontSize13),
                 ):Text(
                   "Ks. ${mCartController.deliveryFee.value}",
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kLargeFontSize14,
-                      fontWeight: FontWeight.w700),
+                      color: Theme.of(context).colorScheme.secondaryVariant,
+                      fontSize: kLargeFontSize13),
                 );
               })
               ],

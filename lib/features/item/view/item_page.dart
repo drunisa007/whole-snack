@@ -57,15 +57,17 @@ class ItemPage extends StatelessWidget {
                                 "Dan Vanilla Layer Cake",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: kLargeFontSize14.sp,
-                                    fontWeight: FontWeight.w900),
+                                    fontSize: kExtraLargeFontSize15.sp,
+                                    fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
                                 height: 4.sp,
                               ),
                               Text(
                                 "Snack Cake&Pie",
-                                style: TextStyle(fontSize: kMediumFontSize12.sp),
+                                style: TextStyle(fontSize: kMediumFontSize11.sp,
+                                color: Theme.of(context).colorScheme.onSecondary
+                                ),
                               ),
                               SizedBox(
                                 height: kDefaultMargin.sp + 10.sp,
@@ -104,10 +106,7 @@ class ItemPage extends StatelessWidget {
                         ),
                         SizedBox(
                           height: GetPlatform.isIOS
-                              ? kBottomNavigationBarHeight +
-                                  kDefaultMargin +
-                                  kDefaultMargin +
-                                  kDefaultMargin
+                              ? kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom+kDefaultMargin.sp
                               : kBottomNavigationBarHeight + kDefaultMargin,
                         ),
                       ],
@@ -128,9 +127,7 @@ class ItemPage extends StatelessWidget {
                     width: double.infinity,
                     color: Theme.of(context).primaryColor,
                     height: GetPlatform.isIOS
-                        ? kBottomNavigationBarHeight +
-                            kDefaultMargin +
-                            kDefaultMargin
+                        ? kBottomNavigationBarHeight +MediaQuery.of(context).padding.bottom
                         : kBottomNavigationBarHeight,
                     padding: EdgeInsets.only(
                         left: kDefaultMargin + kDefaultMargin,
@@ -143,7 +140,7 @@ class ItemPage extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
-                                fontSize: kExtraLargeFontSize16),
+                                fontSize: kExtraLargeFontSize15),
                           ),
                           SizedBox(
                             width: kDefaultMargin,
@@ -162,7 +159,7 @@ class ItemPage extends StatelessWidget {
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: kMediumFontSize12),
+                                      fontSize: kMediumFontSize11),
                                 );
                               })
                             ),
@@ -174,7 +171,7 @@ class ItemPage extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: kExtraLargeFontSize16),
+                                  fontSize: kExtraLargeFontSize15),
                             );
                           })
                         ],

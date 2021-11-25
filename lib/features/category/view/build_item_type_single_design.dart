@@ -26,10 +26,13 @@ class BuildItemTypeSingleDesign extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              "$itemTypeTitle",
-              style: TextStyle(
-                  fontSize: kLargeFontSize14.sp, fontWeight: FontWeight.w700),
+            Padding(
+              padding: EdgeInsets.only(left: 3.sp),
+              child: Text(
+                "$itemTypeTitle",
+                style: TextStyle(
+                    fontSize: kMediumFontSize12.sp, fontWeight: FontWeight.w600),
+              ),
             ),
             Spacer(),
             IconButton(
@@ -49,7 +52,7 @@ class BuildItemTypeSingleDesign extends StatelessWidget {
         ),
         GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, childAspectRatio: 2.7 / 3),
+              crossAxisCount: 2, childAspectRatio: 1 / 1.24),
           itemCount: mItemList.length,
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),

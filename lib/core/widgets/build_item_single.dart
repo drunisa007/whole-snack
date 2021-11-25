@@ -38,29 +38,30 @@ class BuildItemSingle extends StatelessWidget {
         color: Colors.white,
         elevation: 1,
         child: Container(
-          height: mSizeConfig.blockSizeVertical * 21.5,
           width: mSizeConfig.blockSizeVertical * 17,
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(6.sp),
-                  topRight: Radius.circular(6.sp),
-                ),
-                child: CachedNetworkImage(
-                  height: mSizeConfig.blockSizeVertical * 10,
-                  width: mSizeConfig.blockSizeVertical * 16,
-                  imageUrl: image,
-                  placeholder: (context, url) => Image.asset(
-                    "assets/images/place_holder.png",
-                    fit: BoxFit.cover,
+              Container(
+                height:mSizeConfig.blockSizeVertical * 10,
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(6.sp),
+                    topRight: Radius.circular(6.sp),
                   ),
-                  errorWidget: (context, url, error) => Image.asset(
-                    "assets/images/place_holder.png",
-                    fit: BoxFit.cover,
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    placeholder: (context, url) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
+                    ),
+                    errorWidget: (context, url, error) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -74,12 +75,12 @@ class BuildItemSingle extends StatelessWidget {
                       maxLines: 2,
                       style: TextStyle(
                           color: Colors.black,
-                          fontWeight: FontWeight.w900,
-                          fontSize: kLargeFontSize14.sp),
+                          fontWeight: FontWeight.w600,
+                          fontSize: kMediumFontSize12.sp),
                     ),
                     Text(
                       originalPrice,
-                      style: TextStyle(fontSize: kSmallFontSize10.sp),
+                      style: TextStyle(fontSize: kExtraSmallFontSize8.sp,color: Theme.of(context).colorScheme.onSecondary),
                     ),
                   ],
                 ),
@@ -87,7 +88,7 @@ class BuildItemSingle extends StatelessWidget {
               Spacer(),
               Container(
                 width: double.infinity,
-                height: mSizeConfig.blockSizeVertical * 3.5,
+                height: mSizeConfig.blockSizeVertical * 3,
                 padding: EdgeInsets.symmetric(horizontal: 8.sp),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
@@ -101,13 +102,15 @@ class BuildItemSingle extends StatelessWidget {
                       firstPackages.quantity,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: kLargeFontSize14.sp),
+                          fontWeight: FontWeight.w600,
+                          fontSize: kLargeFontSize13.sp),
                     ),
                     Spacer(),
                     Text("Ks ${firstPackages.price}",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: kLargeFontSize14.sp),
+                          fontWeight: FontWeight.w600,
+                          fontSize: kLargeFontSize13.sp),
                     ),
                   ],
                 )

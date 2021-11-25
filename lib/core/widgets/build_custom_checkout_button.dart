@@ -30,9 +30,9 @@ class BuildCustomCheckoutButton extends StatelessWidget {
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.only(left: kDefaultMargin, right: kDefaultMargin),
-          height: mSizeConfig.blockSizeVertical * 7.2,
+          height: mSizeConfig.blockSizeVertical * 7,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.sp),
+            borderRadius: BorderRadius.circular(5.sp),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,8 +41,8 @@ class BuildCustomCheckoutButton extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: kLargeFontSize14),
+                    fontWeight: FontWeight.w600,
+                    fontSize: kLargeFontSize13),
               ),
               Spacer(),
               Column(
@@ -52,15 +52,15 @@ class BuildCustomCheckoutButton extends StatelessWidget {
                   Text(
                     "Grand Total",
                     style: TextStyle(
-                        color: Colors.white, fontSize: kSmallFontSize10),
+                        color: Colors.white, fontSize: kExtraSmallFontSize8),
                   ),
                   Obx(() {
                     return Text(
                       "Ks. ${mCartController.grandTotal.value}",
                       style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: kExtraLargeFontSize16),
+                          fontWeight: FontWeight.w700,
+                          fontSize: kLargeFontSize13),
                     );
                   }),
                 ],

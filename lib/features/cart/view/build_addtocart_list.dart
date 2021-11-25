@@ -27,7 +27,7 @@ class BuildAddToCartList extends StatelessWidget {
                 left: kDefaultMargin.sp + kDefaultMargin.sp,
                 right: kDefaultMargin.sp + kDefaultMargin.sp),
             child: Divider(
-              height: 0.8,
+              height: 0.8.sp,
               color: Colors.grey.withOpacity(0.7),
             ),
           );
