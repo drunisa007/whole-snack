@@ -121,7 +121,8 @@ class ItemPage extends StatelessWidget {
                 child: InkWell(
                   onTap: (){
                     mFeatureController.changeIndex(2);
-                    Get.offAndToNamed("/");
+                    mCartController.cartAppBarBackArrow.value = true;
+                    Get.toNamed("/");
                   },
                   child: Container(
                     width: double.infinity,
