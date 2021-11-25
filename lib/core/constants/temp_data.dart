@@ -60,7 +60,7 @@ List<TempItemModel> zItemData = [
 List<TempAddToCartModel> zAddToCartList = [
   TempAddToCartModel(
     "https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
-    "Apollo Layer Cake Layer Cake ",
+    "Apollo Cake",
     "1 pc - Ks.200",
     TempItemPackageModel("3pcs", "500"),
     1,
