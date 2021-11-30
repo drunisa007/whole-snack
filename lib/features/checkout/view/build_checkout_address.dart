@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
-import 'package:whole_snack/core/model/data_model/township_model.dart';
+import 'package:whole_snack/core/model/data_model/region_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/checkout/controller/checkout_controller.dart';
 
@@ -87,18 +87,18 @@ class BuildCheckOutAddress extends StatelessWidget {
                   width: 1,
                 ),),
               child: DropdownButtonHideUnderline(
-                child: DropdownButton<TownshipModel>(
+                child: DropdownButton<RegionModel>(
                   focusColor: Colors.white,
                   value: controller.choosenValue,
                   //elevation: 5,
                   style: TextStyle(color: Colors.white),
                   iconEnabledColor: Colors.black,
                   items: controller.townshipList
-                      .map<DropdownMenuItem<TownshipModel>>((TownshipModel value) {
-                    return DropdownMenuItem<TownshipModel>(
+                      .map<DropdownMenuItem<RegionModel>>((RegionModel value) {
+                    return DropdownMenuItem<RegionModel>(
                       value: value,
                       child: Text(
-                        value.townshipName,
+                        value.regName,
                         style: TextStyle(color: Colors.black, fontSize: 12.sp),
                       ),
                     );

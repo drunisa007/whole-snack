@@ -19,7 +19,7 @@ class CartPage extends StatelessWidget {
     CartController mCartController = Get.find<CartController>();
 
     return Scaffold(
-      appBar: SimpleAppBar(
+     /* appBar: SimpleAppBar(
         title: 'Shopping Cart',
         haveBackArrow: mCartController.cartAppBarBackArrow.value,
         action: (){
@@ -27,7 +27,7 @@ class CartPage extends StatelessWidget {
           mCartController.cartAppBarBackArrow.refresh();
           Get.back();
         },
-      ),
+      ),*/
       body: Column(
         children: [
           SizedBox(

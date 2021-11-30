@@ -1,30 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:whole_snack/core/model/data_model/township_model.dart';
+import 'package:whole_snack/core/model/data_model/region_model.dart';
 
 class CheckOutController extends GetxController{
-  List<TownshipModel> townshipList = [];
-  TownshipModel ? choosenValue;
+  List<RegionModel> townshipList = [];
+  RegionModel ? choosenValue;
 
   CheckOutController() {
     addTownshipAddress();
   }
 
   addTownshipAddress() {
-    townshipList = <TownshipModel>[
-      TownshipModel(id: 1, townshipName: "Amarapura"),
-      TownshipModel(id: 2, townshipName: "Aungmyaythazan"),
-      TownshipModel(id: 3, townshipName: "Amarapura"),
-      TownshipModel(id: 4, townshipName: "Chanayethazan"),
-      TownshipModel(id: 5, townshipName: "Chanmyathazi"),
-      TownshipModel(id: 6, townshipName: "Mahaaungmyay"),
-      TownshipModel(id: 7, townshipName: "Patheingyi"),
-      TownshipModel(id: 8, townshipName: "Pyigyidagun"),
+    townshipList = <RegionModel>[
+/*      RegionModel(id: 1, townshipName: "Amarapura"),
+      RegionModel(id: 2, townshipName: "Aungmyaythazan"),
+      RegionModel(id: 3, townshipName: "Amarapura"),
+      RegionModel(id: 4, townshipName: "Chanayethazan"),
+      RegionModel(id: 5, townshipName: "Chanmyathazi"),
+      RegionModel(id: 6, townshipName: "Mahaaungmyay"),
+      RegionModel(id: 7, townshipName: "Patheingyi"),
+      RegionModel(id: 8, townshipName: "Pyigyidagun"),*/
     ];
   }
 
 
-  changeDropDownValue(TownshipModel model) {
+  changeDropDownValue(RegionModel model) {
 
     int index = townshipList.indexOf(model);
     choosenValue = townshipList[index];

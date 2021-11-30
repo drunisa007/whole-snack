@@ -73,21 +73,23 @@ Widget _buildProfileWidget(
           SizedBox(
             width: 16,
           ),
-          RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: "Kyaw Zin Latt\n",
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontSize: kExtraLargeFontSize16.sp,
-                        fontWeight: FontWeight.bold)),
-                TextSpan(
-                    text: "09972000283",
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontSize: kMediumFontSize12.sp,
-                        )),
-              ])),
+          Obx(
+              ()=>controller.myProfile.length==0?Text('No Image') :   RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "${controller.myProfile[0].cusName}\n",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontSize: kExtraLargeFontSize16.sp,
+                          fontWeight: FontWeight.bold)),
+                  TextSpan(
+                      text: "${controller.myProfile[0].cusPhone}",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          fontSize: kMediumFontSize12.sp,
+                          )),
+                ]))
+          ),
           Spacer(),
           GestureDetector(
             onTap: () => Get.toNamed("/edit-profile-page"),

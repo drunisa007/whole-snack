@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
-import 'package:whole_snack/core/model/data_model/township_model.dart';
+import 'package:whole_snack/core/model/data_model/region_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
 import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
@@ -83,18 +83,18 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
               width: 1,
             ),),
           child: DropdownButtonHideUnderline(
-            child: DropdownButton<TownshipModel>(
+            child: DropdownButton<RegionModel>(
               focusColor: Colors.white,
               value: controller.choosenValue,
               //elevation: 5,
               style: TextStyle(color: Colors.white),
               iconEnabledColor: Colors.black,
-              items: controller.townshipList
-                  .map<DropdownMenuItem<TownshipModel>>((TownshipModel value) {
-                return DropdownMenuItem<TownshipModel>(
+              items: controller.townshipList.value
+                  .map<DropdownMenuItem<RegionModel>>((RegionModel value) {
+                return DropdownMenuItem<RegionModel>(
                   value: value,
                   child: Text(
-                    value.townshipName,
+                    value.regName,
                     style: TextStyle( color: Theme.of(context).colorScheme.secondary, fontSize: kLargeFontSize13.sp),
                   ),
                 );
