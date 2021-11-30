@@ -26,10 +26,8 @@ class CategoryPage extends StatelessWidget {
     mSizeConfig.init(context);
 
     HomeController mHomeController = Get.find<HomeController>();
+    CategoryController mCategoryController = Get.find<CategoryController>();
     double appBarHeight = mSizeConfig.blockSizeVertical * 9;
-
-    List<TempCategoryModel> mCategoryList = zRealCategoryData;
-    List<TempCategoryModel> mTypeList = zTypeList;
 
     List<TempItemModel> mItemList = zItemData;
 
@@ -42,23 +40,27 @@ class CategoryPage extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: Container(
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return BuildSingleCategoryDesign(
-                        image: mCategoryList[index].image,
-                        title: mCategoryList[index].title,
-                        index:index
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return Divider(
-                      height: 0.6.sp,
-                    );
-                  },
-                  itemCount: mCategoryList.length,
-                ),
-              )
+              child: Obx((){
+                return Container(
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return BuildSingleCategoryDesign(
+                          image: mHomeController.mCategoryList[index].categImg,
+                          title: mHomeController.mCategoryList[index].categName,
+                          index:index,
+                          id: mHomeController.mCategoryList[index].categId,
+                        mHomeController: mHomeController
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Divider(
+                        height: 0.6.sp,
+                      );
+                    },
+                    itemCount: mHomeController.mCategoryList.length,
+                  ),
+                );
+              })
             ),
             Expanded(
                 flex: 9,
@@ -71,10 +73,12 @@ class CategoryPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Wrap(
-                        children: GenerateTypeList()
-                            .generateTypeListWidget(mTypeList, mSizeConfig),
-                      ),
+                     Obx((){
+                       return  Wrap(
+                         children: GenerateTypeList()
+                             .generateTypeListWidget(mCategoryController.mTypeList, mSizeConfig),
+                       );
+                     }),
                       SizedBox(
                         height: 8.sp,
                       ),

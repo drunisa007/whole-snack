@@ -3,17 +3,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/utils/get_category_image.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 import 'package:whole_snack/features/category/controller/category_controller.dart';
+import 'package:whole_snack/features/home/controller/home_controller.dart';
 
 class BuildSingleCategoryDesign extends StatelessWidget {
   final String image;
   final String title;
   final int index;
+  final String id;
+  final HomeController mHomeController;
 
   const BuildSingleCategoryDesign(
-      {Key? key, required this.image, required this.title, required this.index})
+      {Key? key,
+      required this.image,
+      required this.title,
+      required this.index,
+      required this.id, required this.mHomeController,})
       : super(key: key);
 
   @override
@@ -22,16 +30,20 @@ class BuildSingleCategoryDesign extends StatelessWidget {
 
     CategoryController mCategoryController = Get.find<CategoryController>();
 
+    String iconName = getCategoryImage(title);
+
     return Obx((){
       return GestureDetector(
-        onTap: (){
-          mCategoryController.changeCategoryIndex(index);
+        onTap: () {
+          mCategoryController.changeCategoryIndex(index,id);
         },
         child: Container(
           width: double.infinity,
-          height:mSizeConfig.blockSizeVertical * 8.3,
+          height: mSizeConfig.blockSizeVertical * 10,
           decoration: BoxDecoration(
-            color: mCategoryController.selectedCategoryIndex.value==index?Theme.of(context).primaryColor:Theme.of(context).colorScheme.primaryVariant,
+            color: mCategoryController.selectedCategoryIndex.value == index
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).colorScheme.primaryVariant,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -40,11 +52,13 @@ class BuildSingleCategoryDesign extends StatelessWidget {
                 height: mSizeConfig.blockSizeVertical * 2,
               ),
               SvgPicture.asset(
-                "$image",
+                iconName,
                 width: mSizeConfig.blockSizeVertical * 3,
                 height: mSizeConfig.blockSizeVertical * 3,
                 fit: BoxFit.fill,
-                color: mCategoryController.selectedCategoryIndex.value==index?Colors.white:Theme.of(context).colorScheme.secondaryVariant,
+                color: mCategoryController.selectedCategoryIndex.value == index
+                    ? Colors.white
+                    : Theme.of(context).colorScheme.secondaryVariant,
               ),
               SizedBox(
                 height: 4.sp,
@@ -56,7 +70,11 @@ class BuildSingleCategoryDesign extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: kMediumFontSize12.sp,
-                      color: mCategoryController.selectedCategoryIndex.value==index?Colors.white:Theme.of(context).colorScheme.secondaryVariant),
+                      letterSpacing: 0.6,
+                      color: mCategoryController.selectedCategoryIndex.value ==
+                          index
+                          ? Colors.white
+                          : Theme.of(context).colorScheme.secondaryVariant),
                 ),
               )
             ],
