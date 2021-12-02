@@ -183,7 +183,7 @@ Widget _buildCustomerSigleItem(BuildContext context, SizeConfig sizeConfig,
                    )),
             Spacer(),
             GestureDetector(
-              onTap:()=> onClick,
+              onTap:()=> controller.launchPhoneDialer("$number1"),
               child: CircleAvatar(
                 maxRadius: sizeConfig.blockSizeVertical*2,
                   backgroundColor: Theme.of(context).primaryColor,

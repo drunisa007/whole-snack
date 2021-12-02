@@ -21,170 +21,175 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
   TextEditingController addressController = TextEditingController();
   TextEditingController saveTittleController = TextEditingController();
 
-  return ListView(
-    children: [
-      Text(
-        "Phone Number",
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.secondary,
-          fontSize: kLargeFontSize13.sp,
+  return  Obx(
+    ()=> controller.townshipList.length==0? Center(child: CircularProgressIndicator(
 
+      color: Theme.of(context).primaryColor,
+    )) : ListView(
+      children: [
+        Text(
+          "Phone Number",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+            fontSize: kLargeFontSize13.sp,
+
+              fontWeight: FontWeight.w500
+          ),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        TextField(
+          controller: phoneController,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide( color: Theme.of(context).colorScheme.onPrimary, width: 1),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.onPrimary
+              ),
+            ),
+            hintText: "Enter you address",
+            hintStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: kLargeFontSize13.sp),
+          ),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Text(
+          "Township",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+            fontSize: kLargeFontSize13.sp,
             fontWeight: FontWeight.w500
-        ),
-      ),
-      SizedBox(
-        height: 8,
-      ),
-      TextField(
-        controller: phoneController,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide( color: Theme.of(context).colorScheme.onPrimary, width: 1),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.onPrimary
-            ),
-          ),
-          hintText: "Enter you address",
-          hintStyle: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: kLargeFontSize13.sp),
         ),
-      ),
-      SizedBox(
-        height: 12,
-      ),
-      Text(
-        "Township",
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.secondary,
-          fontSize: kLargeFontSize13.sp,
-          fontWeight: FontWeight.w500
+        SizedBox(
+          height: 8,
         ),
-      ),
-      SizedBox(
-        height: 8,
-      ),
-      GetBuilder<AddAddressPageController>(
-        builder: (controller) => Container(
+        GetBuilder<AddAddressPageController>(
+          builder: (controller) => Container(
 
-          padding: EdgeInsets.only(left: kDefaultMargin,right: kDefaultMargin),
+            padding: EdgeInsets.only(left: kDefaultMargin,right: kDefaultMargin),
 
-          decoration: BoxDecoration(
-           
+            decoration: BoxDecoration(
 
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            border: Border.all(
-              color: Theme.of(context).colorScheme.onPrimary,
 
-              width: 1,
-            ),),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<RegionModel>(
-              focusColor: Colors.white,
-              value: controller.choosenValue,
-              //elevation: 5,
-              style: TextStyle(color: Colors.white),
-              iconEnabledColor: Colors.black,
-              items: controller.townshipList.value
-                  .map<DropdownMenuItem<RegionModel>>((RegionModel value) {
-                return DropdownMenuItem<RegionModel>(
-                  value: value,
-                  child: Text(
-                    value.regName,
-                    style: TextStyle( color: Theme.of(context).colorScheme.secondary, fontSize: kLargeFontSize13.sp),
-                  ),
-                );
-              }).toList(),
-              hint: Text(
-                "Please Choose Your Region\t \t \t\t",
-                style: TextStyle( color: Theme.of(context).colorScheme.onPrimary, fontSize: kLargeFontSize13.sp),
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.onPrimary,
+
+                width: 1,
+              ),),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<RegionModel>(
+                focusColor: Colors.white,
+                value: controller.choosenValue,
+                //elevation: 5,
+                style: TextStyle(color: Colors.white),
+                iconEnabledColor: Colors.black,
+                items: controller.townshipList.value
+                    .map<DropdownMenuItem<RegionModel>>((RegionModel value) {
+                  return DropdownMenuItem<RegionModel>(
+                    value: value,
+                    child: Text(
+                      value.regName,
+                      style: TextStyle( color: Theme.of(context).colorScheme.secondary, fontSize: kLargeFontSize13.sp),
+                    ),
+                  );
+                }).toList(),
+                hint: Text(
+                  "Please Choose Your Region\t \t \t\t",
+                  style: TextStyle( color: Theme.of(context).colorScheme.onPrimary, fontSize: kLargeFontSize13.sp),
+                ),
+                underline: Container(
+                  decoration: const BoxDecoration(
+                      border: Border(bottom: BorderSide(color: Colors.transparent))),
+                ),
+                onChanged: (value) {
+                  controller.changeDropDownValue(value!);
+                  print(value);
+                },
               ),
-              underline: Container(
-                decoration: const BoxDecoration(
-                    border: Border(bottom: BorderSide(color: Colors.transparent))),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Text(
+          "Delivery Addresss",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+            fontSize: kLargeFontSize13.sp,
+            fontWeight: FontWeight.w500
+          ),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        TextField(
+          controller: addressController,
+          maxLines: 3,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.onPrimary
               ),
-              onChanged: (value) {
-                controller.changeDropDownValue(value!);
-                print(value);
-              },
             ),
+            hintText: "Enter your address",
+            hintStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: kLargeFontSize13.sp),
           ),
         ),
-      ),
-      SizedBox(
-        height: 12,
-      ),
-      Text(
-        "Delivery Addresss",
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.secondary,
-          fontSize: kLargeFontSize13.sp,
-          fontWeight: FontWeight.w500
+        SizedBox(
+          height: 12,
         ),
-      ),
-      SizedBox(
-        height: 8,
-      ),
-      TextField(
-        controller: addressController,
-        maxLines: 3,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1),
+        Text(
+          "Save As",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+            fontSize: kLargeFontSize13.sp,
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.onPrimary
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        TextField(
+          controller: saveTittleController,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1),
             ),
-          ),
-          hintText: "Enter your address",
-          hintStyle: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: kLargeFontSize13.sp),
-        ),
-      ),
-      SizedBox(
-        height: 12,
-      ),
-      Text(
-        "Save As",
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.secondary,
-          fontSize: kLargeFontSize13.sp,
-        ),
-      ),
-      SizedBox(
-        height: 8,
-      ),
-      TextField(
-        controller: saveTittleController,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.onPrimary
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.onPrimary
+              ),
             ),
+            hintText: "Home",
+            hintStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: kLargeFontSize13.sp),
           ),
-          hintText: "Home",
-          hintStyle: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: kLargeFontSize13.sp),
         ),
-      ),
-      SizedBox(
-        height: 16,
-      ),
-    BuildCustomButton(haveCorner: false, action: ()=>Get.back(), title: "Save Address")
-    ],
+        SizedBox(
+          height: 16,
+        ),
+      BuildCustomButton(haveCorner: false, action: ()=>Get.back(), title: "Save Address")
+      ],
+    ),
   );
 }

@@ -56,15 +56,17 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
 
 Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddressController controller) {
 
-  return controller.addressList.length==0 || controller.addressList.length<0 ?Obx(
-      ()=> ListView.builder(
+  return Obx(
+      ()=> controller.addressList.length==0 ?CircularProgressIndicator(
+        color: Theme.of(context).primaryColor,
+      ) : ListView.builder(
 
       itemCount: controller.addressList.length,
         itemBuilder: (context,int index) {
 
 
 
-      return Container(
+      return   Container(
 
         padding: EdgeInsets.all(kDefaultMargin),
         decoration: BoxDecoration(
@@ -131,8 +133,8 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
 
 
           ],
-        ),
+        )
       );
     }),
-  ) : Text("No Address Found");
+  ) ;
 }

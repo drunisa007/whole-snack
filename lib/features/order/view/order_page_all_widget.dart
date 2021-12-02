@@ -29,15 +29,19 @@ Widget orderPageAllWidget(
           children: [
             Expanded(
               flex: 1,
-                child: _buildFilter(context, sizeConfig, controller, "From", isDate,()=>print(isDate))),
+                child: _buildFilter(context, sizeConfig, controller, "From", isDate,()=>controller.showDataPicker(context,1),"${controller.firstDate}"
+                )
+            ),
             SizedBox(width: 8,),
             Expanded(
-                flex: 1,child: _buildFilter(context, sizeConfig, controller, "To", isDate,()=>print(isDate))),
+                flex: 1,child: _buildFilter(context, sizeConfig, controller, "To", isDate,()=>controller.showDataPicker(context,2),"${controller.secondDate}"
+            )
+            ),
             SizedBox(width: 8,),
             Expanded(
               flex: 1,
               child: _buildFilter(
-                  context, sizeConfig, controller, "", !isDate,()=>print(isDate)),
+                  context, sizeConfig, controller, "", !isDate,()=>print(isDate),"${controller.firstDate}"),
             ),
 
 
@@ -59,7 +63,7 @@ Widget orderPageAllWidget(
 ///Build date picker and apply button to filte order history
 
 Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
-    OrderController controller, String title, bool isDate, Function onClick) {
+    OrderController controller, String title, bool isDate, Function onClick,String date) {
   return Container(
     padding: EdgeInsets.all(4),
     child: Column(
@@ -81,7 +85,7 @@ Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
         /*  width: sizeConfig.safeBlockVertical * 13,*/
           height: sizeConfig.blockSizeHorizontal * 10,
           child: isDate
-              ? BuildCustomButton(haveCorner: true, action: ()=>Get.toNamed("/order-detail-page"), title: "11/12/21"):
+              ? BuildCustomButton(haveCorner: true, action: () => onClick(), title: "$date"):
          BuildCustomButton(haveCorner: false, action: ()=>Get.toNamed("/order-detail-page"), title: "Apply")
 
         ),
