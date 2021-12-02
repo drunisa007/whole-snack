@@ -24,7 +24,10 @@ class BuildTypeDesign extends StatelessWidget {
     return Obx(() {
       return GestureDetector(
         onTap: () {
-          mCategoryController.changeTypeIndex(index);
+          if(mCategoryController.selectedPrevent.isFalse){
+            mCategoryController.changeTypeIndex(index);
+          }
+
         },
         child: Container(
           width: mSizeConfig.blockSizeVertical * 7.5,

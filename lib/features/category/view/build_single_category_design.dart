@@ -35,11 +35,14 @@ class BuildSingleCategoryDesign extends StatelessWidget {
     return Obx((){
       return GestureDetector(
         onTap: () {
-          mCategoryController.changeCategoryIndex(index,id);
+          if(mCategoryController.selectedPrevent.isFalse){
+            mCategoryController.changeCategoryIndex(index,id);
+          }
+
         },
         child: Container(
           width: double.infinity,
-          height: mSizeConfig.blockSizeVertical * 10,
+          height: mSizeConfig.blockSizeVertical * 9,
           decoration: BoxDecoration(
             color: mCategoryController.selectedCategoryIndex.value == index
                 ? Theme.of(context).primaryColor
@@ -49,12 +52,12 @@ class BuildSingleCategoryDesign extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: mSizeConfig.blockSizeVertical * 2,
+                height: mSizeConfig.blockSizeVertical * 1.5,
               ),
               SvgPicture.asset(
                 iconName,
-                width: mSizeConfig.blockSizeVertical * 3,
-                height: mSizeConfig.blockSizeVertical * 3,
+                width: mSizeConfig.blockSizeVertical * 2.8,
+                height: mSizeConfig.blockSizeVertical * 2.8,
                 fit: BoxFit.fill,
                 color: mCategoryController.selectedCategoryIndex.value == index
                     ? Colors.white
@@ -69,8 +72,8 @@ class BuildSingleCategoryDesign extends StatelessWidget {
                   "$title",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: kMediumFontSize12.sp,
-                      letterSpacing: 0.6,
+                      fontSize: kMediumFontSize12.sp-1.sp,
+                      letterSpacing: 0.3,
                       color: mCategoryController.selectedCategoryIndex.value ==
                           index
                           ? Colors.white

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:whole_snack/core/repos/category_repo.dart';
+import 'package:whole_snack/core/repos/item_repo.dart';
 import 'package:whole_snack/core/repos/register_repo.dart';
 import 'package:whole_snack/core/repos/type_repo.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
@@ -20,6 +21,7 @@ class FeatureMainBinding extends Bindings{
     Get.lazyPut(() => CategoryRepo());
     Get.lazyPut(() => CategoryController());
     Get.lazyPut(() => TypeRepo());
+    Get.lazyPut(() => ItemRepo());
     Get.lazyPut(() => CartController());
     Get.lazyPut(() => OrderController());
     Get.lazyPut(() => AccountController());

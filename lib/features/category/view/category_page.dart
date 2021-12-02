@@ -83,25 +83,11 @@ class CategoryPage extends StatelessWidget {
                         height: 8.sp,
                       ),
                       Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: ListView(
-                            children: [
-                              BuildItemTypeSingleDesign(
-                                itemTypeTitle: 'PopCorns',
-                                mSizeConfig: mSizeConfig,
-                                mHomeController: mHomeController,
-                                mItemList: mItemList,
-                              ),
-                              BuildItemTypeSingleDesign(
-                                itemTypeTitle: 'Biscuits',
-                                mSizeConfig: mSizeConfig,
-                                mHomeController: mHomeController,
-                                mItemList: mItemList,
-                              )
-                            ],
-                          ),
+                        child: BuildItemTypeSingleDesign(
+                          itemTypeTitle: 'PopCorns',
+                          mSizeConfig: mSizeConfig,
+                          mHomeController: mHomeController,
+                          mItemList: mItemList,
                         ),
                       ),
                     ],
