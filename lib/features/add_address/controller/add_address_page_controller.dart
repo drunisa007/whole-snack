@@ -1,30 +1,32 @@
 import 'package:get/get.dart';
-import 'package:whole_snack/core/model/data_model/township_model.dart';
+import 'package:whole_snack/core/model/data_model/region_model.dart';
+import 'package:whole_snack/core/model/service_model/http_get_result.dart';
+import 'package:whole_snack/core/repos/get_all_region_repo.dart';
 
 class AddAddressPageController extends GetxController {
- List<TownshipModel> townshipList = [];
- TownshipModel ? choosenValue;
+ RxList<RegionModel> townshipList = RxList();
+ RegionModel ? choosenValue;
+ GetAllRegionRepo getAllRegion= Get.put(GetAllRegionRepo());
 
   AddAddressPageController() {
-    print("hhahahahha");
+
+
+
+
     addTownshipAddress();
   }
 
-  addTownshipAddress() {
-    townshipList = <TownshipModel>[
-      TownshipModel(id: 1, townshipName: "Amarapura"),
-      TownshipModel(id: 2, townshipName: "Aungmyaythazan"),
-      TownshipModel(id: 3, townshipName: "Amarapura"),
-      TownshipModel(id: 4, townshipName: "Chanayethazan"),
-      TownshipModel(id: 5, townshipName: "Chanmyathazi"),
-      TownshipModel(id: 6, townshipName: "Mahaaungmyay"),
-      TownshipModel(id: 7, townshipName: "Patheingyi"),
-      TownshipModel(id: 8, townshipName: "Pyigyidagun"),
-    ];
+  addTownshipAddress() async  {
+
+    HttpGetResult<RegionModel>  regionResult = await getAllRegion.getTownshipList();
+
+    townshipList.addAll(regionResult.mData);
+
+    update();
   }
 
 
-  changeDropDownValue(TownshipModel model) {
+  changeDropDownValue(RegionModel model) {
 
    int index = townshipList.indexOf(model);
    choosenValue = townshipList[index];

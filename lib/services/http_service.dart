@@ -7,6 +7,8 @@ class HttpService{
   late String baseUrl;
   late String apiKey;
 
+  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjA5Nzg1ODgyMzgxIiwiZXhwIjoxNjY4NTY5Nzk2fQ.XHJLaHuVBHG44fQSJJjVgXlWP2NlzsvBt67sfK0k8iY";
+
   HttpService(){
     initData();
   }
@@ -16,7 +18,14 @@ class HttpService{
 
       // ,headers: getHeader()
       var url = Uri.parse(baseUrl+uri);
-      http.Response response  = await http.get(url);
+      http.Response response  = await http.get(url,
+        headers: {
+          "Authorization" : "$token"
+
+        }
+
+
+      );
       if(response.statusCode==200){
         return HttpCustomResponse('', 200, response.body, true);
       }
@@ -41,6 +50,9 @@ class HttpService{
 
     // ,headers: getHeader()
       var url = Uri.parse(baseUrl+uri);
+//       http.Response response  = await http.get(url,   headers: getHeader());
+//       print("status code is ${response.statusCode}");
+
       http.Response response  = await http.get(url);
       if(response.statusCode==200){
         return HttpCustomResponse('', 200, response.body, true);
@@ -87,6 +99,15 @@ class HttpService{
   initData(){
     baseUrl = "$API";
     apiKey = "343434";
+  }
+
+  getHeader() {
+    return {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    };
+
   }
 
 /*  getHeader(){
