@@ -13,7 +13,9 @@ class BuildItemSingleGrid extends StatelessWidget {
   final String image;
   final String title;
   final String originalPrice;
-  final TempItemPackageModel firstPackages;
+  final String firstPackages;
+  final String quantity;
+  final String itemId;
 
   const BuildItemSingleGrid(
       {Key? key,
@@ -23,7 +25,9 @@ class BuildItemSingleGrid extends StatelessWidget {
       required this.image,
       required this.title,
       required this.originalPrice,
-      required this.firstPackages})
+      required this.quantity,
+      required this.firstPackages,
+      required this.itemId})
       : super(key: key);
 
   @override
@@ -40,7 +44,7 @@ class BuildItemSingleGrid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height:mSizeConfig.blockSizeVertical * 10,
+              height: mSizeConfig.blockSizeVertical * 10,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -72,47 +76,47 @@ class BuildItemSingleGrid extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w900,
-                        fontSize: kMediumFontSize12.sp),
+                        fontSize: kMediumFontSize12.sp-1.sp),
                   ),
                   Text(
                     originalPrice,
-                    style: TextStyle(fontSize: kSmallFontSize10.sp,
-                    color: Theme.of(context).colorScheme.onSecondary
-                    ),
+                    style: TextStyle(
+                        fontSize: kSmallFontSize10.sp-1.sp,
+                        color: Theme.of(context).colorScheme.onSecondary),
                   ),
                 ],
               ),
             ),
             Spacer(),
             Container(
-              width: double.infinity,
-              height: mSizeConfig.blockSizeVertical * 3,
-              padding: EdgeInsets.symmetric(horizontal: 8.sp),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(6.sp),
-                    bottomRight: Radius.circular(6.sp),
-                  )),
-              child: Row(
-                children: [
-                  Text(
-                    firstPackages.quantity,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: kLargeFontSize13.sp),
-                  ),
-                  Spacer(),
-                  Text("Ks ${firstPackages.price}",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: kLargeFontSize13.sp),
-                  ),
-                ],
-              )
-            )
+                width: double.infinity,
+                height: mSizeConfig.blockSizeVertical * 3,
+                padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(6.sp),
+                      bottomRight: Radius.circular(6.sp),
+                    )),
+                child: Row(
+                  children: [
+                    Text(
+                      firstPackages,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: kMediumFontSize11.sp),
+                    ),
+                    Spacer(),
+                    Text(
+                      "$originalPrice Ks",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: kMediumFontSize11.sp),
+                    ),
+                  ],
+                ))
           ],
         ),
       ),

@@ -50,8 +50,10 @@ class HttpService{
 
     // ,headers: getHeader()
       var url = Uri.parse(baseUrl+uri);
-      http.Response response  = await http.get(url,   headers: getHeader());
-      print("status code is ${response.statusCode}");
+//       http.Response response  = await http.get(url,   headers: getHeader());
+//       print("status code is ${response.statusCode}");
+
+      http.Response response  = await http.get(url);
       if(response.statusCode==200){
         return HttpCustomResponse('', 200, response.body, true);
       }
