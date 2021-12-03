@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whole_snack/core/model/data_model/order_item_model.dart';
+import 'package:whole_snack/core/model/service_model/http_get_result.dart';
+import 'package:whole_snack/core/repos/order_repo.dart';
 
 class OrderController extends GetxController {
   String firstDate = DateTime(
@@ -12,16 +15,26 @@ class OrderController extends GetxController {
           .toString()
           .substring(0, 10);
 
+  late OrderRepo orderRepo;
+  RxList<OrderItemModel> orderItemList = RxList();
+
+
+
   OrderController() {
     print("this is order controllre");
+
+    orderRepo = Get.put(OrderRepo());
   }
 
   ///for the order filter using date picker
   showDataPicker(context, int id) async {
+
+   ;
     var result = await showDatePicker(
       context: context,
-      initialDate: id==1? DateTime(DateTime.now().year, DateTime.now().month - 1)
-          : DateTime(DateTime.now().year, DateTime.now().month) ,
+      initialDate: id == 1
+          ? DateTime(DateTime.now().year, DateTime.now().month - 1)
+          : DateTime(DateTime.now().year, DateTime.now().month),
       lastDate: new DateTime(
           DateTime.now().year, DateTime.now().month, DateTime.now().day),
       firstDate: DateTime(2021),
@@ -50,8 +63,23 @@ class OrderController extends GetxController {
   }
 
 
-  dateCompare() {
 
 
+  getOrderItemList() {
+
+
+
+    print("hahhaha");
+
+   HttpGetResult<OrderItemModel> result = orderRepo.getOrderItem();
+
+    orderItemList.addAll(result.mData);
+    print(orderItemList);
   }
+
+
+
+
+
+
 }

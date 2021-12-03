@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-List<OrderModel> orderModelFromJson(String str) => List<OrderModel>.from(json.decode(str).map((x) => OrderModel.fromJson(x)));
+List<OrderInfoModel> orderInfoModelFromJson(String str) => List<OrderInfoModel>.from(json.decode(str).map((x) => OrderInfoModel.fromJson(x)));
 
-String orderModelToJson(List<OrderModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String orderInfoModelToJson(List<OrderInfoModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class OrderModel {
-  OrderModel({
+class OrderInfoModel {
+  OrderInfoModel({
     required this.ordId,
     required this.ordNo,
     required this.ordCreate,
@@ -21,7 +21,7 @@ class OrderModel {
     required this.ordType,
     required this.cusId,
     required this.regId,
-    required this.riderId,
+    required this.regName,
   });
 
   String ordId;
@@ -35,13 +35,13 @@ class OrderModel {
   String ordAddress;
   String ordStatus;
   String deliveryFee;
-  String riderPhone;
+  dynamic riderPhone;
   String ordType;
   String cusId;
   String regId;
-  String riderId;
+  String regName;
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
+  factory OrderInfoModel.fromJson(Map<String, dynamic> json) => OrderInfoModel(
     ordId: json["ord_id"],
     ordNo: json["ord_no"],
     ordCreate: DateTime.parse(json["ord_create"]),
@@ -57,7 +57,7 @@ class OrderModel {
     ordType: json["ord_type"],
     cusId: json["cus_id"],
     regId: json["reg_id"],
-    riderId: json["rider_id"],
+    regName: json["reg_name"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -76,6 +76,6 @@ class OrderModel {
     "ord_type": ordType,
     "cus_id": cusId,
     "reg_id": regId,
-    "rider_id": riderId,
+    "reg_name": regName,
   };
 }
