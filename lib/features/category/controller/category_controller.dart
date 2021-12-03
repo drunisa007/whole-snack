@@ -11,50 +11,55 @@ class CategoryController extends GetxController {
 
   RxBool selectedPrevent = false.obs;
 
- late RxString mainCategoryId=RxString("");
+  late RxString mainCategoryId = RxString("");
 
- changeCategoryId(String categoryId){
-   mainCategoryId.value = categoryId;
+  changeCategoryId(String categoryId) {
+    mainCategoryId.value = categoryId;
+  }
 
- }
-
-  changeCategoryIndex(int index,String id) {
-    print("category id is "+id);
+  changeCategoryIndex(int index, String id) async {
+    print("category id is " + id);
     if (index != selectedCategoryIndex.value) {
       selectedPrevent.value = true;
       selectedCategoryIndex.value = index;
       selectedTypeId.value = "";
 
-      if(id==mainCategoryId.value){
-        mainCategoryId.value =id;
+
+      if (id == mainCategoryId.value) {
+        onLoad.value = true;
+        mainCategoryId.value = id;
+         fetchingType(id);
+         fetchingItemList(id, true);
+      } else {
+        selectedTypeIndex.value = -1;
+        mainCategoryId.value = id;
+        onLoad.value = false;
+        itemLoading.value = true;
         fetchingType(id);
-        fetchingItemList(id,true);
-      }
-      else{
-          selectedTypeIndex.value = -1;
-          mainCategoryId.value =id;
-          fetchingType(id);
-          fetchingItemList(id,false);
+        fetchingItemList(id, false);
       }
     }
   }
 
   ///type selected index
   RxInt selectedTypeIndex = RxInt(-1);
-  late RxString selectedTypeId=RxString("");
+  late RxString selectedTypeId = RxString("");
 
   changeTypeIndex(int index) {
     selectedPrevent.value = true;
     selectedTypeIndex.value = index;
-    if(selectedTypeId.value==mTypeList[index].typeId){
+    if (selectedTypeId.value == mTypeList[index].typeId) {
       print("select type id is already exist");
-      fetchingItemList(mainCategoryId.value,true,typeId:selectedTypeId.value);
+      fetchingItemList(mainCategoryId.value, true,
+          typeId: selectedTypeId.value);
       selectedTypeId.value = mTypeList[index].typeId;
-    }
-    else{
+      onLoad.value = true;
+    } else {
       print("select type id is already not exist");
       selectedTypeId.value = mTypeList[index].typeId;
-      fetchingItemList(mainCategoryId.value,false,typeId:selectedTypeId.value);
+      onLoad.value = false;
+      fetchingItemList(mainCategoryId.value, false,
+          typeId: selectedTypeId.value);
     }
   }
 
@@ -87,49 +92,52 @@ class CategoryController extends GetxController {
 
   ///fetching item list
 
-    RxList<ItemModel> mItemList = RxList();
-    RxString itemErrorMessage = "".obs;
-    RxBool itemLoading = true.obs;
-    ItemRepo mItemRepo = Get.find<ItemRepo>();
-    RxInt totalPage = RxInt(1);
-    RxInt currentPage = RxInt(1);
+  RxList<ItemModel> mItemList = RxList();
+  RxString itemErrorMessage = "".obs;
+  RxBool itemLoading = true.obs;
+  ItemRepo mItemRepo = Get.find<ItemRepo>();
+  RxInt totalPage = RxInt(1);
+  RxInt currentPage = RxInt(1);
+  RxBool onLoad = RxBool(false);
 
-    ///loading == true mean load list value false mean refresh list value
+  ///loading == true mean load list value false mean refresh list value
 
-  fetchingItemList(categoryId,bool loading,{String typeId=""}) async {
+  fetchingItemList(categoryId, bool loading, {String typeId = ""}) async {
 
-    if(!loading){
+    itemLoading.value = true;
+
+    if (!loading) {
       mItemList.clear();
       currentPage.value = 1;
     }
 
-    itemLoading.value = true;
 
-    if(currentPage.value<=totalPage.value){
+
+    if (currentPage.value <= totalPage.value) {
       HttpGetResult<ItemModel> mResult;
-      if(typeId.isEmpty){
-        mResult = await mItemRepo.getItemList(categoryId,currentPage);
-      }
-      else{
-        mResult = await mItemRepo.getItem(categoryId,typeId,currentPage);
+      if (typeId.isEmpty) {
+        mResult = await mItemRepo.getItemList(categoryId, currentPage);
+      } else {
+        mResult = await mItemRepo.getItem(categoryId, typeId, currentPage);
       }
       print("mResult $mResult");
-      itemLoading.value = false;
+
 
       if (mResult.isSuccessful) {
         itemErrorMessage.value = "";
         totalPage.value = int.parse(mResult.errorMessage);
         mItemList.addAll(mResult.mData);
-        currentPage.value  = currentPage.value +1;
+        currentPage.value = currentPage.value + 1;
+        itemLoading.value = false;
+
         print("current page is ${currentPage.value} ${totalPage.value}");
       } else {
         itemErrorMessage.value =
-        "Please check your internet connection or refresh";
+            "Please check your internet connection or refresh";
         mItemList = RxList();
+        itemLoading.value = false;
       }
       selectedPrevent.value = false;
     }
-
   }
-
 }
