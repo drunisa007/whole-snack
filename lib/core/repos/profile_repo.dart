@@ -37,7 +37,7 @@ class ProfileRepo {
     else {
 
       print("errror");
-      return HttpGetResult(response.errorMessage, response.stateCode, response.mData, false);
+      return HttpGetResult(response.errorMessage, response.stateCode, [], false);
     }
   }
 }

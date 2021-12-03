@@ -33,7 +33,7 @@ class GetAddressRepo {
       return HttpGetResult("", 200, addressList, true);
     } else {
 
-      return HttpGetResult(result.errorMessage, result.stateCode, result.mData, false);
+      return HttpGetResult(result.errorMessage, result.stateCode, [], false);
     }
     
   }
