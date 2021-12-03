@@ -67,7 +67,7 @@ class HttpPostService {
     var uri = Uri.parse('$API/customer/register.php');
     final response = await http.post(uri,
         headers: getHeader(),
-        body: jsonEncode({"name": "aa", "phone": "09978770588"}));
+        body: jsonEncode({"name": "$name", "phone": "$phoneNumber"}));
 
     if (response.statusCode == 200) {
       print(response.statusCode);
@@ -85,7 +85,7 @@ class HttpPostService {
     final response = await http.post(uri,
         headers: getHeader(),
         body: jsonEncode(
-            {"name": "aa", "phone": "09788216552", "otp": "7720"}
+            {"name": "$name", "phone": "$phone", "otp": "$otp"}
             ));
 
     if (response.statusCode == 200) {
