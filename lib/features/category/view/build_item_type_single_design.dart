@@ -89,7 +89,7 @@ class BuildItemTypeSingleDesign extends StatelessWidget {
                     height: 50.0.sp,
                     child: Center(child: body),
                   );
-                  ;
+
                 },
               ),
               controller: _refreshController,
@@ -103,15 +103,6 @@ class BuildItemTypeSingleDesign extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return BuildItemSingleGrid(
                     currentIndex: index,
-                    mSizeConfig: mSizeConfig,
-                    mHomeController: mHomeController,
-                    image: mCategoryController.mItemList[index].img,
-                    title: mCategoryController.mItemList[index].itemName,
-                    originalPrice: mCategoryController.mItemList[index].price,
-                    firstPackages:
-                        mCategoryController.mItemList[index].packageName,
-                    quantity: mCategoryController.mItemList[index].price,
-                    itemId: mCategoryController.mItemList[index].itemId,
                   );
                 },
               ));

@@ -18,8 +18,11 @@ class CartController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-    mAddToCartList.addAll(zAddToCartList);
-    calculatePrice();
+    //mAddToCartList.addAll(zAddToCartList);
+    if(mAddToCartList.isNotEmpty){
+      calculatePrice();
+    }
+
   }
 
 

@@ -18,7 +18,7 @@ class CategoryController extends GetxController {
   }
 
   changeCategoryIndex(int index, String id) async {
-    print("category id is " + id);
+
     if (index != selectedCategoryIndex.value) {
       selectedPrevent.value = true;
       selectedCategoryIndex.value = index;
@@ -49,13 +49,11 @@ class CategoryController extends GetxController {
     selectedPrevent.value = true;
     selectedTypeIndex.value = index;
     if (selectedTypeId.value == mTypeList[index].typeId) {
-      print("select type id is already exist");
       fetchingItemList(mainCategoryId.value, true,
           typeId: selectedTypeId.value);
       selectedTypeId.value = mTypeList[index].typeId;
       onLoad.value = true;
     } else {
-      print("select type id is already not exist");
       selectedTypeId.value = mTypeList[index].typeId;
       onLoad.value = false;
       fetchingItemList(mainCategoryId.value, false,
@@ -120,7 +118,6 @@ class CategoryController extends GetxController {
       } else {
         mResult = await mItemRepo.getItem(categoryId, typeId, currentPage);
       }
-      print("mResult $mResult");
 
 
       if (mResult.isSuccessful) {
@@ -130,7 +127,6 @@ class CategoryController extends GetxController {
         currentPage.value = currentPage.value + 1;
         itemLoading.value = false;
 
-        print("current page is ${currentPage.value} ${totalPage.value}");
       } else {
         itemErrorMessage.value =
             "Please check your internet connection or refresh";
