@@ -36,7 +36,8 @@ class BuildSingleCategoryDesign extends StatelessWidget {
       return GestureDetector(
         onTap: () {
           if(mCategoryController.selectedPrevent.isFalse){
-            mCategoryController.changeCategoryIndex(index,id);
+            mCategoryController.selectedCategoryId.value = id;
+            mCategoryController.changeCategoryIndex(index);
           }
 
         },

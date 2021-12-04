@@ -92,7 +92,6 @@ class ItemPage extends StatelessWidget {
                                 ),
                                 BuildCustomButton(
                                   action: () {
-
                                if( mItemController.itemSelectedIndex.value>=0){
 
                                  ItemDetailNoImageModel mModel = mItemController.mItemDetailNoImage[mItemController.itemSelectedIndex.value];
@@ -105,11 +104,11 @@ class ItemPage extends StatelessWidget {
                                        TempItemPackageModel("${mModel.itemQty}", "${mModel.price}"),
                                        1,
                                      ));
-
                                  mItemController.changeItemSelectedIndex(-1);
 
                               }
                                   },
+                                  disable: mItemController.itemSelectedIndex.value>=0?false:true,
                                   haveCorner: false,
                                   title: "Add to Cart",
                                 ),

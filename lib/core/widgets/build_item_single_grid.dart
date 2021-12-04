@@ -11,10 +11,12 @@ import 'package:whole_snack/features/home/controller/home_controller.dart';
 
 class BuildItemSingleGrid extends StatelessWidget {
   final int currentIndex;
+  final int mainIndex;
 
   const BuildItemSingleGrid(
       {Key? key,
       required this.currentIndex,
+      required this.mainIndex,
 })
       : super(key: key);
 
@@ -26,7 +28,7 @@ class BuildItemSingleGrid extends StatelessWidget {
 
     CategoryController mCategoryController = Get.find<CategoryController>();
 
-    ItemModel mItemModel = mCategoryController.mItemList[currentIndex];
+    ItemModel mItemModel = mCategoryController.mAllItemList[mainIndex].mItemList[currentIndex];
 
     return Padding(
       padding: EdgeInsets.only(right: kDefaultMargin.sp,bottom: kDefaultMargin.sp),

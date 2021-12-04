@@ -11,6 +11,7 @@ import 'package:whole_snack/core/utils/generate_type_list_widgets.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/appbar/custom_appbar.dart';
 import 'package:whole_snack/features/category/controller/category_controller.dart';
+import 'package:whole_snack/features/category/view/build_item_from_all_type.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 
 import 'build_item_type_single_design.dart';
@@ -74,36 +75,71 @@ class CategoryPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Obx(() {
-                        return mCategoryController.typeLoading.isTrue
-                            ? Shimmer.fromColors(
-                                baseColor: Theme.of(context)
-                                    .colorScheme
-                                    .primaryVariant,
-                                highlightColor: Colors.grey[400]!,
-                                child: Wrap(
-                                  children: GenerateTypeList()
-                                      .generateTypeListWidgetShimmer(
-                                          mSizeConfig),
-                                ))
-                            : Wrap(
-                                children: GenerateTypeList()
-                                    .generateTypeListWidget(
-                                        mCategoryController.mTypeList,
-                                        mSizeConfig),
-                              );
-                      }),
-                      SizedBox(
-                        height: 12.sp,
-                      ),
-                      Expanded(
-                        child: BuildItemTypeSingleDesign(
-                          itemTypeTitle: 'PopCorns',
-                          mSizeConfig: mSizeConfig,
-                          mHomeController: mHomeController,
-                          mItemList: mItemList,
+                      Container(
+                        width: double.infinity,
+                        height: mSizeConfig.safeBlockVertical*22,
+                        child: ListView(
+                          children: [
+                            Obx(() {
+                              return mCategoryController.typeLoading.isTrue
+                                  ? Shimmer.fromColors(
+                                      baseColor: Theme.of(context)
+                                          .colorScheme
+                                          .primaryVariant,
+                                      highlightColor: Colors.grey[400]!,
+                                      child: Wrap(
+                                        children: GenerateTypeList()
+                                            .generateTypeListWidgetShimmer(
+                                                mSizeConfig),
+                                      ))
+                                  : Wrap(
+                                      children: GenerateTypeList()
+                                          .generateTypeListWidget(
+                                              mCategoryController.mTypeList,
+                                              mSizeConfig),
+                                    );
+                            }),
+                          ],
                         ),
                       ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            width: double.infinity,
+                            height: mSizeConfig.safeBlockVertical*64-kToolbarHeight,
+                            child: BuildItemFromAllType(),
+                          ),
+                        ),
+                      )
+
+                      // Obx(() {
+                      //   return mCategoryController.typeLoading.isTrue
+                      //       ? Shimmer.fromColors(
+                      //           baseColor: Theme.of(context)
+                      //               .colorScheme
+                      //               .primaryVariant,
+                      //           highlightColor: Colors.grey[400]!,
+                      //           child: Wrap(
+                      //             children: GenerateTypeList()
+                      //                 .generateTypeListWidgetShimmer(
+                      //                     mSizeConfig),
+                      //           ))
+                      //       : Wrap(
+                      //           children: GenerateTypeList()
+                      //               .generateTypeListWidget(
+                      //                   mCategoryController.mTypeList,
+                      //                   mSizeConfig),
+                      //         );
+                      // }),
+                      // SizedBox(
+                      //   height: 12.sp,
+                      // ),
+                      // Container(
+                      //   height:400,
+                      //   width: double.infinity,
+                      //   child: BuildItemFromAllType()
+                      // ),
                     ],
                   ),
                 ))

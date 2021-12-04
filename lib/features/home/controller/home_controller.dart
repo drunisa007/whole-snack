@@ -40,9 +40,9 @@ class HomeController extends GetxController{
         mCategoryList.addAll(mResult.mData);
         if(mCategoryList.isNotEmpty){
           String categoryId =mCategoryList[0].categId;
-          mCategoryController.onLoad.value = false;
-          mCategoryController.changeCategoryId(categoryId);
-          mCategoryController.changeCategoryIndex(0, categoryId);
+          //mCategoryController.onLoad.value = false;
+          mCategoryController.selectedCategoryId.value = categoryId;
+          mCategoryController.changeCategoryIndex(0);
           // mCategoryController.fetchingType(categoryId);
           // mCategoryController.mainCategoryId.value = categoryId;
           // mCategoryController.fetchingItemList(categoryId, true);

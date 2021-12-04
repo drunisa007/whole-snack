@@ -30,7 +30,7 @@ class BuildItemSingle extends StatelessWidget {
 
     return GestureDetector(
       onTap: (){
-        Get.toNamed("/item-page");
+        //Get.toNamed("/item-page");
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.sp)),

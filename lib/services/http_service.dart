@@ -21,10 +21,7 @@ class HttpService{
       http.Response response  = await http.get(url,
         headers: {
           "Authorization" : "$token"
-
         }
-
-
       );
       if(response.statusCode==200){
         return HttpCustomResponse('', 200, response.body, true);
