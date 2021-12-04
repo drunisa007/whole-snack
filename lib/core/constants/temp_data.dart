@@ -39,21 +39,21 @@ List<TempCategoryModel> zCategoryData = [
 List<TempItemModel> zItemData = [
   TempItemModel("https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
       "Apollo Layer  Cake Layer Cake", "1 pc - Ks.200", [
-    TempItemPackageModel("3pcs", "500"),
-    TempItemPackageModel("6pcs", "1200"),
-    TempItemPackageModel("12pcs/1box", "2500")
+    TempItemPackageModel(quantity: "3pcs", price:"500",packageId: "1"),
+    TempItemPackageModel(quantity:"6pcs", price:"1200",packageId: "1"),
+    TempItemPackageModel(quantity: "12pcs/1box", price: "2500",packageId: "1")
   ]),
   TempItemModel("https://dl.dropbox.com/s/yimglu6x07trjlf/snacktwo.jpeg?dl=0",
       "Britannia Layer Cake", "1 pc - Ks.400", [
-    TempItemPackageModel("3pcs", "1000"),
-    TempItemPackageModel("6pcs", "2000"),
-    TempItemPackageModel("12pcs/1box", "3000")
+    TempItemPackageModel(quantity: "3pcs", price: "1000",packageId: "1"),
+    TempItemPackageModel(quantity: "6pcs", price: "2000",packageId: "1"),
+    TempItemPackageModel(quantity: "12pcs/1box", price: "3000",packageId: "1")
   ]),
   TempItemModel("https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
       "Dan Vanilla Cake", "1 pc - Ks.300", [
-    TempItemPackageModel("2pcs", "400"),
-    TempItemPackageModel("4pcs", "1000"),
-    TempItemPackageModel("8pcs/1box", "2000")
+    TempItemPackageModel(quantity: "2pcs", price: "400",packageId: "1"),
+    TempItemPackageModel(quantity: "4pcs", price: "1000",packageId: "1"),
+    TempItemPackageModel(quantity: "8pcs/1box", price: "2000",packageId: "1")
   ]),
 ];
 
@@ -62,29 +62,29 @@ List<TempAddToCartModel> zAddToCartList = [
     "https://dl.dropbox.com/s/2mua2ebuxuyiqan/apolo.jpeg?dl=0",
     "Apollo Cake",
     "1 pc - Ks.200",
-    TempItemPackageModel("3pcs", "500"),
+    TempItemPackageModel(quantity: "8pcs/1box", price: "2000",packageId: "1"),
     1,
   ),
   TempAddToCartModel(
     "https://dl.dropbox.com/s/yimglu6x07trjlf/snacktwo.jpeg?dl=0",
     "Dan Vanilla Cake",
     "1 pc - Ks.400",
-    TempItemPackageModel("6pcs", "2000"),
+    TempItemPackageModel(quantity: "8pcs/1box", price: "2000",packageId: "1"),
     1,
   ),
   TempAddToCartModel(
     "https://assets.balvi.com/spree/products/7616/large/24243.jpg?1521163643",
     "Dan Layer Corn",
     "1 pc - Ks.300",
-    TempItemPackageModel("8pcs/1box", "2000"),
+    TempItemPackageModel(quantity: "8pcs/1box", price: "2000",packageId: "1"),
     1,
   )
 ];
 
 List<TempItemPackageModel> zTempItemPackageList = [
-  TempItemPackageModel("2pcs", "400"),
-  TempItemPackageModel("4pcs", "1000"),
-  TempItemPackageModel("8pcs/1box", "2000"),
+  TempItemPackageModel(quantity: "8pcs/1box", price: "2000",packageId: "1"),
+  TempItemPackageModel(quantity: "8pcs/1box", price: "2000",packageId: "1"),
+  TempItemPackageModel(quantity: "8pcs/1box", price: "2000",packageId: "1"),
 ];
 
 List<TempCategoryModel> zTypeList = [

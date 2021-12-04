@@ -20,9 +20,9 @@ class ItemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     CartController mCartController = Get.find<CartController>();
-    FeatureMainController mFeatureController = Get.find<FeatureMainController>();
+    FeatureMainController mFeatureController =
+        Get.find<FeatureMainController>();
 
     ItemController mItemController = Get.find<ItemController>();
 
@@ -32,183 +32,207 @@ class ItemPage extends StatelessWidget {
 
     mItemController.fetchItemDetail(itemId);
 
-
     return Scaffold(
       body: Container(
-        child: Obx((){
-          return mItemController.showLoading.isTrue&&mItemController.mItemDetailImages.isEmpty?Center(
-            child: GetPlatform.isAndroid?CircularProgressIndicator():CupertinoActivityIndicator(),
-          ):
-          Stack(
-            children: [
-              Column(
-                children: [
-                  BuildItemBannerDesign(),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      child: ListView(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        children: [
-                          SizedBox(
-                            height: kDefaultMargin.sp,
-                          ),
-                          Container(
+        child: Obx(() {
+          return mItemController.showLoading.isTrue &&
+                  mItemController.mItemDetailImages.isEmpty
+              ? Center(
+                  child: GetPlatform.isAndroid
+                      ? CircularProgressIndicator()
+                      : CupertinoActivityIndicator(),
+                )
+              : Stack(
+                  children: [
+                    Column(
+                      children: [
+                        BuildItemBannerDesign(),
+                        Expanded(
+                          child: Container(
                             width: double.infinity,
-                            color: Colors.white,
-                            padding: EdgeInsets.only(
-                                left: kDefaultMargin.sp,
-                                right: kDefaultMargin.sp,
-                                top: kDefaultMargin.sp),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: ListView(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
                               children: [
                                 SizedBox(
                                   height: kDefaultMargin.sp,
                                 ),
-                                Text(
-                                  "$itemName",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: kExtraLargeFontSize15.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 4.sp,
-                                ),
-                                Text(
-                                  "$categoryName",
-                                  style: TextStyle(fontSize: kMediumFontSize11.sp,
-                                      color: Theme.of(context).colorScheme.onSecondary
+                                Container(
+                                  width: double.infinity,
+                                  color: Colors.white,
+                                  padding: EdgeInsets.only(
+                                      left: kDefaultMargin.sp,
+                                      right: kDefaultMargin.sp,
+                                      top: kDefaultMargin.sp),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: kDefaultMargin.sp,
+                                      ),
+                                      Text(
+                                        "$itemName",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: kExtraLargeFontSize15.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      SizedBox(
+                                        height: 4.sp,
+                                      ),
+                                      Text(
+                                        "$categoryName",
+                                        style: TextStyle(
+                                            fontSize: kMediumFontSize11.sp,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondary),
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultMargin.sp + 10.sp,
+                                      ),
+                                      BuildItemPackagesDetail(),
+                                      SizedBox(
+                                        height: kDefaultMargin.sp + 10.sp,
+                                      ),
+                                      BuildCustomButton(
+                                        action: () {
+                                          if (mItemController
+                                                  .itemSelectedIndex.value >=
+                                              0) {
+                                            ItemDetailNoImageModel mModel =
+                                                mItemController
+                                                        .mItemDetailNoImage[
+                                                    mItemController
+                                                        .itemSelectedIndex
+                                                        .value];
+
+                                            mCartController
+                                                .addNewCart(TempAddToCartModel(
+                                              mItemController
+                                                  .mItemDetailImages[0],
+                                              mModel.itemName,
+                                              "${mModel.packageName} - ${mModel.price} Ks",
+                                              TempItemPackageModel(
+                                                  quantity: "${mModel.itemQty}",
+                                                  price: "${mModel.price}",
+                                                  packageId:
+                                                      "${mModel.packageId}"),
+                                              1,
+                                            ));
+
+                                            mItemController
+                                                .changeItemSelectedIndex(-1);
+                                          }
+                                        },
+                                        disable: mItemController
+                                                    .itemSelectedIndex.value >=
+                                                0
+                                            ? false
+                                            : true,
+                                        haveCorner: false,
+                                        title: "Add to Cart",
+                                      ),
+                                      SizedBox(
+                                        height: kDefaultMargin.sp + 10.sp,
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(
-                                  height: kDefaultMargin.sp + 10.sp,
+                                  height: kDefaultMargin.sp,
                                 ),
-                                BuildItemPackagesDetail(),
-                                SizedBox(
-                                  height: kDefaultMargin.sp + 10.sp,
-                                ),
-                                BuildCustomButton(
-                                  action: () {
-
-                               if( mItemController.itemSelectedIndex.value>=0){
-
-                                 ItemDetailNoImageModel mModel = mItemController.mItemDetailNoImage[mItemController.itemSelectedIndex.value];
-
-                                 mCartController.addNewCart(
-                                     TempAddToCartModel(
-                                       mItemController.mItemDetailImages[0],
-                                       mModel.itemName,
-                                       "${mModel.packageName} - ${mModel.price} Ks",
-                                       TempItemPackageModel("${mModel.itemQty}", "${mModel.price}"),
-                                       1,
-                                     ));
-
-                                 mItemController.changeItemSelectedIndex(-1);
-
-                              }
-                                  },
-                                  haveCorner: false,
-                                  title: "Add to Cart",
+                                BuildHorizontalItems(
+                                  title: "Similar Items",
+                                  haveSeeMore: false,
                                 ),
                                 SizedBox(
-                                  height: kDefaultMargin.sp + 10.sp,
+                                  height: GetPlatform.isIOS
+                                      ? kBottomNavigationBarHeight +
+                                          MediaQuery.of(context)
+                                              .padding
+                                              .bottom +
+                                          kDefaultMargin.sp
+                                      : kBottomNavigationBarHeight +
+                                          kDefaultMargin,
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: kDefaultMargin.sp,
-                          ),
-                          BuildHorizontalItems(
-                            title: "Similar Items",
-                            haveSeeMore: false,
-                          ),
-                          SizedBox(
-                            height: GetPlatform.isIOS
-                                ? kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom+kDefaultMargin.sp
-                                : kBottomNavigationBarHeight + kDefaultMargin,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: InkWell(
-                    onTap: (){
-                      mFeatureController.changeIndex(2);
-                      mCartController.cartAppBarBackArrow.value = true;
-                      Get.toNamed("/");
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      color: Theme.of(context).primaryColor,
-                      height: GetPlatform.isIOS
-                          ? kBottomNavigationBarHeight +MediaQuery.of(context).padding.bottom
-                          : kBottomNavigationBarHeight,
-                      padding: EdgeInsets.only(
-                          left: kDefaultMargin + kDefaultMargin,
-                          right: kDefaultMargin + kDefaultMargin),
-                      child: Center(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Total in cart",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: kExtraLargeFontSize15),
-                            ),
-                            SizedBox(
-                              width: kDefaultMargin,
-                            ),
-                            Container(
-                              width: 20.sp,
-                              height: 20.sp,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                              child: Center(
-                                  child: Obx((){
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: InkWell(
+                          onTap: () {
+                            mFeatureController.changeIndex(2);
+                            mCartController.cartAppBarBackArrow.value = true;
+                            Get.toNamed("/");
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            color: Theme.of(context).primaryColor,
+                            height: GetPlatform.isIOS
+                                ? kBottomNavigationBarHeight +
+                                    MediaQuery.of(context).padding.bottom
+                                : kBottomNavigationBarHeight,
+                            padding: EdgeInsets.only(
+                                left: kDefaultMargin + kDefaultMargin,
+                                right: kDefaultMargin + kDefaultMargin),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Total in cart",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: kExtraLargeFontSize15),
+                                  ),
+                                  SizedBox(
+                                    width: kDefaultMargin,
+                                  ),
+                                  Container(
+                                    width: 20.sp,
+                                    height: 20.sp,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                    child: Center(child: Obx(() {
+                                      return Text(
+                                        "${mCartController.mAddToCartList.length}",
+                                        style: TextStyle(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: kMediumFontSize11),
+                                      );
+                                    })),
+                                  ),
+                                  Spacer(),
+                                  Obx(() {
                                     return Text(
-                                      "${mCartController.mAddToCartList.length}",
+                                      "Ks ${mCartController.totalPrice}",
                                       style: TextStyle(
-                                          color: Theme.of(context).primaryColor,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: kMediumFontSize11),
+                                          fontSize: kExtraLargeFontSize15),
                                     );
                                   })
+                                ],
                               ),
                             ),
-                            Spacer(),
-                            Obx((){
-                              return Text(
-                                "Ks ${mCartController.totalPrice}",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: kExtraLargeFontSize15),
-                              );
-                            })
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          );
-        }
-
-        ),
+                    )
+                  ],
+                );
+        }),
       ),
     );
   }

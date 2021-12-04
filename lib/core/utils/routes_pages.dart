@@ -30,8 +30,6 @@ import 'package:whole_snack/features/sign_up_page/view/sign_up_page.dart';
 import 'package:whole_snack/features/search/binding/search_binding.dart';
 import 'package:whole_snack/features/search/view/search_page.dart';
 
-
-
 class RoutePage {
   var routePage = [
     GetPage(
@@ -55,53 +53,39 @@ class RoutePage {
         page: () => CustomerSupportPage(),
         binding: CustomerSupportPageBinding()),
     GetPage(
-        name: '/about-page' , page:()=> AboutPage(),
-      binding: AboutPageBinding()
-    ),
+        name: '/about-page',
+        page: () => AboutPage(),
+        binding: AboutPageBinding()),
     GetPage(
-        name: '/manage-address-page' , page:()=> ManageAddressPage(),
-        binding: ManageAddrssBinding()
-    ),
+        name: '/manage-address-page',
+        page: () => ManageAddressPage(),
+        binding: ManageAddrssBinding()),
     GetPage(
-      name: '/edit-profile-page',
-      page: ()=>EditProfilePage(),
-      binding: EditProfilePageBinding()
-    ),
-    GetPage(
-      name: '/item-page',
-      page: () =>  ItemPage(),
-      binding: ItemBinding()
-    ),
+        name: '/edit-profile-page',
+        page: () => EditProfilePage(),
+        binding: EditProfilePageBinding()),
+    GetPage(name: '/item-page', page: () => ItemPage(), binding: ItemBinding()),
     GetPage(
         name: '/login-sign-up-main-page',
-        page: () =>  LoginSignUpMainPage(),
-        binding: LoginSignUpMainPageBinding()
-    ),
-    GetPage(name: "/login-phone-number-page", page: ()=>LoginPhoneNumberPage(),
-      binding: LoginPhoneNumberPageBinding()
-    ),
-    GetPage(name: "/sign-up-page", page: () =>SignUpPage(),
-
-    binding: SignUpPageBinding()
-    ),
-    GetPage(name: "/otp-page", page: () =>OtpPage(),
-
-        binding: OtpPageBinding()
-    ),
-     GetPage(
+        page: () => LoginSignUpMainPage(),
+        binding: LoginSignUpMainPageBinding()),
+    GetPage(
+        name: "/login-phone-number-page",
+        page: () => LoginPhoneNumberPage(),
+        binding: LoginPhoneNumberPageBinding()),
+    GetPage(
+        name: "/sign-up-page",
+        page: () => SignUpPage(),
+        binding: SignUpPageBinding()),
+    GetPage(
+        name: "/otp-page", page: () => OtpPage(), binding: OtpPageBinding()),
+    GetPage(
         name: '/search-page',
         page: () => SearchPage(),
-        binding: SearchBinding()
-    ),
+        binding: SearchBinding()),
     GetPage(
         name: '/checkout-page',
         page: () => CheckOutPage(),
-        binding: CheckOutBinding()
-    )
-
-
-
-
-
+        binding: CheckOutBinding())
   ];
 }
