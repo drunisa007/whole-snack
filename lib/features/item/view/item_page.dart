@@ -115,12 +115,10 @@ class ItemPage extends StatelessWidget {
                                               mModel.itemName,
                                               "${mModel.packageName} - ${mModel.price} Ks",
                                               TempItemPackageModel(
-                                                 quantity: "${mModel.itemQty}",
+                                                  quantity: "${mModel.itemQty}",
                                                   price: "${mModel.price}",
-                                                packageId: "${mModel.packageId}"
-
-                                              ),
-
+                                                  packageId:
+                                                      "${mModel.packageId}"),
                                               1,
                                             ));
 

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:whole_snack/core/constants/default_values.dart';
@@ -43,15 +44,40 @@ class HttpService{
       return HttpCustomResponse('Something went wrong', 400, '', false);
     }
   }
+  Future<HttpCustomResponse> orderSubmit(uri,body) async {
+    try{
+      var url = Uri.parse(baseUrl+uri);
+      print("url is $url");
+
+      http.Response response  = await http.post(url,
+          headers: getHeader(),
+          body:jsonEncode(body
+          ));
+
+      if(response.statusCode==200){
+        return HttpCustomResponse('', 200, response.body, true);
+      }
+      else{
+        return HttpCustomResponse('Something went wrong status code',response.statusCode, '', false);
+      }
+    }
+    on FormatException catch(_){
+      return HttpCustomResponse('Something went wrong on server', 400, "", false);
+    }
+    on SocketException catch(_){
+
+      return HttpCustomResponse('Something went wrong with internet', 400, "", false);
+    }
+    catch(e){
+      print(e);
+      return HttpCustomResponse('Something went wrong', 400, "", false);
+    }
+  }
 
 
   Future<HttpCustomResponse> getData(uri) async {
     try{
-
-    // ,headers: getHeader()
       var url = Uri.parse(baseUrl+uri);
-//       http.Response response  = await http.get(url,   headers: getHeader());
-//       print("status code is ${response.statusCode}");
 
       http.Response response  = await http.get(url);
       if(response.statusCode==200){
@@ -107,7 +133,6 @@ class HttpService{
       "Accept": "application/json",
       "Authorization": "Bearer $token"
     };
-
   }
 
 /*  getHeader(){

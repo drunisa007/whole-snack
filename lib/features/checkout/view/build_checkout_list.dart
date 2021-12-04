@@ -14,110 +14,110 @@ class BuildCheckOutList extends StatelessWidget {
   Widget build(BuildContext context) {
 
     CartController mCartController = Get.find<CartController>();
+    SizeConfig mSizeConfig = Get.find<SizeConfig>();
 
-    return ListView.builder(itemBuilder: (context,index){
-      TempAddToCartModel mModel = mCartController.mAddToCartList[index];
-      SizeConfig mSizeConfig = Get.find<SizeConfig>();
-      mSizeConfig.init(context);
-      return Container(
-        width: double.infinity,
-        height: mSizeConfig.blockSizeVertical * 10.9,
-        padding: EdgeInsets.only(
-          left: kDefaultMargin.sp,
-          right: kDefaultMargin.sp,
-          top: kDefaultMargin.sp ,
-          bottom: kDefaultMargin.sp,
-        ),
-        child: Center(
-          child: Row(
-            children: [
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    child: CachedNetworkImage(
-                      imageUrl: "${mModel.image}",
-                      fit: BoxFit.contain,
-                      placeholder: (context, url) => Image.asset(
-                        "assets/images/place_holder.png",
-                        fit: BoxFit.cover,
-                      ),
-                      errorWidget: (context, url, error) => Image.asset(
-                        "assets/images/place_holder.png",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )),
-              Expanded(
-                  flex: 4,
-                  child: Container(
-                    padding: EdgeInsets.only(left: kDefaultMargin.sp),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          mModel.title,
-                          maxLines: 2,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: kLargeFontSize13,
-                              letterSpacing: 0.3,
-                              fontWeight: FontWeight.w600),
+    mSizeConfig.init(context);
+    return ListView.separated(itemBuilder: (context,index){
+      return GestureDetector(
+        onTap: (){
+          print("this is working");
+        },
+        child: Container(
+          width: double.infinity,
+          height: mSizeConfig.blockSizeVertical * 10.9,
+          padding: EdgeInsets.only(
+            left: kDefaultMargin.sp,
+            right: kDefaultMargin.sp,
+            top: kDefaultMargin.sp ,
+            bottom: kDefaultMargin.sp,
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      child: CachedNetworkImage(
+                        imageUrl: "${mCartController.mAddToCartList[index].image}",
+                        fit: BoxFit.contain,
+                        placeholder: (context, url) => Image.asset(
+                          "assets/images/place_holder.png",
+                          fit: BoxFit.cover,
                         ),
-                        Text(
-                          mModel.originalPrice,
-                          style: TextStyle(
-                              fontSize: kSmallFontSize10,
-                              color: Theme.of(context).colorScheme.onSecondary
+                        errorWidget: (context, url, error) => Image.asset(
+                          "assets/images/place_holder.png",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )),
+                Expanded(
+                    flex: 4,
+                    child: Container(
+                      padding: EdgeInsets.only(left: kDefaultMargin.sp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${mCartController.mAddToCartList[index].title}",
+                            maxLines: 2,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: kLargeFontSize13,
+                                letterSpacing: 0.3,
+                                fontWeight: FontWeight.w600),
                           ),
-                        ),
-                        Spacer(),
-                        Row(
-                          children: [
-                            Text(
-                              mModel.itemPackage.quantity,
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: kLargeFontSize13,
-                                fontWeight: FontWeight.w600,
+                          Spacer(),
+                          Row(
+                            children: [
+                              Text(
+                                "${mCartController.mAddToCartList[index].itemPackage.quantity}",
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: kLargeFontSize13,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 10.sp,
-                            ),
-                            Text(
-                              mModel.itemPackage.price,
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: kLargeFontSize13,
-                                fontWeight: FontWeight.w600,),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )),
-              Expanded(
-                  flex: 3,
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Qty : ${mModel.count}',style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondaryVariant,
-                         fontSize: kLargeFontSize14.sp,
-                          fontWeight: FontWeight.w600
-                        ),)
-                      ],
-                    ),
-                  )),
-            ],
+                              SizedBox(
+                                width: 10.sp,
+                              ),
+                              Text(
+                                "${mCartController.mAddToCartList[index].itemPackage.price} Ks",
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: kLargeFontSize13,
+                                  fontWeight: FontWeight.w600,),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    )),
+                Expanded(
+                    flex: 3,
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Qty : ${mCartController.mAddToCartList[index].count}',style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondaryVariant,
+                           fontSize: kLargeFontSize14.sp,
+                            fontWeight: FontWeight.w600
+                          ),)
+                        ],
+                      ),
+                    )),
+              ],
+            ),
           ),
         ),
       );
     },
-      shrinkWrap: true,
+      shrinkWrap: false,
       itemCount: mCartController.mAddToCartList.length,
+      separatorBuilder: (BuildContext context, int index) {
+      return Divider();
+      },
     );
   }
 }
