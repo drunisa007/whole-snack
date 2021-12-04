@@ -1,123 +1,130 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/data_model/item_model.dart';
 import 'package:whole_snack/core/model/temp_model/temp_item_package_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/category/controller/category_controller.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 
 class BuildItemSingleGrid extends StatelessWidget {
   final int currentIndex;
-  final SizeConfig mSizeConfig;
-  final HomeController mHomeController;
-  final String image;
-  final String title;
-  final String originalPrice;
-  final String firstPackages;
-  final String quantity;
-  final String itemId;
 
   const BuildItemSingleGrid(
       {Key? key,
       required this.currentIndex,
-      required this.mSizeConfig,
-      required this.mHomeController,
-      required this.image,
-      required this.title,
-      required this.originalPrice,
-      required this.quantity,
-      required this.firstPackages,
-      required this.itemId})
+})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.sp)),
-      color: Colors.white,
-      elevation: 1,
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: mSizeConfig.blockSizeVertical * 10,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(6.sp),
-                  topRight: Radius.circular(6.sp),
-                ),
-              ),
-              child: CachedNetworkImage(
-                fit: BoxFit.contain,
-                imageUrl: image,
-                placeholder: (context, url) => Image.asset(
-                  "assets/images/place_holder.png",
-                  fit: BoxFit.fill,
-                ),
-                errorWidget: (context, url, error) => Image.asset(
-                  "assets/images/place_holder.png",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 8.sp),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 2,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w900,
-                        fontSize: kMediumFontSize12.sp-1.sp),
-                  ),
-                  Text(
-                    originalPrice,
-                    style: TextStyle(
-                        fontSize: kSmallFontSize10.sp-1.sp,
-                        color: Theme.of(context).colorScheme.onSecondary),
-                  ),
-                ],
-              ),
-            ),
-            Spacer(),
-            Container(
-                width: double.infinity,
-                height: mSizeConfig.blockSizeVertical * 3,
-                padding: EdgeInsets.symmetric(horizontal: 8.sp),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+
+    SizeConfig mSizeConfig = Get.find<SizeConfig>();
+    mSizeConfig.init(context);
+
+    CategoryController mCategoryController = Get.find<CategoryController>();
+
+    ItemModel mItemModel = mCategoryController.mItemList[currentIndex];
+
+    return Padding(
+      padding: EdgeInsets.only(right: kDefaultMargin.sp,bottom: kDefaultMargin.sp),
+      child: Material(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.sp),
+        ),
+        shadowColor: Colors.grey,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(6.sp),
+          splashColor: Colors.grey,
+          onTap: () {
+            Get.toNamed("/item-page",arguments: [mItemModel.itemId,mItemModel.categoryName,mItemModel.itemName]);
+          },
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: mSizeConfig.blockSizeVertical * 10,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(6.sp),
-                      bottomRight: Radius.circular(6.sp),
-                    )),
-                child: Row(
-                  children: [
-                    Text(
-                      firstPackages,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: kMediumFontSize11.sp),
+                      topLeft: Radius.circular(6.sp),
+                      topRight: Radius.circular(6.sp),
                     ),
-                    Spacer(),
-                    Text(
-                      "$originalPrice Ks",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: kMediumFontSize11.sp),
+                  ),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.contain,
+                    imageUrl: mItemModel.img,
+                    placeholder: (context, url) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.fill,
                     ),
-                  ],
-                ))
-          ],
+                    errorWidget: (context, url, error) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 8.sp),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        mItemModel.itemName,
+                        maxLines: 2,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w900,
+                            fontSize: kMediumFontSize12.sp - 1.sp),
+                      ),
+                      Text(
+                        mItemModel.price,
+                        style: TextStyle(
+                            fontSize: kSmallFontSize10.sp - 1.sp,
+                            color: Theme.of(context).colorScheme.onSecondary),
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(),
+                Container(
+                    width: double.infinity,
+                    height: mSizeConfig.blockSizeVertical * 3,
+                    padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(6.sp),
+                          bottomRight: Radius.circular(6.sp),
+                        )),
+                    child: Row(
+                      children: [
+                        Text(
+                          mItemModel.packageName,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: kMediumFontSize11.sp),
+                        ),
+                        Spacer(),
+                        Text(
+                          "${mItemModel.price} Ks",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: kMediumFontSize11.sp),
+                        ),
+                      ],
+                    ))
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -6,7 +6,11 @@ import 'package:whole_snack/core/model/data_model/order_info_model.dart';
 import 'package:whole_snack/core/model/data_model/order_item_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
 import 'package:whole_snack/core/model/service_model/http_get_result.dart';
+
 import 'package:whole_snack/services/http_post_service.dart';
+
+import 'package:whole_snack/core/model/service_model/http_register_result.dart';
+
 import 'package:whole_snack/services/http_service.dart';
 
 class OrderRepo {
@@ -65,3 +69,26 @@ class OrderRepo {
 
 
 }
+
+  Future<HttpRegisterResult<String>> submitOrder(body) async {
+
+
+    HttpCustomResponse result =  await _httpService.orderSubmit("order/submitorder.php",body);
+
+
+    if(result.isSuccessful) {
+      return HttpRegisterResult('', result.stateCode, "success", true);
+    }
+    else {
+
+
+      return HttpRegisterResult(result.errorMessage, result.stateCode,"not success", false);
+    }
+
+
+
+
+  }
+
+}
+
