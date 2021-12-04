@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/data_model/add_address_model.dart';
 import 'package:whole_snack/core/model/data_model/address_model.dart';
+import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
 
 class HttpPostService {
@@ -9,16 +11,19 @@ class HttpPostService {
   late String apiKey;
   late String mName;
   late String mPhone;
+  String token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjA5Nzg1ODgyMzgxIiwiZXhwIjoxNjY4NTY5Nzk2fQ.XHJLaHuVBHG44fQSJJjVgXlWP2NlzsvBt67sfK0k8iY";
 
   HttpPostService() {
     initData();
   }
 
   ///this will use to send address data
-  Future<HttpCustomResponse> postAddress(AddressModel addressModel) async {
+  Future<HttpCustomResponse> postAddress(
+      AddAddressModel addAddressModel) async {
     var uri = Uri.parse('$API/customer/address.php');
     final response = await http.post(uri,
-        headers: getHeader(), body: jsonEncode(addressModel.toJson()));
+        headers: getHeader(), body: jsonEncode(addAddressModel.toJson()));
 
     if (response.statusCode == 200) {
       print("success");
@@ -32,20 +37,18 @@ class HttpPostService {
     }
   }
 
-  Future<HttpCustomResponse> deleteAlbum(String id) async {
-    var uri = Uri.parse('customer/deleteaddress.php?id=30');
-    final http.Response response = await http.delete(
-      uri,
-      headers: getHeader(),
-    );
+  Future<HttpCustomResponse> deleteAddress(AddressModel model) async {
+    var uri = Uri.parse('$API/customer/address.php');
+    final response = await http.delete(uri,
+        headers: getHeader(), body: jsonEncode(model.toJson()));
 
     if (response.statusCode == 200) {
-      print("success");
-      return HttpCustomResponse('', 200, "", true);
+      print(response.statusCode);
+      return HttpCustomResponse('', response.statusCode, response.body, true);
     } else {
-      // If the server did not return a "200 OK response",
-      // then throw an exception.
-      throw Exception('Failed to delete address.');
+      print(response.statusCode);
+      return HttpCustomResponse('', response.statusCode, [], false);
+      print(response.statusCode);
     }
   }
 
@@ -57,17 +60,18 @@ class HttpPostService {
   getHeader() {
     return {
       "Content-Type": "application/json",
-      'Authorization': 'Bearer {getAPIBox()}'
+      'Authorization': 'Bearer $token'
     };
   }
 
   Future<HttpCustomResponse> register(String name, String phoneNumber) async {
     mName = name;
     mPhone = phoneNumber;
+
     var uri = Uri.parse('$API/customer/register.php');
     final response = await http.post(uri,
         headers: getHeader(),
-        body: jsonEncode({"name": "$name", "phone": "$phoneNumber"}));
+        body: jsonEncode({"name": "test", "phone": "09978770588"}));
 
     if (response.statusCode == 200) {
       print(response.statusCode);
@@ -81,12 +85,28 @@ class HttpPostService {
 
   Future<HttpCustomResponse> sendOtp(
       String name, String phone, String otp) async {
+    print("name $name phone $phone $otp is otp");
+    print(jsonEncode(jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"})));
     var uri = Uri.parse('https://seinwholesale.com/api/customer/verify.php');
     final response = await http.post(uri,
-        headers: getHeader(),
-        body: jsonEncode(
-            {"name": "$name", "phone": "$phone", "otp": "$otp"}
-            ));
+        // headers: getHeader(),
+        body: jsonEncode({"name": "test", "phone": "09978770588", "otp": "$otp"}));
+
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      return HttpCustomResponse('', response.statusCode, response.body, true);
+    } else {
+      print(response.statusCode);
+      return HttpCustomResponse('', response.statusCode, [], false);
+      print(response.statusCode);
+    }
+  }
+
+  ///get order list by date filter
+  Future<HttpCustomResponse> getOrderByDate(OrderDateFilterModel model) async {
+    var uri = Uri.parse('$API/order/orderfilter.php');
+    final response = await http.post(uri,
+        headers: getHeader(), body: jsonEncode(model.toJson()));
 
     if (response.statusCode == 200) {
       print(response.statusCode);

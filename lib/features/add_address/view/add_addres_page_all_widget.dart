@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/data_model/add_address_model.dart';
 import 'package:whole_snack/core/model/data_model/region_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
@@ -27,40 +28,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
       color: Theme.of(context).primaryColor,
     )) : ListView(
       children: [
-        Text(
-          "Phone Number",
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
-            fontSize: kLargeFontSize13.sp,
 
-              fontWeight: FontWeight.w500
-          ),
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        TextField(
-          controller: phoneController,
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide( color: Theme.of(context).colorScheme.onPrimary, width: 1),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.onPrimary
-              ),
-            ),
-            hintText: "Enter you address",
-            hintStyle: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontSize: kLargeFontSize13.sp),
-          ),
-        ),
-        SizedBox(
-          height: 12,
-        ),
         Text(
           "Township",
           style: TextStyle(
@@ -153,7 +121,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
                 fontSize: kLargeFontSize13.sp),
           ),
         ),
-        SizedBox(
+    /*    SizedBox(
           height: 12,
         ),
         Text(
@@ -184,11 +152,16 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
                 color: Theme.of(context).colorScheme.onPrimary,
                 fontSize: kLargeFontSize13.sp),
           ),
-        ),
+        ),*/
         SizedBox(
           height: 16,
         ),
-      BuildCustomButton(haveCorner: false, action: ()=>Get.back(), title: "Save Address")
+      BuildCustomButton(haveCorner: false, action: () async=> {
+        
+        controller.addNewAddress(AddAddressModel(cusId: "56", regId: controller.regionId, cusAddress: "Hello World Testing"))
+        
+        
+      }, title: "Save Address")
       ],
     ),
   );

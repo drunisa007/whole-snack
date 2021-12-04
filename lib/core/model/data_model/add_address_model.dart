@@ -1,33 +1,29 @@
 import 'dart:convert';
 
-List<AddAddressModel> addAddressModelFromJson(String str) => List<AddAddressModel>.from(json.decode(str).map((x) => AddAddressModel.fromJson(x)));
+AddAddressModel addAddressModelFromJson(String str) => AddAddressModel.fromJson(json.decode(str));
 
-String addAddressModelToJson(List<AddAddressModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String addAddressModelToJson(AddAddressModel data) => json.encode(data.toJson());
 
 class AddAddressModel {
   AddAddressModel({
-  required  this.cusAddress,
-  required  this.regName,
-  required  this.regId,
-   required this.cusId,
+    required this.cusId,
+    required this.regId,
+    required this.cusAddress,
   });
 
-  String cusAddress;
-  String regName;
-  String regId;
   String cusId;
+  String regId;
+  String cusAddress;
 
   factory AddAddressModel.fromJson(Map<String, dynamic> json) => AddAddressModel(
-    cusAddress: json["cus_address"],
-    regName: json["reg_name"],
-    regId: json["reg_id"],
     cusId: json["cus_id"],
+    regId: json["reg_id"],
+    cusAddress: json["cus_address"],
   );
 
   Map<String, dynamic> toJson() => {
-    "cus_address": cusAddress,
-    "reg_name": regName,
-    "reg_id": regId,
     "cus_id": cusId,
+    "reg_id": regId,
+    "cus_address": cusAddress,
   };
 }
