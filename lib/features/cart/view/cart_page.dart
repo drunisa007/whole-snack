@@ -40,7 +40,7 @@ class CartPage extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                    flex: 7,
+                    flex: 8,
                     child: Container(
                       width: double.infinity,
                       child: BuildAddToCartList(),
