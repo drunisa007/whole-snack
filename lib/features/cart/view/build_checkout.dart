@@ -9,8 +9,9 @@ class BuildCheckOut extends StatelessWidget {
 
   final String title;
   final action;
+  final disable;
 
-  const BuildCheckOut({Key? key, required this.title, this.action}) : super(key: key);
+  const BuildCheckOut({Key? key, required this.title, this.action,this.disable}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

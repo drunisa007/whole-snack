@@ -26,11 +26,20 @@ class ItemPage extends StatelessWidget {
 
     ItemController mItemController = Get.find<ItemController>();
 
-    String itemId = Get.arguments[0];
-    String categoryName = Get.arguments[1];
-    String itemName = Get.arguments[2];
+    String itemId="";
+    String categoryName="";
+    String itemName="";
+    if(Get.arguments!=null){
+       itemId = Get.arguments[0];
+       categoryName = Get.arguments[1];
+       itemName = Get.arguments[2];
+      mItemController.fetchItemDetail(itemId);
+    }
+    else{
+     Get.back();
+    }
 
-    mItemController.fetchItemDetail(itemId);
+
 
     return Scaffold(
       body: Container(

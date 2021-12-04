@@ -47,7 +47,14 @@ class CartPage extends StatelessWidget {
             ),
           ),
           Spacer(),
-         BuildCheckOut(action: ()=> Get.toNamed("checkout-page",), title: 'Continue to checkout',)
+         BuildCheckOut(action: (){
+           if(mCartController.mAddToCartList.length>0){
+             Get.toNamed("checkout-page");
+           }
+           else{
+             Get.snackbar("Empty","Choose your favourite items to checkout.");
+           }
+         }, title: 'Continue to checkout',)
         ],
       ),
     );

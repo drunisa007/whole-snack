@@ -28,7 +28,7 @@ class ItemController extends GetxController{
 
   ItemDetailRepo _itemDetailRepo = Get.find<ItemDetailRepo>();
   RxString errorMessage = RxString("");
-  RxBool showLoading = RxBool(false);
+  RxBool showLoading = RxBool(true);
 
   RxList<ItemDetailNoImageModel> mItemDetailNoImage = RxList();
   RxList<String> mItemDetailImages = RxList();
