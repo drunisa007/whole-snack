@@ -87,7 +87,7 @@ class BuildItemBannerDesign extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Obx(() {
-                return DotsIndicator(
+                return mItemController.mItemDetailImageInt.length>0?DotsIndicator(
                   dotsCount: mItemController.mItemDetailImages.length,
                   position: mItemController.bannerIndex.value,
                   decorator: DotsDecorator(
@@ -98,7 +98,7 @@ class BuildItemBannerDesign extends StatelessWidget {
                     activeShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0)),
                   ),
-                );
+                ):Container();
               }),
             ),
           ),

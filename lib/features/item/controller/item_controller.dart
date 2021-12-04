@@ -51,7 +51,8 @@ class ItemController extends GetxController{
               packageName: mModel.packageName,
               itemQty: mModel.itemQty,
               price: mModel.price,
-              instock: mModel.instock));
+              instock: mModel.instock,
+              packageId: mModel.packageId));
         }
         else {
           String imageName = mModel.itemImg;
@@ -62,6 +63,7 @@ class ItemController extends GetxController{
         }
       }
 
+      mItemDetailImageInt.clear();
       for (int i = 1; i <= mItemDetailImages.length; i++) {
         mItemDetailImageInt.add(i);
       }
