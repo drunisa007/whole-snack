@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/appbar/simple_app_bar.dart';
+import 'package:whole_snack/core/widgets/appbar/simple_custom_appbar.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 import 'package:whole_snack/features/cart/view/build_addtocart_list.dart';
 import 'package:whole_snack/features/cart/view/build_checkout.dart';
 import 'package:whole_snack/features/cart/view/build_delivery_fee.dart';
@@ -15,11 +17,12 @@ class CartPage extends StatelessWidget {
     SizeConfig mSizeConfig = Get.find<SizeConfig>();
     mSizeConfig.init(context);
 
+    CartController mCartController = Get.find<CartController>();
+
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: 'Shopping Cart',
-        haveBackArrow: false,
-      ),
+    appBar: SimpleCustomAppBar(
+    title: 'Shopping Cart'
+    ),
       body: Column(
         children: [
           SizedBox(
@@ -32,7 +35,7 @@ class CartPage extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                    flex: 7,
+                    flex: 8,
                     child: Container(
                       width: double.infinity,
                       child: BuildAddToCartList(),
@@ -44,7 +47,14 @@ class CartPage extends StatelessWidget {
             ),
           ),
           Spacer(),
-         BuildCheckOut()
+         BuildCheckOut(action: (){
+           if(mCartController.mAddToCartList.length>0){
+             Get.toNamed("checkout-page");
+           }
+           else{
+             Get.snackbar("Empty","Choose your favourite items to checkout.");
+           }
+         }, title: 'Continue to checkout',)
         ],
       ),
     );

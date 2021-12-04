@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/data_model/address_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/manage_address/controller/manage_address_controller.dart';
 
@@ -9,11 +10,10 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
 
 
   return Column(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      SizedBox(height: 8,),
-      buildAddressList(context, sizeConfig, controller),
       SizedBox(height: 16,),
-      buildAddressList(context, sizeConfig, controller),
+      Flexible(child: buildAddressList(context, sizeConfig, controller)),
       SizedBox(height: 16,),
       Center(
           child:GestureDetector(
@@ -40,7 +40,7 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
                     "Add New Address",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        fontSize: kLargeFontSize14.sp,
+                        fontSize: kExtraLargeFontSize15.sp,
                         fontWeight: FontWeight.w600),
 
                   )
@@ -49,6 +49,7 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
             ),
           )
       ),
+      SizedBox(height: 16,),
 
     ],
   );
@@ -56,72 +57,90 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
 
 Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddressController controller) {
 
-  return Container(
+  return Obx(
+      ()=> controller.addressList.length==0 ?CircularProgressIndicator(
+        color: Theme.of(context).primaryColor,
+      ) : ListView.builder(
 
-    padding: EdgeInsets.all(kDefaultMargin),
-    decoration: BoxDecoration(
-      color: Colors.white,
+      itemCount: controller.addressList.length,
+        itemBuilder: (context,int index) {
 
-    /*  border: Border.all(
-        color: Colors.grey
-      )*/
-    ),
-    child: Row(
-      children: [
 
-        Icon(Icons.place,size: 22.sp,color: Colors.grey,),
-        SizedBox(width: 16,),
-        Flexible(
-          child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: "Home\n",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: kMediumFontSize12.sp,
-                        fontWeight: FontWeight.bold)),
-                TextSpan(
-                    text: "45 E 45 St Mdy City Mya kyaw minglar a a a a a Myamandalar ,Mandalay",
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontSize: kSmallFontSize10.sp,
-                      )),
-              ])),
+
+      return   Container(
+
+        padding: EdgeInsets.all(kDefaultMargin),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+
+          /*  border: Border.all(
+          color: Colors.grey
+        )*/
         ),
-
-
-
-
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Row(
           children: [
+
+            Icon(Icons.place,size: 22.sp,color: Colors.grey,),
+            SizedBox(width: 16,),
+            Flexible(
+              flex: 6,
+              child: RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: "${controller.addressList[index].regName} \n" ,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: kLargeFontSize13.sp,
+                            fontWeight: FontWeight.bold)),
+                    TextSpan(
+                        text: "${controller.addressList[index].cusAddress} fsf sfs sfsf sf sf sf a ad d sfssffs ",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          fontSize: kMediumFontSize12.sp,
+                        )),
+                  ])),
+            ),
+
+            Spacer(),
+
+
+
+
+
+
+
             GestureDetector(
               onTap: ()=> print("hahhaha"),
               child: Text(
                   "Update",
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kMediumFontSize12.sp,
-                    fontWeight: FontWeight.bold
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: kSmallFontSize10.sp,
+                      fontWeight: FontWeight.bold
                   )),
             ),
             SizedBox(width: 8,),
             GestureDetector(
-              onTap: ()=>print('hahahhahaha'),
+              onTap: () async=> {
+
+                controller.deleteAddress(controller.addressList[index])
+
+              },
               child: Text(
                   "Delete",
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: kMediumFontSize12.sp,
+                      color: Theme.of(context).primaryColor,
+                      fontSize: kSmallFontSize10.sp,
+                      fontWeight: FontWeight.bold
                   )),
             ),
+
+
+
           ],
-        ),
-
-
-
-      ],
-    ),
-  );
+        )
+      );
+    }),
+  ) ;
 }

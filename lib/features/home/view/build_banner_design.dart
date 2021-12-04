@@ -28,7 +28,7 @@ class BuildBannerDesign extends StatelessWidget {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height:mSizeConfig.blockSizeVertical*18,
+            height:mSizeConfig.blockSizeVertical*18.5,
             initialPage: 0,
             aspectRatio: 16 / 9,
             viewportFraction: 1,
@@ -50,16 +50,16 @@ class BuildBannerDesign extends StatelessWidget {
                   margin: EdgeInsets.only(left: kDefaultMargin,right: kDefaultMargin),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6)
+                      borderRadius: BorderRadius.circular(6.sp)
                   ),
                   child: Container(
                     width: double.infinity,
-                    height: mSizeConfig.blockSizeVertical*18,
+                    height: mSizeConfig.blockSizeVertical*18.5,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6)
+                        borderRadius: BorderRadius.circular(5.sp)
                     ),
                     child:ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(5.sp),
                       child: CachedNetworkImage(
                         imageUrl: "${mTempImages[i-1]}",
                         fit: BoxFit.fill,
@@ -92,7 +92,7 @@ class BuildBannerDesign extends StatelessWidget {
               size: Size.square(7.0.sp),
               activeSize:Size(30.0.sp, 7.0.sp),
               activeShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
+                  borderRadius: BorderRadius.circular(5.0.sp)),
             ),
           );
         }),

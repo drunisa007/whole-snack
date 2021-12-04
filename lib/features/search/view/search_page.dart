@@ -23,7 +23,7 @@ class SearchPage extends StatelessWidget {
     List<TempAddToCartModel> mSearchList = zAddToCartList;
 
     return Scaffold(
-      appBar: CustomSearchAppBar(key: _scaffoldKey, height: height),
+      appBar: CustomSearchAppBar(key: _scaffoldKey, height: height,haveBackButton: true),
       body: Container(
         margin:
             EdgeInsets.only(left: kDefaultMargin.sp, right: kDefaultMargin.sp),
@@ -73,15 +73,16 @@ class SearchPage extends StatelessWidget {
                                 mModel.title,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: kLargeFontSize14,
-                                    letterSpacing: 0.4,
-                                    fontWeight: FontWeight.w800),
+                                    fontSize: kMediumFontSize12.sp,
+                                    letterSpacing: 0.3,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Text(
                                 mModel.originalPrice,
                                 style: TextStyle(
-                                    fontSize: kSmallFontSize10,
-                                    fontWeight: FontWeight.w500),
+                                  color: Theme.of(context).primaryColor,
+                                    fontSize: kSmallFontSize9.sp,
+                                ),
                               ),
                             ],
                           ),
@@ -105,12 +106,12 @@ class SearchPage extends StatelessWidget {
                                 Text(mModel.itemPackage.quantity,style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: kMediumFontSize12
+                                  fontSize: kMediumFontSize11
                                 ),),
                                 Text(mModel.itemPackage.price,style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700,
-                                    fontSize: kMediumFontSize12
+                                    fontSize: kMediumFontSize11
                                 ),)
                               ],
                             ),

@@ -13,16 +13,29 @@ class ItemRepo{
     _httpService = Get.put(HttpService());
   }
 
-  Future<HttpGetResult<ItemModel>>  getItem(categoryId,typeId) async {
+  Future<HttpGetResult<ItemModel>>  getItemList(categoryId,page) async {
+    HttpCustomResponse result = await _httpService.getData("Item/?categoryid=$categoryId&page=$page");
+    if(result.isSuccessful){
+      Map tempJson = jsonDecode(result.mData);
+      String tempData = jsonEncode(tempJson["output"]["data"]);
+      List<ItemModel> parseData = itemModelFromJson(tempData);
+      return HttpGetResult(tempJson["output"]["last_page"].toString(), 200, parseData, true);
+    }
+    else{
+      return HttpGetResult(result.errorMessage, result.stateCode,[], false);
+    }
+  }
+
+  Future<HttpGetResult<ItemModel>>  getItem(categoryId,typeId,page) async {
     HttpCustomResponse result = await _httpService.getData("Item/?catid=$categoryId&typeid=$typeId&page=1");
     if(result.isSuccessful){
       Map tempJson = jsonDecode(result.mData);
       String tempData = jsonEncode(tempJson["output"]["data"]);
       List<ItemModel> parseData = itemModelFromJson(tempData);
-      return HttpGetResult('', 200, parseData, true);
+      return HttpGetResult(tempJson["output"]["last_page"].toString(), 200, parseData, true);
     }
     else{
-      return HttpGetResult(result.errorMessage, result.stateCode,result.mData, false);
+      return HttpGetResult(result.errorMessage, result.stateCode,[], false);
     }
   }
 }

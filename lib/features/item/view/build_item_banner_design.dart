@@ -22,8 +22,6 @@ class BuildItemBannerDesign extends StatelessWidget {
 
     ItemController mItemController = Get.find<ItemController>();
 
-    List<String> mTempImages = zItemBannerImages;
-
 
     return Stack(
       children: [
@@ -43,12 +41,12 @@ class BuildItemBannerDesign extends StatelessWidget {
               enableInfiniteScroll: true,
             ),
             carouselController: buttonCarouselController,
-            items: [1,2,3].map((i) {
+            items: mItemController.mItemDetailImageInt.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
                     child: CachedNetworkImage(
-                      imageUrl: mTempImages[i - 1],
+                      imageUrl: mItemController.mItemDetailImages[i - 1],
                       placeholder: (context, url) => Image.asset(
                         "assets/images/place_holder.png",
                         fit: BoxFit.fill,
@@ -89,8 +87,8 @@ class BuildItemBannerDesign extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Obx(() {
-                return DotsIndicator(
-                  dotsCount: mTempImages.length,
+                return mItemController.mItemDetailImageInt.length>0?DotsIndicator(
+                  dotsCount: mItemController.mItemDetailImages.length,
                   position: mItemController.bannerIndex.value,
                   decorator: DotsDecorator(
                     color: Theme.of(context).primaryColor.withOpacity(0.5), // Inactive color
@@ -100,7 +98,7 @@ class BuildItemBannerDesign extends StatelessWidget {
                     activeShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0)),
                   ),
-                );
+                ):Container();
               }),
             ),
           ),

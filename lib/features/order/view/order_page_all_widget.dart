@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
 
-import 'package:whole_snack/core/constants/default_values.dart';
-import 'package:whole_snack/core/constants/default_values.dart';
-import 'package:whole_snack/core/constants/default_values.dart';import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
 
 import 'package:whole_snack/features/order/controller/order_controller.dart';
@@ -15,12 +15,6 @@ Widget orderPageAllWidget(
   bool isDate = true;
   int orderStatus = 01;
 
-  List<Widget> orderCart = [
-
-    _buildOrderHistoryCard(context, sizeConfig, controller,orderStatus),
-    _buildOrderHistoryCard(context, sizeConfig, controller,orderStatus),
-    _buildOrderHistoryCard(context, sizeConfig, controller,orderStatus),
-  ];
   return Container(
     margin: EdgeInsets.all(kDefaultMargin),
     child: Column(
@@ -29,29 +23,60 @@ Widget orderPageAllWidget(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              flex: 1,
-                child: _buildFilter(context, sizeConfig, controller, "From", isDate,()=>print(isDate))),
-            SizedBox(width: 8,),
-            Expanded(
-                flex: 1,child: _buildFilter(context, sizeConfig, controller, "To", isDate,()=>print(isDate))),
-            SizedBox(width: 8,),
-            Expanded(
-              flex: 1,
-              child: _buildFilter(
-                  context, sizeConfig, controller, "", !isDate,()=>print(isDate)),
+                flex: 1,
+                child: GetBuilder<OrderController>(
+                  builder: (controller) => _buildFilter(
+                      context,
+                      sizeConfig,
+                      controller,
+                      "From",
+                      isDate,
+                      () => controller.showDataPicker(context, 1),
+                      "${controller.firstDate}"),
+                )),
+            SizedBox(
+              width: 8,
             ),
-
-
+            Expanded(
+                flex: 1,
+                child: GetBuilder<OrderController>(
+                  builder: (controller) => _buildFilter(
+                      context,
+                      sizeConfig,
+                      controller,
+                      "To",
+                      isDate,
+                      () => controller.showDataPicker(context, 2),
+                      "${controller.secondDate}"),
+                )),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              flex: 1,
+              child: _buildFilter(context, sizeConfig, controller, "", !isDate,
+                  () => print(isDate), "${controller.firstDate}"),
+            ),
           ],
-
         ),
-        SizedBox(height: 12,),
-        Flexible(
-          child: ListView(
-              children: orderCart.map((e) => e).toList()
+        SizedBox(
+          height: 12,
+        ),
+        Obx(
+          () => Flexible(
+            child: controller.orderItemList.length == 0
+                ? CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  )
+                : ListView.builder(
+                    itemCount: controller.orderItemList.length,
+                    itemBuilder: (context, index) {
+                      return _buildOrderHistoryCard(
+                          context, sizeConfig, controller, orderStatus, index);
+                    },
+                  ),
           ),
         )
-
       ],
     ),
   );
@@ -59,8 +84,14 @@ Widget orderPageAllWidget(
 
 ///Build date picker and apply button to filte order history
 
-Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
-    OrderController controller, String title, bool isDate, Function onClick) {
+Widget _buildFilter(
+    BuildContext context,
+    SizeConfig sizeConfig,
+    OrderController controller,
+    String title,
+    bool isDate,
+    Function onClick,
+    String date) {
   return Container(
     padding: EdgeInsets.all(4),
     child: Column(
@@ -70,162 +101,190 @@ Widget _buildFilter(BuildContext context, SizeConfig sizeConfig,
         Text(
           title,
           style: TextStyle(
-            color: Colors.black,
-            fontSize: kMediumFontSize12.sp,
+            color: Theme.of(context).colorScheme.onPrimary,
+            fontSize: kLargeFontSize13.sp,
           ),
         ),
         SizedBox(
           height: 8,
         ),
         Container(
-          width: double.infinity,
-        /*  width: sizeConfig.safeBlockVertical * 13,*/
-          height: sizeConfig.blockSizeHorizontal * 10,
-          child: isDate
-              ? BuildCustomButton(haveCorner: true, action: ()=>Get.toNamed("/order-detail-page"), title: "11/12/21"):
-         BuildCustomButton(haveCorner: false, action: ()=>Get.toNamed("/order-detail-page"), title: "Apply")
-
-        ),
+            width: double.infinity,
+            /*  width: sizeConfig.safeBlockVertical * 13,*/
+            height: sizeConfig.blockSizeHorizontal * 10,
+            child: isDate
+                ? BuildCustomButton(
+                    haveCorner: true, action: () => onClick(), title: "$date")
+                : BuildCustomButton(
+                    haveCorner: false,
+                    action: () => {
+                          print(controller.firstDate),
+                          controller.getByDate(
+                              controller.firstDate, controller.secondDate),
+                          controller.getOrderInfoList(OrderDateFilterModel(
+                              customerId: "56",
+                              from: controller.firstDate,
+                              to: controller.secondDate)),
+                        },
+                    title: "Apply")),
       ],
     ),
   );
 }
 
 ///build order histroy  card style
-Widget _buildOrderHistoryCard(BuildContext context,SizeConfig sizeConfig,OrderController controller,int orderStatus) {
+Widget _buildOrderHistoryCard(BuildContext context, SizeConfig sizeConfig,
+    OrderController controller, int orderStatus, int index) {
+  String orderStatusText = "";
+  Color color = Color(0xaa0400B7);
+  Color cancelButtonColor = Theme.of(context).colorScheme.onPrimary;
 
+  ///check orderStatusTExt
+  switch (controller.orderItemList[index].ordStatus) {
+    case "0":
+      color = Color(0xff0400B7);
+      cancelButtonColor = Color(0xff3D3D3D);
+      orderStatusText = "Order Processing";
+      break;
+    case "1":
+      color = Color(0xffFB9600);
+      orderStatusText = "Order Delivery";
+      break;
+    case "3":
+      color = Color(0xff076AFF);
+
+      orderStatusText = "Order Received";
+      break;
+
+    default:
+      cancelButtonColor = Color(0xffC4C4C4);
+  }
 
   return Card(
-
-
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     child: Container(
       margin: EdgeInsets.all(kDefaultMargin),
-
       width: double.infinity,
       child: Column(
-
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-
         children: [
-
-
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
               Text(
-                "Apply",
+                controller.orderItemList[index].ordCreate
+                    .toString()
+                    .substring(0, 10),
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kMediumFontSize12.sp,
+                    fontSize: kLargeFontSize14.sp,
                     fontWeight: FontWeight.w600),
               ),
+              Spacer(),
               Text(
-                "Ks. 50000",
+                controller.orderItemList[index].ordPrice,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: kSmallFontSize10.sp,
+                    fontSize: kExtraLargeFontSize15.sp,
                     fontWeight: FontWeight.w600),
               ),
+              SizedBox(
+                width: 8,
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 15.sp,
+                color: Colors.black,
+              )
             ],
           ),
           Text(
-            "Order Code #8488394",
+            controller.orderItemList[index].ordId,
             style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-
-                fontSize: kSmallFontSize10.sp,
+                color: Theme.of(context).colorScheme.secondaryVariant,
+                fontSize: kMediumFontSize11.sp,
                 fontWeight: FontWeight.w500),
           ),
           SizedBox(
             height: 8,
           ),
           Row(
-
             children: [
-              Icon(Icons.shopping_bag,color: Theme.of(context).colorScheme.onPrimary,size: 26.sp,),
-              SizedBox(width: 8,),
+              SvgPicture.asset(
+                "assets/images/bag.svg",
+                color: Theme.of(context).colorScheme.onPrimary,
+                width: 12.sp,
+                height: 12.sp,
+              ),
+              SizedBox(
+                width: 8,
+              ),
               Flexible(
                 child: Text(
-                  "80 Street, Corner Of 16 Street, AMP Tsp, Mandalay",
-                  
+                  controller.orderItemList[index].ordAddress,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: kMediumFontSize12.sp,
+                      fontSize: kMediumFontSize11.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ),
-
             ],
           ),
           SizedBox(
             height: 8,
           ),
           Row(
-
             children: [
-             Container(
-               height: sizeConfig.blockSizeHorizontal*3,
-               width: sizeConfig.blockSizeVertical*3,
-               decoration: BoxDecoration(
-                 shape: BoxShape.circle,
-                  color: Colors.blueAccent
-               ),
-             ),
-              SizedBox(width: 8,),
+              Container(
+                height: sizeConfig.blockSizeHorizontal * 3,
+                width: sizeConfig.blockSizeVertical * 3,
+                decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+              ),
+              SizedBox(
+                width: 8,
+              ),
               Flexible(
                 child: Text(
-                  "Order Processing",
-
+                  orderStatusText,
                   style: TextStyle(
-                      color: Colors.blueAccent,
+                      color: color,
                       fontSize: kMediumFontSize12.sp,
                       fontWeight: FontWeight.w600),
                 ),
               ),
-
             ],
           ),
           SizedBox(
             height: 12,
           ),
           Divider(
-
             height: 3,
           ),
           SizedBox(
             height: 12,
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
               Text(
                 "Cancel Order",
                 style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: kMediumFontSize12.sp,
-                    fontWeight: FontWeight.w600),
+                    color: cancelButtonColor,
+                    fontSize: kLargeFontSize13.sp,
+                    fontWeight: FontWeight.w500),
               ),
               Text(
                 "Track Order",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: kMediumFontSize12.sp,
+                    fontSize: kLargeFontSize13.sp,
                     fontWeight: FontWeight.w600),
               ),
             ],
           ),
-
-
-
         ],
       ),
-
     ),
   );
-
 }

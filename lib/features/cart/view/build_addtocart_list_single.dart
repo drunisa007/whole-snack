@@ -24,12 +24,12 @@ class BuildAddToCartListSingle extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: mSizeConfig.blockSizeVertical * 10.7,
+      height: mSizeConfig.blockSizeVertical *13,
       padding: EdgeInsets.only(
         left: kDefaultMargin.sp,
         right: kDefaultMargin.sp,
-        top: kDefaultMargin.sp - 4.sp,
-        bottom: kDefaultMargin.sp - 4.sp,
+        top: kDefaultMargin.sp-4.sp,
+        bottom: kDefaultMargin.sp-4.sp,
       ),
       child: Row(
         children: [
@@ -58,27 +58,28 @@ class BuildAddToCartListSingle extends StatelessWidget {
                   children: [
                     Text(
                       mModel.title,
+                      maxLines: 2,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: kLargeFontSize14,
-                          letterSpacing: 0.4,
-                          fontWeight: FontWeight.w800),
+                          fontSize: kLargeFontSize13,
+                          letterSpacing: 0.3,
+                          fontWeight: FontWeight.w600),
                     ),
                     Text(
                       mModel.originalPrice,
                       style: TextStyle(
                           fontSize: kSmallFontSize10,
-                          fontWeight: FontWeight.w500),
+                          color: Theme.of(context).colorScheme.onSecondary
+                          ),
                     ),
-                    Spacer(),
                     Row(
                       children: [
                         Text(
                           mModel.itemPackage.quantity,
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
-                            fontSize: kLargeFontSize14,
-                            fontWeight: FontWeight.w800,
+                            fontSize: kLargeFontSize13,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         SizedBox(
@@ -88,8 +89,8 @@ class BuildAddToCartListSingle extends StatelessWidget {
                           mModel.itemPackage.price,
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
-                              fontSize: kLargeFontSize14,
-                              fontWeight: FontWeight.w800),
+                            fontSize: kLargeFontSize13,
+                            fontWeight: FontWeight.w600,),
                         ),
                       ],
                     )
@@ -101,45 +102,58 @@ class BuildAddToCartListSingle extends StatelessWidget {
               child: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         mCartController.removeOldCart(index);
                       },
-                      child: Icon(
-                        Icons.clear_outlined,
-                        size: 18.sp,
+                      child: Container(
+                        width: 30.sp,
+                        height: 25.sp,
+                        child: Center(
+                          child: Icon(
+                            Icons.clear_outlined,
+                            size: 18.sp,
+                          ),
+                        ),
                       ),
                     ),
                     Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {
+                        InkWell(
+                          onTap: (){
                             mCartController.removeNewCount(index);
                           },
                           child: Container(
-                            width: 18.sp,
-                            height: 18.sp,
-                            decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(6.sp),
-                                border: Border.all(
-                                    color: mModel.count > 1
-                                        ? Colors.black
-                                        : Colors.grey,
-                                    width: 1.5)),
+                            width: 30.sp,
+                            height: 30.sp,
                             child: Center(
-                              child: Icon(
-                                Icons.remove_outlined,
-                                size: 15.sp,
+                              child: Container(
+                                width: 18.sp,
+                                height: 18.sp,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(5.sp),
+                                    border: Border.all(
+                                        color: mModel.count > 1
+                                            ? Colors.black
+                                            : Colors.grey,
+                                        width: 1.5.sp)),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.remove_outlined,
+                                    size: 15.sp,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
                         Container(
-                          width: mSizeConfig.blockSizeVertical * 4,
+                          width: mSizeConfig.blockSizeVertical * 3,
                           child: Center(
                             child: Text(
                               mCartController.mAddToCartList[index].count.toString(),
@@ -150,20 +164,26 @@ class BuildAddToCartListSingle extends StatelessWidget {
                             ),
                           ),
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             mCartController.addNewCount(index);
                           },
                           child: Container(
-                            width: 18.sp,
-                            height: 18.sp,
-                            decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(6.sp),
-                                border: Border.all(
-                                    color: Colors.black, width: 1.5)),
+                            width: 30.sp,
+                            height: 30.sp,
                             child: Center(
-                              child: Icon(Icons.add_outlined, size: 15.sp),
+                              child: Container(
+                                width: 18.sp,
+                                height: 18.sp,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(5.sp),
+                                    border: Border.all(
+                                        color: Colors.black, width: 1.5.sp)),
+                                child: Center(
+                                  child: Icon(Icons.add_outlined, size: 15.sp),
+                                ),
+                              ),
                             ),
                           ),
                         ),

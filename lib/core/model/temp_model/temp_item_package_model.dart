@@ -1,7 +1,9 @@
 class TempItemPackageModel{
 late   String quantity;
+late  String price;
+late  String packageId;
 
-TempItemPackageModel(this.quantity, this.price);
+TempItemPackageModel({required this.quantity, required this.price,required this.packageId});
 
-  late  String price;
+
 }

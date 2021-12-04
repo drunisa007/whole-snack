@@ -19,56 +19,60 @@ class BuildCustomCheckoutButton extends StatelessWidget {
 
     CartController mCartController = Get.find<CartController>();
 
-    return Material(
-      borderRadius: BorderRadius.circular(6.sp),
-      color: Theme.of(context).primaryColor,
-      shadowColor: Colors.grey,
-      child: InkWell(
+    return Obx((){
+      return Material(
         borderRadius: BorderRadius.circular(6.sp),
-        splashColor: Colors.white.withOpacity(0.1),
-        onTap: action,
-        child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(left: kDefaultMargin, right: kDefaultMargin),
-          height: mSizeConfig.blockSizeVertical * 7.2,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.sp),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: kLargeFontSize14),
-              ),
-              Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Grand Total",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: kSmallFontSize10),
-                  ),
-                  Obx(() {
-                    return Text(
-                      "Ks. ${mCartController.grandTotal.value}",
+        color: mCartController.mAddToCartList.length > 0
+            ? Theme.of(context).primaryColor
+            : Colors.grey,
+        shadowColor: Colors.grey,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(6.sp),
+          splashColor: Colors.white.withOpacity(0.1),
+          onTap: action,
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.only(left: kDefaultMargin, right: kDefaultMargin),
+            height: mSizeConfig.blockSizeVertical * 7,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.sp),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: kLargeFontSize13),
+                ),
+                Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Grand Total",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: kExtraLargeFontSize16),
-                    );
-                  }),
-                ],
-              )
-            ],
+                          color: Colors.white, fontSize: kExtraSmallFontSize8),
+                    ),
+                    Obx(() {
+                      return Text(
+                        "Ks. ${mCartController.grandTotal.value}",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: kLargeFontSize13),
+                      );
+                    }),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

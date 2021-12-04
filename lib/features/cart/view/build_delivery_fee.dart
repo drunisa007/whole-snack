@@ -26,23 +26,11 @@ class BuildDeliveryFee extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Row(
-          //   children: [
-          //     Text(
-          //       "Delivery Fe",
-          //       style: TextStyle(color: Colors.white),
-          //     ),
-          //     Icon(
-          //       Icons.info_outlined,
-          //       size: 15.sp,
-          //     )
-          //   ],
-          // ),
           Text(
             "Delivery Fee",
             style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontSize: kLargeFontSize14),
+                color: Theme.of(context).colorScheme.secondaryVariant,
+                fontSize: kLargeFontSize13),
           ),
           SizedBox(
             height: 2.sp,

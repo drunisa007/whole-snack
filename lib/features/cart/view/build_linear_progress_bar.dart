@@ -62,14 +62,14 @@ class BuildLinearProgressBar extends StatelessWidget {
                                 "FREE",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: kSmallFontSize10,
+                                  fontSize: kTinyFontSize7.sp,
                                 ),
                               )
                             : Text(
                                 "Ks. ${mCartController.deliveryFee.value}",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: kSmallFontSize10,
+                                  fontSize: kTinyFontSize7.sp,
                                 ),
                               ),
                       ),
@@ -85,7 +85,7 @@ class BuildLinearProgressBar extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          height: mSizeConfig.blockSizeVertical * 1.8,
+          height: mSizeConfig.blockSizeVertical * 1.5,
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primaryVariant,
               borderRadius: BorderRadius.circular(10.sp)),
@@ -97,7 +97,7 @@ class BuildLinearProgressBar extends StatelessWidget {
                     : Container(
                         width: mSizeConfig.safeBlockHorizontal *
                             mCartController.progressBarSizeBoxWidth.value,
-                        height: mSizeConfig.blockSizeVertical * 1.8,
+                        height: mSizeConfig.blockSizeVertical * 1.5,
                         decoration: BoxDecoration(
                             color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(10.sp)),
@@ -121,8 +121,8 @@ class BuildLinearProgressBar extends StatelessWidget {
                     child: Text(
                       "Ks. 0",
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: kMediumFontSize12),
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: kSmallFontSize10),
                     ),
                   ),
                 ),
@@ -135,8 +135,8 @@ class BuildLinearProgressBar extends StatelessWidget {
                     child: Text(
                       "Ks. 3,000",
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: kMediumFontSize12),
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: kSmallFontSize10),
                     ),
                   ),
                 ),
@@ -149,8 +149,8 @@ class BuildLinearProgressBar extends StatelessWidget {
                     child: Text(
                       "Ks. 5,000",
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: kMediumFontSize12),
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: kSmallFontSize10),
                     ),
                   ),
                 ),
@@ -163,8 +163,8 @@ class BuildLinearProgressBar extends StatelessWidget {
                     child: Text(
                       "Free",
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: kMediumFontSize12),
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: kSmallFontSize10),
                     ),
                   ),
                 ),

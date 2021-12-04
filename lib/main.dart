@@ -24,7 +24,7 @@ Future<void> main() async {
   await Hive.openBox('customerBox');
 
  runApp(const MyApp());
- /* runApp(DevicePreview(
+/*  runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => MyApp(), // Wrap your app
   ));*/
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Whole Snack',
       builder: DevicePreview.appBuilder,
-      theme: StyleTheme().getTheme(),
+      theme: StyleTheme(). getTheme(),
       debugShowCheckedModeBanner: false,
       getPages: RoutePage().routePage,
       initialRoute: '/',

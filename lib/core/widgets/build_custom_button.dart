@@ -8,8 +8,8 @@ class BuildCustomButton extends StatelessWidget {
   final bool haveCorner;
   final  String title;
   final action;
-  const BuildCustomButton({Key? key, required this.haveCorner, required this.action, required this.title}) : super(key: key);
-
+  final disable;
+  const BuildCustomButton({Key? key, required this.haveCorner, required this.action, required this.title, this.disable=false}) : super(key: key);
   @override
   Widget build(BuildContext context) {
 
@@ -27,7 +27,11 @@ class BuildCustomButton extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: mSizeConfig.blockSizeVertical*6,
-          decoration: BoxDecoration(
+          decoration: disable?BoxDecoration(
+              borderRadius: BorderRadius.circular(6.sp),
+              color: Colors.grey
+
+          ):BoxDecoration(
             borderRadius: BorderRadius.circular(6.sp),
             border: Border.all(
               color: haveCorner?Theme.of(context).primaryColor:Colors.transparent,
@@ -37,8 +41,8 @@ class BuildCustomButton extends StatelessWidget {
           child: Center(
             child: Text(title,style: TextStyle(
                 color: haveCorner?Theme.of(context).primaryColor:Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: kLargeFontSize14
+              fontWeight: FontWeight.w600,
+              fontSize: kLargeFontSize13,
             ),),
           ),
         ),

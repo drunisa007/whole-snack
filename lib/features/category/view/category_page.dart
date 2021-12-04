@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/constants/temp_data.dart';
 import 'package:whole_snack/core/model/temp_model/temp_category_model.dart';
@@ -26,14 +27,10 @@ class CategoryPage extends StatelessWidget {
     mSizeConfig.init(context);
 
     HomeController mHomeController = Get.find<HomeController>();
+    CategoryController mCategoryController = Get.find<CategoryController>();
     double appBarHeight = mSizeConfig.blockSizeVertical * 9;
 
-    List<TempCategoryModel> mCategoryList = zRealCategoryData;
-    List<TempCategoryModel> mTypeList = zTypeList;
-
     List<TempItemModel> mItemList = zItemData;
-
-    CategoryController mCategoryController = Get.find<CategoryController>();
 
     return Scaffold(
       appBar: MyCustomAppBar(height: appBarHeight, key: _scaffoldKey),
@@ -43,25 +40,29 @@ class CategoryPage extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              flex: 3,
-              child: Container(
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return BuildSingleCategoryDesign(
-                        image: mCategoryList[index].image,
-                        title: mCategoryList[index].title,
-                        index:index
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return Divider(
-                      height: 0.6,
-                    );
-                  },
-                  itemCount: mCategoryList.length,
-                ),
-              )
-            ),
+                flex: 3,
+                child: Obx(() {
+                  return Container(
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return BuildSingleCategoryDesign(
+                            image:
+                                mHomeController.mCategoryList[index].categImg,
+                            title:
+                                mHomeController.mCategoryList[index].categName,
+                            index: index,
+                            id: mHomeController.mCategoryList[index].categId,
+                            mHomeController: mHomeController);
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return Divider(
+                          height: 0.6.sp,
+                        );
+                      },
+                      itemCount: mHomeController.mCategoryList.length,
+                    ),
+                  );
+                })),
             Expanded(
                 flex: 9,
                 child: Container(
@@ -73,33 +74,34 @@ class CategoryPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Wrap(
-                        children: GenerateTypeList()
-                            .generateTypeListWidget(mTypeList, mSizeConfig),
-                      ),
+                      Obx(() {
+                        return mCategoryController.typeLoading.isTrue
+                            ? Shimmer.fromColors(
+                                baseColor: Theme.of(context)
+                                    .colorScheme
+                                    .primaryVariant,
+                                highlightColor: Colors.grey[400]!,
+                                child: Wrap(
+                                  children: GenerateTypeList()
+                                      .generateTypeListWidgetShimmer(
+                                          mSizeConfig),
+                                ))
+                            : Wrap(
+                                children: GenerateTypeList()
+                                    .generateTypeListWidget(
+                                        mCategoryController.mTypeList,
+                                        mSizeConfig),
+                              );
+                      }),
                       SizedBox(
-                        height: 8.sp,
+                        height: 12.sp,
                       ),
                       Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: ListView(
-                            children: [
-                              BuildItemTypeSingleDesign(
-                                itemTypeTitle: 'PopCorns',
-                                mSizeConfig: mSizeConfig,
-                                mHomeController: mHomeController,
-                                mItemList: mItemList,
-                              ),
-                              BuildItemTypeSingleDesign(
-                                itemTypeTitle: 'Biscuits',
-                                mSizeConfig: mSizeConfig,
-                                mHomeController: mHomeController,
-                                mItemList: mItemList,
-                              )
-                            ],
-                          ),
+                        child: BuildItemTypeSingleDesign(
+                          itemTypeTitle: 'PopCorns',
+                          mSizeConfig: mSizeConfig,
+                          mHomeController: mHomeController,
+                          mItemList: mItemList,
                         ),
                       ),
                     ],
