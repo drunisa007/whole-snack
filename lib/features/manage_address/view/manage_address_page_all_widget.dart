@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/data_model/address_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/manage_address/controller/manage_address_controller.dart';
 
@@ -69,6 +70,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
       return   Container(
 
         padding: EdgeInsets.all(kDefaultMargin),
+        width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
 
@@ -82,6 +84,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
             Icon(Icons.place,size: 22.sp,color: Colors.grey,),
             SizedBox(width: 16,),
             Flexible(
+              flex: 6,
               child: RichText(
                   text: TextSpan(children: [
                     TextSpan(
@@ -91,7 +94,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                             fontSize: kLargeFontSize13.sp,
                             fontWeight: FontWeight.bold)),
                     TextSpan(
-                        text: "45 E 45 St Mdy City Mya kyaw minglar a a a a a Myamandalar ,Mandalay",
+                        text: "${controller.addressList[index].cusAddress} fsf sfs sfsf sf sf sf a ad d sfssffs ",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onPrimary,
                           fontSize: kMediumFontSize12.sp,
@@ -99,35 +102,38 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                   ])),
             ),
 
+            Spacer(),
 
 
 
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                GestureDetector(
-                  onTap: ()=> print("hahhaha"),
-                  child: Text(
-                      "Update",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: kSmallFontSize10.sp,
-                          fontWeight: FontWeight.bold
-                      )),
-                ),
-                SizedBox(width: 8,),
-                GestureDetector(
-                  onTap: ()=>print('hahahhahaha'),
-                  child: Text(
-                      "Delete",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: kSmallFontSize10.sp,
-                          fontWeight: FontWeight.bold
-                      )),
-                ),
-              ],
+
+
+
+            GestureDetector(
+              onTap: ()=> print("hahhaha"),
+              child: Text(
+                  "Update",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: kSmallFontSize10.sp,
+                      fontWeight: FontWeight.bold
+                  )),
+            ),
+            SizedBox(width: 8,),
+            GestureDetector(
+              onTap: () async=> {
+
+                controller.deleteAddress(controller.addressList[index])
+
+              },
+              child: Text(
+                  "Delete",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: kSmallFontSize10.sp,
+                      fontWeight: FontWeight.bold
+                  )),
             ),
 
 

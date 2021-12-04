@@ -4,16 +4,25 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
+import 'package:whole_snack/features/otp_page/controller/otp_page_controller.dart';
 
 class BuildOtpPageBody extends StatelessWidget {
    BuildOtpPageBody({Key? key}) : super(key: key);
 
    final sizeConfig = Get.find<SizeConfig>();
+   final controller = Get.find<OtpPageController>();
 
   @override
   Widget build(BuildContext context) {
     sizeConfig.init(context);
+    TextEditingController box1 = TextEditingController();
+    TextEditingController box2 = TextEditingController();
+    TextEditingController box3 = TextEditingController();
+    TextEditingController box4 = TextEditingController();
+    String otp = "";
     return SingleChildScrollView(
+
+
       child: Container(
           height: sizeConfig.blockSizeVertical*100,
           width: double.infinity,
@@ -58,7 +67,7 @@ class BuildOtpPageBody extends StatelessWidget {
                             fontWeight: FontWeight.bold
                         ),),
 
-                        Text("Enter 6-digits SMS code to continue.",style: TextStyle(
+                        Text("Enter 4-digits SMS code to continue.",style: TextStyle(
 
                             color:  Theme.of(context).colorScheme.onPrimary,fontSize: kMediumFontSize12.sp
                         ),),
@@ -67,36 +76,16 @@ class BuildOtpPageBody extends StatelessWidget {
                           height: 16,
                         ),
 
-               /*         TextField(
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: kExtraLargeFontSize16.sp,
-                              fontWeight: FontWeight.bold),
-                          controller: phoneController,
-                          decoration: InputDecoration(
-                              filled: true,
-                              hintStyle: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                                fontSize: kMediumFontSize12.sp,
-                              ),
-                              hintText: "09******",
-                              fillColor: Colors.grey.withOpacity(0.1),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              )),
-                        ),*/
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _box(context,sizeConfig.safeBlockVertical*6),
-                            _box(context,sizeConfig.safeBlockVertical*6),
-                            _box(context,sizeConfig.safeBlockVertical*6),
-                            _box(context,sizeConfig.safeBlockVertical*6),
-                            _box(context,sizeConfig.safeBlockVertical*6),
-                            _box(context,sizeConfig.safeBlockVertical*6),
+                            _box(context,sizeConfig.safeBlockVertical*6,box1),
+                            _box(context,sizeConfig.safeBlockVertical*6,box2),
+                            _box(context,sizeConfig.safeBlockVertical*6,box3),
+                            _box(context,sizeConfig.safeBlockVertical*6,box4),
+                       /*     _box(context,sizeConfig.safeBlockVertical*6),
+                            _box(context,sizeConfig.safeBlockVertical*6),*/
 
 
                           ],
@@ -121,7 +110,16 @@ class BuildOtpPageBody extends StatelessWidget {
                         SizedBox(
                           height: 24,
                         ),
-                        BuildCustomButton(haveCorner: false, action: ()=>Get.toNamed("/"), title: "Confirm Otp"),
+                        BuildCustomButton(haveCorner: false, action: () async=> {
+
+                         otp =  box1.text+box2.text+box3.text+box4.text,
+
+                          print(otp),
+
+                          await controller.getOpt(otp),
+
+
+                        }, title: "Confirm Otp"),
 
 
 
@@ -152,7 +150,7 @@ class BuildOtpPageBody extends StatelessWidget {
           )),
     );
   }
-   Widget _box(context,size) {
+   Widget _box(context,size,TextEditingController textEditingController) {
      return Container(
        alignment: Alignment.center,
 
@@ -162,6 +160,7 @@ class BuildOtpPageBody extends StatelessWidget {
        child: Center(
          child: TextField(
 
+           controller: textEditingController,
            style: TextStyle(
 
                 fontSize: kExtraLargeFontSize15.sp, color: Colors.black,fontWeight: FontWeight.bold),

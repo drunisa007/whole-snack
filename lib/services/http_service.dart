@@ -100,6 +100,35 @@ class HttpService{
     }
   }
 
+  Future<HttpCustomResponse> getDataWithHeader(uri) async {
+    try{
+
+      // ,headers: getHeader()
+      var url = Uri.parse(baseUrl+uri);
+     http.Response response  = await http.get(url,   headers: getHeader());
+//       print("status code is ${response.statusCode}");
+
+     // http.Response response  = await http.get(url);
+      if(response.statusCode==200){
+        return HttpCustomResponse('', 200, response.body, true);
+      }
+      else{
+        return HttpCustomResponse('Something went wrong status code',response.statusCode, '', false);
+      }
+    }
+    on FormatException catch(_){
+      return HttpCustomResponse('Something went wrong on server', 400, [], false);
+    }
+    on SocketException catch(_){
+
+      return HttpCustomResponse('Something went wrong with internet', 400, [], false);
+    }
+    catch(e){
+
+      return HttpCustomResponse('Something went wrong', 400, [], false);
+    }
+  }
+
   Future<HttpCustomResponse> getDataWithJson(uri) async {
     try{
       var url = Uri.parse(uri);
