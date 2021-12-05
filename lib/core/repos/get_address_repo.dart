@@ -43,7 +43,7 @@ class GetAddressRepo {
 
   Future<HttpCustomResponse> deleteAddress(AddressModel model) async {
 
-    print(model);
+    // print(model);
     HttpCustomResponse response = await _httpPostService.deleteAddress(model);
 
     if (response.isSuccessful) {

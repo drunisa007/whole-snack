@@ -26,12 +26,12 @@ class HttpPostService {
         headers: getHeader(), body: jsonEncode(addAddressModel.toJson()));
 
     if (response.statusCode == 200) {
-      print("success");
+     // print("success");
       return HttpCustomResponse('', 200, "", true);
     } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
-      print(response.statusCode);
+     // print(response.statusCode);
 
       throw Exception('Failed to add address');
     }
@@ -43,10 +43,10 @@ class HttpPostService {
         headers: getHeader(), body: jsonEncode(model.toJson()));
 
     if (response.statusCode == 200) {
-      print(response.statusCode);
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, response.body, true);
     } else {
-      print(response.statusCode);
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, [], false);
       print(response.statusCode);
     }
@@ -74,10 +74,10 @@ class HttpPostService {
         body: jsonEncode({"name": "test", "phone": "09978770588"}));
 
     if (response.statusCode == 200) {
-      print(response.statusCode);
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, response.body, true);
     } else {
-      print(response.statusCode);
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, [], false);
       print(response.statusCode);
     }
@@ -85,18 +85,18 @@ class HttpPostService {
 
   Future<HttpCustomResponse> sendOtp(
       String name, String phone, String otp) async {
-    print("name $name phone $phone $otp is otp");
-    print(jsonEncode(jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"})));
+    //print("name $name phone $phone $otp is otp");
+   // print(jsonEncode(jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"})));
     var uri = Uri.parse('https://seinwholesale.com/api/customer/verify.php');
     final response = await http.post(uri,
         // headers: getHeader(),
         body: jsonEncode({"name": "test", "phone": "09978770588", "otp": "$otp"}));
 
     if (response.statusCode == 200) {
-      print(response.statusCode);
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, response.body, true);
     } else {
-      print(response.statusCode);
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, [], false);
       print(response.statusCode);
     }
@@ -109,10 +109,10 @@ class HttpPostService {
         headers: getHeader(), body: jsonEncode(model.toJson()));
 
     if (response.statusCode == 200) {
-      print(response.statusCode);
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, response.body, true);
     } else {
-      print(response.statusCode);
+     // print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, [], false);
       print(response.statusCode);
     }

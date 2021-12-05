@@ -47,7 +47,7 @@ class HttpService{
   Future<HttpCustomResponse> orderSubmit(uri,body) async {
     try{
       var url = Uri.parse(baseUrl+uri);
-      print("url is $url");
+      //print("url is $url");
 
       http.Response response  = await http.post(url,
           headers: getHeader(),

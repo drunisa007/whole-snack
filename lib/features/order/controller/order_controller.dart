@@ -69,7 +69,6 @@ class OrderController extends GetxController {
   }
 
   getOrderInfoList(OrderDateFilterModel model) async {
-    print("hahhaha");
 
     HttpGetResult<OrderInfoModel> result =
         await orderRepo.getFilterOrderInfo(model);

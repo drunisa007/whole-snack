@@ -152,10 +152,6 @@ class ItemPage extends StatelessWidget {
                                 SizedBox(
                                   height: kDefaultMargin.sp,
                                 ),
-                                BuildHorizontalItems(
-                                  title: "Similar Items",
-                                  haveSeeMore: false,
-                                ),
                                 SizedBox(
                                   height: GetPlatform.isIOS
                                       ? kBottomNavigationBarHeight +
