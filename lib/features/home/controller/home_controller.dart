@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:whole_snack/core/model/data_model/category_item_list_model.dart';
 import 'package:whole_snack/core/model/data_model/category_model.dart';
 import 'package:whole_snack/core/model/data_model/item_model.dart';
@@ -68,7 +69,7 @@ class HomeController extends GetxController {
 
   /// for home fetching category list
 
-  fetchingAllItemBasedOnCategoryList({required bool refreshLoad,required bool firstTime,index}) async {
+  fetchingAllItemBasedOnCategoryList({required bool refreshLoad,required bool firstTime,index,RefreshController? mRefreshController}) async {
 
     if(firstTime){
       for (int i = 0; i < mCategoryList.length; i++) {
@@ -99,7 +100,9 @@ class HomeController extends GetxController {
         fetchingItemListSingleData(mModel, index);
       }
       else{
-        await fetchingItemListSingleData(mModel, index);
+
+       fetchingItemListSingleData(mModel, index);
+
       }
     }
 
@@ -109,10 +112,9 @@ class HomeController extends GetxController {
 
 
   fetchingItemListSingleData(CategoryItemListModel mModel,int index) async {
-
-
-    print("current page ${mModel.currentPage} total page ${mModel.totalPage}");
+    
     if (mModel.currentPage <= mModel.totalPage) {
+
       HttpGetResult<ItemModel> mResult;
 
       mResult = await mItemRepo.getItemList(
@@ -126,6 +128,7 @@ class HomeController extends GetxController {
         mModel.itemLoading = false;
 
         mCategoryItemList[index] = mModel;
+
       } else {
         mModel.itemErrorMessage =
         "Please check your internet connection or refresh";
@@ -133,6 +136,7 @@ class HomeController extends GetxController {
         mModel.itemLoading = false;
 
         mCategoryItemList[index] = mModel;
+
       }
     }
   }

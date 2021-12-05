@@ -27,9 +27,7 @@ class BuildItemSingle extends StatelessWidget {
     ItemModel mModel =
         mHomeController.mCategoryItemList[mainIndex].mItemList[currentIndex];
 
-    return mHomeController.mCategoryItemList[mainIndex].itemLoading
-        ? CircularProgressIndicator()
-        : GestureDetector(
+    return GestureDetector(
             onTap: () {
               Get.toNamed("/item-page", arguments: [
                 mModel.itemId,

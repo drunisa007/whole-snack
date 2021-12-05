@@ -55,6 +55,10 @@ class HomePage extends StatelessWidget {
 
             BuildCategoryAllItems(),
 
+            SizedBox(
+              height: kToolbarHeight,
+            )
+
           ],
           shrinkWrap: true,
         ));

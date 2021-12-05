@@ -4,12 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
-import 'package:whole_snack/core/constants/temp_data.dart';
-import 'package:whole_snack/core/model/data_model/category_item_list_model.dart';
-import 'package:whole_snack/core/model/temp_model/temp_item_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_item_single.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
+import 'package:whole_snack/features/home/view/build_category_all_items_shimmer.dart';
 
 class BuildHorizontalItems extends StatelessWidget {
   final bool haveSeeMore;
@@ -30,16 +28,18 @@ class BuildHorizontalItems extends StatelessWidget {
 
     void _onRefresh() async {
       await Future.delayed(Duration(milliseconds: 2000));
-      _refreshController.refreshCompleted();
     }
 
+
     void _onLoading() async {
+
        mHomeController.fetchingAllItemBasedOnCategoryList(
         refreshLoad: false,
         firstTime: false,
-        index: index,
-      );
-      _refreshController.loadComplete();
+        index: index);
+       await Future.delayed(Duration(milliseconds: 1000));
+       _refreshController.loadComplete();
+
     }
 
     return Container(
@@ -80,31 +80,34 @@ class BuildHorizontalItems extends StatelessWidget {
           ),
           Obx(() {
             return mHomeController.mCategoryItemList[index].itemLoading
-                ? CircularProgressIndicator()
+                ? BuildCategoryAllItemsShimmer()
                 : Container(
                     height: mSizeConfig.blockSizeVertical * 20,
                     child: SmartRefresher(
-                      enablePullDown: false,
+                      enablePullDown: true,
                       enablePullUp: true,
                       header: GetPlatform.isAndroid
                           ? WaterDropMaterialHeader()
                           : WaterDropHeader(),
                       footer: CustomFooter(
                         builder: (BuildContext context, LoadStatus? mode) {
-                          print("status is $mode");
                           Widget body;
                           if (mode == LoadStatus.idle) {
-                            body = Text("pull up load");
+                            body = Text("");
                           } else if (mode == LoadStatus.loading) {
                             body = GetPlatform.isAndroid
                                 ? CircularProgressIndicator()
                                 : CupertinoActivityIndicator();
                           } else if (mode == LoadStatus.failed) {
-                            body = Text("Load Failed!Click retry!");
+                            body = Text("");
                           } else if (mode == LoadStatus.canLoading) {
-                            body = Text("release to load more");
-                          } else {
-                            body = Text("No more Data");
+                            body = Text("");
+                          }
+                          else if(mode==LoadStatus.noMore){
+                            body = Text("");
+                          }
+                          else {
+                            body = Text("");
                           }
 
                           return Container(
