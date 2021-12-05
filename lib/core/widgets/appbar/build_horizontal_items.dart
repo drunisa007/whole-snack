@@ -1,25 +1,46 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/constants/temp_data.dart';
+import 'package:whole_snack/core/model/data_model/category_item_list_model.dart';
 import 'package:whole_snack/core/model/temp_model/temp_item_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_item_single.dart';
-class BuildHorizontalItems extends StatelessWidget {
+import 'package:whole_snack/features/home/controller/home_controller.dart';
 
-  final String title;
-  final bool  haveSeeMore;
+class BuildHorizontalItems extends StatelessWidget {
+  final bool haveSeeMore;
+  final int index;
   BuildHorizontalItems(
-      {Key? key,required this.title, required this.haveSeeMore})
+      {Key? key, required this.haveSeeMore, required this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<TempItemModel> mItemList = zItemData;
-
     SizeConfig mSizeConfig = Get.find<SizeConfig>();
     mSizeConfig.init(context);
+
+    HomeController mHomeController = Get.find<HomeController>();
+
+    RefreshController _refreshController =
+        RefreshController(initialRefresh: false);
+
+    void _onRefresh() async {
+      await Future.delayed(Duration(milliseconds: 2000));
+      _refreshController.refreshCompleted();
+    }
+
+    void _onLoading() async {
+       mHomeController.fetchingAllItemBasedOnCategoryList(
+        refreshLoad: false,
+        firstTime: false,
+        index: index,
+      );
+      _refreshController.loadComplete();
+    }
 
     return Container(
       margin: EdgeInsets.only(left: kDefaultMargin),
@@ -31,47 +52,83 @@ class BuildHorizontalItems extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "$title",
+                  "${mHomeController.mCategoryItemList[index].title}",
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
                       fontSize: kExtraLargeFontSize15.sp),
                 ),
                 Spacer(),
-                haveSeeMore? TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                      primary: Theme.of(context).primaryColor),
-                  child: Text(
-                    "see more",
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: kSmallFontSize10.sp),
-                  ),
-                ): Container()
+                haveSeeMore
+                    ? TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                            primary: Theme.of(context).primaryColor),
+                        child: Text(
+                          "see more",
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: kSmallFontSize10.sp),
+                        ),
+                      )
+                    : Container()
               ],
             ),
           ),
           SizedBox(
             height: 6.sp,
           ),
-          Container(
-            height: mSizeConfig.blockSizeVertical * 19.8,
-            child: ListView.builder(itemBuilder: (context, index) {
-              return BuildItemSingle(
-                mSizeConfig: mSizeConfig,
-                 currentIndex: index,
-                title: mItemList[index].title,
-                image: mItemList[index].image,
-                originalPrice: mItemList[index].originalPrice,
-                firstPackages: mItemList[index].packages[0],
-              );
-            },
-              itemCount: mItemList.length,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-            ),
-          )
+          Obx(() {
+            return mHomeController.mCategoryItemList[index].itemLoading
+                ? CircularProgressIndicator()
+                : Container(
+                    height: mSizeConfig.blockSizeVertical * 20,
+                    child: SmartRefresher(
+                      enablePullDown: false,
+                      enablePullUp: true,
+                      header: GetPlatform.isAndroid
+                          ? WaterDropMaterialHeader()
+                          : WaterDropHeader(),
+                      footer: CustomFooter(
+                        builder: (BuildContext context, LoadStatus? mode) {
+                          print("status is $mode");
+                          Widget body;
+                          if (mode == LoadStatus.idle) {
+                            body = Text("pull up load");
+                          } else if (mode == LoadStatus.loading) {
+                            body = GetPlatform.isAndroid
+                                ? CircularProgressIndicator()
+                                : CupertinoActivityIndicator();
+                          } else if (mode == LoadStatus.failed) {
+                            body = Text("Load Failed!Click retry!");
+                          } else if (mode == LoadStatus.canLoading) {
+                            body = Text("release to load more");
+                          } else {
+                            body = Text("No more Data");
+                          }
+
+                          return Container(
+                            margin: EdgeInsets.only(left: 4.sp, right: 2.sp),
+                            child: Center(child: body),
+                          );
+                        },
+                      ),
+                      controller: _refreshController,
+                      onRefresh: _onRefresh,
+                      onLoading: _onLoading,
+                      child: ListView.builder(
+                        itemBuilder: (context, currentIndex) {
+                          return BuildItemSingle(
+                              currentIndex: currentIndex, mainIndex: index);
+                        },
+                        itemCount: mHomeController
+                            .mCategoryItemList[index].mItemList.length,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                      ),
+                    ),
+                  );
+          })
         ],
       ),
     );

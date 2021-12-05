@@ -7,6 +7,7 @@ import 'package:whole_snack/core/widgets/appbar/custom_appbar.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whole_snack/features/home/view/build_banner_design.dart';
+import 'package:whole_snack/features/home/view/build_category_all_items.dart';
 import 'package:whole_snack/features/home/view/build_horizontal_category.dart';
 
 
@@ -51,18 +52,9 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 8.sp,
             ),
-            BuildHorizontalItems(
-              title: "Best Sellers",
-              haveSeeMore: true,
-            ),
-            SizedBox(
-              height: 8.sp,
-            ),
-            BuildHorizontalItems(
-              title: "Monthly Promotions",
-              haveSeeMore: true,
-            ),
-            SizedBox(height: kDefaultMargin,)
+
+            BuildCategoryAllItems(),
+
           ],
           shrinkWrap: true,
         ));
