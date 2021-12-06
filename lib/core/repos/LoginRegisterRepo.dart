@@ -38,7 +38,7 @@ class LoginRegisterRepo {
     if (getResult.isSuccessful) {
       Map map = jsonDecode(getResult.mData);
 
-      print(map);
+      //print(map);
 
       return HttpCustomResponse("", getResult.stateCode, map, true);
     } else {

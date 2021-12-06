@@ -42,6 +42,9 @@ class OrderRepo {
  getAllJson() async {
     result = await _httpService.getData("order/orderfilter.php");
 
+    // print(result);
+    // print(result.mData);
+
   }
 
 
@@ -53,6 +56,9 @@ class OrderRepo {
       Map fromJsom = jsonDecode(response.mData);
       String orderData = jsonEncode(fromJsom["orderlist"]["ordersinfo"]);
       List<OrderInfoModel> orderItemList = orderInfoModelFromJson(orderData);
+
+
+      // print(orderItemList);
 
 
 

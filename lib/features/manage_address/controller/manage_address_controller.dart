@@ -31,7 +31,7 @@ class ManageAddressController extends GetxController {
     addressList.addAll(result.mData);
 
 
-    print(addressList);
+    //print(addressList);
 
 
   }

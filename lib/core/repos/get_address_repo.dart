@@ -46,6 +46,10 @@ class GetAddressRepo {
         "customer/deleteaddress.php?id=$id");
 
 
+    // print(model);
+    HttpCustomResponse response = await _httpPostService.deleteAddress(model);
+
+
     if (result.isSuccessful) {
       /*Map addressMap = jsonDecode(result.mData);
       String data = jsonEncode(addressMap["data"]);
