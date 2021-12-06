@@ -5,6 +5,7 @@ import 'package:whole_snack/core/model/data_model/order_info_model.dart';
 import 'package:whole_snack/core/model/data_model/order_item_model.dart';
 import 'package:whole_snack/core/model/service_model/http_get_result.dart';
 import 'package:whole_snack/core/repos/order_repo.dart';
+import 'package:whole_snack/features/order_detail/controller/order_detail_page_controller.dart';
 
 class OrderController extends GetxController {
   var firstDate = DateTime(
@@ -17,7 +18,11 @@ class OrderController extends GetxController {
           .substring(0, 10);
 
   late OrderRepo orderRepo;
+  late OrderDetailPageController _detailPageController;
+
+  late int id;
   RxList<OrderInfoModel> orderItemList = RxList();
+
 
   OrderController() {
     var date1 = DateTime.parse("$firstDate");
@@ -25,6 +30,9 @@ class OrderController extends GetxController {
     var formattedDate1 = "${date1.year}-${date1.month}-${date1.day}";
     var formattedDate2 = "${date2.year}-${date2.month}-${date2.day}";
     orderRepo = Get.put(OrderRepo());
+
+
+
     getOrderInfoList(OrderDateFilterModel(
         customerId: "55", from: formattedDate1, to: formattedDate2));
   }
@@ -60,7 +68,6 @@ class OrderController extends GetxController {
           child: child!,
         );
       },
-
     );
     String date = result.toString().substring(0, 10);
 
@@ -69,8 +76,6 @@ class OrderController extends GetxController {
   }
 
   getOrderInfoList(OrderDateFilterModel model) async {
-    print("hahhaha");
-
     HttpGetResult<OrderInfoModel> result =
         await orderRepo.getFilterOrderInfo(model);
 
@@ -87,4 +92,13 @@ class OrderController extends GetxController {
     getOrderInfoList(OrderDateFilterModel(
         customerId: "55", from: formattedDate1, to: formattedDate2));
   }
+
+  gerOrderId(String ordId) {
+    id = int.parse(ordId);
+
+
+
+  }
+
+
 }

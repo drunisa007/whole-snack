@@ -10,6 +10,7 @@ import 'package:whole_snack/core/repos/get_all_region_repo.dart';
 class AddAddressPageController extends GetxController {
  RxList<RegionModel> townshipList = RxList();
  RegionModel ? choosenValue;
+ RxBool isSuccessful = RxBool(false) as RxBool;
 
  late String regionId;
 late GetAllRegionRepo getAllRegion;
@@ -52,5 +53,8 @@ late AddAddressRepo _addAddressRepo;
   addNewAddress(AddAddressModel model) async {
 
     HttpCustomResponse response = await _addAddressRepo.addAddresData(model);
+
+    print("this si status code ${response.stateCode}");
+    isSuccessful.value = response.isSuccessful;
   }
 }

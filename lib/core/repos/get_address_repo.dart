@@ -30,7 +30,7 @@ class GetAddressRepo {
 
 
       Map addressMap = jsonDecode(result.mData);
-      String data = jsonEncode(addressMap["output"]["data"]);
+      String data = jsonEncode(addressMap["data"]);
       List<AddressModel> addressList = addressModelFromJson(data);
 
       return HttpGetResult("", 200, addressList, true);
@@ -41,21 +41,25 @@ class GetAddressRepo {
     
   }
 
-  Future<HttpCustomResponse> deleteAddress(AddressModel model) async {
+  Future<HttpCustomResponse> deleteAddress(String id) async {
+    HttpCustomResponse result = await _httpService.getDataWithHeader(
+        "customer/deleteaddress.php?id=$id");
 
-    print(model);
-    HttpCustomResponse response = await _httpPostService.deleteAddress(model);
 
-    if (response.isSuccessful) {
-      Map map = jsonDecode(response.mData);
+    if (result.isSuccessful) {
+      /*Map addressMap = jsonDecode(result.mData);
+      String data = jsonEncode(addressMap["data"]);
+      List<AddressModel> addressList = addressModelFromJson(data);*/
 
-      return HttpCustomResponse("", response.stateCode, map, true);
+      return HttpCustomResponse("", 200, result.mData, true);
     } else {
-      return HttpCustomResponse("", response.stateCode, 'error', true);
+      return HttpCustomResponse(result.errorMessage, result.stateCode, result.mData, false);
     }
-
   }
 
 
 
-}
+
+
+
+  }

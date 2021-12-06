@@ -5,18 +5,22 @@ List<AddressModel> addressModelFromJson(String str) => List<AddressModel>.from(j
 String addressModelToJson(List<AddressModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 class AddressModel {
   AddressModel({
+    required this.cusAddressId,
    required this.cusAddress,
     required this.regName,
     required  this.regId,
     required  this.cusId,
+
   });
 
+  String cusAddressId;
   String cusAddress;
   String regName;
   String regId;
   String cusId;
 
   factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel(
+    cusAddressId: json["cus_address_id"],
     cusAddress: json["cus_address"],
     regName: json["reg_name"],
     regId: json["reg_id"],
@@ -24,6 +28,7 @@ class AddressModel {
   );
 
   Map<String, dynamic> toJson() => {
+    "cus_address_id" : cusAddressId,
     "cus_address": cusAddress,
     "reg_name": regName,
     "reg_id": regId,

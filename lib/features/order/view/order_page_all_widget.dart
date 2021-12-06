@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
 
@@ -71,8 +72,20 @@ Widget orderPageAllWidget(
                 : ListView.builder(
                     itemCount: controller.orderItemList.length,
                     itemBuilder: (context, index) {
-                      return _buildOrderHistoryCard(
-                          context, sizeConfig, controller, orderStatus, index);
+                      return GestureDetector(
+                        onTap:() {
+
+                          controller.gerOrderId(controller.orderItemList[index].ordId);
+                          Get.toNamed("/order-detail-page");
+
+
+
+
+
+                        },
+                        child: _buildOrderHistoryCard(
+                            context, sizeConfig, controller, orderStatus, index),
+                      );
                     },
                   ),
           ),
@@ -118,7 +131,7 @@ Widget _buildFilter(
                 : BuildCustomButton(
                     haveCorner: false,
                     action: () => {
-                          print(controller.firstDate),
+
                           controller.getByDate(
                               controller.firstDate, controller.secondDate),
                           controller.getOrderInfoList(OrderDateFilterModel(
@@ -267,12 +280,25 @@ Widget _buildOrderHistoryCard(BuildContext context, SizeConfig sizeConfig,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Cancel Order",
-                style: TextStyle(
-                    color: cancelButtonColor,
-                    fontSize: kLargeFontSize13.sp,
-                    fontWeight: FontWeight.w500),
+              InkWell(
+
+                onTap: (){
+
+                  if(controller.orderItemList[index].ordStatus == "0") {
+
+
+                    print(controller.orderItemList[index].ordStatus);
+                  }
+
+                },
+
+                child: Text(
+                  "Cancel Order",
+                  style: TextStyle(
+                      color: cancelButtonColor,
+                      fontSize: kLargeFontSize13.sp,
+                      fontWeight: FontWeight.w500),
+                ),
               ),
               Text(
                 "Track Order",

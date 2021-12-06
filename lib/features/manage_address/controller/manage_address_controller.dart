@@ -36,9 +36,14 @@ class ManageAddressController extends GetxController {
 
   }
 
-  deleteAddress(AddressModel model) async {
+  deleteAddress(String id) async {
 
-    HttpCustomResponse response = await getAddressRepo.deleteAddress(model);
+
+    HttpCustomResponse response = await getAddressRepo.deleteAddress(id);
+    addressList.clear();
+
+    getMyAddress();
+
   }
 
 

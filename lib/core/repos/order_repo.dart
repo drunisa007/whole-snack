@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
+import 'package:whole_snack/core/model/data_model/order_detail_model.dart';
 import 'package:whole_snack/core/model/data_model/order_info_model.dart';
 import 'package:whole_snack/core/model/data_model/order_item_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
@@ -40,21 +41,19 @@ class OrderRepo {
 
  getAllJson() async {
     result = await _httpService.getData("order/orderfilter.php");
-    print(result);
-    print(result.mData);
+
   }
 
 
   Future<HttpGetResult<OrderInfoModel>> getFilterOrderInfo(OrderDateFilterModel orderDateFilterModel) async {
     HttpCustomResponse response = await _httpPostService.getOrderByDate(orderDateFilterModel);
 
-    print(response.mData);
+
     if (response.isSuccessful) {
       Map fromJsom = jsonDecode(response.mData);
       String orderData = jsonEncode(fromJsom["orderlist"]["ordersinfo"]);
       List<OrderInfoModel> orderItemList = orderInfoModelFromJson(orderData);
 
-      print(orderItemList);
 
 
       return HttpGetResult('', response.stateCode, orderItemList, true);
@@ -86,6 +85,46 @@ class OrderRepo {
 
 
   }
+
+
+  ///
+  Future<HttpGetResult<OrderInfoModel>> getOrderItemInfoById() async {
+
+    if (result.isSuccessful) {
+      Map fromJsom = jsonDecode(result.mData);
+      String orderData = jsonEncode(fromJsom["orderlist"]["ordersinfo"]);
+      List<OrderInfoModel> orderInfoList = orderInfoModelFromJson(orderData);
+
+      return HttpGetResult('', result.stateCode, orderInfoList, true);
+    } else {
+      return HttpGetResult(
+          result.errorMessage, result.stateCode, result.mData, false);
+    }
+  }
+/*  Future<HttpGetResult<OrderDetailModel>> getOrderDetailById(int id) async {
+    HttpCustomResponse response = await _httpService
+        .getDataWithHeader("order/getorder.php?order_id=${100}");
+
+
+    if (response.isSuccessful) {
+      Map fromJsom = jsonDecode(response.mData);
+      String orderDetail = jsonEncode(fromJsom["detail"]);
+
+
+      OrderDetailModel orderDetailModel = orderDetailModelFromJson(orderDetail);
+
+      print(orderDetailModel.orderItem[0].price);
+
+
+
+      return HttpGetResult("", response.stateCode, [orderDetailModel], true);
+    } else {
+
+      print(response.stateCode);
+      return HttpGetResult("", response.stateCode, response.mData, true);
+    }
+  }*/
+
 }
 
 

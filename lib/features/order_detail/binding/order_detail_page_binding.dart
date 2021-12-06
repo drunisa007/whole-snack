@@ -5,7 +5,7 @@ import 'package:whole_snack/features/order_detail/controller/order_detail_page_c
 class OrderDetailPageBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
+
     Get.put(OrderDetailPageController());
     Get.put(SizeConfig());
   }
