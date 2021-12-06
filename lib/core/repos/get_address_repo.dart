@@ -47,7 +47,7 @@ class GetAddressRepo {
 
 
     // print(model);
-    HttpCustomResponse response = await _httpPostService.deleteAddress(model);
+    //HttpCustomResponse response = await _httpPostService.deleteAddress(model);
 
 
     if (result.isSuccessful) {

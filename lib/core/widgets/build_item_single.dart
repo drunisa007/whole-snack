@@ -49,7 +49,7 @@ class BuildItemSingle extends StatelessWidget {
               color: Colors.white,
               elevation: 1,
               child: Container(
-                width: mSizeConfig.blockSizeVertical * 18,
+                width: mSizeConfig.blockSizeVertical * 19,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(6.sp)),
