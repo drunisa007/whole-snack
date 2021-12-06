@@ -136,7 +136,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
 
               },
               child: Text(
-                  "Delete",
+                  "Delete ",
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontSize: kSmallFontSize10.sp,
