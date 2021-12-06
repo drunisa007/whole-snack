@@ -14,6 +14,7 @@ class AddAddressPage extends StatelessWidget {
 
   SizeConfig sizeConfig = Get.find<SizeConfig>();
   final controller = Get.find<AddAddressPageController>();
+  var data = Get.arguments;
 
   @override
   Widget build(BuildContext context) {

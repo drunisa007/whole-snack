@@ -7,6 +7,7 @@ import 'package:whole_snack/core/model/data_model/region_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
 import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
+import 'package:whole_snack/features/manage_address/controller/manage_address_controller.dart';
 
 Widget addAddressPageAllWidget(BuildContext context, SizeConfig sizeConfig,
     AddAddressPageController controller) {
@@ -19,8 +20,13 @@ Widget addAddressPageAllWidget(BuildContext context, SizeConfig sizeConfig,
 Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
     AddAddressPageController controller) {
   TextEditingController phoneController = TextEditingController();
+
+  var data = Get.arguments;
   TextEditingController addressController = TextEditingController();
   TextEditingController saveTittleController = TextEditingController();
+  ManageAddressController manageAddressController = Get.find<ManageAddressController>();
+
+
 
   return  Obx(
     ()=> controller.townshipList.length==0? Center(child: CircularProgressIndicator(
@@ -72,7 +78,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
                   );
                 }).toList(),
                 hint: Text(
-                  "Please Choose Your Region\t \t \t\t",
+                 "Please Choose Your Region\t \t \t\t",
                   style: TextStyle( color: Theme.of(context).colorScheme.onPrimary, fontSize: kLargeFontSize13.sp),
                 ),
                 underline: Container(
@@ -115,7 +121,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
                   color: Theme.of(context).colorScheme.onPrimary
               ),
             ),
-            hintText: "Enter your address",
+            hintText: data != null &&data !=""?  data[1] : "Enter your address",
             hintStyle: TextStyle(
                 color: Theme.of(context).colorScheme.onPrimary,
                 fontSize: kLargeFontSize13.sp),
@@ -157,12 +163,55 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
           height: 16,
         ),
       BuildCustomButton(haveCorner: false, action: () async=> {
-        
-        controller.addNewAddress(AddAddressModel(cusId: "56", regId: controller.regionId, cusAddress: "Hello World Testing"))
+
+
+
+          showLoaderDialog(context),
+          await controller.addNewAddress(AddAddressModel(cusId: "56", regId: controller.regionId, cusAddress: addressController.text)),
+
+          Get.back(),
+
+
+          Get.back(),
+          manageAddressController.getMyAddress(),
+
+
+
+
+
+
+
+
+
+
+
         
         
       }, title: "Save Address")
       ],
     ),
+  );
+
+}
+showLoaderDialog(context) {
+  AlertDialog alert = AlertDialog(
+    content:   Row(
+      children: [
+        CircularProgressIndicator(
+          color: Theme.of(context).primaryColor,
+        ),
+        Container(
+            margin: EdgeInsets.only(left: 7), child: Text("Loading...")),
+      ],
+    ),
+  );
+  showDialog(
+    barrierDismissible: true,
+    context: context,
+    builder: (BuildContext context) {
+
+
+      return  alert;
+    },
   );
 }

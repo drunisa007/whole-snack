@@ -37,8 +37,8 @@ class HttpPostService {
     }
   }
 
-  Future<HttpCustomResponse> deleteAddress(AddressModel model) async {
-    var uri = Uri.parse('$API/customer/address.php');
+  /*Future<HttpCustomResponse> deleteAddress(String id) async {
+    var uri = Uri.parse('$API/customer/deleteaddress.php?id=$id');
     final response = await http.delete(uri,
         headers: getHeader(), body: jsonEncode(model.toJson()));
 
@@ -50,7 +50,7 @@ class HttpPostService {
       return HttpCustomResponse('', response.statusCode, [], false);
       print(response.statusCode);
     }
-  }
+  }*/
 
   initData() {
     baseUrl = "$API";

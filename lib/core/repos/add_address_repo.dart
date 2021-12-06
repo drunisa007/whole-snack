@@ -20,12 +20,25 @@ class AddAddressRepo {
 
     HttpCustomResponse response = await _httpPostService.postAddress(addressModel);
     if (response.isSuccessful) {
-      Map map = jsonDecode(response.mData);
 
-      return HttpCustomResponse("", response.stateCode, map, true);
+
+      return HttpCustomResponse("", response.stateCode, response.stateCode, true);
     } else {
       return HttpCustomResponse("", response.stateCode, 'error', true);
     }
   }
+
+  Future<HttpCustomResponse> updateAddresData(AddAddressModel addressModel) async {
+
+    HttpCustomResponse response = await _httpPostService.postAddress(addressModel);
+    if (response.isSuccessful) {
+
+
+      return HttpCustomResponse("", response.stateCode, response.stateCode, true);
+    } else {
+      return HttpCustomResponse("", response.stateCode, 'error', true);
+    }
+  }
+
 
 }

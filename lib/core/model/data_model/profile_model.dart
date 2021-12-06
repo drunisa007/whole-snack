@@ -6,28 +6,28 @@ String profileModelToJson(List<ProfileModel> data) => json.encode(List<dynamic>.
 
 class ProfileModel {
   ProfileModel({
-   required this.cusId,
+    required this.cusId,
     required this.cusName,
-   required this.cusPhone,
-   required this.createdAt,
+    required this.cusPhone,
+    required this.createdAt,
   });
 
   String cusId;
   String cusName;
   String cusPhone;
-  DateTime createdAt;
+  String createdAt;
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-    cusId: json["cus_id"],
-    cusName: json["cus_name"],
-    cusPhone: json["cus_phone"],
-    createdAt: DateTime.parse(json["created_at"]),
+    cusId: json["cus_id"] == null ? "No Data" : json["cus_id"],
+    cusName: json["cus_name"] == null ? "Minglabar" : json["cus_name"],
+    cusPhone: json["cus_phone"] == null ? "Nod Data" : json["cus_phone"],
+    createdAt: json["created_at"] == null ? "No Data" : json["created_at"],
   );
 
   Map<String, dynamic> toJson() => {
-    "cus_id": cusId,
-    "cus_name": cusName,
-    "cus_phone": cusPhone,
-    "created_at": "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
+    "cus_id": cusId == null ? "No Data" : cusId,
+    "cus_name": cusName == null ? "No Data" : cusName,
+    "cus_phone": cusPhone == null ? "No Data" : cusPhone,
+    "created_at": createdAt == null ? "No Data" : createdAt,
   };
 }

@@ -14,6 +14,8 @@ Widget editProfilePageAllWidget(BuildContext context,
 
 Widget _buildEditProfileBody(BuildContext context,
     EditProfilePageController controller, SizeConfig sizeConfig) {
+
+  String data = Get.arguments;
   TextEditingController nameController = TextEditingController();
   return Container(
     height: double.infinity,
@@ -50,7 +52,7 @@ Widget _buildEditProfileBody(BuildContext context,
                             color: Theme.of(context).colorScheme.onPrimary,
                             fontSize: kLargeFontSize14.sp,
                             fontWeight: FontWeight.bold),
-                        hintText: "Kyaw Zin",
+                        hintText: "$data",
                         fillColor: Colors.grey.withOpacity(0.1),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),

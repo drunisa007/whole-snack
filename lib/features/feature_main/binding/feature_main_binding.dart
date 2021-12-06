@@ -10,6 +10,7 @@ import 'package:whole_snack/features/category/controller/category_controller.dar
 import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 import 'package:whole_snack/features/order/controller/order_controller.dart';
+import 'package:whole_snack/features/order_detail/controller/order_detail_page_controller.dart';
 
 class FeatureMainBinding extends Bindings{
   @override
@@ -25,6 +26,7 @@ class FeatureMainBinding extends Bindings{
     Get.lazyPut(() => CartController());
     Get.lazyPut(() => OrderController());
     Get.lazyPut(() => AccountController());
+
   }
 
 }

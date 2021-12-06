@@ -13,11 +13,16 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       SizedBox(height: 16,),
-      Flexible(child: buildAddressList(context, sizeConfig, controller)),
+      Flexible(child: Obx(
+              ()=> buildAddressList(context, sizeConfig, controller))),
       SizedBox(height: 16,),
       Center(
           child:GestureDetector(
-            onTap: () => Get.toNamed("/add-address-page"),
+            onTap: () => {
+
+              controller.addressList.clear(),
+              Get.toNamed("/add-address-page"),
+            },
             child: Container(
               height: sizeConfig.blockSizeHorizontal * 10,
               width: sizeConfig.blockSizeVertical*30,
@@ -57,8 +62,7 @@ Widget manageAddressPageAllWidget(BuildContext context,SizeConfig sizeConfig, Ma
 
 Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddressController controller) {
 
-  return Obx(
-      ()=> controller.addressList.length==0 ?CircularProgressIndicator(
+  return controller.addressList.length==0 ?CircularProgressIndicator(
         color: Theme.of(context).primaryColor,
       ) : ListView.builder(
 
@@ -83,8 +87,8 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
 
             Icon(Icons.place,size: 22.sp,color: Colors.grey,),
             SizedBox(width: 16,),
-            Flexible(
-              flex: 6,
+            Expanded(
+              flex: 10,
               child: RichText(
                   text: TextSpan(children: [
                     TextSpan(
@@ -94,7 +98,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                             fontSize: kLargeFontSize13.sp,
                             fontWeight: FontWeight.bold)),
                     TextSpan(
-                        text: "${controller.addressList[index].cusAddress} fsf sfs sfsf sf sf sf a ad d sfssffs ",
+                        text: "${controller.addressList[index].cusAddress}",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onPrimary,
                           fontSize: kMediumFontSize12.sp,
@@ -111,7 +115,11 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
 
 
             GestureDetector(
-              onTap: ()=> print("hahhaha"),
+              onTap: ()=> {
+
+                Get.toNamed("/add-address-page", arguments: [controller.addressList[index].cusAddressId,
+                  controller.addressList[index].cusAddress,controller.addressList[index].regName,controller.addressList[index].cusId])
+              },
               child: Text(
                   "Update",
                   style: TextStyle(
@@ -124,11 +132,11 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
             GestureDetector(
               onTap: () async=> {
 
-                controller.deleteAddress(controller.addressList[index])
+                controller.deleteAddress(controller.addressList[index].cusAddressId)
 
               },
               child: Text(
-                  "Delete",
+                  "Delete ",
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontSize: kSmallFontSize10.sp,
@@ -141,6 +149,5 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
           ],
         )
       );
-    }),
-  ) ;
+    }) ;
 }
