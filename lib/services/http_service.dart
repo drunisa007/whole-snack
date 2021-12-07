@@ -1,166 +1,150 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
-class HttpService{
+import 'package:whole_snack/core/repos/helper/secure_storage_helper.dart';
 
+class HttpService {
   late String baseUrl;
   late String apiKey;
 
-  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjA5Nzg1ODgyMzgxIiwiZXhwIjoxNjY4NTY5Nzk2fQ.XHJLaHuVBHG44fQSJJjVgXlWP2NlzsvBt67sfK0k8iY";
+  late SecureStorageHelper helper;
 
-  HttpService(){
+  late dynamic token;
+
+  HttpService() {
+
     initData();
+
   }
 
   Future<HttpCustomResponse> getLogin(uri) async {
-    try{
-
+    try {
       // ,headers: getHeader()
-      var url = Uri.parse(baseUrl+uri);
-      http.Response response  = await http.get(url,
-        headers: {
-          "Authorization" : "$token"
-
-        }
-
-
-      );
-      if(response.statusCode==200){
+      var url = Uri.parse(baseUrl + uri);
+      http.Response response =
+          await http.get(url, headers: {"Authorization": "$token"});
+      if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
-      }
-      else{
+      } else {
         return HttpCustomResponse('Something went wrong', 400, [], false);
       }
-    }
-    on FormatException catch(_){
-      return HttpCustomResponse('Something went wrong on server', 400, [], false);
-    }
-    on SocketException catch(_){
-      return HttpCustomResponse('Something went wrong with internet', 400, [], false);
-    }
-    catch(e){
+    } on FormatException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong on server', 400, [], false);
+    } on SocketException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong with internet', 400, [], false);
+    } catch (e) {
       return HttpCustomResponse('Something went wrong', 400, '', false);
     }
   }
-  Future<HttpCustomResponse> orderSubmit(uri,body) async {
-    try{
-      var url = Uri.parse(baseUrl+uri);
+
+  Future<HttpCustomResponse> orderSubmit(uri, body) async {
+    try {
+      var url = Uri.parse(baseUrl + uri);
       //print("url is $url");
 
-      http.Response response  = await http.post(url,
-          headers: getHeader(),
-          body:jsonEncode(body
-          ));
+      http.Response response =
+          await http.post(url, headers: getHeader(), body: jsonEncode(body));
 
-      if(response.statusCode==200){
+      if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
+      } else {
+        return HttpCustomResponse(
+            'Something went wrong status code', response.statusCode, '', false);
       }
-      else{
-        return HttpCustomResponse('Something went wrong status code',response.statusCode, '', false);
-      }
-    }
-    on FormatException catch(_){
-      return HttpCustomResponse('Something went wrong on server', 400, "", false);
-    }
-    on SocketException catch(_){
-
-      return HttpCustomResponse('Something went wrong with internet', 400, "", false);
-    }
-    catch(e){
+    } on FormatException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong on server', 400, "", false);
+    } on SocketException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong with internet', 400, "", false);
+    } catch (e) {
       print(e);
       return HttpCustomResponse('Something went wrong', 400, "", false);
     }
   }
 
-
   Future<HttpCustomResponse> getData(uri) async {
-    try{
-      var url = Uri.parse(baseUrl+uri);
+    try {
+      var url = Uri.parse(baseUrl + uri);
 
-      http.Response response  = await http.get(url);
-      if(response.statusCode==200){
+      http.Response response = await http.get(url);
+      if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
+      } else {
+        return HttpCustomResponse(
+            'Something went wrong status code', response.statusCode, '', false);
       }
-      else{
-        return HttpCustomResponse('Something went wrong status code',response.statusCode, '', false);
-      }
-    }
-    on FormatException catch(_){
-      return HttpCustomResponse('Something went wrong on server', 400, [], false);
-    }
-    on SocketException catch(_){
-
-      return HttpCustomResponse('Something went wrong with internet', 400, [], false);
-    }
-    catch(e){
-
+    } on FormatException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong on server', 400, [], false);
+    } on SocketException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong with internet', 400, [], false);
+    } catch (e) {
       return HttpCustomResponse('Something went wrong', 400, [], false);
     }
   }
 
   Future<HttpCustomResponse> getDataWithHeader(uri) async {
-    try{
-
+    try {
       // ,headers: getHeader()
-      var url = Uri.parse(baseUrl+uri);
-     http.Response response  = await http.get(url,   headers: getHeader());
+      var url = Uri.parse(baseUrl + uri);
+      http.Response response = await http.get(url, headers: getHeader());
 
-
-     // http.Response response  = await http.get(url);
-      if(response.statusCode==200){
+      // http.Response response  = await http.get(url);
+      if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
+      } else {
+        return HttpCustomResponse(
+            'Something went wrong status code', response.statusCode, '', false);
       }
-      else{
-        return HttpCustomResponse('Something went wrong status code',response.statusCode, '', false);
-      }
-    }
-    on FormatException catch(_){
-      return HttpCustomResponse('Something went wrong on server', 400, [], false);
-    }
-    on SocketException catch(_){
-
-      return HttpCustomResponse('Something went wrong with internet', 400, [], false);
-    }
-    catch(e){
-
+    } on FormatException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong on server', 400, [], false);
+    } on SocketException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong with internet', 400, [], false);
+    } catch (e) {
       return HttpCustomResponse('Something went wrong', 400, [], false);
     }
   }
 
   Future<HttpCustomResponse> getDataWithJson(uri) async {
-    try{
+    try {
       var url = Uri.parse(uri);
-      http.Response response  = await http.get(url);
-      if(response.statusCode==200){
+      http.Response response = await http.get(url);
+      if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
-      }
-      else{
+      } else {
         return HttpCustomResponse('Something went wrong', 400, [], false);
       }
-    }
-    on FormatException catch(_){
-      return HttpCustomResponse('Something went wrong on server', 400, [], false);
-    }
-    on SocketException catch(_){
-      return HttpCustomResponse('Something went wrong with internet', 400, [], false);
-    }
-    catch(e){
+    } on FormatException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong on server', 400, [], false);
+    } on SocketException catch (_) {
+      return HttpCustomResponse(
+          'Something went wrong with internet', 400, [], false);
+    } catch (e) {
       return HttpCustomResponse('Something went wrong', 400, [], false);
     }
   }
 
-  initData(){
+  initData() {
     baseUrl = "$API";
-    apiKey = "343434";
+    helper = Get.put(SecureStorageHelper());
+    token = helper.readSecureData(key: TOKEN_KEY);
   }
 
   getHeader() {
     return {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "Authorization": "Bearer $token"
+      "Authorization": "Bearer ${token.toString()}"
     };
   }
 

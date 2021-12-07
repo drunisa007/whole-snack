@@ -12,6 +12,8 @@ class OrderDetailPageController extends GetxController {
   RxList<OrderInfoModel> orderInfoList = RxList<OrderInfoModel>();
   RxList<OrderItemModel> orderItemList = RxList();
 
+  RxBool isLoading = true.obs;
+
  late OrderController _orderController;
 
 
@@ -31,12 +33,13 @@ class OrderDetailPageController extends GetxController {
 
   getOrderDetailList(int id) async {
     HttpGetResult<OrderDetailModel> result =
-        await _orderDetailRepo.getOrderDetailById(id);
+        await _orderDetailRepo.getOrderDetailById(100);
 
   orderInfoList.addAll(result.mData[0].ordersinfo);
    orderItemList.addAll(result.mData[0].orderItem);
+   isLoading.value = false;
 
-   print(orderInfoList[0].ordPrice);
+   print("this is price${orderInfoList[0].ordPrice}");
 
 
 

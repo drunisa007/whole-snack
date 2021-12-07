@@ -48,8 +48,13 @@ class CartPage extends StatelessWidget {
           ),
           Spacer(),
          BuildCheckOut(action: (){
+
+
            if(mCartController.mAddToCartList.length>0){
-             Get.toNamed("checkout-page");
+
+
+             mCartController.checkoutCheckStatus();
+
            }
            else{
              Get.snackbar("Empty","Choose your favourite items to checkout.");

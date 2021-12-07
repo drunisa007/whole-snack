@@ -1,21 +1,29 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/add_address_model.dart';
 import 'package:whole_snack/core/model/data_model/address_model.dart';
 import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
+import 'package:whole_snack/core/model/data_model/profile_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
+import 'package:whole_snack/core/repos/helper/secure_storage_helper.dart';
 
 class HttpPostService {
   late String baseUrl;
   late String apiKey;
-  late String mName;
-  late String mPhone;
-  String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjA5Nzg1ODgyMzgxIiwiZXhwIjoxNjY4NTY5Nzk2fQ.XHJLaHuVBHG44fQSJJjVgXlWP2NlzsvBt67sfK0k8iY";
+
+  late dynamic token;
+
+  late SecureStorageHelper helper;
+
 
   HttpPostService() {
+
+    helper = Get.put(SecureStorageHelper());
     initData();
+    token = helper.readSecureData(key: TOKEN_KEY).toString();
+    print(token);
   }
 
   ///this will use to send address data
@@ -52,9 +60,11 @@ class HttpPostService {
     }
   }*/
 
+
   initData() {
     baseUrl = "$API";
-    apiKey = "343434";
+    helper = Get.put(SecureStorageHelper());
+    token = helper.readSecureData(key: TOKEN_KEY);
   }
 
   getHeader() {
@@ -65,8 +75,7 @@ class HttpPostService {
   }
 
   Future<HttpCustomResponse> register(String name, String phoneNumber) async {
-    mName = name;
-    mPhone = phoneNumber;
+
 
     var uri = Uri.parse('$API/customer/userregister.php');
     final response = await http.post(uri,
@@ -114,6 +123,24 @@ class HttpPostService {
       return HttpCustomResponse('', response.statusCode, response.body, true);
     } else {
      // print(response.statusCode);
+      return HttpCustomResponse('', response.statusCode, [], false);
+      print(response.statusCode);
+    }
+  }
+
+  Future<HttpCustomResponse> updateProfile(ProfileModel model) async {
+
+
+    var uri = Uri.parse('$API/customer/updateprofile.php');
+    final response = await http.post(uri,
+        headers: getHeader(),
+        body: jsonEncode(model.toJson()));
+
+    if (response.statusCode == 200) {
+      //print(response.statusCode);
+      return HttpCustomResponse('', response.statusCode, response.body, true);
+    } else {
+      //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, [], false);
       print(response.statusCode);
     }

@@ -11,7 +11,10 @@ import 'package:whole_snack/features/order_detail/controller/order_detail_page_c
 Widget orderDetailPageAllWidget(BuildContext context, SizeConfig sizeConfig,
     OrderDetailPageController controller) {
 
-  return Column(
+  return Obx(
+      () => controller.orderInfoList.length==0 ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor,))
+
+  : Column(
     children: [
       Flexible(
         child: ListView(
@@ -46,9 +49,10 @@ Widget orderDetailPageAllWidget(BuildContext context, SizeConfig sizeConfig,
       ),
 
 
-  controller.orderInfoList[0].ordStatus=="0"? BuildCustomButton(haveCorner: true, action: ()=>print("hahah"), title:"Cancel Order") : SizedBox(width: 0,)
-
+     /* controller.orderInfoList[0].ordStatus=="0"? BuildCustomButton(haveCorner: false, action: ()=>print("hahah"), title:"Cancel Order") : SizedBox(width: 0,)
+*/
     ],
+  )
   );
 }
 
@@ -64,31 +68,32 @@ OrderDetailPageController controller) {
   Color stepperColor = Color(0xffC4C4C4);
   Color titleColor = Color(0xff0400B7);
   String orderTitle = "Order Processing";
- int status =  int.parse(controller.orderInfoList[0].ordStatus);
+ int status = 4;
 
+ switch(status) {
 
- if(status>=0) {
-  stepperColor = Color(0xff00A96C);
-  titleColor = Color(0xff00A96C);
-  orderTitle = "Order Complete";
+   case 1 :
+     orderTitle = "Order Processing";
+     titleColor = Color(0xff0400B7);
+     break;
+   case 2 :
+     orderTitle = "Order Receive";
+     titleColor = Color(0xff076AFF);
+     break;
+   case 3:
+     orderTitle = "Order Delivered";
+     titleColor = Color(0xffFB9600);
+     break;
+   case 4 :
+     orderTitle = "Order Complete";
+     titleColor = Color(0xff00A96C);
+     break;
+
 
  }
- else  if(status>=1) {
-   stepperColor = Color(0xff00A96C);
-   titleColor = Color(0xff00A96C);
-   orderTitle = "Order Delivery";
 
- } else  if(status>=2) {
-   stepperColor = Color(0xff00A96C);
-   titleColor = Color(0xff00A96C);
-   orderTitle = "Order Received";
 
- } else  if(status>=3) {
-   stepperColor = Color(0xff00A96C);
-   titleColor = Color(0xff00A96C);
- //  orderTitle = "Order Complete";
 
- }
   return Container(
     padding: const EdgeInsets.all(kDefaultMargin),
     color: Colors.white,
@@ -101,11 +106,11 @@ OrderDetailPageController controller) {
             RichText(text: TextSpan(
                 children: [
 
-                  TextSpan(text: "Nov 7 2021\n",
+                  TextSpan(text: "${controller.orderInfoList[0].ordCreate.substring(0,10)} \n",
                       style: TextStyle(
                           color: Colors.black, fontSize: kLargeFontSize14.sp,fontWeight: FontWeight.bold)),
 
-                  TextSpan(text: "Order  #DN-A00122",
+                  TextSpan(text: "Order  #${controller.orderInfoList[0].ordId}",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.secondaryVariant, fontSize: kMediumFontSize11.sp,fontWeight: FontWeight.bold)),
                 ]
@@ -133,6 +138,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
 
@@ -146,7 +152,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                         CircleAvatar(
                           radius: sizeConfig.blockSizeVertical*1,
 
-                          backgroundColor: Color(0xff00A96C),
+                          backgroundColor: status>=1 ? Color(0xff00A96C) : stepperColor,
                           child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
                         ),
                         Container(
@@ -160,7 +166,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                     SizedBox(width: kDefaultMargin,),
                     Text( "Order processing",
                         style: TextStyle(
-                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+                          color: status>=1 ? Color(0xff00A96C) : stepperColor, fontSize: kMediumFontSize11.sp,)),
 
 
                   ],
@@ -174,7 +180,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                         CircleAvatar(
                           radius: sizeConfig.blockSizeVertical*1,
 
-                          backgroundColor: Color(0xff00A96C),
+                          backgroundColor: status>=2 ? Color(0xff00A96C) : stepperColor,
                           child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
                         ),
                         Container(
@@ -186,9 +192,9 @@ crossAxisAlignment: CrossAxisAlignment.start,
                       ],
                     ),
                     SizedBox(width: kDefaultMargin,),
-                    Text( "Order processing",
+                    Text( "Order Receive",
                         style: TextStyle(
-                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+                          color: status>=2 ? Color(0xff00A96C) : stepperColor, fontSize: kMediumFontSize11.sp,)),
 
 
                   ],
@@ -202,7 +208,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                         CircleAvatar(
                           radius: sizeConfig.blockSizeVertical*1,
 
-                          backgroundColor: Color(0xff00A96C),
+                          backgroundColor: status>=3 ? Color(0xff00A96C) : stepperColor,
                           child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
                         ),
                         Container(
@@ -214,9 +220,9 @@ crossAxisAlignment: CrossAxisAlignment.start,
                       ],
                     ),
                     SizedBox(width: kDefaultMargin,),
-                    Text( "Order processing",
+                    Text( "Order Delivered",
                         style: TextStyle(
-                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+                          color: status>=3 ? Color(0xff00A96C) : stepperColor, fontSize: kMediumFontSize11.sp,)),
 
 
                   ],
@@ -230,21 +236,16 @@ crossAxisAlignment: CrossAxisAlignment.start,
                         CircleAvatar(
                           radius: sizeConfig.blockSizeVertical*1,
 
-                          backgroundColor: Color(0xff00A96C),
+                          backgroundColor: status>=4 ? Color(0xff00A96C) : stepperColor,
                           child: Icon(Icons.check,size: kMediumFontSize12.sp,color: Colors.white,),
                         ),
-                        Container(
-                          height: sizeConfig.blockSizeHorizontal*5,
-                          width: 1.0,
-                          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.3),
 
-                        ),
                       ],
                     ),
                     SizedBox(width: kDefaultMargin,),
-                    Text( "Order processing",
+                    Text( "Order Completed",
                         style: TextStyle(
-                          color: Color(0xff00A96C), fontSize: kMediumFontSize11.sp,)),
+                          color: status>=4 ? Color(0xff00A96C) : stepperColor, fontSize: kMediumFontSize11.sp,)),
 
 
                   ],

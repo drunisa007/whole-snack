@@ -30,22 +30,22 @@ class LoginRegisterRepo {
       return HttpCustomResponse("", getResult.stateCode, 'error', true);
     }
   }
-  Future<HttpGetResult<RegisterModel>> otpConfirm({required String name, required String phone,required String otp}) async {
+  Future<HttpRegisterResult<RegisterModel>> otpConfirm({required String name, required String phone,required String otp}) async {
 
 
 
     HttpCustomResponse getResult = await _httpPostService.sendOtp(name,phone,otp);
 
     if (getResult.isSuccessful) {
-      Map userDataMap = jsonDecode(getResult.mData);
+
 
       RegisterModel userData = registerModelFromJson(getResult.mData);
 
-      print(userData);
 
-      return HttpGetResult("", getResult.stateCode,[ userData], true);
+
+      return HttpRegisterResult("", getResult.stateCode,userData, true);
     } else {
-      return HttpGetResult("", getResult.stateCode, getResult.mData, true);
+      return HttpRegisterResult("", getResult.stateCode, getResult.mData, true);
     }
   }
 }

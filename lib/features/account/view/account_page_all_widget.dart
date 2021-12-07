@@ -94,7 +94,7 @@ Widget _buildProfileWidget(
           GestureDetector(
             onTap: () => {
 
-              Get.toNamed("/edit-profile-page",arguments: controller.name)},
+              Get.toNamed("/edit-profile-page",arguments: controller.myProfile)},
             child: Text("Edit",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
