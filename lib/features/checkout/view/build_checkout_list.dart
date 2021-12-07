@@ -41,11 +41,11 @@ class BuildCheckOutList extends StatelessWidget {
                         imageUrl: "${mCartController.mAddToCartList[index].image}",
                         fit: BoxFit.contain,
                         placeholder: (context, url) => Image.asset(
-                          "assets/images/place_holder.png",
+                          "assets/images/place_holder.jpeg",
                           fit: BoxFit.cover,
                         ),
                         errorWidget: (context, url, error) => Image.asset(
-                          "assets/images/place_holder.png",
+                          "assets/images/place_holder.jpeg",
                           fit: BoxFit.cover,
                         ),
                       ),
