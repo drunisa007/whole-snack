@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:whole_snack/core/repos/category_repo.dart';
+import 'package:whole_snack/core/repos/helper/secure_storage_helper.dart';
 import 'package:whole_snack/core/repos/item_repo.dart';
 import 'package:whole_snack/core/repos/register_repo.dart';
 import 'package:whole_snack/core/repos/type_repo.dart';
@@ -26,6 +27,7 @@ class FeatureMainBinding extends Bindings{
     Get.lazyPut(() => CartController());
     Get.lazyPut(() => OrderController());
     Get.lazyPut(() => AccountController());
+    Get.lazyPut(() => SecureStorageHelper());
 
   }
 

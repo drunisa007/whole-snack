@@ -135,11 +135,12 @@ class BuildSignUpPageBody extends StatelessWidget {
                         BuildCustomButton(
                             haveCorner: false,
                             action: () async => {
-                                  // if (controller.isLoading == true)
-                                  //   {
-                                  //     showLoaderDialog(context),
-                                  //
-                                  //   },
+                               /*   if (controller.isLoading == true)
+                                    {
+                                      showLoaderDialog(context),
+
+                                    },*/
+
                                   await controller.getLoginData(nameController.text,phoneController.text),
 
                                   //showLoaderDialog(context),
@@ -147,7 +148,7 @@ class BuildSignUpPageBody extends StatelessWidget {
                                   if (controller.isSuccessful)
                                     {
                                       print(controller.isSuccessful),
-                                      Get.toNamed("/otp-page"),
+                                      Get.toNamed("/otp-page",arguments: [nameController.text,phoneController.text]),
                                     }
                                   else
                                     {

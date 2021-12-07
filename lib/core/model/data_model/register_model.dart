@@ -15,16 +15,16 @@ class RegisterModel {
   });
 
   String message;
-  List<Customer> customer;
+  Customer customer;
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
     message: json["message"],
-    customer: List<Customer>.from(json["customer"].map((x) => Customer.fromJson(x))),
+    customer: Customer.fromJson(json["customer"]),
   );
 
   Map<String, dynamic> toJson() => {
     "message": message,
-    "customer": List<dynamic>.from(customer.map((x) => x.toJson())),
+    "customer": customer.toJson(),
   };
 }
 
@@ -38,8 +38,8 @@ class Customer {
   String cusId;
 
   factory Customer.fromJson(Map<String, dynamic> json) => Customer(
-    token: json["token"],
-    cusId: json["cus_id"],
+    token: json["token"] == null ? "null" : json["token"],
+    cusId: json["cus_id"] == null ? "null" :json["cus_id"],
   );
 
   Map<String, dynamic> toJson() => {

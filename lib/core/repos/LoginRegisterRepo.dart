@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/model/data_model/register_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
 import 'package:whole_snack/core/model/service_model/http_get_result.dart';
+import 'package:whole_snack/core/model/service_model/http_register_result.dart';
 import 'package:whole_snack/services/http_post_service.dart';
 
 class LoginRegisterRepo {
@@ -29,20 +30,22 @@ class LoginRegisterRepo {
       return HttpCustomResponse("", getResult.stateCode, 'error', true);
     }
   }
-  Future<HttpCustomResponse> otpConfirm(String otp) async {
+  Future<HttpGetResult<RegisterModel>> otpConfirm({required String name, required String phone,required String otp}) async {
 
 
-    print("$mName ha ha ha ");
-    HttpCustomResponse getResult = await _httpPostService.sendOtp(mName,mPhone,otp);
+
+    HttpCustomResponse getResult = await _httpPostService.sendOtp(name,phone,otp);
 
     if (getResult.isSuccessful) {
-      Map map = jsonDecode(getResult.mData);
+      Map userDataMap = jsonDecode(getResult.mData);
 
-      //print(map);
+      RegisterModel userData = registerModelFromJson(getResult.mData);
 
-      return HttpCustomResponse("", getResult.stateCode, map, true);
+      print(userData);
+
+      return HttpGetResult("", getResult.stateCode,[ userData], true);
     } else {
-      return HttpCustomResponse("", getResult.stateCode, 'error', true);
+      return HttpGetResult("", getResult.stateCode, getResult.mData, true);
     }
   }
 }

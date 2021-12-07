@@ -20,6 +20,8 @@ class BuildOtpPageBody extends StatelessWidget {
     TextEditingController box3 = TextEditingController();
     TextEditingController box4 = TextEditingController();
     String otp = "";
+
+    List<String> data = Get.arguments;
     return SingleChildScrollView(
 
 
@@ -116,7 +118,7 @@ class BuildOtpPageBody extends StatelessWidget {
 
                           print(otp),
 
-                          await controller.getOpt(otp),
+                          await controller.getOpt(name: data[0], phone: data[1], otp: otp),
 
 
                         }, title: "Confirm Otp"),

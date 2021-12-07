@@ -68,10 +68,10 @@ class HttpPostService {
     mName = name;
     mPhone = phoneNumber;
 
-    var uri = Uri.parse('$API/customer/register.php');
+    var uri = Uri.parse('$API/customer/userregister.php');
     final response = await http.post(uri,
         headers: getHeader(),
-        body: jsonEncode({"name": "test", "phone": "09978770588"}));
+        body: jsonEncode({"name": "$name", "phone": "$phoneNumber",}));
 
     if (response.statusCode == 200) {
       //print(response.statusCode);
@@ -86,12 +86,13 @@ class HttpPostService {
   Future<HttpCustomResponse> sendOtp(
       String name, String phone, String otp) async {
     //print("name $name phone $phone $otp is otp");
-   // print(jsonEncode(jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"})));
+    print(jsonEncode(jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"})));
     var uri = Uri.parse('https://seinwholesale.com/api/customer/verify.php');
     final response = await http.post(uri,
         // headers: getHeader(),
-        body: jsonEncode({"name": "test", "phone": "09978770588", "otp": "$otp"}));
+        body: jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"}));
 
+    print(response.body);
     if (response.statusCode == 200) {
       //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, response.body, true);
