@@ -28,103 +28,103 @@ class BuildItemSingle extends StatelessWidget {
         mHomeController.mCategoryItemList[mainIndex].mItemList[currentIndex];
 
     return GestureDetector(
-            onTap: () {
-              Get.toNamed("/item-page", arguments: [
-                mModel.itemId,
-                mHomeController.mCategoryItemList[mainIndex].title,
-                mModel.itemName
-              ]);
-            },
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6.sp)),
-              margin: EdgeInsets.only(
-                right: mHomeController
-                                .mCategoryItemList[mainIndex].mItemList.length -
-                            1 ==
-                        currentIndex
-                    ? 0
-                    : kDefaultMargin + 4.sp,
-              ),
-              color: Colors.white,
-              elevation: 1,
-              child: Container(
-                width: mSizeConfig.blockSizeVertical * 19,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(6.sp)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: mSizeConfig.blockSizeVertical * 10.5,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(6.sp),
-                          topRight: Radius.circular(6.sp),
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl: mModel.img,
-                          placeholder: (context, url) => Image.asset(
-                            "assets/images/place_holder.png",
-                            fit: BoxFit.cover,
-                          ),
-                          errorWidget: (context, url, error) => Image.asset(
-                            "assets/images/place_holder.png",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
+      onTap: () {
+        Get.toNamed("/item-page", arguments: [
+          mModel.itemId,
+          mHomeController.mCategoryItemList[mainIndex].title,
+          mModel.itemName
+        ]);
+      },
+      child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.sp)),
+        margin: EdgeInsets.only(
+          right: mHomeController.mCategoryItemList[mainIndex].mItemList.length -
+                      1 ==
+                  currentIndex
+              ? 0
+              : kDefaultMargin + 4.sp,
+        ),
+        color: Colors.white,
+        elevation: 1,
+        child: Container(
+          width: mSizeConfig.blockSizeVertical * 19,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: mSizeConfig.blockSizeVertical * 10.5,
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(6.sp),
+                    topRight: Radius.circular(6.sp),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: mModel.img,
+                    placeholder: (context, url) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
                     ),
-                    Expanded(
-                      child: Container(
-                        height: double.infinity,
-                        margin: EdgeInsets.only(left: 8.sp),
-                        child: Text(
-                          mModel.itemName,
-                          maxLines: 2,
-                          textScaleFactor: 0.85,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                              fontSize: kMediumFontSize12.sp),
-                        ),
-                      ),
+                    errorWidget: (context, url, error) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
                     ),
-                    Container(
-                        width: double.infinity,
-                        height: mSizeConfig.blockSizeVertical * 3.5,
-                        padding: EdgeInsets.symmetric(horizontal: 8.sp),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(6.sp),
-                              bottomRight: Radius.circular(6.sp),
-                            )),
-                        child: Row(
-                          children: [
-                            Text(
-                              mModel.packageName,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: kLargeFontSize13.sp),
-                            ),
-                            Spacer(),
-                            Text(
-                              "Ks ${mModel.price}",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: kLargeFontSize13.sp),
-                            ),
-                          ],
-                        ))
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
+              Expanded(
+                child: Container(
+                  height: double.infinity,
+                  margin: EdgeInsets.only(left: 8.sp),
+                  child: Text(
+                    mModel.itemName,
+                    maxLines: 2,
+                    textScaleFactor: 0.85,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: kMediumFontSize12.sp),
+                  ),
+                ),
+              ),
+              Container(
+                  width: double.infinity,
+                  height: mSizeConfig.blockSizeVertical * 3.5,
+                  padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(6.sp),
+                        bottomRight: Radius.circular(6.sp),
+                      )),
+                  child: Row(
+                    children: [
+                      Text(
+                        mModel.packageName,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: mModel.packageName.length > 10
+                                ? kSmallFontSize10
+                                : kLargeFontSize13.sp),
+                      ),
+                      Spacer(),
+                      Text(
+                        "Ks ${mModel.price}",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: kLargeFontSize13.sp),
+                      ),
+                    ],
+                  ))
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

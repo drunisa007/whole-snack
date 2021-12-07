@@ -33,26 +33,26 @@ class ItemModel {
   String instock;
 
   factory ItemModel.fromJson(Map<String, dynamic> json) => ItemModel(
-    itemId: json["item_id"],
-    itemName: json["item_name"],
-    packageName: json["package_name"],
-    img: json["img"],
-    itemQty: json["item_qty"],
-    price: json["price"],
-    categoryId: json["category_id"],
-    categoryName: json["category_name"],
-    instock: json["instock"],
+    itemId: json["item_id"]== null ? "nodata" : json["item_id"],
+    itemName: json["item_name"]== null ? "nodata" : json["item_name"],
+    packageName: json["package_name"] == null ? "nodata" : json["package_name"],
+    img: json["img"]== null ? "nodata" : json["img"],
+    itemQty: json["item_qty"]== null ? "nodata" : json["item_qty"],
+    price: json["price"]== null ? "nodata" : json["price"],
+    categoryId: json["category_id"]== null ? "nodata" : json["category_id"],
+    categoryName: json["category_name"]== null ? "nodata" : json["category_name"],
+    instock: json["instock"]== null ? "nodata" : json["instock"],
   );
 
   Map<String, dynamic> toJson() => {
-    "item_id": itemId,
-    "item_name": itemName,
-    "package_name": packageName,
-    "img": img,
-    "item_qty": itemQty,
-    "price": price,
-    "category_id": categoryId,
-    "category_name": categoryName,
-    "instock": instock,
+    "item_id": itemId== null ? "nodata" : itemId,
+    "item_name": itemName== null ? "nodata" : itemName,
+    "package_name": packageName== null ? "nodata" : packageName,
+    "img": img== null ? "nodata" : img,
+    "item_qty": itemQty== null ? "nodata" : itemQty,
+    "price": price== null ? "nodata" : price,
+    "category_id": categoryId== null ? "nodata" : categoryId,
+    "category_name": categoryName== null ? "nodata" :categoryName,
+    "instock": instock== null ? "nodata" : instock,
   };
 }
