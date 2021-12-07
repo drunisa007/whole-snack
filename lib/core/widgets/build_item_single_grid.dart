@@ -7,6 +7,7 @@ import 'package:whole_snack/core/model/data_model/item_model.dart';
 import 'package:whole_snack/core/model/temp_model/temp_item_package_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/category/controller/category_controller.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 
 class BuildItemSingleGrid extends StatelessWidget {
@@ -28,6 +29,9 @@ class BuildItemSingleGrid extends StatelessWidget {
 
     ItemModel mItemModel = mCategoryController.mItemList[currentIndex];
 
+    FeatureMainController mFeatureMainController = Get.find<FeatureMainController>();
+
+
     return Padding(
       padding: EdgeInsets.only(right: kDefaultMargin.sp,bottom: kDefaultMargin.sp),
       child: Material(
@@ -39,6 +43,8 @@ class BuildItemSingleGrid extends StatelessWidget {
           borderRadius: BorderRadius.circular(6.sp),
           splashColor: Colors.grey,
           onTap: () {
+            mFeatureMainController.pushNewRoutesHistory();
+            mFeatureMainController.startRoute.value="category";
             Get.toNamed("/item-page",arguments: [mItemModel.itemId,mItemModel.categoryName,mItemModel.itemName]);
           },
           child: Container(
@@ -110,7 +116,8 @@ class BuildItemSingleGrid extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              fontSize: kMediumFontSize11.sp),
+                              fontSize: mItemModel.packageName.length > 10
+                                  ? kSmallFontSize9:kMediumFontSize11.sp),
                         ),
                         Spacer(),
                         Text(

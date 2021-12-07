@@ -52,8 +52,6 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
             padding: EdgeInsets.only(left: kDefaultMargin,right: kDefaultMargin),
 
             decoration: BoxDecoration(
-
-
               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               border: Border.all(
                 color: Theme.of(context).colorScheme.onPrimary,

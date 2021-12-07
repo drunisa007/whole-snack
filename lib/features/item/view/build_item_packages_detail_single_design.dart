@@ -27,7 +27,10 @@ class BuildItemPackagesDetailSingleDesign extends StatelessWidget {
           mItemController.changeItemSelectedIndex(index);
         }
         else{
-          Get.snackbar("Out Of Stock", "Sorry for inconvenience");
+          if(!Get.isSnackbarOpen){
+            Get.snackbar("Out Of Stock", "Sorry for inconvenience");
+          }
+
         }
 
       },

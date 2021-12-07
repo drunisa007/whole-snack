@@ -82,9 +82,9 @@ class BuildHorizontalItems extends StatelessWidget {
             return mHomeController.mCategoryItemList[index].itemLoading
                 ? BuildCategoryAllItemsShimmer()
                 : Container(
-                    height: mSizeConfig.blockSizeVertical * 20,
+                    height: mSizeConfig.blockSizeVertical * 22,
                     child: SmartRefresher(
-                      enablePullDown: true,
+                      enablePullDown: false,
                       enablePullUp: true,
                       header: GetPlatform.isAndroid
                           ? WaterDropMaterialHeader()

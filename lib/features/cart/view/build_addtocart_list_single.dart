@@ -24,7 +24,7 @@ class BuildAddToCartListSingle extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: mSizeConfig.blockSizeVertical *13,
+      height: mSizeConfig.blockSizeVertical *13.7,
       padding: EdgeInsets.only(
         left: kDefaultMargin.sp,
         right: kDefaultMargin.sp,

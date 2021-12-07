@@ -34,7 +34,17 @@ class SimpleCustomAppBar extends StatelessWidget implements PreferredSizeWidget 
               ? IconButton(
             onPressed: (){
               mCartController.cartAppBarBackArrow.value = false;
-              mFeatureController.changeIndex(1);
+              mFeatureController.mRouteHistory.removeLast();
+
+              if(mFeatureController.startRoute.value=="home"){
+                mFeatureController.changeIndex(0);
+              }
+              else if(mFeatureController.startRoute.value == "category"){
+                mFeatureController.changeIndex(1);
+              }
+              else{
+                mFeatureController.changeIndex(2);
+              }
               Get.back();
             },
             icon: Icon(
