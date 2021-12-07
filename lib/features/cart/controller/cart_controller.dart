@@ -17,7 +17,8 @@ class CartController extends GetxController {
   RxBool cartAppBarBackArrow = false.obs;
 
   late SecureStorageHelper helper;
-  late dynamic token;
+  RxString token = RxString("");
+  RxString customId = RxString("");
 
 
 
@@ -39,12 +40,37 @@ class CartController extends GetxController {
     super.onInit();
 
     helper = Get.put(SecureStorageHelper());
-    token = await  helper.readSecureData(key: TOKEN_KEY);
+
+    checkLoginOrNot();
 
 
     //mAddToCartList.addAll(zAddToCartList);
     if (mAddToCartList.isNotEmpty) {
       calculatePrice();
+    }
+  }
+
+  checkLoginOrNot() async {
+    dynamic result = await helper.readSecureData(key: TOKEN_KEY);
+    print("result is $result");
+    if(result==null){
+      token.value = "";
+    }
+    else{
+      token.value= result;
+      getCustomerId();
+    }
+  }
+
+  getCustomerId() async {
+    dynamic result = await helper.readSecureData(key: CUSTOMER_ID_KEY);
+    print("customer id is $result");
+
+    if(result==null){
+      customId.value = "";
+    }
+    else{
+      customId.value= result;
     }
   }
 
@@ -133,22 +159,11 @@ class CartController extends GetxController {
 
    dynamic test = await helper.readSecureData(key: TOKEN_KEY) ;
 
-
-
-
     if( token != null) {
-
-
-
       Get.toNamed("checkout-page");
-
     }
      else {
-
-
        Get.toNamed("/sign-up-page");
-
-
     }
   }
 

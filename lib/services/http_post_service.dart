@@ -82,6 +82,8 @@ class HttpPostService {
         headers: getHeader(),
         body: jsonEncode({"name": "$name", "phone": "$phoneNumber",}));
 
+    print(response.statusCode);
+
     if (response.statusCode == 200) {
       //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, response.body, true);

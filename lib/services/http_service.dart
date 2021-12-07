@@ -51,6 +51,9 @@ class HttpService {
       http.Response response =
           await http.post(url, headers: getHeader(), body: jsonEncode(body));
 
+
+      print("order reponse is ${response.statusCode}");
+
       if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
       } else {
@@ -135,13 +138,14 @@ class HttpService {
     }
   }
 
-  initData() {
+  initData() async {
     baseUrl = "$API";
     helper = Get.put(SecureStorageHelper());
-    token = helper.readSecureData(key: TOKEN_KEY);
+    token = await helper.readSecureData(key: TOKEN_KEY);
   }
 
   getHeader() {
+    print("header token is $token");
     return {
       "Content-Type": "application/json",
       "Accept": "application/json",
