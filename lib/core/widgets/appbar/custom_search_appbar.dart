@@ -24,6 +24,9 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
     double horizontalMargin = mSizeConfig.blockSizeHorizontal * 5;
     double verticalMargin = mSizeConfig.blockSizeVertical * 1.45;
 
+    TextEditingController mTextEditingController = TextEditingController();
+
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -63,11 +66,18 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
                       SizedBox(
                         width: mSizeConfig.blockSizeHorizontal * 5,
                       ),
-                      Text(
-                        "Find Products Or Category Here",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontSize: kMediumFontSize12.sp),
+                      Container(
+                        width: mSizeConfig.blockSizeHorizontal * 40,
+                        child: TextField(
+                          controller: mTextEditingController,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Enter Your Name'
+                          ),
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              fontSize: kMediumFontSize12.sp),
+                        ),
                       ),
                     ],
                   ),
