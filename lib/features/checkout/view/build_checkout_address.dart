@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/region_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
 import 'package:whole_snack/features/checkout/controller/checkout_controller.dart';
 
 
@@ -19,9 +20,11 @@ class BuildCheckOutAddress extends StatelessWidget {
 
     CheckOutController mCheckoutController = Get.find<CheckOutController>();
 
-    TextEditingController phoneController = TextEditingController();
-    TextEditingController addressController = TextEditingController();
+
     TextEditingController saveTittleController = TextEditingController();
+
+    AddAddressPageController mAddAddressController = Get.find<AddAddressPageController>();
+
 
     return Container(
       color: Colors.white,
@@ -44,7 +47,7 @@ class BuildCheckOutAddress extends StatelessWidget {
           Container(
             height: mSizeConfig.safeBlockVertical*6,
             child: TextField(
-              controller: phoneController,
+              controller: mCheckoutController.phoneController,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4.sp),
@@ -56,7 +59,7 @@ class BuildCheckOutAddress extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                hintText: "Enter you address",
+                hintText: "Enter your phone number",
                 hintStyle: TextStyle(
                     color: Theme.of(context).colorScheme.onSecondary,
                     fontSize: kLargeFontSize13.sp),
@@ -75,7 +78,7 @@ class BuildCheckOutAddress extends StatelessWidget {
           SizedBox(
             height: 6.sp,
           ),
-          GetBuilder<CheckOutController>(
+          GetBuilder<AddAddressPageController>(
             builder: (controller) => Container(
               padding: EdgeInsets.only(left: kDefaultMargin,right: kDefaultMargin),
               height: mSizeConfig.safeBlockVertical*6,
@@ -135,7 +138,7 @@ class BuildCheckOutAddress extends StatelessWidget {
           Container(
             height: mSizeConfig.safeBlockVertical*12,
             child: TextField(
-              controller: addressController,
+              controller: mCheckoutController.addressController,
               maxLines: 6,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(

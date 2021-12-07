@@ -12,7 +12,7 @@ class AddAddressPageController extends GetxController {
  RegionModel ? choosenValue;
  RxBool isSuccessful = RxBool(false) as RxBool;
 
- late String regionId;
+ late String regionId="";
 late GetAllRegionRepo getAllRegion;
 late AddAddressRepo _addAddressRepo;
 
@@ -21,9 +21,6 @@ late AddAddressRepo _addAddressRepo;
 
     getAllRegion =  Get.put(GetAllRegionRepo());
     _addAddressRepo = Get.put(AddAddressRepo());
-
-
-
     addTownshipAddress();
   }
 
@@ -44,8 +41,6 @@ late AddAddressRepo _addAddressRepo;
    print('hahahah $choosenValue');
 
    regionId = townshipList[index].regId;
-
-
 
     update();
   }

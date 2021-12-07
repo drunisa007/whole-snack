@@ -10,6 +10,7 @@ class HttpService {
   late String baseUrl;
   late String apiKey;
 
+
   late SecureStorageHelper helper;
 
   late dynamic token;

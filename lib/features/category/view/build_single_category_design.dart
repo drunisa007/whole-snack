@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,7 +31,7 @@ class BuildSingleCategoryDesign extends StatelessWidget {
 
     CategoryController mCategoryController = Get.find<CategoryController>();
 
-    String iconName = getCategoryImage(title);
+    //String iconName = getCategoryImage(title);
 
     return Obx((){
       return GestureDetector(
@@ -54,15 +55,32 @@ class BuildSingleCategoryDesign extends StatelessWidget {
               SizedBox(
                 height: mSizeConfig.blockSizeVertical * 1.5,
               ),
-              SvgPicture.asset(
-                iconName,
+              Container(
                 width: mSizeConfig.blockSizeVertical * 2.8,
                 height: mSizeConfig.blockSizeVertical * 2.8,
-                fit: BoxFit.fill,
-                color: mCategoryController.selectedCategoryIndex.value == index
-                    ? Colors.white
-                    : Theme.of(context).colorScheme.secondaryVariant,
+                child: ClipRRect(
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    placeholder: (context, url) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
+                    ),
+                    errorWidget: (context, url, error) => Image.asset(
+                      "assets/images/place_holder.png",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
+              // SvgPicture.asset(
+              //   iconName,
+              //   width: mSizeConfig.blockSizeVertical * 2.8,
+              //   height: mSizeConfig.blockSizeVertical * 2.8,
+              //   fit: BoxFit.fill,
+              //   color: mCategoryController.selectedCategoryIndex.value == index
+              //       ? Colors.white
+              //       : Theme.of(context).colorScheme.secondaryVariant,
+              // ),
               SizedBox(
                 height: 4.sp,
               ),

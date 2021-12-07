@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/temp_data.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
+import 'package:whole_snack/features/feature_main/view/feature_main.dart';
 import 'package:whole_snack/features/item/controller/item_controller.dart';
 
 
@@ -21,6 +23,7 @@ class BuildItemBannerDesign extends StatelessWidget {
 
 
     ItemController mItemController = Get.find<ItemController>();
+    FeatureMainController mFeatureMainController = Get.find<FeatureMainController>();
 
 
     return Stack(
@@ -75,6 +78,7 @@ class BuildItemBannerDesign extends StatelessWidget {
                   color: Colors.black,
                 ),
                 onPressed: () {
+                  mFeatureMainController.mRouteHistory.removeLast();
                   Get.back();
                 },
               ),
