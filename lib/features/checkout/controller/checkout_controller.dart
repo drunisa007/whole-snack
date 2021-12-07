@@ -50,7 +50,7 @@ class CheckOutController extends GetxController{
               }
 
               var body = {
-                "cus_id": "129",
+                "cus_id": mCartController.customId.value,
                 "ord_price": mCartController.totalPrice.value.toString(),
                 "ord_phone": orderPhone.value,
                 "address":  address.value,

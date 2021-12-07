@@ -52,34 +52,37 @@ class CartPage extends StatelessWidget {
           ),
           Spacer(),
          BuildCheckOut(action: (){
-
-
-           if(mCartController.mAddToCartList.length>0){
-
-             //mCartController.checkoutCheckStatus();
-             
-             mFeatureMainController.pushNewRoutesHistory();
-
-             if(mCartController.cartAppBarBackArrow.isTrue){
-               mCartController.cartAppBarBackArrow.value = false;
-               Get.back();
-               Get.back();
-
-               mFeatureMainController.mRouteHistory.removeLast();
-               Get.toNamed("checkout-page");
-             }
-             else{
-               Get.toNamed("checkout-page");
-             }
-
-
+           if(mCartController.token.value.isEmpty){
+             Get.toNamed("/sign-up-page");
            }
            else{
-             if(!Get.isSnackbarOpen){
-               Get.snackbar("Empty","Choose your favourite items to checkout.");
+             if(mCartController.mAddToCartList.length>0){
+
+               //mCartController.checkoutCheckStatus();
+
+               mFeatureMainController.pushNewRoutesHistory();
+
+               if(mCartController.cartAppBarBackArrow.isTrue){
+                 mCartController.cartAppBarBackArrow.value = false;
+                 Get.back();
+                 Get.back();
+
+                 mFeatureMainController.mRouteHistory.removeLast();
+                 Get.toNamed("checkout-page");
+               }
+               else{
+                 Get.toNamed("checkout-page");
+               }
+
+
+             }
+             else{
+               if(!Get.isSnackbarOpen){
+                 Get.snackbar("Empty","Choose your favourite items to checkout.");
+               }
              }
            }
-         }, title: 'Continue to checkout',)
+         }, title: mCartController.token.value.isEmpty?"Login to checkout":'Continue to checkout',)
         ],
       ),
     );
