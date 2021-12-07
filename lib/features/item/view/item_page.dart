@@ -255,7 +255,9 @@ class ItemPage extends StatelessWidget {
         }),
       ),
     ), onWillPop: () async {
-      mFeatureMainController.mRouteHistory.removeLast();
+      if(mFeatureMainController.mRouteHistory.isNotEmpty){
+        mFeatureMainController.mRouteHistory.removeLast();
+      }
      return true;
     });
   }

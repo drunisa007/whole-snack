@@ -54,7 +54,7 @@ class BuildItemSingle extends StatelessWidget {
         color: Colors.white,
         elevation: 1,
         child: Container(
-          width: mSizeConfig.blockSizeVertical * 19,
+          width: mSizeConfig.blockSizeVertical * 20,
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
           child: Column(
@@ -88,11 +88,10 @@ class BuildItemSingle extends StatelessWidget {
                   child: Text(
                     mModel.itemName,
                     maxLines: 2,
-                    textScaleFactor: 0.85,
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
-                        fontSize: kMediumFontSize12.sp),
+                        fontSize: kSmallFontSize10.sp),
                   ),
                 ),
               ),

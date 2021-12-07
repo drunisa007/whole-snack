@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/item_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
 import 'package:whole_snack/features/search/controller/search_controller.dart';
 
 class SearchPage extends StatelessWidget {
@@ -34,6 +35,8 @@ class SearchPage extends StatelessWidget {
         mSearchController.emptyFilterList();
       }
     });
+
+    FeatureMainController mFeatureController = Get.find<FeatureMainController>();
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -88,7 +91,7 @@ class SearchPage extends StatelessWidget {
                               controller: mTextEditingController,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Enter Your Name'),
+                                  hintText: 'search your items here'),
                               style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.onPrimary,
@@ -126,6 +129,8 @@ class SearchPage extends StatelessWidget {
                       child: InkWell(
                         borderRadius: BorderRadius.circular(2.sp),
                         onTap: () {
+                          mFeatureController.pushNewRoutesHistory();
+                          mFeatureController.startRoute.value = "search";
                           Get.toNamed("/item-page",arguments: [mModel.itemId,mModel.categoryName,mModel.itemName]);
                         },
                         child: Container(

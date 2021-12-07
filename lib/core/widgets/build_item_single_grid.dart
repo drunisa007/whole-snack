@@ -116,7 +116,8 @@ class BuildItemSingleGrid extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              fontSize: kMediumFontSize11.sp),
+                              fontSize: mItemModel.packageName.length > 10
+                                  ? kSmallFontSize9:kMediumFontSize11.sp),
                         ),
                         Spacer(),
                         Text(
