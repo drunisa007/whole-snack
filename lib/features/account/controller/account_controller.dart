@@ -11,6 +11,10 @@ class AccountController extends GetxController{
   int customerId = 56;
   String name = "";
 
+ late ProfileModel model;
+
+
+
   RxList <ProfileModel> myProfile = RxList();
  late ProfileRepo profileRepo;
   AccountController() {

@@ -31,7 +31,7 @@ class OrderDetailRepo {
 
       OrderDetailModel orderDetailModel = orderDetailModelFromJson(orderDetail);
 
-      print(orderDetailModel.orderItem[0].price);
+
 
 
 

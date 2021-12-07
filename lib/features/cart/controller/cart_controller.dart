@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/constants/temp_data.dart';
 import 'package:whole_snack/core/model/temp_model/temp_addtocart_model.dart';
+import 'package:whole_snack/core/repos/helper/secure_storage_helper.dart';
 
 class CartController extends GetxController {
   ///for add to cart list
@@ -13,6 +15,10 @@ class CartController extends GetxController {
   RxInt progressBarRealWidth = RxInt(0);
   RxInt progressBarSizeBoxWidth = RxInt(0);
   RxBool cartAppBarBackArrow = false.obs;
+
+  late SecureStorageHelper helper;
+  late dynamic token;
+
 
 
   ///clearing cart controller
@@ -29,8 +35,13 @@ class CartController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+
+    helper = Get.put(SecureStorageHelper());
+    token = await  helper.readSecureData(key: TOKEN_KEY);
+
+
     //mAddToCartList.addAll(zAddToCartList);
     if (mAddToCartList.isNotEmpty) {
       calculatePrice();
@@ -116,4 +127,29 @@ class CartController extends GetxController {
       grandTotal.value = totalPrice.value.toInt();
     }
   }
+
+
+  checkoutCheckStatus() async{
+
+   dynamic test = await helper.readSecureData(key: TOKEN_KEY) ;
+
+
+
+
+    if( token != null) {
+
+
+
+      Get.toNamed("checkout-page");
+
+    }
+     else {
+
+
+       Get.toNamed("/sign-up-page");
+
+
+    }
+  }
+
 }

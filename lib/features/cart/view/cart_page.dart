@@ -52,7 +52,12 @@ class CartPage extends StatelessWidget {
           ),
           Spacer(),
          BuildCheckOut(action: (){
+
+
            if(mCartController.mAddToCartList.length>0){
+
+             //mCartController.checkoutCheckStatus();
+             
              mFeatureMainController.pushNewRoutesHistory();
 
              if(mCartController.cartAppBarBackArrow.isTrue){
@@ -66,6 +71,7 @@ class CartPage extends StatelessWidget {
              else{
                Get.toNamed("checkout-page");
              }
+
 
            }
            else{

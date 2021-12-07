@@ -23,7 +23,7 @@ Future<void> main() async {
   await Hive.openBox('apiBox');
   await Hive.openBox('customerBox');
 
- runApp(const MyApp());
+  runApp(const MyApp());
 /*  runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => MyApp(), // Wrap your app
@@ -33,16 +33,19 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+
+
+
     return GetMaterialApp(
       title: 'Whole Snack',
       builder: DevicePreview.appBuilder,
-      theme: StyleTheme(). getTheme(),
+      theme: StyleTheme().getTheme(),
       debugShowCheckedModeBanner: false,
       getPages: RoutePage().routePage,
       initialRoute: '/',
     );
   }
 }
-

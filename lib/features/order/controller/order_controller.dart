@@ -24,6 +24,7 @@ class OrderController extends GetxController {
   RxList<OrderInfoModel> orderItemList = RxList();
 
 
+
   OrderController() {
     var date1 = DateTime.parse("$firstDate");
     var date2 = DateTime.parse("$secondDate");
@@ -80,6 +81,10 @@ class OrderController extends GetxController {
         await orderRepo.getFilterOrderInfo(model);
 
     orderItemList.addAll(result.mData);
+
+
+
+
   }
 
   getByDate(var date1, var date2) {
@@ -89,8 +94,9 @@ class OrderController extends GetxController {
     var formattedDate1 = "${date1.year}-${date1.month}-${date1.day}";
     var formattedDate2 = "${date2.year}-${date2.month}-${date2.day}";
 
+
     getOrderInfoList(OrderDateFilterModel(
-        customerId: "55", from: formattedDate1, to: formattedDate2));
+        customerId: "129", from: formattedDate1, to: formattedDate2));
   }
 
   gerOrderId(String ordId) {
@@ -99,6 +105,8 @@ class OrderController extends GetxController {
 
 
   }
+
+
 
 
 }

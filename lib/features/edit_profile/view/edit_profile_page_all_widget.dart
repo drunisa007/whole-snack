@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/model/data_model/profile_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
 import 'package:whole_snack/features/edit_profile/controller/edit_profile_page_controller.dart';
@@ -15,7 +16,7 @@ Widget editProfilePageAllWidget(BuildContext context,
 Widget _buildEditProfileBody(BuildContext context,
     EditProfilePageController controller, SizeConfig sizeConfig) {
 
-  String data = Get.arguments;
+  List<ProfileModel> data = Get.arguments;
   TextEditingController nameController = TextEditingController();
   return Container(
     height: double.infinity,
@@ -52,7 +53,7 @@ Widget _buildEditProfileBody(BuildContext context,
                             color: Theme.of(context).colorScheme.onPrimary,
                             fontSize: kLargeFontSize14.sp,
                             fontWeight: FontWeight.bold),
-                        hintText: "$data",
+                        hintText: data.length==0? "Enter Your Name" : data[0].cusName ,
                         fillColor: Colors.grey.withOpacity(0.1),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
@@ -63,7 +64,14 @@ Widget _buildEditProfileBody(BuildContext context,
                   SizedBox(
                     height: 16,
                   ),
-     BuildCustomButton(haveCorner: false, action: ()=>Get.back(), title: "Update Profile"),
+     BuildCustomButton(haveCorner: false, action: ()=> {
+
+
+       print(data[0]),
+       controller.updateProfile(ProfileModel(cusId: data[0].cusId, cusName: nameController.text, cusPhone: data[0].cusPhone, createdAt: data[0].createdAt)),
+       Get.back()
+
+     }, title: "Update Profile"),
                   SizedBox(
                     height: 16,
                   ),
