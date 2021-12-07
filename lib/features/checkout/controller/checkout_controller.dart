@@ -6,31 +6,36 @@ import 'package:whole_snack/core/model/data_model/region_model.dart';
 import 'package:whole_snack/core/model/service_model/http_register_result.dart';
 import 'package:whole_snack/core/model/temp_model/temp_addtocart_model.dart';
 import 'package:whole_snack/core/repos/order_repo.dart';
+import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
 import 'package:whole_snack/features/cart/controller/cart_controller.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
 
 class CheckOutController extends GetxController{
-  List<RegionModel> townshipList = [];
-  RegionModel ? choosenValue;
 
 
   /// for submit order
 
   OrderRepo mOrderRepo = Get.find<OrderRepo>();
 
-  CartController mCartController = Get.find<CartController>();
-
-  CheckOutController() {
-    addTownshipAddress();
-  }
+    CartController mCartController = Get.find<CartController>();
+    AddAddressPageController mAddressController = Get.find<AddAddressPageController>();
 
 
 
+    TextEditingController phoneController = TextEditingController();
+    TextEditingController addressController = TextEditingController();
 
-    RxString regionId = RxString("3");
-    RxString address = RxString("Chanmyatharsi");
-    RxString orderPhone =RxString("09785882381");
+    RxString regionId = RxString("");
+    RxString address = RxString("");
+    RxString orderPhone =RxString("");
 
       submitOrder(context) async {
+
+        orderPhone.value  = phoneController.text.toString();
+        address.value = addressController.text.toString();
+        regionId.value = mAddressController.regionId;
+
+
       if (mCartController.mAddToCartList.length > 0) {
 
         if(orderPhone.value.isNotEmpty){
@@ -45,7 +50,7 @@ class CheckOutController extends GetxController{
               }
 
               var body = {
-                "cus_id": "55",
+                "cus_id": "129",
                 "ord_price": mCartController.totalPrice.value.toString(),
                 "ord_phone": orderPhone.value,
                 "address":  address.value,
@@ -65,14 +70,15 @@ class CheckOutController extends GetxController{
               HttpRegisterResult mResult = await mOrderRepo.submitOrder(body);
               if (mResult.isSuccessful) {
                  mCartController.clearCartController();
-                 Get.back();
-                 Get.back();
-                 Get.back();
+                 phoneController.text = "";
+                  addressController.text="";
+                 mAddressController.regionId = "";
+                 FeatureMainController mFeatureMainController = Get.find<FeatureMainController>();
+                 mFeatureMainController.pushNewRoutesHistory();
                  Get.offAndToNamed("/order-success-page");
               }
               else {
                 showSnackBarOrder("Order Submit Fail", "please check your internet connection or refresh again");
-
               }
 
             }
@@ -98,27 +104,5 @@ class CheckOutController extends GetxController{
       Get.snackbar(title, message);
     }
 
-    /// to clear after submitting order
 
-  addTownshipAddress() {
-    townshipList = <RegionModel>[
-/*      RegionModel(id: 1, townshipName: "Amarapura"),
-      RegionModel(id: 2, townshipName: "Aungmyaythazan"),
-      RegionModel(id: 3, townshipName: "Amarapura"),
-      RegionModel(id: 4, townshipName: "Chanayethazan"),
-      RegionModel(id: 5, townshipName: "Chanmyathazi"),
-      RegionModel(id: 6, townshipName: "Mahaaungmyay"),
-      RegionModel(id: 7, townshipName: "Patheingyi"),
-      RegionModel(id: 8, townshipName: "Pyigyidagun"),*/
-    ];
-  }
-
-
-  changeDropDownValue(RegionModel model) {
-
-    int index = townshipList.indexOf(model);
-    choosenValue = townshipList[index];
-
-    update();
-  }
 }

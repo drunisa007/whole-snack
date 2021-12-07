@@ -34,7 +34,7 @@ class OrderController extends GetxController {
 
 
     getOrderInfoList(OrderDateFilterModel(
-        customerId: "55", from: formattedDate1, to: formattedDate2));
+        customerId: "129", from: formattedDate1, to: formattedDate2));
   }
 
   ///for the order filter using date picker

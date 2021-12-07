@@ -6,6 +6,8 @@ import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/item_model.dart';
 import 'package:whole_snack/core/model/temp_model/temp_item_package_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
+import 'package:whole_snack/features/feature_main/view/feature_main.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 
 class BuildItemSingle extends StatelessWidget {
@@ -27,8 +29,12 @@ class BuildItemSingle extends StatelessWidget {
     ItemModel mModel =
         mHomeController.mCategoryItemList[mainIndex].mItemList[currentIndex];
 
+    FeatureMainController mFeatureMainController = Get.find<FeatureMainController>();
+
     return GestureDetector(
       onTap: () {
+        mFeatureMainController.pushNewRoutesHistory();
+        mFeatureMainController.startRoute.value = "home";
         Get.toNamed("/item-page", arguments: [
           mModel.itemId,
           mHomeController.mCategoryItemList[mainIndex].title,

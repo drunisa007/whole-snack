@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/appbar/simple_app_bar.dart';
+import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
 import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 import 'package:whole_snack/features/cart/view/build_checkout.dart';
 import 'package:whole_snack/features/checkout/controller/checkout_controller.dart';
 import 'package:whole_snack/features/checkout/view/build_checkout_address.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
+import 'package:whole_snack/features/manage_address/controller/manage_address_controller.dart';
 
 import 'build_checkout_list.dart';
 
@@ -20,6 +23,8 @@ class CheckOutPage extends StatelessWidget {
     mSizeConfig.init(context);
 
     CheckOutController mCheckoutController = Get.find<CheckOutController>();
+
+
 
 
     return Scaffold(
