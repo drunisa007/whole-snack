@@ -37,7 +37,6 @@ class ManageAddressController extends GetxController {
 
     HttpGetResult<AddressModel> result = await getAddressRepo.getAddress(customerId: customerId.toString());
 
-
     addressList.clear();
 
     addressList.addAll(result.mData);

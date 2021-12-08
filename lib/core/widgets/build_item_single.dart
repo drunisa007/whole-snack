@@ -6,6 +6,8 @@ import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/item_model.dart';
 import 'package:whole_snack/core/model/temp_model/temp_item_package_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
+import 'package:whole_snack/features/feature_main/view/feature_main.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 
 class BuildItemSingle extends StatelessWidget {
@@ -27,8 +29,12 @@ class BuildItemSingle extends StatelessWidget {
     ItemModel mModel =
         mHomeController.mCategoryItemList[mainIndex].mItemList[currentIndex];
 
+    FeatureMainController mFeatureMainController = Get.find<FeatureMainController>();
+
     return GestureDetector(
       onTap: () {
+        mFeatureMainController.pushNewRoutesHistory();
+        mFeatureMainController.startRoute.value = "home";
         Get.toNamed("/item-page", arguments: [
           mModel.itemId,
           mHomeController.mCategoryItemList[mainIndex].title,
@@ -48,7 +54,7 @@ class BuildItemSingle extends StatelessWidget {
         color: Colors.white,
         elevation: 1,
         child: Container(
-          width: mSizeConfig.blockSizeVertical * 19,
+          width: mSizeConfig.blockSizeVertical * 20,
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
           child: Column(
@@ -65,11 +71,11 @@ class BuildItemSingle extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: mModel.img,
                     placeholder: (context, url) => Image.asset(
-                      "assets/images/place_holder.png",
+                      "assets/images/place_holder.jpeg",
                       fit: BoxFit.cover,
                     ),
                     errorWidget: (context, url, error) => Image.asset(
-                      "assets/images/place_holder.png",
+                      "assets/images/place_holder.jpeg",
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -82,11 +88,10 @@ class BuildItemSingle extends StatelessWidget {
                   child: Text(
                     mModel.itemName,
                     maxLines: 2,
-                    textScaleFactor: 0.85,
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
-                        fontSize: kMediumFontSize12.sp),
+                        fontSize: kSmallFontSize10.sp),
                   ),
                 ),
               ),

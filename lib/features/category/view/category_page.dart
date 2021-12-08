@@ -33,7 +33,7 @@ class CategoryPage extends StatelessWidget {
     List<TempItemModel> mItemList = zItemData;
 
     return Scaffold(
-      appBar: MyCustomAppBar(height: appBarHeight, key: _scaffoldKey),
+      appBar: MyCustomAppBar(height: appBarHeight, key: _scaffoldKey,action: ()=> Get.toNamed("search-page"),),
       body: Container(
         width: double.infinity,
         height: double.infinity,

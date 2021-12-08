@@ -77,7 +77,9 @@ class BuildHorizontalCategory extends StatelessWidget {
                                 categoryTitle: mHomeController
                                     .mCategoryList[index].categName,
                                 categoryId: mHomeController
-                                    .mCategoryList[index].categId);
+                                    .mCategoryList[index].categId,
+                                 index:index
+                            );
                           },
                           itemCount: mHomeController.mCategoryList.length,
                           scrollDirection: Axis.horizontal,

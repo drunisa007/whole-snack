@@ -60,11 +60,11 @@ class BuildTypeDesign extends StatelessWidget {
                         imageUrl: "${mModel.typeImg}",
                         fit: BoxFit.contain,
                         placeholder: (context, url) => Image.asset(
-                          "assets/images/place_holder.png",
+                          "assets/images/place_holder.jpeg",
                           fit: BoxFit.fill,
                         ),
                         errorWidget: (context, url, error) => Image.asset(
-                          "assets/images/place_holder.png",
+                          "assets/images/place_holder.jpeg",
                           fit: BoxFit.fill,
                         ),
                       ),

@@ -8,6 +8,8 @@ import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 import 'package:whole_snack/features/cart/view/build_addtocart_list.dart';
 import 'package:whole_snack/features/cart/view/build_checkout.dart';
 import 'package:whole_snack/features/cart/view/build_delivery_fee.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
+import 'package:whole_snack/features/feature_main/view/feature_main.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -18,6 +20,8 @@ class CartPage extends StatelessWidget {
     mSizeConfig.init(context);
 
     CartController mCartController = Get.find<CartController>();
+
+    FeatureMainController mFeatureMainController = Get.find<FeatureMainController>();
 
     return Scaffold(
     appBar: SimpleCustomAppBar(
@@ -48,18 +52,37 @@ class CartPage extends StatelessWidget {
           ),
           Spacer(),
          BuildCheckOut(action: (){
-
-
-           if(mCartController.mAddToCartList.length>0){
-
-
-             mCartController.checkoutCheckStatus();
-
+           if(mCartController.token.value.isEmpty){
+             Get.toNamed("/sign-up-page");
            }
            else{
-             Get.snackbar("Empty","Choose your favourite items to checkout.");
+             if(mCartController.mAddToCartList.length>0){
+
+               //mCartController.checkoutCheckStatus();
+
+               mFeatureMainController.pushNewRoutesHistory();
+
+               if(mCartController.cartAppBarBackArrow.isTrue){
+                 mCartController.cartAppBarBackArrow.value = false;
+                 Get.back();
+                 Get.back();
+
+                 mFeatureMainController.mRouteHistory.removeLast();
+                 Get.toNamed("checkout-page");
+               }
+               else{
+                 Get.toNamed("checkout-page");
+               }
+
+
+             }
+             else{
+               if(!Get.isSnackbarOpen){
+                 Get.snackbar("Empty","Choose your favourite items to checkout.");
+               }
+             }
            }
-         }, title: 'Continue to checkout',)
+         }, title: mCartController.token.value.isEmpty?"Login to checkout":'Continue to checkout',)
         ],
       ),
     );

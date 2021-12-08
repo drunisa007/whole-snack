@@ -65,8 +65,6 @@ class OrderRepo {
       return HttpGetResult('', response.stateCode, orderItemList, true);
     } else {
 
-
-     ;
       return HttpGetResult(
           result.errorMessage, response.stateCode, result.mData, false);
     }

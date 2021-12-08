@@ -24,7 +24,7 @@ class BuildAddToCartListSingle extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: mSizeConfig.blockSizeVertical *13,
+      height: mSizeConfig.blockSizeVertical *13.7,
       padding: EdgeInsets.only(
         left: kDefaultMargin.sp,
         right: kDefaultMargin.sp,
@@ -40,11 +40,11 @@ class BuildAddToCartListSingle extends StatelessWidget {
                   imageUrl: "${mModel.image}",
                   fit: BoxFit.contain,
                   placeholder: (context, url) => Image.asset(
-                    "assets/images/place_holder.png",
+                    "assets/images/place_holder.jpeg",
                     fit: BoxFit.cover,
                   ),
                   errorWidget: (context, url, error) => Image.asset(
-                    "assets/images/place_holder.png",
+                    "assets/images/place_holder.jpeg",
                     fit: BoxFit.cover,
                   ),
                 ),
