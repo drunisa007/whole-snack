@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
 import 'package:whole_snack/core/model/data_model/order_info_model.dart';
 import 'package:whole_snack/core/model/data_model/order_item_model.dart';
 import 'package:whole_snack/core/model/service_model/http_get_result.dart';
+import 'package:whole_snack/core/repos/helper/secure_storage_helper.dart';
 import 'package:whole_snack/core/repos/order_repo.dart';
 import 'package:whole_snack/features/order_detail/controller/order_detail_page_controller.dart';
 
@@ -20,12 +22,16 @@ class OrderController extends GetxController {
   late OrderRepo orderRepo;
   late OrderDetailPageController _detailPageController;
 
-  late int id;
+  late int mOrdId;
   RxList<OrderInfoModel> orderItemList = RxList();
+  late SecureStorageHelper helper;
+  late dynamic token;
+  late int customerId = -1;
 
 
 
   OrderController() {
+    getToken();
     var date1 = DateTime.parse("$firstDate");
     var date2 = DateTime.parse("$secondDate");
     var formattedDate1 = "${date1.year}-${date1.month}-${date1.day}";
@@ -100,13 +106,36 @@ class OrderController extends GetxController {
   }
 
   gerOrderId(String ordId) {
-    id = int.parse(ordId);
+    mOrdId = int.parse(ordId);
 
 
 
   }
 
+  getToken() async {
+    helper = Get.put(SecureStorageHelper());
 
+
+
+    token = await helper.readSecureData(key: TOKEN_KEY);
+
+
+
+              dynamic id = await helper.readSecureData(key: CUSTOMER_ID_KEY);
+    customerId = int.parse(id);
+  //  print("Customer id in profile$customerId");
+
+  }
+
+  checkoutCheckStatus() async {
+
+
+    if (token != null) {
+      Get.toNamed("/add-address-page");
+    } else {
+      Get.toNamed("/sign-up-page");
+    }
+  }
 
 
 }

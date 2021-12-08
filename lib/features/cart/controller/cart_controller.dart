@@ -21,10 +21,9 @@ class CartController extends GetxController {
   RxString customId = RxString("");
 
 
-
   ///clearing cart controller
 
-  clearCartController(){
+  clearCartController() {
     mAddToCartList.clear();
     totalPrice.value = 0.0;
     deliveryFee.value = 0;
@@ -32,7 +31,7 @@ class CartController extends GetxController {
     grandTotal.value = 0;
     progressBarRealWidth.value = 0;
     progressBarSizeBoxWidth.value = 0;
-     cartAppBarBackArrow.value = false;
+    cartAppBarBackArrow.value = false;
   }
 
   @override
@@ -40,9 +39,9 @@ class CartController extends GetxController {
     super.onInit();
 
     helper = Get.put(SecureStorageHelper());
+    token = await helper.readSecureData(key: TOKEN_KEY);
 
     checkLoginOrNot();
-
 
     //mAddToCartList.addAll(zAddToCartList);
     if (mAddToCartList.isNotEmpty) {
@@ -154,7 +153,7 @@ class CartController extends GetxController {
     }
   }
 
-
+  
   checkoutCheckStatus() async{
 
    dynamic test = await helper.readSecureData(key: TOKEN_KEY) ;
@@ -166,5 +165,4 @@ class CartController extends GetxController {
        Get.toNamed("/sign-up-page");
     }
   }
-
 }

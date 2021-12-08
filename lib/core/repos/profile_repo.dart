@@ -23,7 +23,7 @@ class ProfileRepo {
   Future<HttpGetResult<ProfileModel>> getProfile({required int cutomerId}) async {
     
     
-    HttpCustomResponse response =  await _httpService.getDataWithHeader("customer/profile.php?id=$cutomerId");
+    HttpCustomResponse response =  await _httpService.getDataWithHeader("customer/profile.php?id=129");
 
     print("data profile${response.mData}");
     if(response.isSuccessful) {

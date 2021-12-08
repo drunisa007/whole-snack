@@ -134,27 +134,26 @@ class BuildSignUpPageBody extends StatelessWidget {
                         ),
                         BuildCustomButton(
                             haveCorner: false,
-                            action: () async => {
-                               /*   if (controller.isLoading == true)
+                            action: ()  async => {
+                               await controller.getLoginData(nameController.text,phoneController.text,context),
+                            /*  print(nameController.text),
+                            if (controller.isLoading)
                                     {
                                       showLoaderDialog(context),
 
-                                    },*/
+                                    } else {
+                              Get.back(),
+                    Get.toNamed("/otp-page"),
 
-                                  await controller.getLoginData(nameController.text,phoneController.text),
+                            },
+*/
 
-                                  //showLoaderDialog(context),
 
-                                  if (controller.isSuccessful)
-                                    {
-                                      print(controller.isSuccessful),
-                                      Get.toNamed("/otp-page",arguments: [nameController.text,phoneController.text]),
-                                    }
-                                  else
-                                    {
-                                      print(controller.isSuccessful),
 
-                                    }
+
+
+
+
                                 },
                             title: "Verify Phone Number"),
                       ],
@@ -176,7 +175,7 @@ class BuildSignUpPageBody extends StatelessWidget {
     );
   }
 
-  showLoaderDialog(context) {
+/*  showLoaderDialog(context) {
     AlertDialog alert = AlertDialog(
       content: new Row(
         children: [
@@ -189,14 +188,16 @@ class BuildSignUpPageBody extends StatelessWidget {
       ),
     );
     showDialog(
-      barrierDismissible: true,
+      barrierDismissible:false,
       context: context,
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 20), () {
-          Navigator.of(context).pop(true);
-        });
+
+         // Navigator.of(context).pop(true);
+
         return alert;
       },
     );
-  }
+  }*/
+
+
 }

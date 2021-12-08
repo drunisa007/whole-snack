@@ -165,7 +165,7 @@ Widget _buildAddAddressForm(BuildContext context, SizeConfig sizeConfig,
 
 
           showLoaderDialog(context),
-          await controller.addNewAddress(AddAddressModel(cusId: "56", regId: controller.regionId, cusAddress: addressController.text)),
+          await controller.addNewAddress(AddAddressModel(cusId: "${controller.customerId.toString()}", regId: controller.regionId, cusAddress: addressController.text)),
 
           Get.back(),
 
