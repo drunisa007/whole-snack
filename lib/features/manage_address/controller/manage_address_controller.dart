@@ -19,32 +19,37 @@ class ManageAddressController extends GetxController {
   CartController mCartController= Get.find<CartController>();
 
   ManageAddressController() {
-
     getAddressRepo = Get.put(GetAddressRepo());
-
-    getMyAddress();
-
   }
 
 
+  RxBool loading = RxBool(true);
+  RxString errorMessage = RxString("");
 
   getMyAddress() async{
-
     if(mCartController.token.isNotEmpty){
+      loading.value = true;
       HttpGetResult<AddressModel> result = await getAddressRepo.getAddress(customerId: mCartController.customId.value.toString());
-      addressList.clear();
-      addressList.addAll(result.mData);
+     loading.value =false;
+
+     if(result.isSuccessful){
+       addressList.clear();
+       addressList.addAll(result.mData);
+       errorMessage.value = "";
+     }
+     else{
+       errorMessage.value= result.errorMessage;
+     }
+    }
+    else{
+      loading.value =false;
+      errorMessage.value = "no token";
     }
 
-
-
     //print(addressList);
-
-
   }
 
   deleteAddress(String id) async {
-
 
     HttpCustomResponse response = await getAddressRepo.deleteAddress(id);
     addressList.clear();

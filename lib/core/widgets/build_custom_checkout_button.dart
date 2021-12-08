@@ -22,7 +22,7 @@ class BuildCustomCheckoutButton extends StatelessWidget {
     return Obx((){
       return Material(
         borderRadius: BorderRadius.circular(6.sp),
-        color: mCartController.mAddToCartList.length > 0
+        color: mCartController.token.value.isEmpty? Theme.of(context).primaryColor:mCartController.mAddToCartList.length > 0
             ? Theme.of(context).primaryColor
             : Colors.grey,
         shadowColor: Colors.grey,

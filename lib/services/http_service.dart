@@ -100,6 +100,8 @@ class HttpService {
       var url = Uri.parse(baseUrl + uri);
       http.Response response = await http.get(url, headers: getHeader());
 
+      print("response is address $response");
+
       // http.Response response  = await http.get(url);
       if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);

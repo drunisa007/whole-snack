@@ -4,24 +4,32 @@ import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 import 'package:whole_snack/features/otp_page/controller/otp_page_controller.dart';
+import 'package:whole_snack/features/otp_page/view/build_opt_text_form_design.dart';
 
 class BuildOtpPageBody extends StatelessWidget {
    BuildOtpPageBody({Key? key}) : super(key: key);
 
-   final sizeConfig = Get.find<SizeConfig>();
-   final controller = Get.find<OtpPageController>();
+
 
   @override
   Widget build(BuildContext context) {
-    sizeConfig.init(context);
+
     TextEditingController box1 = TextEditingController();
     TextEditingController box2 = TextEditingController();
     TextEditingController box3 = TextEditingController();
     TextEditingController box4 = TextEditingController();
-    String otp = "";
+
+    final sizeConfig = Get.find<SizeConfig>();
+    sizeConfig.init(context);
+    OtpPageController controller = Get.find<OtpPageController>();
+
 
     var data = Get.arguments;
+
+
+
     return SingleChildScrollView(
 
 
@@ -36,10 +44,6 @@ class BuildOtpPageBody extends StatelessWidget {
                   left: 0,
                   right: 0,
                   top:0,
-
-
-
-
                   child: Image.asset("assets/images/cover.png",fit: BoxFit.cover,)),
 
               Positioned(
@@ -47,10 +51,6 @@ class BuildOtpPageBody extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 right: 0,
-
-
-
-
                 child:  Container(
                     padding: EdgeInsets.all(kDefaultMargin),
                     decoration: BoxDecoration(
@@ -69,29 +69,24 @@ class BuildOtpPageBody extends StatelessWidget {
                             fontWeight: FontWeight.bold
                         ),),
 
-                        Text("Enter 4-digits SMS code to continue.",style: TextStyle(
-
-                            color:  Theme.of(context).colorScheme.onPrimary,fontSize: kMediumFontSize12.sp
-                        ),),
-
                         SizedBox(
                           height: 16,
                         ),
 
-
-                        Row(
+                     BuildOtpTextFormDesign(),
+                      /*  Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _box(context,sizeConfig.safeBlockVertical*6,box1),
                             _box(context,sizeConfig.safeBlockVertical*6,box2),
                             _box(context,sizeConfig.safeBlockVertical*6,box3),
                             _box(context,sizeConfig.safeBlockVertical*6,box4),
-                       /*     _box(context,sizeConfig.safeBlockVertical*6),
-                            _box(context,sizeConfig.safeBlockVertical*6),*/
+                       *//*     _box(context,sizeConfig.safeBlockVertical*6),
+                            _box(context,sizeConfig.safeBlockVertical*6),*//*
 
 
                           ],
-                        ),
+                        ),*/
                         SizedBox(
                           height: 8,
                         ),
@@ -104,7 +99,7 @@ class BuildOtpPageBody extends StatelessWidget {
                             ),),
                             TextSpan(text: "30s",style: TextStyle(
 
-                                color:  Theme.of(context).primaryColor,fontSize: kMediumFontSize12.sp
+                                color:  Colors.transparent,fontSize: kMediumFontSize12.sp
                             ),),
 
                           ]
@@ -112,14 +107,26 @@ class BuildOtpPageBody extends StatelessWidget {
                         SizedBox(
                           height: 24,
                         ),
-                        BuildCustomButton(haveCorner: false, action: () async=> {
+                        BuildCustomButton(haveCorner: false, action: (){
 
-                         otp =  box1.text+box2.text+box3.text+box4.text,
 
-                          print(otp),
-                          print("${data[0]} hahahah"),
+                          if(controller.mOptCodeList.length==4){
 
-                          await controller.getOpt(name: data[0], phone: data[1], otp: otp,context: context),
+                            controller.getOpt(name: data[0], phone: data[1], otp: controller.createOptCode(),context: context);
+                          }
+                          else{
+                            if(!Get.isSnackbarOpen){
+                              Get.snackbar("Opt Code", "Please fill otp code correctly.",duration: Duration(milliseconds: 500));
+                            }
+
+                          }
+
+                         // otp =  box1.text+box2.text+box3.text+box4.text,
+                         //
+                         //  print(otp),
+                         //  print("${data[0]} hahahah"),
+                         //
+                         //  await controller.getOpt(name: data[0], phone: data[1], otp: otp,context: context),
 
 
                         }, title: "Confirm Otp"),
