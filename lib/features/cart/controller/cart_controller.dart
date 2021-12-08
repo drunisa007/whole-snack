@@ -17,7 +17,7 @@ class CartController extends GetxController {
   RxBool cartAppBarBackArrow = false.obs;
 
   late SecureStorageHelper helper;
-  RxString token = RxString("");
+  RxString  token = RxString("");
   RxString customId = RxString("");
 
 
@@ -39,9 +39,8 @@ class CartController extends GetxController {
     super.onInit();
 
     helper = Get.put(SecureStorageHelper());
-    token = await helper.readSecureData(key: TOKEN_KEY);
 
-    checkLoginOrNot();
+   await checkLoginOrNot();
 
     //mAddToCartList.addAll(zAddToCartList);
     if (mAddToCartList.isNotEmpty) {

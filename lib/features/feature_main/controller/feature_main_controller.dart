@@ -32,9 +32,12 @@ class FeatureMainController extends GetxController{
     /// 2 is main page state
     RxInt authPosition = 0.obs;
 
+    //cart controller
+
     @override
     void onInit() {
       super.onInit();
+
     }
 
 

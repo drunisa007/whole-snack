@@ -9,12 +9,16 @@ import 'package:whole_snack/features/order/view/order_page_all_widget.dart';
 class OrderPage extends StatelessWidget {
 
 
-  SizeConfig sizeConfig  = Get.find<SizeConfig>();
-  final controller = Get.find<OrderController>();
+
 
   @override
   Widget build(BuildContext context) {
+
+    SizeConfig sizeConfig  = Get.find<SizeConfig>();
+
     sizeConfig.init(context);
+    final controller = Get.find<OrderController>();
+    controller.FetchOrderController();
     return ScreenUtilInit(
       builder : ()=> Scaffold(
         appBar: SimpleAppBar(title: "Order History",haveBackArrow: false,action: ()=> print("good"),),

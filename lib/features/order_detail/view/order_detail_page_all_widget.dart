@@ -299,12 +299,7 @@ Widget _buildDeliveryRiderProfile(BuildContext context, SizeConfig sizeConfig,
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: Image.asset(
-                "assets/images/profile.jpg",
-                width: sizeConfig.safeBlockVertical * 8,
-                height: sizeConfig.safeBlockVertical * 8,
-                fit: BoxFit.cover,
-              )),
+              child: Icon(Icons.account_circle,size: sizeConfig.blockSizeHorizontal*8,)),
           SizedBox(
             width: 16,
           ),
@@ -323,7 +318,7 @@ Widget _buildDeliveryRiderProfile(BuildContext context, SizeConfig sizeConfig,
           ),
           Spacer(),
           GestureDetector(
-            onTap:()=> supportPageController.launchPhoneDialer(controller.orderInfoList[0].riderPhone),
+            onTap:()=> supportPageController.launchLinks(controller.orderInfoList[0].riderPhone, ),
             child: CircleAvatar(
                 maxRadius: sizeConfig.blockSizeVertical*2,
                 backgroundColor: Theme.of(context).primaryColor,

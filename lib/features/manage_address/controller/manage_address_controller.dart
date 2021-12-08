@@ -6,6 +6,7 @@ import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
 import 'package:whole_snack/core/model/service_model/http_get_result.dart';
 import 'package:whole_snack/core/repos/get_address_repo.dart';
 import 'package:whole_snack/core/repos/helper/secure_storage_helper.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 
 class ManageAddressController extends GetxController {
 
@@ -14,32 +15,27 @@ class ManageAddressController extends GetxController {
 
   RxList<AddressModel> addressList = RxList();
 
-  late dynamic customerId;
-  late SecureStorageHelper helper;
 
-
+  CartController mCartController= Get.find<CartController>();
 
   ManageAddressController() {
+
     getAddressRepo = Get.put(GetAddressRepo());
-    initState();
+
     getMyAddress();
 
   }
 
-  initState() async {
 
-    helper = Get.put(SecureStorageHelper());
-    customerId = await helper.readSecureData(key: CUSTOMER_ID_KEY);
-
-  }
 
   getMyAddress() async{
 
-    HttpGetResult<AddressModel> result = await getAddressRepo.getAddress(customerId: customerId.toString());
+    if(mCartController.token.isNotEmpty){
+      HttpGetResult<AddressModel> result = await getAddressRepo.getAddress(customerId: mCartController.customId.value.toString());
+      addressList.clear();
+      addressList.addAll(result.mData);
+    }
 
-    addressList.clear();
-
-    addressList.addAll(result.mData);
 
 
     //print(addressList);

@@ -16,6 +16,8 @@ import 'package:whole_snack/features/order_detail/controller/order_detail_page_c
 class FeatureMainBinding extends Bindings{
   @override
   void dependencies() {
+    Get.lazyPut(() => SecureStorageHelper());
+    Get.lazyPut(() => CartController());
     Get.lazyPut(() => FeatureMainController());
     Get.lazyPut(() => RegisterRepo());
     Get.lazyPut(() => SizeConfig());
@@ -24,10 +26,9 @@ class FeatureMainBinding extends Bindings{
     Get.lazyPut(() => CategoryController());
     Get.lazyPut(() => TypeRepo());
     Get.lazyPut(() => ItemRepo());
-    Get.lazyPut(() => CartController());
     Get.lazyPut(() => OrderController());
     Get.lazyPut(() => AccountController());
-    Get.lazyPut(() => SecureStorageHelper());
+
 
   }
 
