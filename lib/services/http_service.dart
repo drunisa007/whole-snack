@@ -25,7 +25,7 @@ class HttpService {
       // ,headers: getHeader()
       var url = Uri.parse(baseUrl + uri);
       http.Response response =
-          await http.get(url, headers: {"Authorization": "$token"});
+          await http.get(url, headers: {"Authorization": "${token.toString()}"});
       if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
       } else {

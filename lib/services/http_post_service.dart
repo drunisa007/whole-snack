@@ -17,13 +17,8 @@ class HttpPostService {
 
   late SecureStorageHelper helper;
 
-
   HttpPostService() {
-
-    helper = Get.put(SecureStorageHelper());
     initData();
-    token = helper.readSecureData(key: TOKEN_KEY).toString();
-    print(token);
   }
 
   ///this will use to send address data
@@ -34,37 +29,22 @@ class HttpPostService {
         headers: getHeader(), body: jsonEncode(addAddressModel.toJson()));
 
     if (response.statusCode == 200) {
-     // print("success");
+      // print("success");
       return HttpCustomResponse('', 200, "", true);
     } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
-     // print(response.statusCode);
+      // print(response.statusCode);
 
       throw Exception('Failed to add address');
     }
   }
 
-  /*Future<HttpCustomResponse> deleteAddress(String id) async {
-    var uri = Uri.parse('$API/customer/deleteaddress.php?id=$id');
-    final response = await http.delete(uri,
-        headers: getHeader(), body: jsonEncode(model.toJson()));
-
-    if (response.statusCode == 200) {
-      //print(response.statusCode);
-      return HttpCustomResponse('', response.statusCode, response.body, true);
-    } else {
-      //print(response.statusCode);
-      return HttpCustomResponse('', response.statusCode, [], false);
-      print(response.statusCode);
-    }
-  }*/
-
-
-  initData() {
+  initData() async {
     baseUrl = "$API";
     helper = Get.put(SecureStorageHelper());
-    token = helper.readSecureData(key: TOKEN_KEY);
+    var test = await helper.readSecureData(key: TOKEN_KEY);
+    token = test.toString();
   }
 
   getHeader() {
@@ -75,12 +55,13 @@ class HttpPostService {
   }
 
   Future<HttpCustomResponse> register(String name, String phoneNumber) async {
-
-
     var uri = Uri.parse('$API/customer/userregister.php');
     final response = await http.post(uri,
         headers: getHeader(),
-        body: jsonEncode({"name": "$name", "phone": "$phoneNumber",}));
+        body: jsonEncode({
+          "name": "$name",
+          "phone": "$phoneNumber",
+        }));
 
     if (response.statusCode == 200) {
       //print(response.statusCode);
@@ -95,7 +76,8 @@ class HttpPostService {
   Future<HttpCustomResponse> sendOtp(
       String name, String phone, String otp) async {
     //print("name $name phone $phone $otp is otp");
-    print(jsonEncode(jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"})));
+    print(jsonEncode(
+        jsonEncode({"name": "$name", "phone": "$phone", "otp": "$otp"})));
     var uri = Uri.parse('https://seinwholesale.com/api/customer/verify.php');
     final response = await http.post(uri,
         // headers: getHeader(),
@@ -122,19 +104,16 @@ class HttpPostService {
       //print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, response.body, true);
     } else {
-     // print(response.statusCode);
+      // print(response.statusCode);
       return HttpCustomResponse('', response.statusCode, [], false);
       print(response.statusCode);
     }
   }
 
   Future<HttpCustomResponse> updateProfile(ProfileModel model) async {
-
-
     var uri = Uri.parse('$API/customer/updateprofile.php');
     final response = await http.post(uri,
-        headers: getHeader(),
-        body: jsonEncode(model.toJson()));
+        headers: getHeader(), body: jsonEncode(model.toJson()));
 
     if (response.statusCode == 200) {
       //print(response.statusCode);

@@ -23,7 +23,12 @@ Widget accountPageAllWidget(
           color: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: kDefaultMargin, vertical: 16),
           child: _buildSubSettinList(context, controller, sizeConfig,
-              "assets/images/logout.svg", "Log Out", () => Get.toNamed("/order-success-page"), !isArrow)),
+              "assets/images/logout.svg", "Log Out", () => {
+
+
+            controller.logout(),
+
+              }, !isArrow)),
       SizedBox(
         height: 16,
       ),
@@ -74,7 +79,12 @@ Widget _buildProfileWidget(
             width: 16,
           ),
           Obx(
-              ()=>controller.myProfile.length==0?Text('No Image') :   RichText(
+              ()=>controller.token==null?GestureDetector(
+                  onTap: () {
+
+                    controller.checkoutCheckStatus();
+                  },
+                  child: Text('Sign in',style: TextStyle(fontWeight: FontWeight.w600,color: Theme.of(context).primaryColor),)) :   RichText(
                 text: TextSpan(children: [
                   TextSpan(
                       text: "${controller.myProfile[0].cusName}\n",
@@ -94,7 +104,8 @@ Widget _buildProfileWidget(
           GestureDetector(
             onTap: () => {
 
-              Get.toNamed("/edit-profile-page",arguments: controller.myProfile)},
+            controller.checkoutCheckStatus()
+            },
             child: Text("Edit",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
@@ -111,7 +122,10 @@ Widget _buildSetting(
 
   List<Widget> settingList = [
     _buildSubSettinList(context, controller, sizeConfig, "assets/images/location_icon.svg",
-        "Manage Address", () =>Get.toNamed("/manage-address-page"), isArrow),
+        "Manage Address", () =>{
+
+      controller.checkoutCheckStatus()
+        }, isArrow),
     Divider(),
     _buildSubSettinList(context, controller, sizeConfig, "assets/images/head_phone.svg",
         "Customer Support", () => Get.toNamed("/customer-support-page"), isArrow),

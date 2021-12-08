@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
 
@@ -14,7 +13,7 @@ import 'package:whole_snack/features/order/controller/order_controller.dart';
 Widget orderPageAllWidget(
     BuildContext context, SizeConfig sizeConfig, OrderController controller) {
   bool isDate = true;
-  int orderStatus = 01;
+
 
   return Container(
     margin: EdgeInsets.all(kDefaultMargin),
@@ -64,7 +63,7 @@ Widget orderPageAllWidget(
           height: 12,
         ),
         Obx(
-          () => Flexible(
+          () =>  Flexible(
             child: controller.orderItemList.length == 0
                 ? CircularProgressIndicator(
                     color: Theme.of(context).primaryColor,
@@ -84,7 +83,7 @@ Widget orderPageAllWidget(
 
                         },
                         child: _buildOrderHistoryCard(
-                            context, sizeConfig, controller, orderStatus, index),
+                            context, sizeConfig, controller, index),
                       );
                     },
                   ),
@@ -147,13 +146,15 @@ Widget _buildFilter(
 
 ///build order histroy  card style
 Widget _buildOrderHistoryCard(BuildContext context, SizeConfig sizeConfig,
-    OrderController controller, int orderStatus, int index) {
+    OrderController controller, int index) {
   String orderStatusText = "";
   Color color = Color(0xaa0400B7);
   Color cancelButtonColor = Theme.of(context).colorScheme.onPrimary;
 
   ///check orderStatusTExt
   switch (controller.orderItemList[index].ordStatus) {
+
+
     case "0":
       color = Color(0xff0400B7);
       cancelButtonColor = Color(0xff3D3D3D);
@@ -173,7 +174,7 @@ Widget _buildOrderHistoryCard(BuildContext context, SizeConfig sizeConfig,
       cancelButtonColor = Color(0xffC4C4C4);
   }
 
-  return Card(
+  return controller.orderItemList.length ==0 ? Text("No Data Found")  : Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     child: Container(
       margin: EdgeInsets.all(kDefaultMargin),

@@ -20,10 +20,9 @@ class CartController extends GetxController {
   late dynamic token;
 
 
-
   ///clearing cart controller
 
-  clearCartController(){
+  clearCartController() {
     mAddToCartList.clear();
     totalPrice.value = 0.0;
     deliveryFee.value = 0;
@@ -31,7 +30,7 @@ class CartController extends GetxController {
     grandTotal.value = 0;
     progressBarRealWidth.value = 0;
     progressBarSizeBoxWidth.value = 0;
-     cartAppBarBackArrow.value = false;
+    cartAppBarBackArrow.value = false;
   }
 
   @override
@@ -39,7 +38,7 @@ class CartController extends GetxController {
     super.onInit();
 
     helper = Get.put(SecureStorageHelper());
-    token = await  helper.readSecureData(key: TOKEN_KEY);
+    token = await helper.readSecureData(key: TOKEN_KEY);
 
 
     //mAddToCartList.addAll(zAddToCartList);
@@ -128,28 +127,13 @@ class CartController extends GetxController {
     }
   }
 
-
-  checkoutCheckStatus() async{
-
-   dynamic test = await helper.readSecureData(key: TOKEN_KEY) ;
+  checkoutCheckStatus() async {
 
 
-
-
-    if( token != null) {
-
-
-
+    if (token != null) {
       Get.toNamed("checkout-page");
-
-    }
-     else {
-
-
-       Get.toNamed("/sign-up-page");
-
-
+    } else {
+      Get.toNamed("/sign-up-page");
     }
   }
-
 }

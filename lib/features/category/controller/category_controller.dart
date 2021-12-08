@@ -18,18 +18,16 @@ class CategoryController extends GetxController {
   }
 
   changeCategoryIndex(int index, String id) async {
-
     if (index != selectedCategoryIndex.value) {
       selectedPrevent.value = true;
       selectedCategoryIndex.value = index;
       selectedTypeId.value = "";
 
-
       if (id == mainCategoryId.value) {
         onLoad.value = true;
         mainCategoryId.value = id;
-         fetchingType(id);
-         fetchingItemList(id, true);
+        fetchingType(id);
+        fetchingItemList(id, true);
       } else {
         selectedTypeIndex.value = -1;
         mainCategoryId.value = id;
@@ -101,15 +99,12 @@ class CategoryController extends GetxController {
   ///loading == true mean load list value false mean refresh list value
 
   fetchingItemList(categoryId, bool loading, {String typeId = ""}) async {
-
     itemLoading.value = true;
 
     if (!loading) {
       mItemList.clear();
       currentPage.value = 1;
     }
-
-
 
     if (currentPage.value <= totalPage.value) {
       HttpGetResult<ItemModel> mResult;
@@ -119,14 +114,12 @@ class CategoryController extends GetxController {
         mResult = await mItemRepo.getItem(categoryId, typeId, currentPage);
       }
 
-
       if (mResult.isSuccessful) {
         itemErrorMessage.value = "";
         totalPage.value = int.parse(mResult.errorMessage);
         mItemList.addAll(mResult.mData);
         currentPage.value = currentPage.value + 1;
         itemLoading.value = false;
-
       } else {
         itemErrorMessage.value =
             "Please check your internet connection or refresh";
