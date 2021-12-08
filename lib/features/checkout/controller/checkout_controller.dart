@@ -59,14 +59,6 @@ class CheckOutController extends GetxController{
                 "cart": mListCart
               };
 
-              showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    title: Text('Please wait . . .'),
-                    content: Text('Processing your order.'),
-                  )
-              );
-
               HttpRegisterResult mResult = await mOrderRepo.submitOrder(body);
               if (mResult.isSuccessful) {
                  mCartController.clearCartController();
@@ -78,6 +70,7 @@ class CheckOutController extends GetxController{
                  Get.offAndToNamed("/order-success-page");
               }
               else {
+                Get.back();
                 showSnackBarOrder("Order Submit Fail", "please check your internet connection or refresh again");
               }
 

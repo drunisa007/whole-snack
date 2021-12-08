@@ -46,7 +46,7 @@ class HttpPostService {
    dynamic test = await helper.readSecureData(key: TOKEN_KEY);
     token = test.toString();
 
-    print("post in token $token");
+    //print("post in token $token");
   }
 
   getHeader() {

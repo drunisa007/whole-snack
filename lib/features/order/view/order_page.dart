@@ -8,9 +8,6 @@ import 'package:whole_snack/features/order/view/order_page_all_widget.dart';
 
 class OrderPage extends StatelessWidget {
 
-
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -19,12 +16,10 @@ class OrderPage extends StatelessWidget {
     sizeConfig.init(context);
     final controller = Get.find<OrderController>();
     controller.FetchOrderController();
-    return ScreenUtilInit(
-      builder : ()=> Scaffold(
-        appBar: SimpleAppBar(title: "Order History",haveBackArrow: false,action: ()=> print("good"),),
-        body: Center(
+    return Scaffold(
+      appBar: SimpleAppBar(title: "Order History",haveBackArrow: false,action: ()=> print("good"),),
+      body: Center(
           child: orderPageAllWidget(context, sizeConfig, controller)
-        ),
       ),
     );
   }

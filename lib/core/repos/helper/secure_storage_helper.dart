@@ -9,7 +9,7 @@ class SecureStorageHelper{
   Future readSecureData({required String key}) async {
     var readData = await _storage.read(key: key);
 
-    print(readData);
+    //print(readData);
     return readData;
   }
   Future deleteSecureData({required String key}) async{

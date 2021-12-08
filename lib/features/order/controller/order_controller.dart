@@ -20,14 +20,22 @@ class OrderController extends GetxController {
           .toString()
           .substring(0, 10);
 
+  var tempDate1 = DateTime(
+      DateTime.now().year, DateTime.now().month, DateTime.now().day-1)
+      .toString()
+      .substring(0, 10);
+  var tempDate2 =
+  DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day+1)
+      .toString()
+      .substring(0, 10);
+
   late OrderRepo orderRepo;
   late OrderDetailPageController _detailPageController;
 
   RxInt mOrdId = RxInt(-1);
   RxList<OrderInfoModel> orderItemList = RxList();
-  RxBool isloading = true.obs;
-  RxBool isSuccessful = false.obs;
-  RxString erroMessage = RxString("");
+  RxBool loading = RxBool(true);
+  RxString errorMessage = RxString("");
 
 
   CartController mCartController = Get.find<CartController>();
@@ -51,12 +59,10 @@ class OrderController extends GetxController {
 
       getOrderInfoList(OrderDateFilterModel(
           customerId: mCartController.customId.value.toString(), from: temp1, to: temp2));
-
-      print("token in cart conteroller");
     }
      else {
-
-       print("no token in cart conteroller");
+       loading.value = false;
+       errorMessage.value = "auth";
     }
   }
 
@@ -95,33 +101,26 @@ class OrderController extends GetxController {
     );
     String date = result.toString().substring(0, 10);
 
-    id == 1 ? firstDate = date : secondDate = date;
+    id == 1 ? tempDate1 = date : tempDate2 = date;
     update();
   }
 
   getOrderInfoList(OrderDateFilterModel model) async {
 
-    isloading.value = true;
+    loading.value = true;
     HttpGetResult<OrderInfoModel> result =
         await orderRepo.getFilterOrderInfo(model);
-
-    orderItemList.clear();
-    isloading.value = false;
-
+    loading.value = false;
     if(result.isSuccessful) {
-
-      erroMessage.value = "";
+      errorMessage.value = "";
+      orderItemList.clear();
       orderItemList.addAll(result.mData.reversed);
     }
 
     else {
-
-      erroMessage.value = "No Data Found";
+      errorMessage.value = result.errorMessage;
     }
 
-
-
-    print(orderItemList.length);
   }
 
   getByDate(var date1, var date2) {
