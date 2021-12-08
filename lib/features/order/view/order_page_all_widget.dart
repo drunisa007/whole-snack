@@ -64,9 +64,9 @@ Widget orderPageAllWidget(
         ),
         Obx(
           () =>  Flexible(
-            child: controller.orderItemList.length == 0
-                ? Text("No Order Found")
-                : ListView.builder(
+            child: controller.isloading.value?
+                 CircularProgressIndicator(color: Theme.of(context).primaryColor,)
+                : controller.isSuccessful.value?Text(controller.erroMessage.value) :  ListView.builder(
                     itemCount: controller.orderItemList.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -131,10 +131,7 @@ Widget _buildFilter(
 
                           controller.getByDate(
                               controller.firstDate, controller.secondDate),
-                       /*   controller.getOrderInfoList(OrderDateFilterModel(
-                              customerId: controller.customerId.toString(),
-                              from: controller.firstDate,
-                              to: controller.secondDate)),*/
+
                         },
                     title: "Apply")),
       ],

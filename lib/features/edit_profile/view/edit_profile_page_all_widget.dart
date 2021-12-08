@@ -6,17 +6,18 @@ import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/profile_model.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
+import 'package:whole_snack/features/account/controller/account_controller.dart';
 import 'package:whole_snack/features/edit_profile/controller/edit_profile_page_controller.dart';
 
 Widget editProfilePageAllWidget(BuildContext context,
-    EditProfilePageController controller, SizeConfig sizeConfig) {
-  return _buildEditProfileBody(context, controller, sizeConfig);
+    EditProfilePageController controller, SizeConfig sizeConfig,AccountController mAccountController) {
+  return _buildEditProfileBody(context, controller, sizeConfig,mAccountController);
 }
 
 Widget _buildEditProfileBody(BuildContext context,
-    EditProfilePageController controller, SizeConfig sizeConfig) {
+    EditProfilePageController controller, SizeConfig sizeConfig,AccountController mAccountController) {
 
-  List<ProfileModel> data = Get.arguments;
+
   TextEditingController nameController = TextEditingController();
   return Container(
     height: double.infinity,
@@ -53,7 +54,7 @@ Widget _buildEditProfileBody(BuildContext context,
                             color: Theme.of(context).colorScheme.onPrimary,
                             fontSize: kLargeFontSize14.sp,
                             fontWeight: FontWeight.bold),
-                        hintText: data.length==0? "Enter Your Name" : data[0].cusName ,
+                        hintText: mAccountController.myProfile.length==0? "Enter Your Name" : mAccountController.myProfile[0].cusName,
                         fillColor: Colors.grey.withOpacity(0.1),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
@@ -67,9 +68,9 @@ Widget _buildEditProfileBody(BuildContext context,
      BuildCustomButton(haveCorner: false, action: ()=> {
 
 
-       print(data[0]),
-       controller.updateProfile(ProfileModel(cusId: data[0].cusId, cusName: nameController.text, cusPhone: data[0].cusPhone, createdAt: data[0].createdAt)),
-       Get.back()
+
+       controller.updateProfile(mAccountController.myProfile[0],context),
+       ///Get.back()
 
      }, title: "Update Profile"),
                   SizedBox(
@@ -82,8 +83,10 @@ Widget _buildEditProfileBody(BuildContext context,
           height: sizeConfig.blockSizeHorizontal * 18,
           top: sizeConfig.blockSizeHorizontal * 8,
           child:ClipRRect(
+
               borderRadius: BorderRadius.circular(100),
-              child: Image.asset("assets/images/profile.jpg",fit: BoxFit.fill,  height: sizeConfig.blockSizeHorizontal * 18, width: sizeConfig.blockSizeHorizontal * 18,)),
+              child: Icon(Icons.photo_camera,color : Colors.grey,size: sizeConfig.blockSizeHorizontal * 18,)
+          ),
         ),
         Positioned(
             height: sizeConfig.blockSizeHorizontal * 6,

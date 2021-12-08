@@ -23,11 +23,11 @@ import 'package:whole_snack/core/utils/theme.dart';
   // await Hive.openBox('apiBox');
   // await Hive.openBox('customerBox');
 
-  runApp(const MyApp());
-/*  runApp(DevicePreview(
+  //runApp(const MyApp());
+  runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => MyApp(), // Wrap your app
-  ));*/
+  ));
 }
 
 class MyApp extends StatelessWidget {

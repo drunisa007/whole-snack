@@ -22,13 +22,11 @@ class AccountController extends GetxController {
 
   CartController mCartController = Get.find<CartController>();
 
-  AccountController() {
+  fetchData() {
     profileRepo = Get.put(ProfileRepo());
 
     getProfileInfo();
-    /* if(mCartController.token.value.isNotEmpty){
-      profileRepo.getProfile(cutomerId: mCartController.customId.value.toString());
-    }*/
+
 
     //getProfileInfo();
   }

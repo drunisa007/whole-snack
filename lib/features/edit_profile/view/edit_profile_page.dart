@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/appbar/appbar_with_back_arrow.dart';
+import 'package:whole_snack/features/account/controller/account_controller.dart';
 import 'package:whole_snack/features/edit_profile/controller/edit_profile_page_controller.dart';
 import 'package:whole_snack/features/edit_profile/view/edit_profile_page_all_widget.dart';
 
@@ -12,6 +13,7 @@ class EditProfilePage extends StatelessWidget {
 
   final sizeConfig = Get.find<SizeConfig>();
   final controller = Get.find<EditProfilePageController>();
+  final AccountController mAccountController = Get.find<AccountController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class EditProfilePage extends StatelessWidget {
     Scaffold(
       appBar: getAppBarWithBackArrow("Edit My Profile", sizeConfig, ()=>Get.back()),
 
-      body: editProfilePageAllWidget(context, controller, sizeConfig),
+      body: editProfilePageAllWidget(context, controller, sizeConfig,mAccountController),
     ));
   }
 }

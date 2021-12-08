@@ -97,7 +97,7 @@ class BuildItemTypeSingleDesign extends StatelessWidget {
               onLoading: _onLoading,
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 1 / 1.25),
+                    crossAxisCount: 2, childAspectRatio: 1.2/ 1.5),
                 itemCount: mCategoryController.mItemList.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
