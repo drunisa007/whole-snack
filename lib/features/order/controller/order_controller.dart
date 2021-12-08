@@ -25,6 +25,9 @@ class OrderController extends GetxController {
 
   RxInt mOrdId = RxInt(-1);
   RxList<OrderInfoModel> orderItemList = RxList();
+  RxBool isloading = true.obs;
+  RxBool isSuccessful = false.obs;
+  RxString erroMessage = RxString("");
 
 
   CartController mCartController = Get.find<CartController>();
@@ -98,11 +101,25 @@ class OrderController extends GetxController {
 
   getOrderInfoList(OrderDateFilterModel model) async {
 
+    isloading.value = true;
     HttpGetResult<OrderInfoModel> result =
         await orderRepo.getFilterOrderInfo(model);
-    orderItemList.clear();
 
-    orderItemList.addAll(result.mData);
+    orderItemList.clear();
+    isloading.value = false;
+
+    if(result.isSuccessful) {
+
+      erroMessage.value = "";
+      orderItemList.addAll(result.mData.reversed);
+    }
+
+    else {
+
+      erroMessage.value = "No Data Found";
+    }
+
+
 
     print(orderItemList.length);
   }

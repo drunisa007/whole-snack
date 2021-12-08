@@ -4,13 +4,15 @@ import 'package:whole_snack/core/model/data_model/profile_model.dart';
 import 'package:whole_snack/core/model/service_model/http_custom_response.dart';
 import 'package:whole_snack/core/repos/helper/secure_storage_helper.dart';
 import 'package:whole_snack/core/repos/profile_repo.dart';
+import 'package:whole_snack/core/widgets/loading_dialog.dart';
 
 class EditProfilePageController extends GetxController {
 
-  RxString name=RxString("");
+
   late ProfileRepo _repo;
-  late int customerId;
-  late dynamic token;
+
+  RxBool isLoading = true.obs;
+  RxBool isSuccessful  = false.obs;
   late SecureStorageHelper helper;
   EditProfilePageController() {
 
@@ -18,24 +20,29 @@ class EditProfilePageController extends GetxController {
 
   }
 
-  updateProfile(ProfileModel model) async{
+  updateProfile(ProfileModel model,context) async{
 
+    isLoading.value = true;
+    showLoaderDialog(context);
     HttpCustomResponse response = await  _repo.updateProfile(model);
 
-    print(response);
+
+    isLoading.value =false;
+
+    Get.back();
+    if(response.isSuccessful) {
+
+      isSuccessful.value = true;
+      Get.back();
+    }
+    else {
+
+      isSuccessful.value = false;
+    }
   }
 
 
 
-  getToken() async {
-    helper = Get.put(SecureStorageHelper());
 
-    token = await helper.readSecureData(key: TOKEN_KEY);
-
-    dynamic id = await helper.readSecureData(key: CUSTOMER_ID_KEY);
-    customerId = int.parse(id);
-    print("Customer id in profile$customerId");
-
-  }
 
 }

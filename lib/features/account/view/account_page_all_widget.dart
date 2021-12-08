@@ -8,32 +8,36 @@ import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/account/controller/account_controller.dart';
 import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 
-Widget accountPageAllWidget(
-    BuildContext context, AccountController controller, SizeConfig sizeConfig,CartController mCartController) {
+Widget accountPageAllWidget(BuildContext context, AccountController controller,
+    SizeConfig sizeConfig, CartController mCartController) {
   bool isArrow = true;
   return Column(
     children: [
       SizedBox(
         height: 8,
       ),
-      _buildProfileWidget(context, controller, sizeConfig,mCartController),
+      _buildProfileWidget(context, controller, sizeConfig, mCartController),
       SizedBox(
         height: 8,
       ),
-      _buildSetting(context, controller, sizeConfig,mCartController),
+      _buildSetting(context, controller, sizeConfig, mCartController),
       SizedBox(
         height: 16,
       ),
       Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: kDefaultMargin, vertical: 16),
-          child: _buildSubSettinList(context, controller, sizeConfig,
-              "assets/images/logout.svg", "Log Out", () => {
-
-
-            controller.logout(),
-
-              }, !isArrow)),
+          padding:
+              EdgeInsets.symmetric(horizontal: kDefaultMargin, vertical: 16),
+          child: _buildSubSettinList(
+              context,
+              controller,
+              sizeConfig,
+              "assets/images/logout.svg",
+              "Log Out",
+              () => {
+                    controller.logout(),
+                  },
+              !isArrow)),
       SizedBox(
         height: 16,
       ),
@@ -44,7 +48,6 @@ Widget accountPageAllWidget(
                 fontSize: kSmallFontSize10.sp,
                 fontWeight: FontWeight.w500)),
       ),
-
       Spacer(),
       Center(
         child: Text("Reach out to Us",
@@ -66,8 +69,8 @@ Widget accountPageAllWidget(
 }
 
 ///Build profile widget
-Widget _buildProfileWidget(
-    BuildContext context, AccountController controller, SizeConfig sizeConfig,CartController mCartController) {
+Widget _buildProfileWidget(BuildContext context, AccountController controller,
+    SizeConfig sizeConfig, CartController mCartController) {
   return Container(
       color: Colors.white,
       padding: EdgeInsets.all(kDefaultMargin),
@@ -75,48 +78,52 @@ Widget _buildProfileWidget(
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(100),
-
-              child: Image.asset("assets/images/profile.jpg",height: sizeConfig.blockSizeHorizontal*12,
-                width: sizeConfig.blockSizeHorizontal*12,
-                fit: BoxFit.cover,)
-          ),
+              child: Icon(
+                Icons.account_circle,
+                size: sizeConfig.blockSizeHorizontal * 12,
+                color: Colors.grey,
+              )),
           SizedBox(
             width: 16,
           ),
-          Obx(
-              ()=>controller.isSuccessful.isFalse?GestureDetector(
+          Obx(() => controller.isSuccessful.isFalse
+              ? GestureDetector(
                   onTap: () {
-
-                    if(mCartController.token.value.isEmpty){
+                    if (mCartController.token.value.isEmpty) {
                       Get.toNamed("/sign-up-page");
                     }
                   },
-                  child: Text('Sign in',style: TextStyle(fontWeight: FontWeight.w600,color: Theme.of(context).primaryColor),)) :   RichText(
-                text: TextSpan(children: [
-
-                  TextSpan(text: "Minglabar ",   style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize: kExtraLargeFontSize16.sp,
-                      fontWeight: FontWeight.bold)),
-                  TextSpan(
-                      text: "${controller.myProfile[0].cusName}\n",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: kExtraLargeFontSize16.sp,
-                          fontWeight: FontWeight.bold)),
-                  TextSpan(
-                      text: "${controller.myProfile[0].cusPhone}",
-                      style: TextStyle(
+                  child: Text(
+                    'Sign in',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).primaryColor),
+                  ))
+              : Obx(
+                  () => RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                        text: "${controller.myProfile[0].cusName}\n",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: kExtraLargeFontSize16.sp,
+                            fontWeight: FontWeight.bold)),
+                    TextSpan(
+                        text: "${controller.myProfile[0].cusPhone}",
+                        style: TextStyle(
                           color: Theme.of(context).colorScheme.onPrimary,
                           fontSize: kMediumFontSize12.sp,
-                          )),
-                ]))
-          ),
+                        )),
+                  ])),
+                )),
           Spacer(),
           GestureDetector(
             onTap: () => {
-
-            controller.checkoutCheckStatus()
+              if (mCartController.token.isNotEmpty)
+                {
+                  Get.toNamed("/edit-profile-page",
+                      arguments: [controller.myProfile[0]]),
+                }
             },
             child: Text("Edit",
                 style: TextStyle(
@@ -128,23 +135,42 @@ Widget _buildProfileWidget(
       ));
 }
 
-Widget _buildSetting(
-    BuildContext context, AccountController controller, SizeConfig sizeConfig,CartController mCartController) {
+Widget _buildSetting(BuildContext context, AccountController controller,
+    SizeConfig sizeConfig, CartController mCartController) {
   bool isArrow = true;
 
   List<Widget> settingList = [
-    _buildSubSettinList(context, controller, sizeConfig, "assets/images/location_icon.svg",
-        "Manage Address", () =>{
-        if(mCartController.token.value.isNotEmpty){
-        Get.toNamed("/manage-address-page"),
-}
-        }, isArrow),
+    _buildSubSettinList(
+        context,
+        controller,
+        sizeConfig,
+        "assets/images/location_icon.svg",
+        "Manage Address",
+        () => {
+              if (mCartController.token.value.isNotEmpty)
+                {
+                  Get.toNamed("/manage-address-page"),
+                }
+            },
+        isArrow),
     Divider(),
-    _buildSubSettinList(context, controller, sizeConfig, "assets/images/head_phone.svg",
-        "Customer Support", () => Get.toNamed("/customer-support-page"), isArrow),
+    _buildSubSettinList(
+        context,
+        controller,
+        sizeConfig,
+        "assets/images/head_phone.svg",
+        "Customer Support",
+        () => Get.toNamed("/customer-support-page"),
+        isArrow),
     Divider(),
-    _buildSubSettinList(context, controller, sizeConfig,"assets/images/about.svg",
-        "About Daily", () => Get.toNamed("/about-page"), isArrow),
+    _buildSubSettinList(
+        context,
+        controller,
+        sizeConfig,
+        "assets/images/about.svg",
+        "About Daily",
+        () => Get.toNamed("/about-page"),
+        isArrow),
   ];
 
   return Container(
@@ -165,15 +191,13 @@ Widget _buildSubSettinList(
     Function onClick,
     bool isArrow) {
   return InkWell(
-    onTap: ()=>onClick(),
+    onTap: () => onClick(),
     child: Row(
       children: [
-       SvgPicture.asset(
-            icon,
+        SvgPicture.asset(icon,
             width: 20.sp,
             height: 20.sp,
-            color: Theme.of(context).colorScheme.secondary
-        ),
+            color: Theme.of(context).colorScheme.secondary),
         SizedBox(
           width: 8,
         ),
@@ -183,25 +207,41 @@ Widget _buildSubSettinList(
                 fontSize: kLargeFontSize13.sp,
                 fontWeight: FontWeight.w500)),
         Spacer(),
-        isArrow ? Icon(Icons.navigate_next,size: 24.sp,color: Theme.of(context).colorScheme.secondary,) : Text("")
+        isArrow
+            ? Icon(
+                Icons.navigate_next,
+                size: 24.sp,
+                color: Theme.of(context).colorScheme.secondary,
+              )
+            : Text("")
       ],
     ),
   );
 }
 
 Widget _buildSocialButtonList(
-    BuildContext context,
-    AccountController controller,
-    SizeConfig sizeConfig,
-    ) {
+  BuildContext context,
+  AccountController controller,
+  SizeConfig sizeConfig,
+) {
   List<Widget> socialButtons = [
-    _buildSocialButton(context, controller, sizeConfig, "assets/images/viber.png", ()=>launch('sms:+959751111906'),),
-
-    _buildSocialButton(context, controller, sizeConfig, "assets/images/messenger.png", ()=>launch('https://m.me/DailyMDY')),
-
-    _buildSocialButton(context, controller, sizeConfig, "assets/images/facebook.png", ()=>launch("https://www.facebook.com/DailyMDY/")),
-
-    _buildSocialButton(context, controller, sizeConfig, "assets/images/email.png", ()=>launch("mailto:dailymdy77@gmail.com")),
+    _buildSocialButton(
+      context,
+      controller,
+      sizeConfig,
+      "assets/images/viber.png",
+      () => launch('sms:+959751111906'),
+    ),
+    _buildSocialButton(context, controller, sizeConfig,
+        "assets/images/messenger.png", () => launch('https://m.me/DailyMDY')),
+    _buildSocialButton(
+        context,
+        controller,
+        sizeConfig,
+        "assets/images/facebook.png",
+        () => launch("https://www.facebook.com/DailyMDY/")),
+    _buildSocialButton(context, controller, sizeConfig,
+        "assets/images/email.png", () => launch("mailto:dailymdy77@gmail.com")),
   ];
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +254,6 @@ Widget _buildSocialButton(BuildContext context, AccountController controller,
   return GestureDetector(
     onTap: () => function(),
     child: Container(
-
       padding: EdgeInsets.only(right: 12),
       height: sizeConfig.blockSizeHorizontal * 12,
       width: sizeConfig.blockSizeHorizontal * 12,

@@ -16,6 +16,7 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    controller.fetchData();
     sizeConfig.init(context);
     return ScreenUtilInit(builder: ()=> Scaffold(
 

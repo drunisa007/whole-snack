@@ -55,7 +55,7 @@ class BuildItemSingleGrid extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: mSizeConfig.blockSizeVertical * 10,
+                  height: mSizeConfig.blockSizeVertical * 8,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -83,6 +83,7 @@ class BuildItemSingleGrid extends StatelessWidget {
                     children: [
                       Text(
                         mItemModel.itemName,
+                        overflow: TextOverflow.fade,
                         maxLines: 2,
                         style: TextStyle(
                             color: Colors.black,
@@ -110,16 +111,19 @@ class BuildItemSingleGrid extends StatelessWidget {
                           bottomRight: Radius.circular(6.sp),
                         )),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          mItemModel.packageName,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: mItemModel.packageName.length > 10
-                                  ? kSmallFontSize9:kMediumFontSize11.sp),
+                        Flexible(
+                          child: Text(
+                            mItemModel.packageName,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: mItemModel.packageName.length > 10
+                                    ? kSmallFontSize9:kMediumFontSize11.sp),
+                          ),
                         ),
-                        Spacer(),
+
                         Text(
                           "${mItemModel.price} Ks",
                           style: TextStyle(

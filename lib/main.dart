@@ -23,11 +23,11 @@ Future<void> main() async {
   await Hive.openBox('apiBox');
   await Hive.openBox('customerBox');
 
-  runApp(const MyApp());
-/*  runApp(DevicePreview(
+  //runApp(const MyApp());
+  runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => MyApp(), // Wrap your app
-  ));*/
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       theme: StyleTheme().getTheme(),
       debugShowCheckedModeBanner: false,
       getPages: RoutePage().routePage,
-      initialRoute: '/sign-up-page',
+      initialRoute: '/',
     );
   }
 }

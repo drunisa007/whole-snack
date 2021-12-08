@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -343,12 +344,33 @@ Widget _buildProductScroll(BuildContext context, SizeConfig sizeConfig,
               itemBuilder: (context,index) {
                 return Row(
                   children: [
-                    Image.asset(
-                      "assets/images/snack.png",
+                    Container(
+                      width: sizeConfig.blockSizeVertical * 12,
+                      height: sizeConfig.blockSizeVertical * 12,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(6.sp),
+                          topRight: Radius.circular(6.sp),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: controller.orderItemList[0].itemImage,
+                          placeholder: (context, url) => Image.asset(
+                            "assets/images/place_holder.jpeg",
+                            fit: BoxFit.cover,
+                          ),
+                          errorWidget: (context, url, error) => Image.asset(
+                            "assets/images/place_holder.jpeg",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+               /*     Image.network(
+                      controller.orderItemList[index].itemImage,
                   //    controller.orderItemList[index].itemImage,
                       width: sizeConfig.safeBlockVertical * 12,
                       height: sizeConfig.safeBlockHorizontal * 18,
-                    ),
+                    ),*/
                     SizedBox(
                       width: 8,
                     ),

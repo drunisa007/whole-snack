@@ -106,19 +106,24 @@ class BuildItemSingle extends StatelessWidget {
                         bottomRight: Radius.circular(6.sp),
                       )),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        mModel.packageName,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: mModel.packageName.length > 10
-                                ? kSmallFontSize10
-                                : kLargeFontSize13.sp),
+                      Flexible(
+                        child: Text(
+                          mModel.packageName,
+                          style: TextStyle(
+                              color: Colors.white,
+
+                              fontWeight: FontWeight.w600,
+                              fontSize: mModel.packageName.length > 10
+                                  ? kSmallFontSize10
+                                  : kLargeFontSize13.sp),
+                        ),
                       ),
-                      Spacer(),
+
                       Text(
                         "Ks ${mModel.price}",
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
