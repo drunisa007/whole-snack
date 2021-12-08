@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
+import 'package:whole_snack/core/utils/empty_data_design.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/appbar/simple_app_bar.dart';
 import 'package:whole_snack/core/widgets/appbar/simple_custom_appbar.dart';
@@ -22,72 +23,75 @@ class CartPage extends StatelessWidget {
 
     CartController mCartController = Get.find<CartController>();
 
-    FeatureMainController mFeatureMainController = Get.find<FeatureMainController>();
+    FeatureMainController mFeatureMainController =
+        Get.find<FeatureMainController>();
 
     return Scaffold(
-    appBar: SimpleCustomAppBar(
-    title: 'Shopping Cart'
-    ),
-      body: mCartController.mAddToCartList.length==0?
-          NoDataPage(imagePath: "assets/images/no_data.png", title: "No Card items found", subtitle: "Please Add Card Item",
-              buttonTitle: "Shop Now",
-              isButton: true, action: ()=>print("hahha"), sizeConfig: mSizeConfig):
-      Column(
+      appBar: SimpleCustomAppBar(title: 'Shopping Cart'),
+      body: Column(
         children: [
           SizedBox(
             height: kDefaultMargin,
           ),
-          Container(
-            width: double.infinity,
-            height: mSizeConfig.blockSizeVertical * 50,
-            color: Colors.white,
-            child: Column(
-              children: [
-                Expanded(
-                    flex: 8,
-                    child: Container(
-                      width: double.infinity,
-                      child: BuildAddToCartList(),
-                    )),
-                Expanded(
-                    flex: 3,
-                    child: BuildDeliveryFee())
-              ],
-            ),
-          ),
+          Obx((){
+            return mCartController.mAddToCartList.length>0
+                ? Container(
+              width: double.infinity,
+              height: mSizeConfig.blockSizeVertical * 50,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Expanded(
+                      flex: 8,
+                      child: Container(
+                        width: double.infinity,
+                        child: BuildAddToCartList(),
+                      )),
+                  Expanded(flex: 3, child: BuildDeliveryFee())
+                ],
+              ),
+            ):
+            EmptyDataDesign(
+            image: "assets/images/empty.json",
+            title: "Cart is empty",
+            content: "Look like you haven't made your choice yet",
+            buttonText: "Lets Choice",
+            buttonAction: ()=> mFeatureMainController.changeIndex(1),
+            );
+          }),
           Spacer(),
-         BuildCheckOut(action: (){
-           if(mCartController.token.value.isEmpty){
-             Get.toNamed("/sign-up-page");
-           }
-           else{
-             if(mCartController.mAddToCartList.length>0){
+          BuildCheckOut(
+            action: () {
+              if (mCartController.token.value.isEmpty) {
+                Get.toNamed("/sign-up-page");
+              } else {
+                if (mCartController.mAddToCartList.length > 0) {
+                  //mCartController.checkoutCheckStatus();
 
-               //mCartController.checkoutCheckStatus();
+                  mFeatureMainController.pushNewRoutesHistory();
 
-               mFeatureMainController.pushNewRoutesHistory();
+                  if (mCartController.cartAppBarBackArrow.isTrue) {
+                    mCartController.cartAppBarBackArrow.value = false;
+                    Get.back();
+                    Get.back();
 
-               if(mCartController.cartAppBarBackArrow.isTrue){
-                 mCartController.cartAppBarBackArrow.value = false;
-                 Get.back();
-                 Get.back();
-
-                 mFeatureMainController.mRouteHistory.removeLast();
-                 Get.toNamed("checkout-page");
-               }
-               else{
-                 Get.toNamed("checkout-page");
-               }
-
-
-             }
-             else{
-               if(!Get.isSnackbarOpen){
-                 Get.snackbar("Empty","Choose your favourite items to checkout.");
-               }
-             }
-           }
-         }, title: mCartController.token.value.isEmpty?"Login to checkout":'Continue to checkout',)
+                    mFeatureMainController.mRouteHistory.removeLast();
+                    Get.toNamed("checkout-page");
+                  } else {
+                    Get.toNamed("checkout-page");
+                  }
+                } else {
+                  if (!Get.isSnackbarOpen) {
+                    Get.snackbar(
+                        "Empty", "Choose your favourite items to checkout.");
+                  }
+                }
+              }
+            },
+            title: mCartController.token.value.isEmpty
+                ? "Login to checkout"
+                : 'Continue to checkout',
+          )
         ],
       ),
     );

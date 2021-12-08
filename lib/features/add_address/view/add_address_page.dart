@@ -3,12 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/appbar/appbar_with_back_arrow.dart';
-import 'package:whole_snack/core/widgets/appbar/simple_app_bar.dart';
 import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
-import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
-import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
-import 'package:whole_snack/features/add_address/controller/add_address_page_controller.dart';
-import 'package:whole_snack/features/add_address/view/add_addres_page_all_widget.dart';
+import 'package:whole_snack/features/add_address/view/build_address_form.dart';
 
 class AddAddressPage extends StatelessWidget {
 
@@ -21,8 +17,7 @@ class AddAddressPage extends StatelessWidget {
     sizeConfig.init(context);
     return ScreenUtilInit(builder: () => Scaffold(
       appBar: getAppBarWithBackArrow("Add New Address", sizeConfig, ()=>Get.back()),
-
-      body:addAddressPageAllWidget(context, sizeConfig, controller),
+      body:BuildAddressForm(),
     ));
   }
 }

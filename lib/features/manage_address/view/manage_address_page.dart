@@ -7,20 +7,17 @@ import 'package:whole_snack/features/manage_address/controller/manage_address_co
 import 'package:whole_snack/features/manage_address/view/manage_address_page_all_widget.dart';
 
 class ManageAddressPage extends StatelessWidget {
-
-
-final  sizeConfig = Get.find<SizeConfig>();
-  final controller = Get.find<ManageAddressController>();
-
   @override
   Widget build(BuildContext context) {
-
+    final  sizeConfig = Get.find<SizeConfig>();
     sizeConfig.init(context);
-    return ScreenUtilInit(builder: () =>
-    Scaffold(
-      appBar: getAppBarWithBackArrow("Manage Addrss", sizeConfig, ()=> Get.back()),
-      body: manageAddressPageAllWidget(context,sizeConfig, controller)
-    )
+
+    ManageAddressController controller = Get.find<ManageAddressController>();
+    controller.getMyAddress();
+
+    return Scaffold(
+        appBar: getAppBarWithBackArrow("Manage Address", sizeConfig, ()=> Get.back()),
+        body: ManageAddressPageAllWidget()
     );
   }
 }
