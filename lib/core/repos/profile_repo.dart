@@ -20,16 +20,18 @@ class ProfileRepo {
   }
 
 
-  Future<HttpGetResult<ProfileModel>> getProfile({required int cutomerId}) async {
+  Future<HttpGetResult<ProfileModel>> getProfile({required String cutomerId}) async {
     
     
-    HttpCustomResponse response =  await _httpService.getDataWithHeader("customer/profile.php?id=129");
+    HttpCustomResponse response =  await _httpService.getDataWithHeader("customer/profile.php?id=$cutomerId");
 
     print("data profile${response.mData}");
     if(response.isSuccessful) {
       
       
       Map mapProfile = jsonDecode(response.mData);
+
+
 
       String profileData = jsonEncode(mapProfile["profile"]);
 
@@ -45,7 +47,7 @@ class ProfileRepo {
     }
     else {
 
-      print("error in profile");
+      print("error in profile ${response.stateCode  }");
 
       return HttpGetResult(response.errorMessage, response.stateCode, [], false);
     }

@@ -65,9 +65,7 @@ Widget orderPageAllWidget(
         Obx(
           () =>  Flexible(
             child: controller.orderItemList.length == 0
-                ? CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                  )
+                ? Text("No Order Found")
                 : ListView.builder(
                     itemCount: controller.orderItemList.length,
                     itemBuilder: (context, index) {
@@ -133,10 +131,10 @@ Widget _buildFilter(
 
                           controller.getByDate(
                               controller.firstDate, controller.secondDate),
-                          controller.getOrderInfoList(OrderDateFilterModel(
-                              customerId: "56",
+                       /*   controller.getOrderInfoList(OrderDateFilterModel(
+                              customerId: controller.customerId.toString(),
                               from: controller.firstDate,
-                              to: controller.secondDate)),
+                              to: controller.secondDate)),*/
                         },
                     title: "Apply")),
       ],

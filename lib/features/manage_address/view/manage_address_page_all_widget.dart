@@ -114,7 +114,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
 
 
 
-            GestureDetector(
+           /* GestureDetector(
               onTap: ()=> {
 
                 Get.toNamed("/add-address-page", arguments: [controller.addressList[index].cusAddressId,
@@ -128,7 +128,7 @@ Widget buildAddressList(BuildContext context,SizeConfig sizeConfig, ManageAddres
                       fontWeight: FontWeight.bold
                   )),
             ),
-            SizedBox(width: 8,),
+            SizedBox(width: 8,),*/
             GestureDetector(
               onTap: () async=> {
 

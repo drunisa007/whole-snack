@@ -13,7 +13,7 @@ class HttpService {
 
   late SecureStorageHelper helper;
 
-  late dynamic token;
+  late String token;
 
   HttpService() {
 
@@ -141,7 +141,8 @@ class HttpService {
   initData() async {
     baseUrl = "$API";
     helper = Get.put(SecureStorageHelper());
-    token = await helper.readSecureData(key: TOKEN_KEY);
+    dynamic mToken = await helper.readSecureData(key: TOKEN_KEY);
+    token = mToken.toString();
   }
 
   getHeader() {

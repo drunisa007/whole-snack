@@ -35,11 +35,11 @@ class CheckOutPage extends StatelessWidget {
           action: () => Get.back(),
         ),
         body: Container(
-          child: Stack(
+          child: Column(
             children: [
-              Positioned.fill(
+              Flexible(
                 child: Container(
-                  child: Column(
+                  child: ListView(
                     children: [
                       SizedBox(
                         height: kDefaultMargin.sp,
@@ -67,19 +67,18 @@ class CheckOutPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned.fill(
-                  child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: double.infinity,
-                        height: mSizeConfig.blockSizeVertical * 22,
-                        child: BuildCheckOut(
-                          action: () {
-                              mCheckoutController.submitOrder(context);
-                          },
-                          title: 'Confirm Order',
-                        ),
-                      ))),
+              Container(
+                width: double.infinity,
+                height: mSizeConfig.blockSizeVertical * 22,
+                child: SingleChildScrollView(
+                  child: BuildCheckOut(
+                    action: () {
+                        mCheckoutController.submitOrder(context);
+                    },
+                    title: 'Confirm Order',
+                  ),
+                ),
+              ),
             ],
           ),
         ));

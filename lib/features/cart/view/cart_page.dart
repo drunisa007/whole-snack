@@ -10,6 +10,7 @@ import 'package:whole_snack/features/cart/view/build_checkout.dart';
 import 'package:whole_snack/features/cart/view/build_delivery_fee.dart';
 import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
 import 'package:whole_snack/features/feature_main/view/feature_main.dart';
+import 'package:whole_snack/features/no_data_page/view/no_data_page.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -27,7 +28,11 @@ class CartPage extends StatelessWidget {
     appBar: SimpleCustomAppBar(
     title: 'Shopping Cart'
     ),
-      body: Column(
+      body: mCartController.mAddToCartList.length==0?
+          NoDataPage(imagePath: "assets/images/no_data.png", title: "No Card items found", subtitle: "Please Add Card Item",
+              buttonTitle: "Shop Now",
+              isButton: true, action: ()=>print("hahha"), sizeConfig: mSizeConfig):
+      Column(
         children: [
           SizedBox(
             height: kDefaultMargin,

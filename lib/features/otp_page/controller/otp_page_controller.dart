@@ -12,46 +12,55 @@ class OtpPageController extends GetxController {
   late LoginRegisterRepo loginRegisterRepo;
 
   late SecureStorageHelper helper;
-  late int customerId;
-  late dynamic token;
+  RxBool isLoading = true.obs;
+  RxString errorMessage = RxString("");
+
+  RxString token = RxString("");
+
   OtpPageController() {
     loginRegisterRepo = Get.put(LoginRegisterRepo());
-    
+
     helper = Get.put(SecureStorageHelper());
   }
 
-  getOpt({required String name,required String phone,required String otp,required context}) async {
-    HttpRegisterResult<RegisterModel> customResponse = await loginRegisterRepo.otpConfirm(name: name, phone: phone, otp: otp);
+  getOpt(
+      {required String name,
+      required String phone,
+      required String otp,
+      required context}) async {
+    isLoading.value = true;
+
+    showLoaderDialog(context);
+    HttpRegisterResult<RegisterModel> customResponse =
+        await loginRegisterRepo.otpConfirm(name: name, phone: phone, otp: otp);
 
     print("token is ${customResponse.mData.customer.cusId}");
-    
-    if(customResponse.mData.customer.cusId !="" && customResponse.mData.token !="") {
+    isLoading.value = false;
+    Get.back();
 
-      showLoaderDialog(context);
-     await helper.writeSecureData(key: TOKEN_KEY, value: customResponse.mData.token);
-     await helper.writeSecureData(key: CUSTOMER_ID_KEY, value: customResponse.mData.customer.cusId);
+    if (customResponse.mData.customer.cusId.isNotEmpty &&
+        customResponse.mData.token.isNotEmpty) {
+      errorMessage.value = "";
 
-     token = await helper.writeSecureData(key: TOKEN_KEY, value: customResponse.mData.token);
+      await helper.writeSecureData(
+          key: TOKEN_KEY, value: customResponse.mData.token);
+      await helper.writeSecureData(
+          key: CUSTOMER_ID_KEY, value: customResponse.mData.customer.cusId);
 
-  /*   if(token!=null) {
+      var loginToken = await helper.writeSecureData(
+          key: TOKEN_KEY, value: customResponse.mData.token);
 
-       Get.back();
-       Get.back();
-       Get.back();
+      token.value = loginToken.toString();
 
-     }
-     else {
-
-       print('error');
-     }*/
-
-
-
-      
+      if (token.value.isNotEmpty) {
+        Get.back();
+        Get.back();
+        Get.back();
+      } else {
+        print("$token is token");
+      }
+    } else {
+      errorMessage.value = "Something Wrong";
     }
   }
-
-
-
-
 }

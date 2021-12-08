@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/account/controller/account_controller.dart';
+import 'package:whole_snack/features/cart/controller/cart_controller.dart';
 
 Widget accountPageAllWidget(
-    BuildContext context, AccountController controller, SizeConfig sizeConfig) {
+    BuildContext context, AccountController controller, SizeConfig sizeConfig,CartController mCartController) {
   bool isArrow = true;
   return Column(
     children: [
-      _buildProfileWidget(context, controller, sizeConfig),
       SizedBox(
         height: 8,
       ),
-      _buildSetting(context, controller, sizeConfig),
+      _buildProfileWidget(context, controller, sizeConfig,mCartController),
+      SizedBox(
+        height: 8,
+      ),
+      _buildSetting(context, controller, sizeConfig,mCartController),
       SizedBox(
         height: 16,
       ),
@@ -62,7 +67,7 @@ Widget accountPageAllWidget(
 
 ///Build profile widget
 Widget _buildProfileWidget(
-    BuildContext context, AccountController controller, SizeConfig sizeConfig) {
+    BuildContext context, AccountController controller, SizeConfig sizeConfig,CartController mCartController) {
   return Container(
       color: Colors.white,
       padding: EdgeInsets.all(kDefaultMargin),
@@ -79,13 +84,20 @@ Widget _buildProfileWidget(
             width: 16,
           ),
           Obx(
-              ()=>controller.token==null?GestureDetector(
+              ()=>controller.isSuccessful.isFalse?GestureDetector(
                   onTap: () {
 
-                    controller.checkoutCheckStatus();
+                    if(mCartController.token.value.isEmpty){
+                      Get.toNamed("/sign-up-page");
+                    }
                   },
                   child: Text('Sign in',style: TextStyle(fontWeight: FontWeight.w600,color: Theme.of(context).primaryColor),)) :   RichText(
                 text: TextSpan(children: [
+
+                  TextSpan(text: "Minglabar ",   style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: kExtraLargeFontSize16.sp,
+                      fontWeight: FontWeight.bold)),
                   TextSpan(
                       text: "${controller.myProfile[0].cusName}\n",
                       style: TextStyle(
@@ -117,14 +129,15 @@ Widget _buildProfileWidget(
 }
 
 Widget _buildSetting(
-    BuildContext context, AccountController controller, SizeConfig sizeConfig) {
+    BuildContext context, AccountController controller, SizeConfig sizeConfig,CartController mCartController) {
   bool isArrow = true;
 
   List<Widget> settingList = [
     _buildSubSettinList(context, controller, sizeConfig, "assets/images/location_icon.svg",
         "Manage Address", () =>{
-
-      controller.checkoutCheckStatus()
+        if(mCartController.token.value.isNotEmpty){
+        Get.toNamed("/manage-address-page"),
+}
         }, isArrow),
     Divider(),
     _buildSubSettinList(context, controller, sizeConfig, "assets/images/head_phone.svg",
@@ -182,14 +195,13 @@ Widget _buildSocialButtonList(
     SizeConfig sizeConfig,
     ) {
   List<Widget> socialButtons = [
-    _buildSocialButton(context, controller, sizeConfig,
-        "assets/images/viber.png", () => print("hahhaha")),
-    _buildSocialButton(context, controller, sizeConfig,
-        "assets/images/messenger.png", () => print("hahhaha")),
-    _buildSocialButton(context, controller, sizeConfig,
-        "assets/images/facebook.png", () => print("hahhaha")),
-    _buildSocialButton(context, controller, sizeConfig,
-        "assets/images/email.png", () => print("hahhaha")),
+    _buildSocialButton(context, controller, sizeConfig, "assets/images/viber.png", ()=>launch('sms:+959751111906'),),
+
+    _buildSocialButton(context, controller, sizeConfig, "assets/images/messenger.png", ()=>launch('https://m.me/DailyMDY')),
+
+    _buildSocialButton(context, controller, sizeConfig, "assets/images/facebook.png", ()=>launch("https://www.facebook.com/DailyMDY/")),
+
+    _buildSocialButton(context, controller, sizeConfig, "assets/images/email.png", ()=>launch("mailto:dailymdy77@gmail.com")),
   ];
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -199,14 +211,18 @@ Widget _buildSocialButtonList(
 
 Widget _buildSocialButton(BuildContext context, AccountController controller,
     SizeConfig sizeConfig, String imagePath, Function function) {
-  return Container(
-    padding: EdgeInsets.only(right: 12),
-    height: sizeConfig.blockSizeHorizontal * 12,
-    width: sizeConfig.blockSizeHorizontal * 12,
-    decoration: BoxDecoration(shape: BoxShape.circle),
-    child: Image.asset(
-      imagePath,
-      fit: BoxFit.fitWidth,
+  return GestureDetector(
+    onTap: () => function(),
+    child: Container(
+
+      padding: EdgeInsets.only(right: 12),
+      height: sizeConfig.blockSizeHorizontal * 12,
+      width: sizeConfig.blockSizeHorizontal * 12,
+      decoration: BoxDecoration(shape: BoxShape.circle),
+      child: Image.asset(
+        imagePath,
+        fit: BoxFit.fitWidth,
+      ),
     ),
   );
 }

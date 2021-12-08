@@ -18,7 +18,7 @@ class OrderDetailRepo {
 
   Future<HttpGetResult<OrderDetailModel>> getOrderDetailById(int id) async {
     HttpCustomResponse response = await _httpService
-        .getDataWithHeader("order/getorder.php?order_id=${100}");
+        .getDataWithHeader("order/getorder.php?order_id=${id}");
 
 
     if (response.isSuccessful) {

@@ -88,6 +88,7 @@ class BuildSingleCategoryDesign extends StatelessWidget {
                 padding: EdgeInsets.only(left: 0.5, right: 0.5),
                 child: Text(
                   "$title",
+                  overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: kMediumFontSize12.sp-1.sp,

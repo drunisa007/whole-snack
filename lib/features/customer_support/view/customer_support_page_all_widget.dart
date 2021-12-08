@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/features/customer_support/controller/customer_support_page_controller.dart';
@@ -129,11 +130,13 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-           _buildSocialButton(context, controller, sizeConfig, "assets/images/viber.png", ()=>print("hahhaha")),
+           _buildSocialButton(context, controller, sizeConfig, "assets/images/viber.png", ()=>launch('sms:+959751111906'),),
             SizedBox(width: 16,),
-            _buildSocialButton(context, controller, sizeConfig, "assets/images/messenger.png", ()=>print("hahhaha")),
+            _buildSocialButton(context, controller, sizeConfig, "assets/images/messenger.png", ()=>launch('https://m.me/DailyMDY')),
             SizedBox(width: 16,),
-            _buildSocialButton(context, controller, sizeConfig, "assets/images/facebook.png", ()=>print("hahhaha")),
+            _buildSocialButton(context, controller, sizeConfig, "assets/images/facebook.png", ()=>launch("https://www.facebook.com/DailyMDY/")),
+            SizedBox(width: 16,),
+            _buildSocialButton(context, controller, sizeConfig, "assets/images/email.png", ()=>launch("mailto:dailymdy77@gmail.com")),
           ],
         ),
       ),
@@ -147,14 +150,17 @@ Widget customerSupportPageAllWidget(BuildContext context, SizeConfig sizeConfig,
 Widget _buildSocialButton (BuildContext context, CustomerSupportPageController controller, SizeConfig sizeConfig,String imagePath,Function function) {
 
 
-  return Container(
-    height: sizeConfig.blockSizeHorizontal*9,
-    width: sizeConfig.blockSizeHorizontal*9,
-    decoration: BoxDecoration(
-        shape: BoxShape.circle
+  return GestureDetector(
+    onTap: ()=>function(),
+    child: Container(
+      height: sizeConfig.blockSizeHorizontal*9,
+      width: sizeConfig.blockSizeHorizontal*9,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle
 
+      ),
+      child: Image.asset(imagePath,fit: BoxFit.fill,),
     ),
-    child: Image.asset(imagePath,fit: BoxFit.fill,),
   );
 }
 Widget _buildCustomerSigleItem(BuildContext context, SizeConfig sizeConfig,
@@ -183,7 +189,7 @@ Widget _buildCustomerSigleItem(BuildContext context, SizeConfig sizeConfig,
                    )),
             Spacer(),
             GestureDetector(
-              onTap:()=> controller.launchPhoneDialer("$number1"),
+              onTap:()=> launch('tel:$number1'),
               child: CircleAvatar(
                 maxRadius: sizeConfig.blockSizeVertical*2,
                   backgroundColor: Theme.of(context).primaryColor,

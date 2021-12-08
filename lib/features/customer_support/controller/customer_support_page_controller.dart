@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -8,7 +10,7 @@ class CustomerSupportPageController extends GetxController {
     print("This is customer suppoet page Controller");
   }
 
-  Future<void> launchPhoneDialer(String contactNumber) async {
+  Future<void> launchLinks(String contactNumber) async {
     final Uri _phoneUri = Uri(
         scheme: "tel",
         path: contactNumber
@@ -21,4 +23,6 @@ class CustomerSupportPageController extends GetxController {
       throw(error.toString());
     }
   }
+
+
 }

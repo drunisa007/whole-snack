@@ -17,6 +17,7 @@ import 'package:whole_snack/features/login_sign_up_main/bindings/login_sign_up_m
 import 'package:whole_snack/features/login_sign_up_main/view/login_sign_up_main_page.dart';
 import 'package:whole_snack/features/manage_address/binding/manage_address_binding.dart';
 import 'package:whole_snack/features/manage_address/view/manage_address_page.dart';
+import 'package:whole_snack/features/no_data_page/view/no_data_page.dart';
 import 'package:whole_snack/features/order_detail/binding/order_detail_page_binding.dart';
 import 'package:whole_snack/features/order_detail/view/order_detail_page.dart';
 import 'package:whole_snack/features/order_success/binding/order_success_binding.dart';
@@ -86,6 +87,8 @@ class RoutePage {
     GetPage(
         name: '/checkout-page',
         page: () => CheckOutPage(),
-        binding: CheckOutBinding())
+        binding: CheckOutBinding()),
+
+
   ];
 }

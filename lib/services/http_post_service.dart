@@ -13,7 +13,7 @@ class HttpPostService {
   late String baseUrl;
   late String apiKey;
 
-  late dynamic token;
+  late String token="";
 
   late SecureStorageHelper helper;
 
@@ -43,8 +43,10 @@ class HttpPostService {
   initData() async {
     baseUrl = "$API";
     helper = Get.put(SecureStorageHelper());
-    var test = await helper.readSecureData(key: TOKEN_KEY);
+   dynamic test = await helper.readSecureData(key: TOKEN_KEY);
     token = test.toString();
+
+    print("post in token $token");
   }
 
   getHeader() {
