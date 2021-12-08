@@ -9,19 +9,19 @@ import 'package:path_provider/path_provider.dart';
 import 'package:whole_snack/core/utils/routes_pages.dart';
 import 'package:whole_snack/core/utils/theme.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  void main() {
+  //WidgetsFlutterBinding.ensureInitialized();
 
-  if (kIsWeb) {
-    await Hive.initFlutter();
-  } else {
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    String appDocPath = appDocDir.path;
-    await Hive.initFlutter(appDocPath);
-  }
-  await Hive.openBox('authBox');
-  await Hive.openBox('apiBox');
-  await Hive.openBox('customerBox');
+  // if (kIsWeb) {
+  //   await Hive.initFlutter();
+  // } else {
+  //   Directory appDocDir = await getApplicationDocumentsDirectory();
+  //   String appDocPath = appDocDir.path;
+  //   await Hive.initFlutter(appDocPath);
+  // }
+  // await Hive.openBox('authBox');
+  // await Hive.openBox('apiBox');
+  // await Hive.openBox('customerBox');
 
   runApp(const MyApp());
 /*  runApp(DevicePreview(
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       theme: StyleTheme().getTheme(),
       debugShowCheckedModeBanner: false,
       getPages: RoutePage().routePage,
-      initialRoute: '/sign-up-page',
+      initialRoute: '/',
     );
   }
 }
