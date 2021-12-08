@@ -50,11 +50,13 @@ class BuildOrderSuccessBody extends StatelessWidget {
                 haveCorner: false,
                 action: () {
 
-                  mFeatureMainController.changeIndex(3);
+                  Get.offAllNamed('/');
 
-                  for(int i = 0;i<mFeatureMainController.mRouteHistory.length;i++){
-                    Get.back();
-                  }
+                  // mFeatureMainController.changeIndex(3);
+                  //
+                  // for(int i = 0;i<mFeatureMainController.mRouteHistory.length;i++){
+                  //   Get.back();
+                  // }
                    //mFeatureMainController.changeIndex(0);
                 },
                 title: "Track your order"),
@@ -63,20 +65,20 @@ class BuildOrderSuccessBody extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (){
-
-                if(mFeatureMainController.startRoute.value=="home"){
-                  mFeatureMainController.changeIndex(0);
-                }
-                else if(mFeatureMainController.startRoute.value == "category"){
-                  mFeatureMainController.changeIndex(1);
-                }
-                else{
-                  mFeatureMainController.changeIndex(2);
-                }
-
-                for(int i = 0;i<mFeatureMainController.mRouteHistory.length;i++){
-                  Get.back();
-                }
+                Get.offAllNamed('/');
+                // if(mFeatureMainController.startRoute.value=="home"){
+                //   mFeatureMainController.changeIndex(0);
+                // }
+                // else if(mFeatureMainController.startRoute.value == "category"){
+                //   mFeatureMainController.changeIndex(1);
+                // }
+                // else{
+                //   mFeatureMainController.changeIndex(2);
+                // }
+                //
+                // for(int i = 0;i<mFeatureMainController.mRouteHistory.length;i++){
+                //   Get.back();
+                // }
 
               },
               child: Text("Continue to Shop other Products",

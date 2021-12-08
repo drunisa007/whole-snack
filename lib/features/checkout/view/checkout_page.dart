@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/appbar/simple_app_bar.dart';
@@ -26,6 +27,27 @@ class CheckOutPage extends StatelessWidget {
 
 
 
+    AlertDialog alert = AlertDialog(
+      content: Container(
+          width: double.infinity,
+          height: 180,
+          child: Stack(children: [
+            Positioned.fill(
+                child: Lottie.asset(
+                  "assets/images/order.json",
+                )),
+            Positioned.fill(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text("Order is processing",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20)),
+                ))
+          ])),
+    );
+
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -35,6 +57,8 @@ class CheckOutPage extends StatelessWidget {
           action: () => Get.back(),
         ),
         body: Container(
+          width: double.infinity,
+          height: double.infinity,
           child: Column(
             children: [
               Flexible(
@@ -44,22 +68,16 @@ class CheckOutPage extends StatelessWidget {
                       SizedBox(
                         height: kDefaultMargin.sp,
                       ),
-                      Expanded(flex: 1, child: BuildCheckOutAddress()),
+                     BuildCheckOutAddress(),
                       SizedBox(
                         height: kDefaultMargin.sp,
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: Container(
+                      Container(
                             width: double.infinity,
                             height: mSizeConfig.safeBlockVertical * 30,
                             padding: EdgeInsets.only(bottom: 50),
                             child: BuildCheckOutList(),
                           ),
-                        ),
-                      ),
                       SizedBox(
                         height: kDefaultMargin.sp,
                       ),
@@ -73,6 +91,13 @@ class CheckOutPage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: BuildCheckOut(
                     action: () {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return alert;
+                        },
+                      );
                         mCheckoutController.submitOrder(context);
                     },
                     title: 'Confirm Order',

@@ -25,7 +25,7 @@ class ProfileRepo {
     
     HttpCustomResponse response =  await _httpService.getDataWithHeader("customer/profile.php?id=$cutomerId");
 
-    print("data profile${response.mData}");
+    //print("data profile${response.mData}");
     if(response.isSuccessful) {
       
       
@@ -41,13 +41,13 @@ class ProfileRepo {
       List<ProfileModel> profileModel = profileModelFromJson(profileData);
 
 
-      print("good in profile");
+      //print("good in profile");
       print(response.mData);
       return HttpGetResult("", 200, profileModel, true);
     }
     else {
 
-      print("error in profile ${response.stateCode  }");
+      //print("error in profile ${response.stateCode  }");
 
       return HttpGetResult(response.errorMessage, response.stateCode, [], false);
     }

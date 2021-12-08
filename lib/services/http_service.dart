@@ -52,7 +52,7 @@ class HttpService {
           await http.post(url, headers: getHeader(), body: jsonEncode(body));
 
 
-      print("order reponse is ${response.statusCode}");
+      //print("order reponse is ${response.statusCode}");
 
       if (response.statusCode == 200) {
         return HttpCustomResponse('', 200, response.body, true);
@@ -100,7 +100,7 @@ class HttpService {
       var url = Uri.parse(baseUrl + uri);
       http.Response response = await http.get(url, headers: getHeader());
 
-      print("response is address $response");
+      //print("response is address $response");
 
       // http.Response response  = await http.get(url);
       if (response.statusCode == 200) {

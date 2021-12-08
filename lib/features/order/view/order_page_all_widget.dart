@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/model/data_model/order_date_filter_model.dart';
+import 'package:whole_snack/core/utils/empty_data_design.dart';
 
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_custom_button.dart';
@@ -13,7 +14,6 @@ import 'package:whole_snack/features/order/controller/order_controller.dart';
 Widget orderPageAllWidget(
     BuildContext context, SizeConfig sizeConfig, OrderController controller) {
   bool isDate = true;
-
 
   return Container(
     margin: EdgeInsets.all(kDefaultMargin),
@@ -32,7 +32,7 @@ Widget orderPageAllWidget(
                       "From",
                       isDate,
                       () => controller.showDataPicker(context, 1),
-                      "${controller.firstDate}"),
+                      "${controller.tempDate1}"),
                 )),
             SizedBox(
               width: 8,
@@ -47,7 +47,7 @@ Widget orderPageAllWidget(
                       "To",
                       isDate,
                       () => controller.showDataPicker(context, 2),
-                      "${controller.secondDate}"),
+                      "${controller.tempDate2}"),
                 )),
             SizedBox(
               width: 8,
@@ -63,28 +63,50 @@ Widget orderPageAllWidget(
           height: 12,
         ),
         Obx(
-          () =>  Flexible(
-            child: controller.isloading.value?
-                 CircularProgressIndicator(color: Theme.of(context).primaryColor,)
-                : controller.isSuccessful.value?Text(controller.erroMessage.value) :  ListView.builder(
-                    itemCount: controller.orderItemList.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap:() {
-
-                          controller.gerOrderId(controller.orderItemList[index].ordId);
-                          Get.toNamed("/order-detail-page");
-
-
-
-
-
-                        },
-                        child: _buildOrderHistoryCard(
-                            context, sizeConfig, controller, index),
-                      );
-                    },
-                  ),
+          () => Flexible(
+            child: controller.loading.isTrue
+                ? CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  )
+                : controller.loading.isFalse &&
+                        controller.errorMessage.value == "auth"
+                    ? EmptyDataDesign(
+                        image: "assets/images/no_auth.json",
+                        title: "Login",
+                        content: "You need to login to obtain your order list",
+                        buttonText: "Login",
+                        buttonAction: () => Get.toNamed("/sign-up-page"),
+                      )
+                    : controller.loading.isFalse &&
+                            controller.errorMessage.value == "error"
+                        ? EmptyDataDesign(
+                            image: "assets/images/no_internet.json",
+                            title: "No Internet",
+                            content:
+                                "Couldn't connect to wifi or internet. Please check your network or refresh.",
+                            buttonText: "Refresh")
+                        : controller.loading.isFalse &&
+                                controller.orderItemList.length > 0
+                            ? ListView.builder(
+                                itemCount: controller.orderItemList.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      controller.gerOrderId(controller
+                                          .orderItemList[index].ordId);
+                                      Get.toNamed("/order-detail-page");
+                                    },
+                                    child: _buildOrderHistoryCard(
+                                        context, sizeConfig, controller, index),
+                                  );
+                                },
+                              )
+                            : EmptyDataDesign(
+                                image: "assets/images/empty.json",
+                                title: "No Order List",
+                                content:
+                                    "Look like you haven't made your order yet",
+                                buttonText: "Order"),
           ),
         )
       ],
@@ -128,10 +150,8 @@ Widget _buildFilter(
                 : BuildCustomButton(
                     haveCorner: false,
                     action: () => {
-
                           controller.getByDate(
                               controller.firstDate, controller.secondDate),
-
                         },
                     title: "Apply")),
       ],
@@ -148,8 +168,6 @@ Widget _buildOrderHistoryCard(BuildContext context, SizeConfig sizeConfig,
 
   ///check orderStatusTExt
   switch (controller.orderItemList[index].ordStatus) {
-
-
     case "0":
       color = Color(0xff0400B7);
       cancelButtonColor = Color(0xff3D3D3D);
@@ -169,144 +187,141 @@ Widget _buildOrderHistoryCard(BuildContext context, SizeConfig sizeConfig,
       cancelButtonColor = Color(0xffC4C4C4);
   }
 
-  return controller.orderItemList.length ==0 ? Text("No Data Found")  : Card(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-    child: Container(
-      margin: EdgeInsets.all(kDefaultMargin),
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                controller.orderItemList[index].ordCreate
-                    .toString()
-                    .substring(0, 10),
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kLargeFontSize14.sp,
-                    fontWeight: FontWeight.w600),
-              ),
-              Spacer(),
-              Text(
-                controller.orderItemList[index].ordPrice,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: kExtraLargeFontSize15.sp,
-                    fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 15.sp,
-                color: Colors.black,
-              )
-            ],
-          ),
-          Text(
-            controller.orderItemList[index].ordId,
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.secondaryVariant,
-                fontSize: kMediumFontSize11.sp,
-                fontWeight: FontWeight.w500),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Row(
-            children: [
-              SvgPicture.asset(
-                "assets/images/bag.svg",
-                color: Theme.of(context).colorScheme.onPrimary,
-                width: 12.sp,
-                height: 12.sp,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Flexible(
-                child: Text(
-                  controller.orderItemList[index].ordAddress,
+  return controller.orderItemList.length == 0
+      ? Text("No Data Found")
+      : Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          child: Container(
+            margin: EdgeInsets.all(kDefaultMargin),
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      controller.orderItemList[index].ordCreate
+                          .toString()
+                          .substring(0, 10),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: kLargeFontSize14.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Spacer(),
+                    Text(
+                      controller.orderItemList[index].ordPrice,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: kExtraLargeFontSize15.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 15.sp,
+                      color: Colors.black,
+                    )
+                  ],
+                ),
+                Text(
+                  controller.orderItemList[index].ordId,
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.secondaryVariant,
                       fontSize: kMediumFontSize11.sp,
                       fontWeight: FontWeight.w500),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Row(
-            children: [
-              Container(
-                height: sizeConfig.blockSizeHorizontal * 3,
-                width: sizeConfig.blockSizeVertical * 3,
-                decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Flexible(
-                child: Text(
-                  orderStatusText,
-                  style: TextStyle(
-                      color: color,
-                      fontSize: kMediumFontSize12.sp,
-                      fontWeight: FontWeight.w600),
+                SizedBox(
+                  height: 8,
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Divider(
-            height: 3,
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-
-                onTap: (){
-
-                  if(controller.orderItemList[index].ordStatus == "0") {
-
-
-                    print(controller.orderItemList[index].ordStatus);
-                  }
-
-                },
-
-                child: Text(
-                  "Cancel Order",
-                  style: TextStyle(
-                      color: cancelButtonColor,
-                      fontSize: kLargeFontSize13.sp,
-                      fontWeight: FontWeight.w500),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      "assets/images/bag.svg",
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      width: 12.sp,
+                      height: 12.sp,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Flexible(
+                      child: Text(
+                        controller.orderItemList[index].ordAddress,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontSize: kMediumFontSize11.sp,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Text(
-                "Track Order",
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: kLargeFontSize13.sp,
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      height: sizeConfig.blockSizeHorizontal * 3,
+                      width: sizeConfig.blockSizeVertical * 3,
+                      decoration:
+                          BoxDecoration(shape: BoxShape.circle, color: color),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Flexible(
+                      child: Text(
+                        orderStatusText,
+                        style: TextStyle(
+                            color: color,
+                            fontSize: kMediumFontSize12.sp,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Divider(
+                  height: 3,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        if (controller.orderItemList[index].ordStatus == "0") {
+                          print(controller.orderItemList[index].ordStatus);
+                        }
+                      },
+                      child: Text(
+                        "Cancel Order",
+                        style: TextStyle(
+                            color: cancelButtonColor,
+                            fontSize: kLargeFontSize13.sp,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    Text(
+                      "Track Order",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: kLargeFontSize13.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-    ),
-  );
+        );
 }

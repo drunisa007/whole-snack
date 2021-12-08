@@ -53,11 +53,13 @@ class AccountController extends GetxController {
   }
 
   logout() async {
+    SecureStorageHelper helper = Get.put(SecureStorageHelper());
+
     var result = await helper.deleteSecureData(key: TOKEN_KEY);
     await helper.deleteSecureData(key: CUSTOMER_ID_KEY);
 
     print("log out result is $result");
 
-    Get.toNamed("/sign-up-page");
+    Get.offAllNamed('/');
   }
 }

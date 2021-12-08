@@ -6,6 +6,9 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:whole_snack/core/constants/default_values.dart';
 import 'package:whole_snack/core/utils/size_config.dart';
 import 'package:whole_snack/core/widgets/build_item_single.dart';
+import 'package:whole_snack/features/category/controller/category_controller.dart';
+import 'package:whole_snack/features/feature_main/controller/feature_main_controller.dart';
+import 'package:whole_snack/features/feature_main/view/feature_main.dart';
 import 'package:whole_snack/features/home/controller/home_controller.dart';
 import 'package:whole_snack/features/home/view/build_category_all_items_shimmer.dart';
 
@@ -22,6 +25,10 @@ class BuildHorizontalItems extends StatelessWidget {
     mSizeConfig.init(context);
 
     HomeController mHomeController = Get.find<HomeController>();
+
+    CategoryController mCategoryController = Get.find<CategoryController>();
+
+    FeatureMainController mFeatureController = Get.find<FeatureMainController>();
 
     RefreshController _refreshController =
         RefreshController(initialRefresh: false);
@@ -61,7 +68,12 @@ class BuildHorizontalItems extends StatelessWidget {
                 Spacer(),
                 haveSeeMore
                     ? TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if(mCategoryController.selectedPrevent.isFalse){
+                            mCategoryController.changeCategoryIndex(index,mHomeController.mCategoryList[index].categId);
+                            mFeatureController.changeIndex(1);
+                          }
+                        },
                         style: TextButton.styleFrom(
                             primary: Theme.of(context).primaryColor),
                         child: Text(

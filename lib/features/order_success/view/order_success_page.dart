@@ -22,20 +22,22 @@ class OrderSuccessPage extends StatelessWidget {
 
 
     return WillPopScope(onWillPop: () async {
-      if(mFeatureMainController.startRoute.value=="home"){
-        mFeatureMainController.changeIndex(0);
-      }
-      else if(mFeatureMainController.startRoute.value == "category"){
-        mFeatureMainController.changeIndex(1);
-      }
-      else{
-        mFeatureMainController.changeIndex(2);
-      }
 
-      mFeatureMainController.pushNewRoutesHistory();
-      for(int i = 0;i<mFeatureMainController.mRouteHistory.length;i++){
-        Get.back();
-      }
+      Get.offAllNamed('/');
+      // if(mFeatureMainController.startRoute.value=="home"){
+      //   mFeatureMainController.changeIndex(0);
+      // }
+      // else if(mFeatureMainController.startRoute.value == "category"){
+      //   mFeatureMainController.changeIndex(1);
+      // }
+      // else{
+      //   mFeatureMainController.changeIndex(2);
+      // }
+      //
+      // mFeatureMainController.pushNewRoutesHistory();
+      // for(int i = 0;i<mFeatureMainController.mRouteHistory.length;i++){
+      //   Get.back();
+      // }
       return true;
     }, child: Scaffold(
 
