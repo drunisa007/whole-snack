@@ -66,7 +66,7 @@ class OrderRepo {
     } else {
 
       return HttpGetResult(
-          result.errorMessage, response.stateCode, result.mData, false);
+          result.errorMessage, response.stateCode, [], false);
     }
   }
 
